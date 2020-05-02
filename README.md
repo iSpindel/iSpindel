@@ -37,7 +37,12 @@ dotnet ef migrations add <name> -c iSpindelContext --startup-project "../iSpinde
 ## Migrations for iSpindel.App - ApplicationDbContext
 
 ```bash
-cd iSpindel.Database
-dotnet ef migrations add <name> -c ApplicationDbContext -o Data/Migrations
+cd iSpindel.App
 dotnet ef database update -c ApplicationDbContext
+```
+
+To add a new migration:
+
+```bash
+dotnet ef migrations add <name> -c ApplicationDbContext -o Data/Migrations
 ```
