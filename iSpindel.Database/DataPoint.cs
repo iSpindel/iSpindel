@@ -15,7 +15,6 @@ namespace iSpindel.Database
         public double Temperature { get; set; }
         public double Battery { get; set; }
         public double Gravity { get; set; }
-        [Column(TypeName="DateTime2")]
         public DateTime RecordTime { get; set; }
     }
 }
