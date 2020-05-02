@@ -13,6 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using iSpindel.Database;
 using Microsoft.Data.SqlClient;
+using Npgsql;
 
 namespace iSpindel.App
 {
@@ -28,10 +29,13 @@ namespace iSpindel.App
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var connectionStringBuilder = new SqlConnectionStringBuilder(Configuration.GetConnectionString("DefaultConnection"));
-            if(!string.IsNullOrWhiteSpace(Configuration["Database:Username"]) && !string.IsNullOrWhiteSpace(Configuration["Database:Password"]) {
-                connectionStringBuilder.UserID = Configuration["Database:Username"];
+            var connectionStringBuilder = new NpgsqlConnectionStringBuilder(Configuration.GetConnectionString("DefaultConnection")) {
+                ApplicationName = "iSpindel.App"
+            };
+            if (!string.IsNullOrWhiteSpace(Configuration["Database:Username"]) && !string.IsNullOrWhiteSpace(Configuration["Database:Password"])) {
+                connectionStringBuilder.Username = Configuration["Database:Username"];
                 connectionStringBuilder.Password = Configuration["Database:Password"];
+                connectionStringBuilder.IntegratedSecurity = false;
             }
 
 
