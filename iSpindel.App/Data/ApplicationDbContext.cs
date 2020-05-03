@@ -43,11 +43,12 @@ namespace iSpindel.App.Data
         protected override void ConfigureTable(EntityTypeBuilder<HistoryRow> history) {
             base.ConfigureTable(history);
             history.Property<string>("ContextKey").HasMaxLength(50);
-            history.Property<DateTime>("Applied").HasDefaultValue(DateTime.Now);
+            history.Property<DateTime>("Applied");
         }
 
         public override string GetInsertScript(HistoryRow row) {
             var stringTypeMapping = Dependencies.TypeMappingSource.GetMapping(typeof(string));
+            var datetimeTypeMapping = Dependencies.TypeMappingSource.GetMapping(typeof(DateTime));
 
             return new StringBuilder().Append("INSERT INTO ")
                 .Append(SqlGenerationHelper.DelimitIdentifier(TableName, TableSchema))
@@ -57,13 +58,17 @@ namespace iSpindel.App.Data
                 .Append(SqlGenerationHelper.DelimitIdentifier(ProductVersionColumnName))
                 .Append(", ")
                 .Append(SqlGenerationHelper.DelimitIdentifier("ContextKey"))
+                .Append(", ")
+                .Append(SqlGenerationHelper.DelimitIdentifier("Applied"))
                 .AppendLine(")")
                 .Append("VALUES (")
                 .Append(stringTypeMapping.GenerateSqlLiteral(row.MigrationId))
                 .Append(", ")
                 .Append(stringTypeMapping.GenerateSqlLiteral(row.ProductVersion))
                 .Append(", ")
-                .Append(stringTypeMapping.GenerateSqlLiteral("ApplicationContext"))
+                .Append(stringTypeMapping.GenerateSqlLiteral("iSpindelContext"))
+                .Append(", ")
+                .Append(datetimeTypeMapping.GenerateSqlLiteral(DateTime.Now))
                 .Append(")")
                 .AppendLine(SqlGenerationHelper.StatementTerminator)
                 .ToString();

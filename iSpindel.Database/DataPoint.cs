@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace iSpindel.Database
 {
@@ -8,9 +9,10 @@ namespace iSpindel.Database
     {
         [Key]
         public int Id { get; set; }
+        [JsonIgnore]
         public int? DataSeriesId { get; set; }
 
-        [ForeignKey("DataSeriesId")]
+        [ForeignKey("DataSeriesId"), JsonIgnore]
         public virtual DataSeries DataSeries { get; set; }
         public double Temperature { get; set; }
         public double Battery { get; set; }

@@ -1,11 +1,10 @@
-using Microsoft.EntityFrameworkCore;
 using System;
-using Npgsql.EntityFrameworkCore.PostgreSQL;
-using Microsoft.EntityFrameworkCore.Migrations;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Migrations.Internal;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System.Text;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Migrations.Internal;
 
 namespace iSpindel.Database
 {
@@ -13,9 +12,11 @@ namespace iSpindel.Database
 	{
 
 		protected iSpindelContext() : base() {
+			this.ChangeTracker.LazyLoadingEnabled = false;
 		}
 
 		public iSpindelContext(DbContextOptions<iSpindelContext> options) : base(options) {
+			this.ChangeTracker.LazyLoadingEnabled = false;
 		}
 
 		public virtual DbSet<DataPoint> DataPoints { get; set; }
@@ -62,11 +63,12 @@ namespace iSpindel.Database
 		protected override void ConfigureTable(EntityTypeBuilder<HistoryRow> history) {
 			base.ConfigureTable(history);
 			history.Property<string>("ContextKey").HasMaxLength(50);
-			history.Property<DateTime>("Applied").HasDefaultValue(DateTime.Now);
+			history.Property<DateTime>("Applied");
 		}
 
 		public override string GetInsertScript(HistoryRow row) {
 			var stringTypeMapping = Dependencies.TypeMappingSource.GetMapping(typeof(string));
+			var datetimeTypeMapping = Dependencies.TypeMappingSource.GetMapping(typeof(DateTime));
 
 			return new StringBuilder().Append("INSERT INTO ")
 				.Append(SqlGenerationHelper.DelimitIdentifier(TableName, TableSchema))
@@ -76,6 +78,8 @@ namespace iSpindel.Database
 				.Append(SqlGenerationHelper.DelimitIdentifier(ProductVersionColumnName))
 				.Append(", ")
 				.Append(SqlGenerationHelper.DelimitIdentifier("ContextKey"))
+				.Append(", ")
+				.Append(SqlGenerationHelper.DelimitIdentifier("Applied"))
 				.AppendLine(")")
 				.Append("VALUES (")
 				.Append(stringTypeMapping.GenerateSqlLiteral(row.MigrationId))
@@ -83,6 +87,8 @@ namespace iSpindel.Database
 				.Append(stringTypeMapping.GenerateSqlLiteral(row.ProductVersion))
 				.Append(", ")
 				.Append(stringTypeMapping.GenerateSqlLiteral("iSpindelContext"))
+				.Append(", ")
+				.Append(datetimeTypeMapping.GenerateSqlLiteral(DateTime.Now))
 				.Append(")")
 				.AppendLine(SqlGenerationHelper.StatementTerminator)
 				.ToString();
