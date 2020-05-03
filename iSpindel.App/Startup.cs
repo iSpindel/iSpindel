@@ -14,6 +14,7 @@ using Microsoft.Extensions.Hosting;
 using iSpindel.Database;
 using Microsoft.Data.SqlClient;
 using Npgsql;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace iSpindel.App
 {
@@ -40,10 +41,14 @@ namespace iSpindel.App
 
 
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseNpgsql(connectionStringBuilder.ConnectionString));
+                options.UseNpgsql(connectionStringBuilder.ConnectionString)
+                .ReplaceService<IHistoryRepository, ApplicationHistoryRepository>()
+            );
 
             services.AddDbContext<iSpindelContext>(options =>
-                options.UseNpgsql(connectionStringBuilder.ConnectionString));
+                options.UseNpgsql(connectionStringBuilder.ConnectionString)
+                .ReplaceService<IHistoryRepository, iSpindelHistoryRepository>()
+           );
 
             services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
