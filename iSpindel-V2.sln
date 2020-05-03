@@ -19,6 +19,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "iSpindel.Database.Job", "iS
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "iSpindel.Database.Job.Test", "iSpindel.Database.Job.Test\iSpindel.Database.Job.Test.csproj", "{235723A2-484E-4C30-B92A-65353A9BDDBB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iSpindel.Database.Job.Runner", "iSpindel.Database.Job.Runner\iSpindel.Database.Job.Runner.csproj", "{1F2427E9-0AC3-4303-9D0E-C588BAA2667C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -101,6 +103,18 @@ Global
 		{235723A2-484E-4C30-B92A-65353A9BDDBB}.Release|x64.Build.0 = Release|Any CPU
 		{235723A2-484E-4C30-B92A-65353A9BDDBB}.Release|x86.ActiveCfg = Release|Any CPU
 		{235723A2-484E-4C30-B92A-65353A9BDDBB}.Release|x86.Build.0 = Release|Any CPU
+		{1F2427E9-0AC3-4303-9D0E-C588BAA2667C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F2427E9-0AC3-4303-9D0E-C588BAA2667C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F2427E9-0AC3-4303-9D0E-C588BAA2667C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{1F2427E9-0AC3-4303-9D0E-C588BAA2667C}.Debug|x64.Build.0 = Debug|Any CPU
+		{1F2427E9-0AC3-4303-9D0E-C588BAA2667C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1F2427E9-0AC3-4303-9D0E-C588BAA2667C}.Debug|x86.Build.0 = Debug|Any CPU
+		{1F2427E9-0AC3-4303-9D0E-C588BAA2667C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F2427E9-0AC3-4303-9D0E-C588BAA2667C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F2427E9-0AC3-4303-9D0E-C588BAA2667C}.Release|x64.ActiveCfg = Release|Any CPU
+		{1F2427E9-0AC3-4303-9D0E-C588BAA2667C}.Release|x64.Build.0 = Release|Any CPU
+		{1F2427E9-0AC3-4303-9D0E-C588BAA2667C}.Release|x86.ActiveCfg = Release|Any CPU
+		{1F2427E9-0AC3-4303-9D0E-C588BAA2667C}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
