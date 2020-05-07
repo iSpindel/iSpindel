@@ -23,7 +23,7 @@ namespace iSpindel.Database.Job.Runner
                 throw new ArgumentException($"Config key {configKey} is empty or missing and has no default value");
             }
 
-            if (configEntry == null && defaultValue != null)
+            if (configEntry == null)
             {
                 return defaultValue;
             }
