@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -10,19 +9,26 @@ using Npgsql;
 
 namespace iSpindel.Database.Job.Runner
 {
-    internal static class ConfigurationExtensions {
-        public  static string ValidateConfigString(this IConfigurationRoot configurationRoot, string configKey, string defaultValue = null) {
-            var configEntry = configurationRoot.GetValue<string>(configKey);
-            //"   "
-            if ( String.IsNullOrWhiteSpace(configEntry)){
-                if ( defaultValue == null ){
-                    throw new ArgumentException($"Config Key {configKey} is empty or missing");
-                }
+    internal static class ConfigurationExtensions
+    {
+        public static T ValidateConfigString<T>(this IConfigurationRoot configurationRoot, string configKey, T defaultValue = default(T))
+        {
+            var configEntry = configurationRoot.GetValue<T>(configKey);
 
+            if (
+                (configEntry is string strEntry && String.IsNullOrWhiteSpace(strEntry)) ||
+                (configEntry == null && defaultValue == null)
+             )
+            {
+                throw new ArgumentException($"Config key {configKey} is empty or missing and has no default value");
+            }
+
+            if (configEntry == null && defaultValue != null)
+            {
                 return defaultValue;
             }
 
-            return configEntry;
+            return configEntry!;
         }
     }
 
@@ -39,20 +45,21 @@ namespace iSpindel.Database.Job.Runner
             var configurationRoot = new ConfigurationBuilder()
                     .SetBasePath(Path.Combine(Directory.GetCurrentDirectory()))
                     .AddJsonFile("appsettings.json", false, false)
+                    //.AddJsonFile("appsettings.Production.json", true, false)
                     .Build();
 
             var runnerOptions = new RunnerOptions()
             {
                 ConnectionString = configurationRoot.GetConnectionString("DefaultConnection"),
-                MqttHost = configurationRoot.GetValue<string>("Mqtt:Host"),
-                MqttPort = configurationRoot.GetValue<int>("Mqtt:Port", 1833),
-                MqttUsername = configurationRoot.GetValue<string>("Mqtt:Credentials:Username"),
-                MqttPassword = configurationRoot.GetValue<string>("Mqtt:Credentials:Password"),
-                TopicRecordRequest = configurationRoot.ValidateConfigString("Mqtt:Topic:RecordRequest", "spindelControl/RecordRequest"),
-                TopicServerStatusRequest = configurationRoot.GetValue<string>("Mqtt:Topics:ServerStatusRequest", "spindelControl/ServerStatusRequest"),
-                TopicISpindelTemperature = configurationRoot.GetValue<string>("Mqtt:Topics:iSpindelBattery"),
-                TopicISpindelBattery = configurationRoot.GetValue<string>("Mqtt:Topics:iSpindelGravity"),
-                TopicISpindelGravity = configurationRoot.GetValue<string>("Mqtt:Topics:iSpindelTemperature"),
+                MqttHost = configurationRoot.ValidateConfigString<string>("Mqtt:Host"),
+                MqttPort = configurationRoot.ValidateConfigString<int?>("Mqtt:Port", 1833).Value,
+                MqttUsername = configurationRoot.ValidateConfigString<string>("Mqtt:Credentials:Username"),
+                MqttPassword = configurationRoot.ValidateConfigString<string>("Mqtt:Credentials:Password"),
+                TopicRecordRequest = configurationRoot.ValidateConfigString<string>("Mqtt:Topic:RecordRequest", "spindelControl/RecordRequest"),
+                TopicServerStatusRequest = configurationRoot.ValidateConfigString<string>("Mqtt:Topics:ServerStatusRequest", "spindelControl/ServerStatusRequest"),
+                TopicISpindelTemperature = configurationRoot.ValidateConfigString<string>("Mqtt:Topics:iSpindelBattery"),
+                TopicISpindelBattery = configurationRoot.ValidateConfigString<string>("Mqtt:Topics:iSpindelGravity"),
+                TopicISpindelGravity = configurationRoot.ValidateConfigString<string>("Mqtt:Topics:iSpindelTemperature"),
             };
 
             Console.WriteLine(
