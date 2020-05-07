@@ -16,11 +16,13 @@ namespace iSpindel.Database.Job
 
         private const string topicBasePath = "ispindel/iSpindel0/";
         private readonly string[] sensorTopics = { "battery", "gravity", "temperature" };
+        private readonly Func<iSpindelContext> dbContextFactory;
 
-        public iSpindelServer(IMqttClient mqttDataClient, IMqttClientOptions mqttClientOptions)
+        public iSpindelServer(IMqttClient mqttDataClient, IMqttClientOptions mqttClientOptions, Func<iSpindelContext> dbContextFactory)
         {
             this.mqttDataClient = mqttDataClient;
             this.mqttClientOptions = mqttClientOptions;
+            this.dbContextFactory = dbContextFactory;
         }
 
 
@@ -53,14 +55,16 @@ namespace iSpindel.Database.Job
             // magic happens here!
         }
 
-        private void persistDataPoint()
+        private async Task persistDataPoint()
         {
+            using var dbContext = this.dbContextFactory();
             // TODO implement context factory
             /*
             using var dbContext = DbContextFactory.Create();
             dbContext.Set(dataPoint);
             dbContext.SaveChangesAsync();
             */
+            await dbContext.SaveChangesAsync();
         }
 
 

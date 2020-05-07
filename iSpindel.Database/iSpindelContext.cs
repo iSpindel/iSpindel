@@ -11,7 +11,7 @@ namespace iSpindel.Database
 	public class iSpindelContext : DbContext
 	{
 
-		protected iSpindelContext() : base() {
+		public iSpindelContext() : base() {
 			this.ChangeTracker.LazyLoadingEnabled = false;
 		}
 

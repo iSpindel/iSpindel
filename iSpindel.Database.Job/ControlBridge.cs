@@ -8,15 +8,21 @@ using MQTTnet.Client.Connecting;
 
 namespace iSpindel.Database.Job
 {
-    public class ControlBridge
+    public class ControlBridge : IDisposable
     {
         private readonly ISpindelService server;
         private readonly IMqttClient mqttClient;
+        private readonly string topicPrefix;
+        private readonly string topicRecordRequest;
+        private readonly string topicServerStatusRequest;
 
-        public ControlBridge(ISpindelService server, IMqttClient mqttClient)
+        public ControlBridge(string topicPrefix, ISpindelService server, IMqttClient mqttClient)
         {
             this.server = server;
             this.mqttClient = mqttClient;
+            this.topicPrefix = topicPrefix.EndsWith("/") ? topicPrefix : topicPrefix + '/';
+            this.topicRecordRequest = topicPrefix + "RecordRequest";
+            this.topicServerStatusRequest = topicPrefix + "ServerStatusRequest";
             mqttClient.UseConnectedHandler(this.Init);
         }
 
@@ -32,15 +38,15 @@ namespace iSpindel.Database.Job
 
         private async Task subscribeToControlTopics()
         {
-            await mqttClient.SubscribeAsync("RecordRequest");
-            await mqttClient.SubscribeAsync("ServerStatusRequest");
+            await mqttClient.SubscribeAsync(this.topicRecordRequest);
+            await mqttClient.SubscribeAsync(this.topicServerStatusRequest);
             mqttClient.UseApplicationMessageReceivedHandler(async e =>
             {
-                if (e.ApplicationMessage.Topic == "RecordRequest")
+                if (e.ApplicationMessage.Topic == this.topicRecordRequest)
                 {
                     await handleStartStop(Encoding.UTF8.GetString(e.ApplicationMessage.Payload));
                 }
-                else if (e.ApplicationMessage.Topic == "ServerStatusRequest")
+                else if (e.ApplicationMessage.Topic == this.topicServerStatusRequest)
                 {
                     await handleRecordStatus(Encoding.UTF8.GetString(e.ApplicationMessage.Payload));
                 }
@@ -51,7 +57,7 @@ namespace iSpindel.Database.Job
         {
             var currentStatus = await server.GetStatusAsync();
             var message = new MqttApplicationMessageBuilder()
-            .WithTopic("ServerStatus")
+            .WithTopic(this.topicServerStatusRequest)
             .WithPayload(currentStatus.ToString())
             .Build();
 
@@ -73,7 +79,11 @@ namespace iSpindel.Database.Job
                 }
             }
             // TODO do something with the return code
-            // May handle this via MQTTnet.Extensions.Rpc, see https://github.com/chkr1011/MQTTnet/wiki/Client#rpc-calls
+        }
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
         }
 
         // TODO do a proper cleanup, probably via Disposable

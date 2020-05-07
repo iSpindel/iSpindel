@@ -11,6 +11,8 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>iSpindel.Database.Job</RootNamespace>
+    <LangVersion>8</LangVersion>
+    <Deterministic>true</Deterministic>
   </PropertyGroup>
 
 </Project>
