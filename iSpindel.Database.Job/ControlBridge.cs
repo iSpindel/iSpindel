@@ -22,6 +22,7 @@ namespace iSpindel.Database.Job
             this.options = options;
             this.topicRecordRequest = options.TopicBasePath + options.TopicRecordRequest;
             this.topicServerStatusRequest = options.TopicBasePath + options.TopicServerStatusRequest;
+            this.server = options.SpindelService;
         }
 
         public async Task Init()
@@ -30,7 +31,7 @@ namespace iSpindel.Database.Job
             mqttClient.UseConnectedHandler(this.VerifyConnection);
         }
 
-        private async Task VerifyConnection (MqttClientConnectedEventArgs connectArgs)
+        private async Task VerifyConnection(MqttClientConnectedEventArgs connectArgs)
         {
             if (connectArgs.AuthenticateResult.ResultCode != MqttClientConnectResultCode.Success)
             {

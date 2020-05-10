@@ -13,6 +13,9 @@ namespace iSpindel.Database.Job.Runner
     {
         private RunnerOptions options;
 
+        public ISpindelService Server { get; set; }
+        public ControlBridge ControlBridge { get; set; }
+
         public Runner(RunnerOptions options)
         {
             this.options = options;
@@ -43,6 +46,7 @@ namespace iSpindel.Database.Job.Runner
                     var factory = new MqttFactory();
                     var client = factory.CreateManagedMqttClient();
                     //await mqttClient.SubscribeAsync(new TopicFilterBuilder().WithTopic("my/topic").Build());
+                    Console.WriteLine($"Starting mqtt client");
                     await client.StartAsync(managedMqttClientOpts);
                     return client;
                 };
@@ -50,7 +54,7 @@ namespace iSpindel.Database.Job.Runner
             var serverOpts = new iSpindelServerOptions()
             {
                 MqttClientFactory = managedMqttClientFactory,
-                DbContext = () =>
+                DbContextFactory = () =>
                 {
                     var optionsBuilder = new DbContextOptionsBuilder<iSpindelContext>()
                     .UseNpgsql(options.ConnectionString);
@@ -62,19 +66,19 @@ namespace iSpindel.Database.Job.Runner
                 TopicGravity = options.TopicISpindelGravity,
             };
 
-            var server = new iSpindelServer(serverOpts);
+            this.Server = new iSpindelServer(serverOpts);
 
             var bridgeOpts = new ControlBridgeOptions()
             {
                 MqttClientFactory = managedMqttClientFactory,
-                SpindelService = server,
+                SpindelService = this.Server,
                 TopicBasePath = options.TopicControlBridgeBasePath,
                 TopicRecordRequest = options.TopicRecordRequest,
                 TopicServerStatusRequest = options.TopicServerStatusRequest
             };
 
-            var mqttControlBridge = new ControlBridge(bridgeOpts);
-            await mqttControlBridge.Init();
+            //this.ControlBridge = new ControlBridge(bridgeOpts);
+            //await this.ControlBridge.Init();
 
         }
     }

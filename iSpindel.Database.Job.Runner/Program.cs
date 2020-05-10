@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System;
+using System.Linq;
+using System.IO;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 
@@ -29,15 +31,43 @@ namespace iSpindel.Database.Job.Runner
                 TopicISpindelBasePath = configurationRoot.GetSanitizedValue<string>("Mqtt:Topics:iSpindelTopicBasePath").AppendTerminatorChar(),
                 TopicRecordRequest = configurationRoot.GetSanitizedValue<string>("Mqtt:Topics:RecordRequest", "RecordRequest"),
                 TopicServerStatusRequest = configurationRoot.GetSanitizedValue<string>("Mqtt:Topics:ServerStatusRequest", "ServerStatusRequest"),
-                TopicISpindelTemperature = configurationRoot.GetSanitizedValue<string>("Mqtt:Topics:iSpindelBattery"),
-                TopicISpindelBattery = configurationRoot.GetSanitizedValue<string>("Mqtt:Topics:iSpindelGravity"),
-                TopicISpindelGravity = configurationRoot.GetSanitizedValue<string>("Mqtt:Topics:iSpindelTemperature"),
+                TopicISpindelTemperature = configurationRoot.GetSanitizedValue<string>("Mqtt:Topics:iSpindelTemperature"),
+                TopicISpindelBattery = configurationRoot.GetSanitizedValue<string>("Mqtt:Topics:iSpindelBattery"),
+                TopicISpindelGravity = configurationRoot.GetSanitizedValue<string>("Mqtt:Topics:iSpindelGravity"),
             };
 
             var runner = new Runner(runnerOptions);
 
             await runner.Run();
-
+            Console.WriteLine("Started cli runner");
+            while (true)
+            {
+                var input = Console.ReadLine();
+                if (input.StartsWith("start"))
+                {
+                    var idStr = input.Split(' ').Skip(1).FirstOrDefault();
+                    var id = -1;
+                    if (Int32.TryParse(idStr, out var readId))
+                    {
+                        id = readId;
+                    }
+                    Console.WriteLine($"Starting recording with id {id}");
+                    await runner.Server.StartAsync(id);
+                    Console.WriteLine($"Started recording with id {id}");
+                }
+                else if (input.StartsWith("stop"))
+                {
+                    var currentId = (runner.Server as iSpindelServer).CurrentId?.ToString() ?? "none";
+                    Console.WriteLine($"Stopping recording {currentId}");
+                    await runner.Server.StopAsync();
+                    Console.WriteLine("Stopped recording");
+                }
+                else if (input.StartsWith("status"))
+                {
+                    var status = await runner.Server.GetStatusAsync();
+                    Console.WriteLine($"Server status is {status}");
+                }
+            }
         }
     }
 }

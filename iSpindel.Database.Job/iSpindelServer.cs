@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 using System.Threading.Tasks;
 using MQTTnet.Client;
@@ -12,7 +13,7 @@ namespace iSpindel.Database.Job
         private iSpindelServerOptions options;
 
         private IManagedMqttClient mqttClient = null;
-        private int? currentId = null;
+        public int? CurrentId { get; set; }
         private RawDataPoint dataBuffer = null;
         private readonly string batteryTopic;
         private readonly string temperatureTopic;
@@ -22,14 +23,19 @@ namespace iSpindel.Database.Job
         public iSpindelServer(iSpindelServerOptions options)
         {
             this.options = options;
-            this.batteryTopic = options.TopicBasePath+options.TopicBattery;
-            this.temperatureTopic = options.TopicBasePath+options.TopicTemperature;
-            this.gravityTopic = options.TopicBasePath+options.TopicGravity;
+            this.batteryTopic = options.TopicBasePath + options.TopicBattery;
+            this.temperatureTopic = options.TopicBasePath + options.TopicTemperature;
+            this.gravityTopic = options.TopicBasePath + options.TopicGravity;
 
             this.sensorTopics.Add(batteryTopic);
             this.sensorTopics.Add(temperatureTopic);
             this.sensorTopics.Add(gravityTopic);
-            
+
+            using var dbContext = this.options.DbContextFactory();
+            if (!dbContext.Database.CanConnect())
+            {
+                throw new ArgumentException("Could not validate database connection");
+            }
         }
 
 
@@ -37,11 +43,17 @@ namespace iSpindel.Database.Job
         {
             foreach (var topic in sensorTopics)
             {
+                Console.WriteLine($"subscribe to topic {topic}");
                 await mqttClient.SubscribeAsync(topic);
-
             }
 
-            mqttClient.UseApplicationMessageReceivedHandler(e => { handleSensorData(e.ApplicationMessage.Topic, e.ApplicationMessage.Payload); });
+            mqttClient.UseApplicationMessageReceivedHandler(async (e) =>
+            {
+                Console.WriteLine($"Got message on topic {e.ApplicationMessage.Topic}");
+                var payload = Encoding.UTF8.GetString(e.ApplicationMessage.Payload);
+                Console.WriteLine($"Payload {payload}");
+                await handleSensorData(e.ApplicationMessage.Topic, payload);
+            });
         }
 
         private async Task unsubscribeFromSensorTopics()
@@ -50,47 +62,64 @@ namespace iSpindel.Database.Job
             foreach (var topic in sensorTopics)
             {
                 await mqttClient.UnsubscribeAsync(topic);
-
             }
-
         }
-        private void handleSensorData(string topic, byte[] payload)
+        private async Task handleSensorData(string topic, string payload)
         {
 
             dataBuffer = dataBuffer ?? new RawDataPoint();
 
-            if (topic.Equals(batteryTopic) && Double.TryParse(Encoding.UTF8.GetString(payload), out var batValue))
+            if (topic.Equals(batteryTopic) && Double.TryParse(payload, NumberStyles.Any, CultureInfo.InvariantCulture, out var batValue))
             {
                 dataBuffer.Battery = batValue;
                 dataBuffer.LastRecordTime = DateTime.Now;
+                Console.WriteLine($"Got battery {batValue} on {dataBuffer.LastRecordTime}");
             }
-            else if (topic.Equals(temperatureTopic) && Double.TryParse(Encoding.UTF8.GetString(payload), out var tempValue))
+            else if (topic.Equals(temperatureTopic) && Double.TryParse(payload, NumberStyles.Any, CultureInfo.InvariantCulture, out var tempValue))
             {
                 dataBuffer.Temperature = tempValue;
                 dataBuffer.LastRecordTime = DateTime.Now;
+                Console.WriteLine($"Got temp {tempValue} on {dataBuffer.LastRecordTime}");
             }
-            else if (topic.Equals(gravityTopic) && Double.TryParse(Encoding.UTF8.GetString(payload), out var gravValue))
+            else if (topic.Equals(gravityTopic) && Double.TryParse(payload, NumberStyles.Any, CultureInfo.InvariantCulture, out var gravValue))
             {
                 dataBuffer.Gravity = gravValue;
                 dataBuffer.LastRecordTime = DateTime.Now;
+                Console.WriteLine($"Got grav {gravValue} on {dataBuffer.LastRecordTime}");
             }
+            //TODO check timeframe from lastrecordtime here
 
+            if (dataBuffer.Battery.HasValue && dataBuffer.Gravity.HasValue && dataBuffer.Temperature.HasValue)
+            {
+                Console.WriteLine("Persisting");
+                await this.persistDataPoint();
+                Console.WriteLine("Persisted");
+            }
         }
 
         private async Task persistDataPoint()
         {
-            using var dbContext = options.DbContext();
-
-            var dataPoint = new DataPoint()
+            try
             {
-                DataSeriesId = currentId ?? -1,
-                Temperature = dataBuffer.Temperature,
-                Battery = dataBuffer.Battery,
-                Gravity = dataBuffer.Gravity,
-                RecordTime = dataBuffer.LastRecordTime
-            };
-            dbContext.DataPoints.Add(dataPoint);
-            await dbContext.SaveChangesAsync();
+                using var dbContext = options.DbContextFactory();
+
+                var dataPoint = new DataPoint()
+                {
+                    DataSeriesId = CurrentId ?? -1,
+                    Temperature = dataBuffer.Temperature.Value,
+                    Battery = dataBuffer.Battery.Value,
+                    Gravity = dataBuffer.Gravity.Value,
+                    RecordTime = dataBuffer.LastRecordTime
+                };
+                Console.WriteLine($"DataPoint T:{dataPoint.Temperature} B:{dataPoint.Battery} G:{dataPoint.Gravity}");
+                dbContext.DataPoints.Add(dataPoint);
+                await dbContext.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message + ex.StackTrace);
+                Console.WriteLine(ex.InnerException.Message + ex.InnerException.StackTrace);
+            }
         }
 
 
@@ -102,7 +131,7 @@ namespace iSpindel.Database.Job
             await subscribeToSensorTopics();
             // TODO - check if Database is alive
             // TODO - check if id already exists in Database 
-            currentId = id;
+            CurrentId = id;
 
             // TODO - return false if another recording is already in progress
             return true;
@@ -110,16 +139,16 @@ namespace iSpindel.Database.Job
 
         public Task<StatusCode> GetStatusAsync()
         {
-            return Task.Run(() => currentId.HasValue ? StatusCode.RECORDING : StatusCode.IDLE);
+            return Task.Run(() => CurrentId.HasValue ? StatusCode.RECORDING : StatusCode.IDLE);
         }
 
         public async Task<bool> StopAsync()
         {
             // TODO - check if all this was successful before returning
             await unsubscribeFromSensorTopics();
-            await mqttClient.StopAsync();
+            //await mqttClient.StopAsync();
             mqttClient = null;
-            currentId = null;
+            CurrentId = null;
             return true;
         }
     }
