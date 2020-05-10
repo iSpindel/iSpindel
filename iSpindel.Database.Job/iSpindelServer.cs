@@ -1,53 +1,54 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using MQTTnet.Client;
-using MQTTnet.Client.Connecting;
-using MQTTnet.Client.Options;
 
 namespace iSpindel.Database.Job
 {
     public class iSpindelServer : ISpindelService
     {
         private iSpindelServerOptions options;
+
+        private IMqttClient mqttClient = null;
         private int? currentId = null;
         private RawDataPoint dataBuffer = null;
         private readonly string batteryTopic;
         private readonly string temperatureTopic;
         private readonly string gravityTopic;
+        private readonly List<string> sensorTopics = new List<string>();
 
         public iSpindelServer(iSpindelServerOptions options)
         {
             this.options = options;
-            options.SensorTopics.TryGetValue("battery", out var batteryTopic);
-            options.SensorTopics.TryGetValue("temperature", out var temperatureTopic);
-            options.SensorTopics.TryGetValue("gravity", out var gravityTopic);
-            this.batteryTopic = batteryTopic;
-            this.temperatureTopic = temperatureTopic;
-            this.gravityTopic = gravityTopic;
+            this.batteryTopic = options.TopicBasePath+options.TopicBattery;
+            this.temperatureTopic = options.TopicBasePath+options.TopicTemperature;
+            this.gravityTopic = options.TopicBasePath+options.TopicGravity;
+
+            this.sensorTopics.Add(batteryTopic);
+            this.sensorTopics.Add(temperatureTopic);
+            this.sensorTopics.Add(gravityTopic);
             
         }
 
 
         private async Task subscribeToSensorTopics()
         {
-            foreach (var topic in options.SensorTopics.Values)
+            foreach (var topic in sensorTopics)
             {
-                await options.MqttClient.SubscribeAsync(topic);
+                await mqttClient.SubscribeAsync(topic);
 
             }
 
-            options.MqttClient.UseApplicationMessageReceivedHandler(e => { handleSensorData(e.ApplicationMessage.Topic, e.ApplicationMessage.Payload); });
+            mqttClient.UseApplicationMessageReceivedHandler(e => { handleSensorData(e.ApplicationMessage.Topic, e.ApplicationMessage.Payload); });
         }
 
         private async Task unsubscribeFromSensorTopics()
         {
 
-            foreach (var topic in options.SensorTopics.Values)
+            foreach (var topic in sensorTopics)
             {
-                await options.MqttClient.UnsubscribeAsync(topic);
+                await mqttClient.UnsubscribeAsync(topic);
 
             }
 
@@ -95,10 +96,11 @@ namespace iSpindel.Database.Job
         public async Task<bool> StartAsync(int id)
         {
             // TODO - check if connection is successful, otherwise return false
-            await options.MqttClient.ConnectAsync(options.MqttClientOptions, CancellationToken.None);
+            this.mqttClient = await options.MqttClientFactory();
             // TODO - check if subscribe is successful, otherwise return false
             await subscribeToSensorTopics();
             // TODO - check if Database is alive
+            // TODO - check if id already exists in Database 
             currentId = id;
 
             // TODO - return false if another recording is already in progress
@@ -114,20 +116,10 @@ namespace iSpindel.Database.Job
         {
             // TODO - check if all this was successful before returning
             await unsubscribeFromSensorTopics();
-            await options.MqttClient.DisconnectAsync();
+            await mqttClient.DisconnectAsync();
+            mqttClient = null;
             currentId = null;
             return true;
         }
-
-        // TODO handle Reconnect
-    }
-
-    public class iSpindelServerOptions
-    {
-        public IMqttClient MqttClient { get; set; }
-        public IMqttClientOptions MqttClientOptions { get; set; }
-        public Func<iSpindelContext> DbContext { get; set; }
-        public Dictionary<string, string> SensorTopics { get; set; }
-
     }
 }

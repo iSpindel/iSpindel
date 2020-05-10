@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using MQTTnet;
 using MQTTnet.Client;
 using MQTTnet.Client.Connecting;
-using MQTTnet.Client.Options;
 
 namespace iSpindel.Database.Job
 {
@@ -13,7 +12,7 @@ namespace iSpindel.Database.Job
     {
         private readonly ControlBridgeOptions options;
         private readonly ISpindelService server;
-        private readonly IMqttClient mqttClient;
+        private IMqttClient mqttClient;
         private readonly string topicRecordRequest;
         private readonly string topicServerStatusRequest;
 
@@ -22,21 +21,20 @@ namespace iSpindel.Database.Job
             this.options = options;
             this.topicRecordRequest = options.TopicBasePath + options.TopicRecordRequest;
             this.topicServerStatusRequest = options.TopicBasePath + options.TopicServerStatusRequest;
-            mqttClient.UseConnectedHandler(this.Init);
-        }
-        public ControlBridge(string topicPrefix, ISpindelService server, IMqttClient mqttClient)
-        {
-            this.server = server;
-            this.mqttClient = mqttClient;
         }
 
-        public async Task Init(MqttClientConnectedEventArgs connectArgs)
+        public async Task Init()
+        {
+            this.mqttClient = await options.MqttClientFactory();
+            mqttClient.UseConnectedHandler(this.VerifyConnection);
+        }
+
+        private async Task VerifyConnection (MqttClientConnectedEventArgs connectArgs)
         {
             if (connectArgs.AuthenticateResult.ResultCode != MqttClientConnectResultCode.Success)
             {
                 return;
             }
-
             await subscribeToControlTopics();
         }
 
@@ -92,15 +90,5 @@ namespace iSpindel.Database.Job
 
         // TODO do a proper cleanup, probably via Disposable
         // TODO handle Reconnect => do this in a connection factory shared with iSpindelServer
-    }
-
-    public class ControlBridgeOptions
-    {
-        public IMqttClient MqttClient { get; set; }
-        public IMqttClientOptions MqttClientOptions { get; set; }
-        public string TopicBasePath { get; set; }
-        public ISpindelService SpindelService { get; set; }
-        public string TopicRecordRequest { get; set; }
-        public string TopicServerStatusRequest { get; set; }
     }
 }
