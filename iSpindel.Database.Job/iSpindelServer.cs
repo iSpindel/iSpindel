@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using MQTTnet.Client;
@@ -13,6 +14,7 @@ namespace iSpindel.Database.Job
         private IMqttClient mqttDataClient;
         private IMqttClientOptions mqttClientOptions;
         private int? currentId = null;
+        private RawDataPoint dataBuffer = null;
 
         private const string topicBasePath = "ispindel/iSpindel0/";
         private readonly string[] sensorTopics = { "battery", "gravity", "temperature" };
@@ -49,21 +51,36 @@ namespace iSpindel.Database.Job
         }
         private void handleSensorData(string topic, byte[] payload)
         {
-            // TODO implement magic
-            // a database entry consist of a data point, which is an entry of temp, grav and batt
-            // ispindel sends this information in seperate topics
-            // magic happens here!
+
+            dataBuffer = dataBuffer ?? new RawDataPoint();
+
+            if (topic.EndsWith("battery") && Double.TryParse(Encoding.UTF8.GetString(payload),out var batValue) ){
+                dataBuffer.Battery = batValue;
+                dataBuffer.LastRecordTime = DateTime.Now;
+            }
+            else if (topic.EndsWith("temperature") && Double.TryParse(Encoding.UTF8.GetString(payload),out var tempValue) ){
+                dataBuffer.Temperature = tempValue;
+                dataBuffer.LastRecordTime = DateTime.Now;
+            }
+            else if (topic.EndsWith("gravity") && Double.TryParse(Encoding.UTF8.GetString(payload),out var gravValue)){
+                dataBuffer.Gravity = gravValue;
+                dataBuffer.LastRecordTime = DateTime.Now;
+            }
+
         }
 
         private async Task persistDataPoint()
         {
             using var dbContext = this.dbContextFactory();
-            // TODO implement context factory
-            /*
-            using var dbContext = DbContextFactory.Create();
-            dbContext.Set(dataPoint);
-            dbContext.SaveChangesAsync();
-            */
+
+            var dataPoint = new DataPoint(){
+                DataSeriesId = currentId ?? -1,
+                Temperature = dataBuffer.Temperature,
+                Battery = dataBuffer.Battery,
+                Gravity = dataBuffer.Gravity,
+                RecordTime = dataBuffer.LastRecordTime
+            };
+            dbContext.DataPoints.Add(dataPoint);
             await dbContext.SaveChangesAsync();
         }
 

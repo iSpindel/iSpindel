@@ -62,22 +62,7 @@ namespace iSpindel.Database.Job.Runner
                 TopicISpindelGravity = configurationRoot.ValidateConfigString<string>("Mqtt:Topics:iSpindelTemperature"),
             };
 
-            Console.WriteLine(
-runnerOptions.ConnectionString + "|" +
-runnerOptions.MqttHost + "|" +
-runnerOptions.MqttPort + "|" +
-runnerOptions.MqttUsername + "|" +
-runnerOptions.MqttPassword + "|" +
-runnerOptions.TopicRecordRequest + "|" +
-runnerOptions.TopicServerStatusRequest + "|" +
-runnerOptions.TopicISpindelTemperature + "|" +
-runnerOptions.TopicISpindelBattery + "|" +
-runnerOptions.TopicISpindelGravity
-            );
-
-            return;
-
-            /*var mqttClientOpts = new MqttClientOptionsBuilder()
+            var mqttClientOpts = new MqttClientOptionsBuilder()
             .WithTcpServer(mqttOpts.GetValue<string>("Host"), mqttOpts.GetValue<int>("Port")) // Port is optional
             .Build();
 
@@ -98,7 +83,7 @@ runnerOptions.TopicISpindelGravity
             while (true)
             {
                 Console.WriteLine(Console.ReadLine());
-            }*/
+            }
         }
     }
 
