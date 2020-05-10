@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -28,8 +29,16 @@ namespace iSpindel.Database.Job.Runner
                 return defaultValue;
             }
 
-            return configEntry!;
+            return configEntry;
         }
+
+    }
+
+    internal static class StringExtensions {
+        public static string ValidatePrefix(this string prefix) {
+            return prefix.EndsWith("/") ? prefix : prefix + '/';
+        }
+
     }
 
     internal class Program
@@ -45,7 +54,7 @@ namespace iSpindel.Database.Job.Runner
             var configurationRoot = new ConfigurationBuilder()
                     .SetBasePath(Path.Combine(Directory.GetCurrentDirectory()))
                     .AddJsonFile("appsettings.json", false, false)
-                    //.AddJsonFile("appsettings.Production.json", true, false)
+                    .AddJsonFile("appsettings.Production.json", true, false)
                     .Build();
 
             var runnerOptions = new RunnerOptions()
@@ -55,29 +64,52 @@ namespace iSpindel.Database.Job.Runner
                 MqttPort = configurationRoot.ValidateConfigString<int?>("Mqtt:Port", 1833).Value,
                 MqttUsername = configurationRoot.ValidateConfigString<string>("Mqtt:Credentials:Username"),
                 MqttPassword = configurationRoot.ValidateConfigString<string>("Mqtt:Credentials:Password"),
-                TopicRecordRequest = configurationRoot.ValidateConfigString<string>("Mqtt:Topic:RecordRequest", "spindelControl/RecordRequest"),
-                TopicServerStatusRequest = configurationRoot.ValidateConfigString<string>("Mqtt:Topics:ServerStatusRequest", "spindelControl/ServerStatusRequest"),
+
+                TopicControlBridgeBasePath = configurationRoot.ValidateConfigString<string>("Mqtt:Topics:ControlBridgeTopicBasePath", "spindelControl/").ValidatePrefix(),
+                TopicISpindelBasePath = configurationRoot.ValidateConfigString<string>("Mqtt:Topics:iSpindelTopicBasePath").ValidatePrefix(),
+
+                TopicRecordRequest = configurationRoot.ValidateConfigString<string>("Mqtt:Topics:RecordRequest", "RecordRequest"),
+                TopicServerStatusRequest = configurationRoot.ValidateConfigString<string>("Mqtt:Topics:ServerStatusRequest", "ServerStatusRequest"),
                 TopicISpindelTemperature = configurationRoot.ValidateConfigString<string>("Mqtt:Topics:iSpindelBattery"),
                 TopicISpindelBattery = configurationRoot.ValidateConfigString<string>("Mqtt:Topics:iSpindelGravity"),
                 TopicISpindelGravity = configurationRoot.ValidateConfigString<string>("Mqtt:Topics:iSpindelTemperature"),
             };
 
             var mqttClientOpts = new MqttClientOptionsBuilder()
-            .WithTcpServer(mqttOpts.GetValue<string>("Host"), mqttOpts.GetValue<int>("Port")) // Port is optional
+            .WithTcpServer(runnerOptions.MqttHost, runnerOptions.MqttPort) // Port is optional
+            .WithCredentials(runnerOptions.MqttUsername, runnerOptions.MqttPassword)
             .Build();
 
-            var server = new iSpindelServer(
-                mqttDataClient,
-                mqttClientOpts,
-            () =>
+            var serverOpts = new iSpindelServerOptions()
             {
-                var options = new DbContextOptions<iSpindelContext>()
-                .UseNpgsql(configurationRoot.GetConnectionString("DefaultConnection"));
+                MqttClient = mqttDataClient,
+                MqttClientOptions = mqttClientOpts,
+                DbContext = () =>
+                {
+                    var options = new DbContextOptions<iSpindelContext>();
+                //.UseNpgsql(configurationRoot.GetConnectionString("DefaultConnection"));
                 //.ReplaceService<IHistoryRepository, ApplicationHistoryRepository>();
-                return new iSpindelContext(options)
-            });
+                return new iSpindelContext(options);
+                },
+                SensorTopics = new Dictionary<string, string>() {
+                    { "battery" , runnerOptions.TopicISpindelBasePath + runnerOptions.TopicISpindelBattery },
+                    { "temperature" , runnerOptions.TopicISpindelBasePath + runnerOptions.TopicISpindelTemperature },
+                    { "gravity" , runnerOptions.TopicISpindelBasePath + runnerOptions.TopicISpindelGravity }
+                }
+            };
 
-            var mqttControlBridge = new ControlBridge(server, mqttControlClient);
+            var server = new iSpindelServer(serverOpts);
+
+            var bridgeOpts = new ControlBridgeOptions()
+            {
+                MqttClient = mqttControlClient,
+                MqttClientOptions = mqttClientOpts,
+                SpindelService = server,
+                TopicBasePath = runnerOptions.TopicControlBridgeBasePath,
+                TopicRecordRequest = runnerOptions.TopicRecordRequest,
+                TopicServerStatusRequest = runnerOptions.TopicServerStatusRequest
+            };
+            var mqttControlBridge = new ControlBridge(runnerOptions.TopicControlBridgeBasePath, server, mqttControlClient);
             await mqttControlClient.ConnectAsync(mqttClientOpts, CancellationToken.None);
 
             while (true)
@@ -96,9 +128,12 @@ namespace iSpindel.Database.Job.Runner
         public string MqttPassword { get; set; }
         public string TopicRecordRequest { get; set; }
         public string TopicServerStatusRequest { get; set; }
+        public string TopicControlBridgeBasePath { get; set; }
+        public string TopicISpindelBasePath { get; set; }
         public string TopicISpindelTemperature { get; set; }
         public string TopicISpindelBattery { get; set; }
         public string TopicISpindelGravity { get; set; }
+
     }
 
     public class Runner

@@ -11,40 +11,43 @@ namespace iSpindel.Database.Job
 {
     public class iSpindelServer : ISpindelService
     {
-        private IMqttClient mqttDataClient;
-        private IMqttClientOptions mqttClientOptions;
+        private iSpindelServerOptions options;
         private int? currentId = null;
         private RawDataPoint dataBuffer = null;
+        private readonly string batteryTopic;
+        private readonly string temperatureTopic;
+        private readonly string gravityTopic;
 
-        private const string topicBasePath = "ispindel/iSpindel0/";
-        private readonly string[] sensorTopics = { "battery", "gravity", "temperature" };
-        private readonly Func<iSpindelContext> dbContextFactory;
-
-        public iSpindelServer(IMqttClient mqttDataClient, IMqttClientOptions mqttClientOptions, Func<iSpindelContext> dbContextFactory)
+        public iSpindelServer(iSpindelServerOptions options)
         {
-            this.mqttDataClient = mqttDataClient;
-            this.mqttClientOptions = mqttClientOptions;
-            this.dbContextFactory = dbContextFactory;
+            this.options = options;
+            options.SensorTopics.TryGetValue("battery", out var batteryTopic);
+            options.SensorTopics.TryGetValue("temperature", out var temperatureTopic);
+            options.SensorTopics.TryGetValue("gravity", out var gravityTopic);
+            this.batteryTopic = batteryTopic;
+            this.temperatureTopic = temperatureTopic;
+            this.gravityTopic = gravityTopic;
+            
         }
 
 
         private async Task subscribeToSensorTopics()
         {
-            foreach (var topic in sensorTopics)
+            foreach (var topic in options.SensorTopics.Values)
             {
-                await mqttDataClient.SubscribeAsync(topicBasePath + topic);
+                await options.MqttClient.SubscribeAsync(topic);
 
             }
 
-            mqttDataClient.UseApplicationMessageReceivedHandler(e => { handleSensorData(e.ApplicationMessage.Topic, e.ApplicationMessage.Payload); });
+            options.MqttClient.UseApplicationMessageReceivedHandler(e => { handleSensorData(e.ApplicationMessage.Topic, e.ApplicationMessage.Payload); });
         }
 
         private async Task unsubscribeFromSensorTopics()
         {
 
-            foreach (var topic in sensorTopics)
+            foreach (var topic in options.SensorTopics.Values)
             {
-                await mqttDataClient.UnsubscribeAsync(topicBasePath + topic);
+                await options.MqttClient.UnsubscribeAsync(topic);
 
             }
 
@@ -54,15 +57,18 @@ namespace iSpindel.Database.Job
 
             dataBuffer = dataBuffer ?? new RawDataPoint();
 
-            if (topic.EndsWith("battery") && Double.TryParse(Encoding.UTF8.GetString(payload),out var batValue) ){
+            if (topic.Equals(batteryTopic) && Double.TryParse(Encoding.UTF8.GetString(payload), out var batValue))
+            {
                 dataBuffer.Battery = batValue;
                 dataBuffer.LastRecordTime = DateTime.Now;
             }
-            else if (topic.EndsWith("temperature") && Double.TryParse(Encoding.UTF8.GetString(payload),out var tempValue) ){
+            else if (topic.Equals(temperatureTopic) && Double.TryParse(Encoding.UTF8.GetString(payload), out var tempValue))
+            {
                 dataBuffer.Temperature = tempValue;
                 dataBuffer.LastRecordTime = DateTime.Now;
             }
-            else if (topic.EndsWith("gravity") && Double.TryParse(Encoding.UTF8.GetString(payload),out var gravValue)){
+            else if (topic.Equals(gravityTopic) && Double.TryParse(Encoding.UTF8.GetString(payload), out var gravValue))
+            {
                 dataBuffer.Gravity = gravValue;
                 dataBuffer.LastRecordTime = DateTime.Now;
             }
@@ -71,9 +77,10 @@ namespace iSpindel.Database.Job
 
         private async Task persistDataPoint()
         {
-            using var dbContext = this.dbContextFactory();
+            using var dbContext = options.DbContext();
 
-            var dataPoint = new DataPoint(){
+            var dataPoint = new DataPoint()
+            {
                 DataSeriesId = currentId ?? -1,
                 Temperature = dataBuffer.Temperature,
                 Battery = dataBuffer.Battery,
@@ -88,7 +95,7 @@ namespace iSpindel.Database.Job
         public async Task<bool> StartAsync(int id)
         {
             // TODO - check if connection is successful, otherwise return false
-            await mqttDataClient.ConnectAsync(mqttClientOptions, CancellationToken.None);
+            await options.MqttClient.ConnectAsync(options.MqttClientOptions, CancellationToken.None);
             // TODO - check if subscribe is successful, otherwise return false
             await subscribeToSensorTopics();
             // TODO - check if Database is alive
@@ -107,11 +114,20 @@ namespace iSpindel.Database.Job
         {
             // TODO - check if all this was successful before returning
             await unsubscribeFromSensorTopics();
-            await mqttDataClient.DisconnectAsync();
+            await options.MqttClient.DisconnectAsync();
             currentId = null;
             return true;
         }
 
         // TODO handle Reconnect
+    }
+
+    public class iSpindelServerOptions
+    {
+        public IMqttClient MqttClient { get; set; }
+        public IMqttClientOptions MqttClientOptions { get; set; }
+        public Func<iSpindelContext> DbContext { get; set; }
+        public Dictionary<string, string> SensorTopics { get; set; }
+
     }
 }

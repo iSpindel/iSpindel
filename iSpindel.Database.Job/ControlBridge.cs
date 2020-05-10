@@ -5,25 +5,29 @@ using System.Threading.Tasks;
 using MQTTnet;
 using MQTTnet.Client;
 using MQTTnet.Client.Connecting;
+using MQTTnet.Client.Options;
 
 namespace iSpindel.Database.Job
 {
     public class ControlBridge : IDisposable
     {
+        private readonly ControlBridgeOptions options;
         private readonly ISpindelService server;
         private readonly IMqttClient mqttClient;
-        private readonly string topicPrefix;
         private readonly string topicRecordRequest;
         private readonly string topicServerStatusRequest;
 
+        public ControlBridge(ControlBridgeOptions options)
+        {
+            this.options = options;
+            this.topicRecordRequest = options.TopicBasePath + options.TopicRecordRequest;
+            this.topicServerStatusRequest = options.TopicBasePath + options.TopicServerStatusRequest;
+            mqttClient.UseConnectedHandler(this.Init);
+        }
         public ControlBridge(string topicPrefix, ISpindelService server, IMqttClient mqttClient)
         {
             this.server = server;
             this.mqttClient = mqttClient;
-            this.topicPrefix = topicPrefix.EndsWith("/") ? topicPrefix : topicPrefix + '/';
-            this.topicRecordRequest = topicPrefix + "RecordRequest";
-            this.topicServerStatusRequest = topicPrefix + "ServerStatusRequest";
-            mqttClient.UseConnectedHandler(this.Init);
         }
 
         public async Task Init(MqttClientConnectedEventArgs connectArgs)
@@ -88,5 +92,15 @@ namespace iSpindel.Database.Job
 
         // TODO do a proper cleanup, probably via Disposable
         // TODO handle Reconnect => do this in a connection factory shared with iSpindelServer
+    }
+
+    public class ControlBridgeOptions
+    {
+        public IMqttClient MqttClient { get; set; }
+        public IMqttClientOptions MqttClientOptions { get; set; }
+        public string TopicBasePath { get; set; }
+        public ISpindelService SpindelService { get; set; }
+        public string TopicRecordRequest { get; set; }
+        public string TopicServerStatusRequest { get; set; }
     }
 }
