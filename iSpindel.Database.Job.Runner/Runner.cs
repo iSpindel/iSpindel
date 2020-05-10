@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using MQTTnet;
 using MQTTnet.Client;
 using MQTTnet.Client.Options;
+using MQTTnet.Extensions.ManagedClient;
 
 namespace iSpindel.Database.Job.Runner
 {
@@ -24,17 +25,31 @@ namespace iSpindel.Database.Job.Runner
             .WithCredentials(options.MqttUsername, options.MqttPassword)
             .Build();
 
-            Func<Task<IMqttClient>> mqttClientFactory = async () => 
+            var managedMqttClientOpts = new ManagedMqttClientOptionsBuilder()
+            .WithAutoReconnectDelay(TimeSpan.FromSeconds(5))
+            .WithClientOptions(mqttClientOpts)
+            .Build();
+
+            Func<Task<IMqttClient>> mqttClientFactory = async () =>
                 {
-                    var factory =  new MqttFactory();
+                    var factory = new MqttFactory();
                     var client = factory.CreateMqttClient();
-                    await client.ConnectAsync(mqttClientOpts,CancellationToken.None);
+                    await client.ConnectAsync(mqttClientOpts, CancellationToken.None);
+                    return client;
+                };
+
+            Func<Task<IManagedMqttClient>> managedMqttClientFactory = async () =>
+                {
+                    var factory = new MqttFactory();
+                    var client = factory.CreateManagedMqttClient();
+                    //await mqttClient.SubscribeAsync(new TopicFilterBuilder().WithTopic("my/topic").Build());
+                    await client.StartAsync(managedMqttClientOpts);
                     return client;
                 };
 
             var serverOpts = new iSpindelServerOptions()
             {
-                MqttClientFactory = mqttClientFactory,
+                MqttClientFactory = managedMqttClientFactory,
                 DbContext = () =>
                 {
                     var optionsBuilder = new DbContextOptionsBuilder<iSpindelContext>()
@@ -43,7 +58,7 @@ namespace iSpindel.Database.Job.Runner
                 },
                 TopicBasePath = options.TopicISpindelBasePath,
                 TopicTemperature = options.TopicISpindelTemperature,
-                TopicBattery  = options.TopicISpindelBattery,
+                TopicBattery = options.TopicISpindelBattery,
                 TopicGravity = options.TopicISpindelGravity,
             };
 
@@ -51,7 +66,7 @@ namespace iSpindel.Database.Job.Runner
 
             var bridgeOpts = new ControlBridgeOptions()
             {
-                MqttClientFactory = mqttClientFactory,
+                MqttClientFactory = managedMqttClientFactory,
                 SpindelService = server,
                 TopicBasePath = options.TopicControlBridgeBasePath,
                 TopicRecordRequest = options.TopicRecordRequest,

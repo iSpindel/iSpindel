@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using MQTTnet;
 using MQTTnet.Client;
 using MQTTnet.Client.Connecting;
+using MQTTnet.Extensions.ManagedClient;
 
 namespace iSpindel.Database.Job
 {
@@ -12,7 +13,7 @@ namespace iSpindel.Database.Job
     {
         private readonly ControlBridgeOptions options;
         private readonly ISpindelService server;
-        private IMqttClient mqttClient;
+        private IManagedMqttClient mqttClient;
         private readonly string topicRecordRequest;
         private readonly string topicServerStatusRequest;
 
@@ -80,7 +81,7 @@ namespace iSpindel.Database.Job
                     rc = await server.StartAsync(id);
                 }
             }
-            // TODO do something with the return code
+            // TODO do something with the return code, publish back?
         }
 
         public void Dispose()

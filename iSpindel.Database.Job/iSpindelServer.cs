@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using MQTTnet.Client;
+using MQTTnet.Extensions.ManagedClient;
 
 namespace iSpindel.Database.Job
 {
@@ -10,7 +11,7 @@ namespace iSpindel.Database.Job
     {
         private iSpindelServerOptions options;
 
-        private IMqttClient mqttClient = null;
+        private IManagedMqttClient mqttClient = null;
         private int? currentId = null;
         private RawDataPoint dataBuffer = null;
         private readonly string batteryTopic;
@@ -116,7 +117,7 @@ namespace iSpindel.Database.Job
         {
             // TODO - check if all this was successful before returning
             await unsubscribeFromSensorTopics();
-            await mqttClient.DisconnectAsync();
+            await mqttClient.StopAsync();
             mqttClient = null;
             currentId = null;
             return true;
