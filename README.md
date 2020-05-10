@@ -45,3 +45,30 @@ To add a new migration:
 ```bash
 dotnet ef migrations add <name> -c ApplicationDbContext -o Data/Migrations
 ```
+
+## Postgres Database Preparations for EF
+
+0. Install Postgres
+```bash
+sudo apt update
+sudo apt install postgresql
+sudo -i -u postgres
+```
+1. Create Database User
+```bash
+$ createuser ispindel
+```
+
+2. Create Database 
+```bash
+createdb iSpindel
+```
+3. Grant Access to User
+```bash
+alter user ispindel with encrypted password '<password>';
+grant all privileges on database "iSpindel" to ispindel;
+```
+4. Test Access
+```bash
+psql -h localhost -p 5432 -U ispindel -d iSpindel
+```
