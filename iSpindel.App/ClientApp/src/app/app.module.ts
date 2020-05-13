@@ -1,36 +1,59 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { RouterModule } from '@angular/router';
+import { environment } from 'src/environments/environment';
+
+import { MqttModule, IMqttServiceOptions } from 'ngx-mqtt';
 
 import { AppComponent } from './app.component';
-import { NavMenuComponent } from './nav-menu/nav-menu.component';
-import { HomeComponent } from './home/home.component';
-import { CounterComponent } from './counter/counter.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { ApiAuthorizationModule } from 'src/api-authorization/api-authorization.module';
-import { AuthorizeGuard } from 'src/api-authorization/authorize.guard';
 import { AuthorizeInterceptor } from 'src/api-authorization/authorize.interceptor';
+import { CustomMaterialModule } from './material.module';
+import { AppRoutingModule } from './app-routing.module';
+import { GraphComponent } from './graph/graph.component';
+import { LiveDataComponent } from './live-data/live-data.component';
+import { NewMeasureComponent } from './new-measure/new-measure.component';
+import { Routes, RouterModule } from '@angular/router';
+import { AuthorizeGuard } from 'src/api-authorization/authorize.guard';
+
+//TODO replace with server sided configuration
+export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions =
+{
+  hostname: "localhost",//environment.mqttBroker.hostname,
+  port: 1883,//environment.mqttBroker.port,
+  username: "ispindel",//environment.mqttBroker.username,
+  password: "ispindel123",//environment.mqttBroker.password,
+  clientId: "angular",//environment.mqttBroker.clientId,
+  path: "/test",//environment.mqttBroker.path,
+};
+
+const routes: Routes = [
+  { path: '', component: LiveDataComponent },
+  { path: 'newMeasure', component: NewMeasureComponent },
+  { path: 'viewMeasure', component: GraphComponent, canActivate: [AuthorizeGuard] },
+];
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavMenuComponent,
-    HomeComponent,
-    CounterComponent,
-    FetchDataComponent
+    GraphComponent,
+    LiveDataComponent,
+    NewMeasureComponent,
   ],
   imports: [
-    BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+    //BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+    BrowserModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
     ApiAuthorizationModule,
-    RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'counter', component: CounterComponent },
-      { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard] },
-    ])
+    //custom modules start here
+    CustomMaterialModule,
+    //TODO replace with app-routing module
+    RouterModule.forRoot(routes),
+    MqttModule.forRoot(MQTT_SERVICE_OPTIONS),
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }

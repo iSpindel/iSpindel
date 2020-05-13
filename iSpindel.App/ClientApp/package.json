@@ -1,5 +1,5 @@
 {
-  "name": "ispindel.app",
+  "name": "ispindel-app",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -23,6 +23,7 @@
     "@angular/router": "^9.1.6",
     "@mdi/angular-material": "^5.1.45",
     "core-js": "^3.6.5",
+    "ngx-mqtt": "^6.13.3",
     "oidc-client": "^1.10.1",
     "rxjs": "^6.5.5",
     "zone.js": "0.10.3"

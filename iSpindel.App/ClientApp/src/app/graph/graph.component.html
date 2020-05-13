@@ -1,0 +1,13 @@
+<ul *ngFor="let temp of ( temperatureDataList | async )">
+    <li>Value: {{temp.y}} - Timestamp: {{temp.x}} </li>
+</ul>
+
+<ul *ngFor="let battery of ( batteryDataList | async )">
+    <li>Value: {{battery.y}} - Timestamp: {{battery.x}} </li>
+</ul>
+
+<ul *ngFor="let gravity of ( gravityDataList | async )">
+    <li>Value: {{gravity.y}} - Timestamp: {{gravity.x}} </li>
+</ul>
+
+<div class="chart" id="chartContainer"></div>

@@ -1,0 +1,30 @@
+<div class="sensor-card">
+    <mat-card>
+        <mat-card-header>
+            <mat-icon mat-card-avatar aria-hidden="false" svgIcon="coolant-temperature"></mat-icon>
+            Temperatur
+            <br>
+            {{currentTemperature$ | async}} °C
+        </mat-card-header>
+    </mat-card>
+</div>
+<div class="sensor-card">
+    <mat-card>
+        <mat-card-header>
+            <mat-icon mat-card-avatar aria-hidden="false" svgIcon="battery-charging-high"></mat-icon>
+            Batterieladung
+            <br>
+            {{currentBattery$ | async}} %
+        </mat-card-header>
+    </mat-card>
+</div>
+<div class="sensor-card">
+    <mat-card>
+        <mat-card-header>
+            <mat-icon mat-card-avatar aria-hidden="false" svgIcon="chart-sankey"></mat-icon>
+            Stammwürze
+            <br>
+            {{currentGravity$ | async}} °Plato
+        </mat-card-header>
+    </mat-card>
+</div>
