@@ -120,6 +120,7 @@ namespace iSpindel.Database.Job
             }
             catch (Exception ex)
             {
+                // TODO - do proper logging
                 Console.WriteLine(ex.Message + ex.StackTrace);
                 Console.WriteLine(ex.InnerException.Message + ex.InnerException.StackTrace);
             }

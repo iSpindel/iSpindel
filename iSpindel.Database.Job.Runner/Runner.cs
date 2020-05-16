@@ -73,12 +73,12 @@ namespace iSpindel.Database.Job.Runner
                 MqttClientFactory = managedMqttClientFactory,
                 SpindelService = this.Server,
                 TopicBasePath = options.TopicControlBridgeBasePath,
-                TopicRecordRequest = options.TopicRecordRequest,
-                TopicServerStatusRequest = options.TopicServerStatusRequest
+                ServerResponse = options.TopicServerRequest,
+                ServerRequest = options.TopicServerResponse
             };
 
-            //this.ControlBridge = new ControlBridge(bridgeOpts);
-            //await this.ControlBridge.Init();
+            this.ControlBridge = new ControlBridge(bridgeOpts);
+            await this.ControlBridge.Init();
 
         }
     }
