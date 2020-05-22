@@ -8,7 +8,8 @@ import { AuthorizeGuard } from 'src/api-authorization/authorize.guard';
 const routes: Routes = [
     { path: '', component: LiveDataComponent },
     { path: 'newMeasure', component: NewMeasureComponent },
-    { path: 'viewMeasure', component: GraphComponent, canActivate: [AuthorizeGuard] },
+    //{ path: 'viewMeasure', component: GraphComponent, canActivate: [AuthorizeGuard] },
+    { path: 'viewMeasure', component: GraphComponent },
 ];
 
 @NgModule({

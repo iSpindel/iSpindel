@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -32,7 +32,8 @@ export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions =
 const routes: Routes = [
   { path: '', component: LiveDataComponent },
   { path: 'newMeasure', component: NewMeasureComponent },
-  { path: 'viewMeasure', component: GraphComponent, canActivate: [AuthorizeGuard] },
+  //{ path: 'viewMeasure', component: GraphComponent, canActivate: [AuthorizeGuard] },
+  { path: 'viewMeasure', component: GraphComponent },
 ];
 
 @NgModule({
@@ -51,8 +52,8 @@ const routes: Routes = [
     ApiAuthorizationModule,
     //custom modules start here
     CustomMaterialModule,
-    //TODO replace with app-routing module
-    RouterModule.forRoot(routes),
+    AppRoutingModule,
+    //RouterModule.forRoot(routes),
     MqttModule.forRoot(MQTT_SERVICE_OPTIONS),
   ],
   providers: [
