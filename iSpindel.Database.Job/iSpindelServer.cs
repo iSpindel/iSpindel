@@ -114,6 +114,9 @@ namespace iSpindel.Database.Job
                 Console.WriteLine($"DataPoint T:{dataPoint.Temperature} B:{dataPoint.Battery} G:{dataPoint.Gravity}");
                 dbContext.DataPoints.Add(dataPoint);
                 await dbContext.SaveChangesAsync();
+
+                //clear existing data
+                dataBuffer = null;
             }
             catch (Exception ex)
             {
