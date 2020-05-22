@@ -2,7 +2,23 @@
 .chart {
     height: 80%;
     width: 80%;
-    margin-left:auto;
+    margin-left: auto;
     margin-top: 5em;
-    margin-right:auto;
+    margin-right: auto;
+}
+
+#graph {
+    width: 600px;
+    height: 300px;
+    border: red 2px dashed;
+}
+
+.battery {
+    fill: gray;
+}
+.gravity {
+    fill: orange;
+}
+.temperature {
+    fill: green;
 }

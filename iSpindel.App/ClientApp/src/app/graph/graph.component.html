@@ -1,13 +1,33 @@
-<ul *ngFor="let temp of ( temperatureDataList | async )">
-    <li>Value: {{temp.y}} - Timestamp: {{temp.x}} </li>
-</ul>
-
-<ul *ngFor="let battery of ( batteryDataList | async )">
-    <li>Value: {{battery.y}} - Timestamp: {{battery.x}} </li>
-</ul>
-
-<ul *ngFor="let gravity of ( gravityDataList | async )">
-    <li>Value: {{gravity.y}} - Timestamp: {{gravity.x}} </li>
-</ul>
-
-<div class="chart" id="chartContainer"></div>
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Current Values</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <ul>
+            <li>Battery: {{ BatteryStream | async }}</li>
+            <li>Temperature: {{ TemperatureStream | async }}</li>
+            <li>Gravity: {{ GravityStream | async }}</li>
+        </ul>
+    </mat-card-content>
+</mat-card>
+<mat-card>
+    <mat-card-content>
+        <svg id="graph">
+            <g *ngFor="let range of Ranges; index as i" transform="translate(0 50)">
+                <text>{{range.Name}}</text>
+            </g>
+            <g transform="translate(50 50) scale(0.4 0.4)">
+                <rect fill="transparent" stroke-width="2" stroke="orange" [attr.width]="SvgWidth"
+                    [attr.height]="SvgHeight">
+                </rect>
+                <g *ngFor="let range of Ranges" [ngClass]="range.Class" transform="translate(0 300) scale(0.99 -0.99)">
+                    <circle class="dot" [ngClass]="range.Class"
+                        *ngFor="let point of CurrentData; trackBy: indexFn; index as i" r="2"
+                        [attr.cx]="calculateX(point, i, CurrentData.length)"
+                        [attr.cy]="calculateY(range.Scale(range.Accessor(point)))">
+                    </circle>
+                </g>
+            </g>
+        </svg>
+    </mat-card-content>
+</mat-card>

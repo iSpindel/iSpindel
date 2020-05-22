@@ -1,18 +1,24 @@
 import { Component, OnInit } from '@angular/core';
-import * as CanvasJS from '../../assets/canvasjs/canvasjs.min';
-import { TiltDefinition, RssiDefinition } from 'src/mock/MockAxisYDefinitions';
-import { Observable, zip } from 'rxjs';
 import { GraphService } from 'src/services/graph.service';
-import { IDataPoint } from 'src/classes/Data/IDataPoint';
-import { Temperature } from 'src/classes/Data/Temperature';
-import { TemperatureDefinition } from 'src/classes/AxisDefinitions/TemperatureDefinition';
-import { BatteryDefinition } from 'src/classes/AxisDefinitions/BatteryDefinition';
-import { GravityDefinition } from 'src/classes/AxisDefinitions/GravityDefinition';
-import { Gravity } from 'src/classes/Data/Gravity';
-import { Battery } from 'src/classes/Data/Battery';
-import { GraphConfig } from 'src/classes/GraphConfig';
-import { map } from 'rxjs/operators';
-import { MqttSubscriptionService } from 'src/services/mqtt.service';
+import { Observable, zip, of, Subject } from 'rxjs';
+import { map, reduce, scan, delay, concatMap, share, shareReplay } from 'rxjs/operators';
+
+export interface IDataPoint {
+  Index?: number;
+  Battery: number;
+  Temperature: number;
+  Gravity: number;
+  RecordTime: number;
+}
+
+export interface Range {
+  Name: string;
+  Class: string;
+  Min: number;
+  Max: number;
+  Scale(value: number): number;
+  Accessor(point: IDataPoint): number;
+}
 
 @Component({
   selector: 'app-graph',
@@ -20,78 +26,81 @@ import { MqttSubscriptionService } from 'src/services/mqtt.service';
   styleUrls: ['./graph.component.scss']
 })
 export class GraphComponent implements OnInit {
+  protected dataGenerator: Subject<IDataPoint> = new Subject<IDataPoint>();
+  public DataStream: Observable<IDataPoint> = this.dataGenerator.pipe(share());
 
-  public chart: CanvasJS.Chart;
-  public graphConfig: GraphConfig;
-  private _temperatureDataList$: Observable<IDataPoint[]>;
-  public temperature: Temperature = new Temperature('red', 0);
-  public temperatureDef: TemperatureDefinition = new TemperatureDefinition(this.temperature.name, this.temperature.color);
+  public BatteryStream: Observable<number> = this.DataStream.pipe(map(x => x.Battery));
+  public TemperatureStream: Observable<number> = this.DataStream.pipe(map(x => x.Temperature));
+  public GravityStream: Observable<number> = this.DataStream.pipe(map(x => x.Gravity));
 
-  private _batteryDataList$: Observable<IDataPoint[]>;
-  public battery: Battery = new Battery('#7F6089', 1)
-  public batteryDef: BatteryDefinition = new BatteryDefinition(this.battery.name, this.battery.color);
+  public CurrentData$: Observable<IDataPoint[]>;
+  public CurrentData: IDataPoint[];
+  //public CurrentDataAmount: Observable<number>;
 
-  private _gravityDataList$: Observable<IDataPoint[]>;
-  public gravity: Gravity = new Gravity('green', 2)
-  public gravityDef: GravityDefinition = new GravityDefinition(this.gravity.name, this.gravity.color);
+  public SvgWidth: number = 600;
+  public SvgHeight: number = 300;
+  public Ranges: Array<Range> = new Array<Range>();
 
-  multi: any[];
-  view: any[] = [700, 300];
+  constructor(private _graphService: GraphService) {
+    this.Ranges.push(this.createScale('Battery', 'battery', 3.2, 4.4, x => x.Battery));
+    this.Ranges.push(this.createScale('Temperature', 'temperature', 0, 45, x => x.Temperature));
+    this.Ranges.push(this.createScale('Gravity', 'gravity', 0, 10, x => x.Gravity));
+  }
 
-  // options
-  legend: boolean = true;
-  showLabels: boolean = true;
-  animations: boolean = true;
-  xAxis: boolean = true;
-  yAxis: boolean = true;
-  showYAxisLabel: boolean = true;
-  showXAxisLabel: boolean = true;
-  xAxisLabel: string = 'Date';
-  yAxisLabel: string = 'Measurement';
-  timeline: boolean = true;
+  private createScale(name: string, classes: string, min: number, max: number, acc: (x: IDataPoint) => number): Range {
+    return {
+      Name: name,
+      Min: min,
+      Max: max,
+      Class: classes,
+      Accessor: acc,
+      Scale: (x) => (x - min) / (max - min)
+    };
+  }
 
-  colorScheme = {
-    domain: ['#5AA454', '#E44D25', '#CFC0BB', '#7aa3e5', '#a8385d', '#aae3f5']
-  };
+  public indexFn(point: IDataPoint): number {
+    return point.Index;
+  }
 
-  constructor(private _graphService: GraphService, private _mqttService: MqttSubscriptionService) {
+  private getPoint(t: number, tMax: number): IDataPoint {
+    const tRatio = t / tMax;
+    return {
+      Battery: Math.round((4.2 - 1 * tRatio) * 100) / 100,
+      Gravity: Math.round((10 * tRatio) * 100) / 100,
+      Temperature: Math.round((20 + Math.sin(Math.PI * 2 * tRatio) * 5) * 100) / 100,
+      RecordTime: Date.now()
+    };
   }
 
   ngOnInit() {
 
-    this._temperatureDataList$ = this._graphService.getTemperatureList(1, 2);
-    this._batteryDataList$ = this._graphService.getBatteryList(1, 2);
-    this._gravityDataList$ = this._graphService.getGravityList(1, 2);
+    this.CurrentData$ = this.DataStream.pipe(
+      scan((acc, val, idx) => {
+        val.Index = idx;
+        acc.push(val);
+        return acc;
+      }, new Array<IDataPoint>()),
+    );
 
-    zip(this._temperatureDataList$, this._batteryDataList$, this._gravityDataList$).pipe(
-      map(([tempData, batteryData, gravityData]) => {
-        this.temperature.dataPoints = tempData;
-        this.gravity.dataPoints = gravityData;
-        this.battery.dataPoints = batteryData;
-      })
-    ).subscribe(() => this.initChart());
+    this.CurrentData$.subscribe(x => this.CurrentData = x);
+    //this.CurrentDataAmount = this.CurrentData.pipe(map(x => x.length));
+
+    const iMax = 100;
+    const gen = (i: number = 0) => setTimeout(() => {
+      this.dataGenerator.next(this.getPoint(i, iMax));
+      if (i < iMax)
+        gen(i + 1);
+    }, 300);
+    gen();
   }
 
-
-  onSelect(data): void {
-    console.log('Item clicked', JSON.parse(JSON.stringify(data)));
+  public calculateX(point: IDataPoint, index: number, arrLength: number): number {
+    if (index == 0) return 0;
+    const scaleRatio = index / (arrLength - 1);
+    return this.SvgWidth * scaleRatio;
   }
-
-  onActivate(data): void {
-    console.log('Activate', JSON.parse(JSON.stringify(data)));
+  public calculateY(relativePos: number): number {
+    return this.SvgHeight * relativePos;
   }
-
-  onDeactivate(data): void {
-    console.log('Deactivate', JSON.parse(JSON.stringify(data)));
-  }
-
-  private initChart(): void {
-    console.log(this.temperature);
-    this.graphConfig = new GraphConfig([this.temperatureDef, this.batteryDef, this.gravityDef], [this.temperature, this.battery, this.gravity]);
-    this.chart = new CanvasJS.Chart("chartContainer", this.graphConfig);
-
-    this.chart.render();
-  }
-
 
 }
