@@ -14,11 +14,28 @@
 }
 
 .battery {
-    fill: gray;
+    .dot {
+        fill: gray;
+    }
+    .line {
+        stroke: gray;
+    }
 }
 .gravity {
-    fill: orange;
+    .dot {
+        fill: orange;
+        stroke: white;
+        stroke-width: 2;
+    }
+    .line {
+        stroke: orange;
+    }
 }
 .temperature {
-    fill: green;
+    .dot {
+        fill: green;
+    }
+    .line {
+        stroke: green;
+    }
 }

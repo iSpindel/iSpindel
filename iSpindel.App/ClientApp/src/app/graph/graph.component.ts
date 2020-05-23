@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { GraphService } from 'src/services/graph.service';
-import { Observable, zip, of, Subject } from 'rxjs';
-import { map, reduce, scan, delay, concatMap, share, shareReplay } from 'rxjs/operators';
+import { Observable, zip, of, Subject, interval, fromEvent } from 'rxjs';
+import { map, reduce, scan, delay, concatMap, share, shareReplay, debounce } from 'rxjs/operators';
 
 export interface IDataPoint {
-  Index?: number;
   Battery: number;
   Temperature: number;
   Gravity: number;
@@ -54,12 +53,8 @@ export class GraphComponent implements OnInit {
       Max: max,
       Class: classes,
       Accessor: acc,
-      Scale: (x) => (x - min) / (max - min)
+      Scale: (x: number) => (x - min) / (max - min)
     };
-  }
-
-  public indexFn(point: IDataPoint): number {
-    return point.Index;
   }
 
   private getPoint(t: number, tMax: number): IDataPoint {
@@ -76,7 +71,6 @@ export class GraphComponent implements OnInit {
 
     this.CurrentData$ = this.DataStream.pipe(
       scan((acc, val, idx) => {
-        val.Index = idx;
         acc.push(val);
         return acc;
       }, new Array<IDataPoint>()),
@@ -92,14 +86,26 @@ export class GraphComponent implements OnInit {
         gen(i + 1);
     }, 300);
     gen();
+
+
+  }
+  ngAfterViewInit() {
+    //TODO replace with angular way
+    const chartArea = document.getElementById('chartArea');
+    console.log(chartArea);
+    fromEvent(chartArea, 'mouseover').pipe(debounce(() => interval(100))).subscribe(x => {
+      console.log(x);
+    });
   }
 
-  public calculateX(point: IDataPoint, index: number, arrLength: number): number {
+  public calculateX(index: number): number {
     if (index == 0) return 0;
-    const scaleRatio = index / (arrLength - 1);
+    const scaleRatio = index / (this.CurrentData.length - 1);
     return this.SvgWidth * scaleRatio;
   }
-  public calculateY(relativePos: number): number {
+  public calculateY(range: Range, point: IDataPoint): number {
+    const value = range.Accessor(point);
+    const relativePos = range.Scale(value);
     return this.SvgHeight * relativePos;
   }
 
