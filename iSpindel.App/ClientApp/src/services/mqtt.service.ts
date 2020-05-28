@@ -12,8 +12,6 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-
-
 export class MqttSubscriptionService implements OnDestroy {
 
   private _iSpindelBasePath = 'ispindel/iSpindel0/';

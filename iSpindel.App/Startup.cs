@@ -15,6 +15,7 @@ using iSpindel.Database;
 using Microsoft.Data.SqlClient;
 using Npgsql;
 using Microsoft.EntityFrameworkCore.Migrations;
+using iSpindel.App.Realtime;
 
 namespace iSpindel.App
 {
@@ -49,6 +50,12 @@ namespace iSpindel.App
                 options.UseNpgsql(connectionStringBuilder.ConnectionString)
                 .ReplaceService<IHistoryRepository, iSpindelHistoryRepository>()
            );
+
+           services.AddSignalR(opts => {
+#if DEBUG
+               opts.EnableDetailedErrors = true;
+#endif
+           });
 
             services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
@@ -96,6 +103,8 @@ namespace iSpindel.App
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapHub<NotifyHub>("/notify");
+
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller}/{action=Index}/{id?}");
@@ -112,6 +121,7 @@ namespace iSpindel.App
                 if (env.IsDevelopment())
                 {
                     spa.UseAngularCliServer(npmScript: "start");
+                    //spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
                 }
             });
         }

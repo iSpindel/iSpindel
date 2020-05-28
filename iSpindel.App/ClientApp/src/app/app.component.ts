@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NotifyService } from 'src/services/notify.service';
 
 @Component({
   selector: 'app-root',
@@ -9,11 +10,12 @@ export class AppComponent {
   title = 'iSpindel Overview';
   screenWidth: number;
 
-  constructor() {
+  constructor(notifyService: NotifyService) {
     this.screenWidth = window.innerWidth;
     window.onresize = () => {
       this.screenWidth = window.innerWidth;
     };
+    notifyService.StartConnection();
 
   }
 }
