@@ -39,6 +39,7 @@ namespace iSpindel.App
                 connectionStringBuilder.IntegratedSecurity = false;
             }
 
+            services.Configure<MqttConnectionSettings>( Configuration.GetSection("Mqtt")); 
 
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseNpgsql(connectionStringBuilder.ConnectionString)

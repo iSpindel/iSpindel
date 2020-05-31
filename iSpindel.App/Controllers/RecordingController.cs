@@ -2,6 +2,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using iSpindel.Database.Job;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Options;
+using System;
+using MQTTnet;
+using MQTTnet.Client;
+using MQTTnet.Client.Options;
+using MQTTnet.Extensions.ManagedClient;
 
 namespace iSpindel.App.Controllers
 {
@@ -12,9 +18,44 @@ namespace iSpindel.App.Controllers
 	{
         private readonly iSpindelClient _iSpindelClient;
 
-		public RecordingController(iSpindelClientOptions options) {
+		public RecordingController(IOptions<MqttConnectionSettings> settings){
+            //iSpindelClientOptions options) {
+             var options = BuildISpindelClientOpts(settings.Value);   
             _iSpindelClient = new iSpindelClient(options);
 		}
+
+        private iSpindelClientOptions BuildISpindelClientOpts(MqttConnectionSettings options){
+
+            var mqttClientOpts = new MqttClientOptionsBuilder()
+            .WithTcpServer(options.Host, options.Port)
+            .WithCredentials(options.Username, options.Password)
+            .Build();
+
+            var managedMqttClientOpts = new ManagedMqttClientOptionsBuilder()
+            .WithAutoReconnectDelay(TimeSpan.FromSeconds(5))
+            .WithClientOptions(mqttClientOpts)
+            .Build();
+            
+            Func<Task<IManagedMqttClient>> managedMqttClientFactory = async () =>
+                {
+                    var factory = new MqttFactory();
+                    var client = factory.CreateManagedMqttClient();
+                    Console.WriteLine($"Starting mqtt client");
+                    await client.StartAsync(managedMqttClientOpts);
+                    return client;
+                };
+
+            var iSpindelOpts = new iSpindelClientOptions(){
+                MqttClientFactory = managedMqttClientFactory,
+                TopicBasePath = options.iSpindelTopicBasePath ,
+                TopicServerRequest = options.ServerRequest,
+                TopicServerResponse = options.ServerResponse
+
+            };
+
+            return iSpindelOpts;
+
+        }
 
 		// GET: api/Recording
 		[HttpGet]

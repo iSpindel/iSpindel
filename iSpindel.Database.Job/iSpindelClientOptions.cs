@@ -9,7 +9,6 @@ namespace iSpindel.Database.Job
     {
         public Func<Task<IManagedMqttClient>> MqttClientFactory { get; set; }
         public string TopicBasePath { get; set; }
-        public ISpindelService SpindelService { get; set; }
         public string TopicServerResponse { get; set; }
         public string TopicServerRequest { get; set; }
 
