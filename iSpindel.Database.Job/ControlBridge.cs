@@ -57,7 +57,9 @@ namespace iSpindel.Database.Job
         {
             if (payload.Equals("Stop"))
             {
+                Console.WriteLine("Stop signal received");
                 var rc = await server.StopAsync();
+                Console.WriteLine($"Stop returned {rc.ToString()}");
                 await sendRpcReply(rc ? "Stop Successful" : "Stop Failed");
             }
             else if (payload.Contains("Start"))
@@ -70,14 +72,20 @@ namespace iSpindel.Database.Job
                     // If no number is supplied, record to default sequence
                     stringId = "-1";
                 }
+                Console.WriteLine($"Start signal received with ID {stringId}");
 
                 if (Int32.TryParse(stringId, out var id))
                 { rc = await server.StartAsync(id); }
+
+                Console.WriteLine($"Start returned {rc.ToString()}");
+
                 await sendRpcReply(rc ? "Start Successful" : "Start Failed");
             }
             else if (payload.Equals("Status"))
             {
+                Console.WriteLine("Status signal received");
                 var currentStatus = await server.GetStatusAsync();
+                Console.WriteLine($"Status: {currentStatus.ToString()}");
                 await sendRpcReply("Status " + currentStatus.ToString());
             }
 
