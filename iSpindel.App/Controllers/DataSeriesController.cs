@@ -46,6 +46,7 @@ namespace iSpindel.App.Controllers
 			return dataSeries;
 		}
 
+
 		// PUT: api/DataSeries/5
 		[HttpPut("{id}")]
 		public async Task<IActionResult> PutDataSeries(int id, DataSeriesDTO dataSeries) {
