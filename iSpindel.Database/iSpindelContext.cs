@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -35,21 +36,39 @@ namespace iSpindel.Database
 			base.OnModelCreating(modelBuilder);
 			modelBuilder.Entity<DataSeries>(e => {
 				e.HasData(new DataSeries() { Id = -1, Name = "Default Data Series", Description = "This is the default Data Series for iSpindel Projects." });
+				e.HasData(new DataSeries() { Id =  1, Name = "Test Series 1", Description = "This is the first test dataset" });
+				e.HasData(new DataSeries() { Id =  2, Name = "Test Series 2", Description = "This is the second test dataset" });
+				e.HasData(new DataSeries() { Id =  3, Name = "Test Series 3", Description = "This is the third test dataset" });
 			});
 			modelBuilder.Entity<DataPoint>(e => {
+				int dataPointIndex = 1;
 				e.HasData(new DataPoint[]{
-					new DataPoint(){Id = 1, DataSeriesId = -1, Temperature = 24, Battery = 100, Gravity = 5, RecordTime = new DateTime(2020,05,01,23,00,00)},
-					new DataPoint(){Id = 2, DataSeriesId = -1, Temperature = 25, Battery = 100, Gravity = 5, RecordTime = new DateTime(2020,05,01,23,05,00)},
-					new DataPoint(){Id = 3, DataSeriesId = -1, Temperature = 25, Battery = 95, Gravity = 7, RecordTime = new DateTime(2020,05,01,23,10,00)},
-					new DataPoint(){Id = 4, DataSeriesId = -1, Temperature = 26, Battery = 95, Gravity = 7, RecordTime = new DateTime(2020,05,01,23,15,00)},
-					new DataPoint(){Id = 5, DataSeriesId = -1, Temperature = 26, Battery = 90, Gravity = 9, RecordTime = new DateTime(2020,05,01,23,20,00)},
-					new DataPoint(){Id = 6, DataSeriesId = -1, Temperature = 26, Battery = 90, Gravity = 9, RecordTime = new DateTime(2020,05,01,23,25,00)},
-					new DataPoint(){Id = 7, DataSeriesId = -1, Temperature = 23, Battery = 90, Gravity = 15, RecordTime = new DateTime(2020,05,01,23,30,00)},
-					new DataPoint(){Id = 8, DataSeriesId = -1, Temperature = 22, Battery = 90, Gravity = 15, RecordTime = new DateTime(2020,05,01,23,35,00)},
-					new DataPoint(){Id = 9, DataSeriesId = -1, Temperature = 21, Battery = 85, Gravity = 25, RecordTime = new DateTime(2020,05,01,23,40,00)},
-					new DataPoint(){Id = 10, DataSeriesId = -1, Temperature = 24, Battery = 80, Gravity = 25, RecordTime = new DateTime(2020,05,01,23,45,00)},
+					new DataPoint(){Id = dataPointIndex++, DataSeriesId = 1, Temperature = 24, Battery = 100, Gravity =  5, RecordTime = new DateTime(2020,05,01,23,00,00)},
+					new DataPoint(){Id = dataPointIndex++, DataSeriesId = 1, Temperature = 25, Battery = 100, Gravity =  5, RecordTime = new DateTime(2020,05,01,23,05,00)},
+					new DataPoint(){Id = dataPointIndex++, DataSeriesId = 1, Temperature = 25, Battery =  95, Gravity =  7, RecordTime = new DateTime(2020,05,01,23,10,00)},
+					new DataPoint(){Id = dataPointIndex++, DataSeriesId = 1, Temperature = 26, Battery =  95, Gravity =  7, RecordTime = new DateTime(2020,05,01,23,15,00)},
+					new DataPoint(){Id = dataPointIndex++, DataSeriesId = 1, Temperature = 26, Battery =  90, Gravity =  9, RecordTime = new DateTime(2020,05,01,23,20,00)},
+					new DataPoint(){Id = dataPointIndex++, DataSeriesId = 1, Temperature = 26, Battery =  90, Gravity =  9, RecordTime = new DateTime(2020,05,01,23,25,00)},
+					new DataPoint(){Id = dataPointIndex++, DataSeriesId = 1, Temperature = 23, Battery =  90, Gravity = 15, RecordTime = new DateTime(2020,05,01,23,30,00)},
+					new DataPoint(){Id = dataPointIndex++, DataSeriesId = 1, Temperature = 22, Battery =  90, Gravity = 15, RecordTime = new DateTime(2020,05,01,23,35,00)},
+					new DataPoint(){Id = dataPointIndex++, DataSeriesId = 1, Temperature = 21, Battery =  85, Gravity = 25, RecordTime = new DateTime(2020,05,01,23,40,00)},
+					new DataPoint(){Id = dataPointIndex++, DataSeriesId = 1, Temperature = 24, Battery =  80, Gravity = 25, RecordTime = new DateTime(2020,05,01,23,45,00)},
 				});
+				e.HasData(Enumerable.Range(0,  20).Select(i => generator(ref dataPointIndex, i,  20, 2)));
+				e.HasData(Enumerable.Range(0, 800).Select(i => generator(ref dataPointIndex, i, 800, 3)));
 			});
+		}
+
+		private DataPoint generator(ref int dataPointIndex, int index, int max, int seriesId) {
+		var tRatio = (double)index / (double)max;
+		return new DataPoint() {
+			Id = dataPointIndex++,
+			DataSeriesId = seriesId,
+			Battery = 4.2 - 1.0 * tRatio,
+			Gravity = 10.0 * tRatio,
+			Temperature = 20.0 + Math.Sin(Math.PI * 2.0 * tRatio) * 5.0,
+			RecordTime = DateTime.Now.AddMinutes(dataPointIndex * 20.0)
+		};
 		}
 	}
 

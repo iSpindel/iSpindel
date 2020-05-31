@@ -118,3 +118,19 @@ $ psql
 postgres=> alter user ispindel with encrypted password '<password>';
 postgres=> grant all privileges on database "iSpindel" to ispindel;
 ```
+
+## Cross compile for raspberry pi
+
+1. Ensure dotnet core is installed
+2. Use simple script to compile
+```bash
+cd iSpindel.Database.Job.Runner
+./publishForPi.sh
+```
+3. success
+```bash
+scp appsettings.json pi@<ZIELPI>:/home/pi
+cd bin/Release/netcoreapp3.1/linux-arm/publish
+scp iSpindel.Database.Job.Runner pi@<ZIELPI>:/home/pi
+```
+4. modify appsettings
