@@ -17,7 +17,7 @@ namespace iSpindel.Database.Job
         protected readonly string topicServerResponse;
         private readonly IManagedMqttClient mqttClient;
         protected readonly string topicServerRequest;
-        private readonly TimeSpan timeout = TimeSpan.FromSeconds(5);
+        private readonly TimeSpan timeout = TimeSpan.FromSeconds(30);
         private const MqttQualityOfServiceLevel qos = MqttQualityOfServiceLevel.AtMostOnce;
         private readonly CancellationToken cancellationToken = CancellationToken.None;
         private readonly RpcAwareApplicationMessageReceivedHandler applicationMessageReceivedHandler;

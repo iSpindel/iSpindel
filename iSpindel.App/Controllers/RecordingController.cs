@@ -11,7 +11,7 @@ using MQTTnet.Extensions.ManagedClient;
 
 namespace iSpindel.App.Controllers
 {
-    [Authorize]
+    //[Authorize]
 	[Route("api/[controller]")]
 	[ApiController]
 	public class RecordingController : ControllerBase
