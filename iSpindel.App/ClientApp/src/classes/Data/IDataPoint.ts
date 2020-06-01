@@ -1,4 +1,8 @@
 export interface IDataPoint {
-    x : Date,
-    y : number | string,
-}
+    id: number;
+    battery: number;
+    temperature: number;
+    gravity: number;
+    //TODO replace with real datetime
+    recordTime: string;
+  }

@@ -1,22 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { GraphService } from 'src/services/graph.service';
-import { Observable, zip, of, Subject, interval, fromEvent } from 'rxjs';
-import { map, reduce, scan, delay, concatMap, share, shareReplay, debounce } from 'rxjs/operators';
+import { Subject, Observable } from 'rxjs';
+import { IDataPoint } from 'src/classes/Data/IDataPoint';
 
-export interface IDataPoint {
-  Battery: number;
-  Temperature: number;
-  Gravity: number;
-  RecordTime: number;
-}
+export class Range {
+  public Name: string;
+  public Class: string;
+  public Min: number;
+  public Max: number;
 
-export interface Range {
-  Name: string;
-  Class: string;
-  Min: number;
-  Max: number;
-  Scale(value: number): number;
-  Accessor(point: IDataPoint): number;
+  public Scale(value: number): number
+  public Scale(value: IDataPoint): number
+  public Scale(value: number|IDataPoint): number {
+    if(typeof(value) == 'number') 
+      return (value - this.Min) / (this.Max - this.Min);
+    return this.Scale(this.Accessor(value));
+  }
+  public Accessor: (point: IDataPoint) => number;
 }
 
 @Component({
@@ -26,76 +26,48 @@ export interface Range {
 })
 export class GraphComponent implements OnInit {
   protected dataGenerator: Subject<IDataPoint> = new Subject<IDataPoint>();
-  public DataStream: Observable<IDataPoint> = this.dataGenerator.pipe(share());
 
-  public BatteryStream: Observable<number> = this.DataStream.pipe(map(x => x.Battery));
-  public TemperatureStream: Observable<number> = this.DataStream.pipe(map(x => x.Temperature));
-  public GravityStream: Observable<number> = this.DataStream.pipe(map(x => x.Gravity));
+  public BatteryStream: Observable<number> = this._graphService.BatteryStream$;
+  public TemperatureStream: Observable<number> = this._graphService.TemperatureStream$;
+  public GravityStream: Observable<number> = this._graphService.GravityStream$;
 
-  public CurrentData$: Observable<IDataPoint[]>;
+  public CurrentData$: Observable<IDataPoint[]> = this._graphService.CurrentData$;
   public CurrentData: IDataPoint[];
-  //public CurrentDataAmount: Observable<number>;
 
   public SvgWidth: number = 600;
   public SvgHeight: number = 300;
   public Ranges: Array<Range> = new Array<Range>();
 
+  // eslint-disable-next-line no-unused-vars
   constructor(private _graphService: GraphService) {
-    this.Ranges.push(this.createScale('Battery', 'battery', 3.2, 4.4, x => x.Battery));
-    this.Ranges.push(this.createScale('Temperature', 'temperature', 0, 45, x => x.Temperature));
-    this.Ranges.push(this.createScale('Gravity', 'gravity', 0, 10, x => x.Gravity));
+    this.Ranges.push(this.createScale('Battery', 'battery', 3.2, 4.4, x => x.battery));
+    this.Ranges.push(this.createScale('Temperature', 'temperature', 0, 45, x => x.temperature));
+    this.Ranges.push(this.createScale('Gravity', 'gravity', 0, 10, x => x.gravity));
   }
 
   private createScale(name: string, classes: string, min: number, max: number, acc: (x: IDataPoint) => number): Range {
-    return {
-      Name: name,
-      Min: min,
-      Max: max,
-      Class: classes,
-      Accessor: acc,
-      Scale: (x: number) => (x - min) / (max - min)
-    };
-  }
+    const range = new Range();
+    range.Name = name;
+    range.Min = min;
+    range.Max = max;
+    range.Class = classes;
+    range.Accessor = acc;
 
-  private getPoint(t: number, tMax: number): IDataPoint {
-    const tRatio = t / tMax;
-    return {
-      Battery: Math.round((4.2 - 1 * tRatio) * 100) / 100,
-      Gravity: Math.round((10 * tRatio) * 100) / 100,
-      Temperature: Math.round((20 + Math.sin(Math.PI * 2 * tRatio) * 5) * 100) / 100,
-      RecordTime: Date.now()
-    };
+    return range;
   }
 
   ngOnInit() {
-
-    this.CurrentData$ = this.DataStream.pipe(
-      scan((acc, val, idx) => {
-        acc.push(val);
-        return acc;
-      }, new Array<IDataPoint>()),
-    );
-
     this.CurrentData$.subscribe(x => this.CurrentData = x);
-    //this.CurrentDataAmount = this.CurrentData.pipe(map(x => x.length));
 
-    const iMax = 100;
-    const gen = (i: number = 0) => setTimeout(() => {
-      this.dataGenerator.next(this.getPoint(i, iMax));
-      if (i < iMax)
-        gen(i + 1);
-    }, 300);
-    gen();
-
-
+    this._graphService.loadData(2);
   }
   ngAfterViewInit() {
     //TODO replace with angular way
-    const chartArea = document.getElementById('chartArea');
-    console.log(chartArea);
-    fromEvent(chartArea, 'mouseover').pipe(debounce(() => interval(100))).subscribe(x => {
-      console.log(x);
-    });
+    //const chartArea = document.getElementById('chartArea');
+    //console.log(chartArea);
+    //fromEvent(chartArea, 'mouseover').pipe(debounce(() => interval(100))).subscribe(x => {
+    //  console.log(x);
+    //});
   }
 
   public calculateX(index: number): number {

@@ -27,7 +27,7 @@
         "@typescript-eslint/no-unused-vars-experimental": "error",
         "indent": [
             "error",
-            4
+            2
         ],
         "linebreak-style": [
             "error",

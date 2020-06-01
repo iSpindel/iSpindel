@@ -13,33 +13,33 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        MatToolbarModule,
-        MatIconModule,
-        MatSidenavModule,
-        MatButtonModule,
-        MatListModule,
-        MatCardModule,
-        MatSlideToggleModule,
-        MatFormFieldModule,
-        MatInputModule
-    ],
-    exports: [
-        CommonModule,
-        MatToolbarModule,
-        MatIconModule,
-        MatSidenavModule,
-        MatButtonModule,
-        MatListModule,
-        MatCardModule,
-        MatSlideToggleModule,
-        MatFormFieldModule,
-        MatInputModule
-    ]
+  imports: [
+    CommonModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatSidenavModule,
+    MatButtonModule,
+    MatListModule,
+    MatCardModule,
+    MatSlideToggleModule,
+    MatFormFieldModule,
+    MatInputModule
+  ],
+  exports: [
+    CommonModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatSidenavModule,
+    MatButtonModule,
+    MatListModule,
+    MatCardModule,
+    MatSlideToggleModule,
+    MatFormFieldModule,
+    MatInputModule
+  ]
 })
 export class CustomMaterialModule {
-    constructor(matIconRegistry: MatIconRegistry, domSanitizer: DomSanitizer) {
-        matIconRegistry.addSvgIconSet(domSanitizer.bypassSecurityTrustResourceUrl('./assets/mdi.svg'));
-    }
+  constructor(matIconRegistry: MatIconRegistry, domSanitizer: DomSanitizer) {
+    matIconRegistry.addSvgIconSet(domSanitizer.bypassSecurityTrustResourceUrl('./assets/mdi.svg'));
+  }
 }
