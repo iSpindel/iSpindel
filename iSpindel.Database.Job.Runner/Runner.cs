@@ -23,37 +23,23 @@ namespace iSpindel.Database.Job.Runner
 
         public async Task Run()
         {
-            var mqttClientOpts = new MqttClientOptionsBuilder()
-            .WithTcpServer(options.MqttHost, options.MqttPort)
-            .WithCredentials(options.MqttUsername, options.MqttPassword)
-            .Build();
+            var mqttClientOptsBridge = BuildClientOpts("iSpindel-ControlBridge");
+            var mqttClientOptsServer = BuildClientOpts("iSpindel-Server");
 
-            var managedMqttClientOpts = new ManagedMqttClientOptionsBuilder()
-            .WithAutoReconnectDelay(TimeSpan.FromSeconds(5))
-            .WithClientOptions(mqttClientOpts)
-            .Build();
+            var managedMqttClientOptsBridge = BuildManagedClientOpts(mqttClientOptsBridge);
+            var managedMqttClientOptsServer = BuildManagedClientOpts(mqttClientOptsServer);
 
-            Func<Task<IMqttClient>> mqttClientFactory = async () =>
-                {
-                    var factory = new MqttFactory();
-                    var client = factory.CreateMqttClient();
-                    await client.ConnectAsync(mqttClientOpts, CancellationToken.None);
-                    return client;
-                };
+            //var BridgeFactory = BuildClientFactory(mqttClientOptsBridge);
+            //var ServerFactory = BuildClientFactory(mqttClientOptsServer);
 
-            Func<Task<IManagedMqttClient>> managedMqttClientFactory = async () =>
-                {
-                    var factory = new MqttFactory();
-                    var client = factory.CreateManagedMqttClient();
-                    //await mqttClient.SubscribeAsync(new TopicFilterBuilder().WithTopic("my/topic").Build());
-                    Console.WriteLine($"Starting mqtt client");
-                    await client.StartAsync(managedMqttClientOpts);
-                    return client;
-                };
+            var BridgeManagedFactory = BuildManagedClientFactory(managedMqttClientOptsBridge);
+            var ServerManagedFactory = BuildManagedClientFactory(managedMqttClientOptsServer);
+
+
 
             var serverOpts = new iSpindelServerOptions()
             {
-                MqttClientFactory = managedMqttClientFactory,
+                MqttClientFactory = ServerManagedFactory,
                 DbContextFactory = () =>
                 {
                     var optionsBuilder = new DbContextOptionsBuilder<iSpindelContext>()
@@ -70,16 +56,58 @@ namespace iSpindel.Database.Job.Runner
 
             var bridgeOpts = new ControlBridgeOptions()
             {
-                MqttClientFactory = managedMqttClientFactory,
+                MqttClientFactory = BridgeManagedFactory,
                 SpindelService = this.Server,
                 TopicBasePath = options.TopicControlBridgeBasePath,
-                ServerResponse = options.TopicServerRequest,
-                ServerRequest = options.TopicServerResponse
+                ServerResponse = options.TopicServerResponse,
+                ServerRequest = options.TopicServerRequest
             };
 
             this.ControlBridge = new ControlBridge(bridgeOpts);
             await this.ControlBridge.Init();
 
+        }
+
+        private IMqttClientOptions BuildClientOpts(string ClientId)
+        {
+            return new MqttClientOptionsBuilder()
+                        .WithClientId(ClientId)
+                        .WithTcpServer(options.MqttHost, options.MqttPort)
+                        .WithCredentials(options.MqttUsername, options.MqttPassword)
+                        .Build();
+        }
+
+        private ManagedMqttClientOptions BuildManagedClientOpts(IMqttClientOptions ClientOpts)
+        {
+            return new ManagedMqttClientOptionsBuilder()
+            .WithAutoReconnectDelay(TimeSpan.FromSeconds(5))
+            .WithClientOptions(ClientOpts)
+            .Build();
+        }
+
+        private Func<Task<IMqttClient>> BuildClientFactory(IMqttClientOptions ClientOpts)
+        {
+            return async () =>
+                            {
+                                var factory = new MqttFactory();
+                                var client = factory.CreateMqttClient();
+                                await client.ConnectAsync(ClientOpts, CancellationToken.None);
+                                return client;
+                            };
+
+        }
+
+        private Func<Task<IManagedMqttClient>> BuildManagedClientFactory(ManagedMqttClientOptions ClientOpts)
+        {
+            return async () =>
+                            {
+                                var factory = new MqttFactory();
+                                var client = factory.CreateManagedMqttClient();
+                                //await mqttClient.SubscribeAsync(new TopicFilterBuilder().WithTopic("my/topic").Build());
+                                Console.WriteLine($"Starting mqtt client");
+                                await client.StartAsync(ClientOpts);
+                                return client;
+                            };
         }
     }
 }

@@ -24,21 +24,27 @@ namespace iSpindel.Database.Job
             this.topicServerResponse = options.TopicBasePath + options.ServerResponse;
             this.topicServerRequest = options.TopicBasePath + options.ServerRequest;
             this.server = options.SpindelService;
+            Console.WriteLine($"Response Topic: {this.topicServerResponse}");
+            Console.WriteLine($"Request Topic: {this.topicServerRequest}");
         }
 
         public async Task Init()
         {
             this.mqttClient = await options.MqttClientFactory();
+            Console.WriteLine("Verifying Connection");
             mqttClient.UseConnectedHandler(this.VerifyConnection);
+            await subscribeToControlTopics();
         }
 
         private async Task VerifyConnection(MqttClientConnectedEventArgs connectArgs)
         {
             if (connectArgs.AuthenticateResult.ResultCode != MqttClientConnectResultCode.Success)
             {
+                Console.WriteLine("Connection Failed");
                 return;
             }
-            await subscribeToControlTopics();
+            Console.WriteLine("Connection Successfull");
+            return;
         }
 
         private async Task subscribeToControlTopics()
@@ -46,11 +52,13 @@ namespace iSpindel.Database.Job
             await mqttClient.SubscribeAsync(this.topicServerRequest);
             mqttClient.UseApplicationMessageReceivedHandler(async e =>
             {
-                if (e.ApplicationMessage.Topic == this.topicServerResponse)
+                Console.WriteLine($"Received Message on Topic {e.ApplicationMessage.Topic} with Payload {Encoding.UTF8.GetString(e.ApplicationMessage.Payload)}");
+                if (e.ApplicationMessage.Topic == this.topicServerRequest)
                 {
                     await handleMessage(Encoding.UTF8.GetString(e.ApplicationMessage.Payload));
                 }
             });
+            Console.WriteLine($"Subscribed to Topic {this.topicServerRequest}");
         }
 
         private async Task handleMessage(string payload)
@@ -99,6 +107,7 @@ namespace iSpindel.Database.Job
             .WithPayload(payload)
             .Build();
 
+            Console.WriteLine($"Publishing Message {payload} to topic {this.topicServerResponse}");
             await mqttClient.PublishAsync(message, CancellationToken.None);
 
         }

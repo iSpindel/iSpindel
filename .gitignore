@@ -433,3 +433,5 @@ $RECYCLE.BIN/
 !.vscode/extensions.json
 
 appsettings.Production.json
+appsettings.Development.json
+README.production.md

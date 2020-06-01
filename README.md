@@ -123,6 +123,7 @@ postgres=> grant all privileges on database "iSpindel" to ispindel;
 
 1. Ensure dotnet core is installed
 2. Use simple script to compile
+
 ```bash
 cd iSpindel.Database.Job.Runner
 ./publishForPi.sh
@@ -131,6 +132,6 @@ cd iSpindel.Database.Job.Runner
 ```bash
 scp appsettings.json pi@<ZIELPI>:/home/pi
 cd bin/Release/netcoreapp3.1/linux-arm/publish
-scp iSpindel.Database.Job.Runner pi@<ZIELPI>:/home/pi
+scp iSpindel.Database.Job.Runner pi@<ZIELPI>:/home/pi/iSpindel
 ```
 4. modify appsettings
