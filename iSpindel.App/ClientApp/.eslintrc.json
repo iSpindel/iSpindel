@@ -5,7 +5,8 @@
     },
     "extends": [
         "eslint:recommended",
-        "plugin:@typescript-eslint/eslint-recommended"
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended-requiring-type-checking"
     ],
     "globals": {
         "Atomics": "readonly",
@@ -14,12 +15,16 @@
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
         "ecmaVersion": 11,
-        "sourceType": "module"
+        "sourceType": "module",
+        "project": "./tsconfig.json"
     },
     "plugins": [
         "@typescript-eslint"
     ],
     "rules": {
+        "no-unused-vars": "off",
+        "@typescript-eslint/no-unused-vars": "off",
+        "@typescript-eslint/no-unused-vars-experimental": "error",
         "indent": [
             "error",
             4
