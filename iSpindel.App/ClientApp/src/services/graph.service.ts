@@ -1,24 +1,61 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { ajax, AjaxResponse } from 'rxjs/ajax';
-import { map } from 'rxjs/operators';
+import { Observable, Subject, from, merge } from 'rxjs';
+import { map, scan, tap, mergeMap, filter } from 'rxjs/operators';
 
+import { HttpClient } from '@angular/common/http';
+import { IDataSeries } from 'src/classes/Data/IDataSeries';
 import { IDataPoint } from 'src/classes/Data/IDataPoint';
-import { NumericalData } from 'src/classes/Data/NumericalData';
-import { IRawData } from 'src/classes/Data/IRawData';
-
-import { environment } from 'src/environments/environment';
-
-import { tempSeries, tiltSeries, batterySeries, gravitySeries, rssiSeries, tempPoints, batteryPoints, gravityPoints } from 'src/mock/MockDataSeries';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GraphService {
+  protected _seriesId: Subject<number> = new Subject<number>();
+  public readonly SeriesId$: Observable<number> = this._seriesId.asObservable();
+  public readonly CurrentSeries$: Observable<IDataSeries>;
 
-  constructor() { }
+  protected _signalrPoints$: Subject<IDataPoint> = new Subject<IDataPoint>();
+  protected _resetChannel$: Subject<IDataPoint> = new Subject<IDataPoint>();
+  public readonly DataStream$: Observable<IDataPoint>;
+  public readonly CurrentData$: Observable<IDataPoint[]>;
 
-  private _getAjaxRequest(urlPart: string): any {
+  public readonly BatteryStream$: Observable<number> = this.DataStream$.pipe(map(x => x.battery));
+  public readonly TemperatureStream$: Observable<number> = this.DataStream$.pipe(map(x => x.temperature));
+  public readonly GravityStream$: Observable<number> = this.DataStream$.pipe(map(x => x.gravity));
+
+  constructor(protected httpClient: HttpClient) {
+    this.CurrentSeries$ = this._seriesId.pipe(
+      mergeMap(x => 
+        this.httpClient.get(`/api/DataSeries/${x}`) as Observable<IDataSeries> ),
+      tap(_ =>
+      //reset current accumulator
+        this._resetChannel$.next(null)
+      ));
+    
+    const nullFilter = filter<IDataPoint>(f => f!= null);
+    const initialPoints = this.CurrentSeries$.pipe(mergeMap(x => from(x.dataPoints)), nullFilter);
+
+    this.DataStream$ = merge(
+      this._resetChannel$,
+      this._signalrPoints$.pipe(nullFilter),
+      initialPoints);
+
+    this.CurrentData$ = this.DataStream$.pipe(
+      scan((acc, val, _) => {
+        if(val == null) //reset signal
+          acc = new Array<IDataPoint>();
+        acc.push(val);
+        return acc;
+      }, new Array<IDataPoint>()),
+    );
+  }
+
+  public loadData(seriesId: number): void {
+    this._seriesId.next(seriesId);
+    //this.httpClient.get('/api/DataSeries/' + seriesId).pipe();
+  }
+
+  /*private _getAjaxRequest(urlPart: string): any {
     return {
       url: '/v1/'+urlPart,
       method: 'GET',
@@ -87,5 +124,5 @@ export class GraphService {
     if(!environment.production)
       return this._fakeGravityData();
     return this._getValueList(start, end, 'gravity');
-  }
+  }*/
 }

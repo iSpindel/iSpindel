@@ -14,6 +14,5 @@ export class AppComponent {
     window.onresize = () => {
       this.screenWidth = window.innerWidth;
     };
-
   }
 }
