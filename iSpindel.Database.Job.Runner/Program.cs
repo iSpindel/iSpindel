@@ -29,8 +29,8 @@ namespace iSpindel.Database.Job.Runner
 
                 TopicControlBridgeBasePath = configurationRoot.GetSanitizedValue<string>("Mqtt:Topics:ControlBridgeTopicBasePath", "spindelControl/").AppendTerminatorChar(),
                 TopicISpindelBasePath = configurationRoot.GetSanitizedValue<string>("Mqtt:Topics:iSpindelTopicBasePath").AppendTerminatorChar(),
-                TopicRecordRequest = configurationRoot.GetSanitizedValue<string>("Mqtt:Topics:RecordRequest", "RecordRequest"),
-                TopicServerStatusRequest = configurationRoot.GetSanitizedValue<string>("Mqtt:Topics:ServerStatusRequest", "ServerStatusRequest"),
+                TopicServerRequest = configurationRoot.GetSanitizedValue<string>("Mqtt:Topics:ServerRequest", "Request"),
+                TopicServerResponse = configurationRoot.GetSanitizedValue<string>("Mqtt:Topics:ServerResponse", "Response"),
                 TopicISpindelTemperature = configurationRoot.GetSanitizedValue<string>("Mqtt:Topics:iSpindelTemperature"),
                 TopicISpindelBattery = configurationRoot.GetSanitizedValue<string>("Mqtt:Topics:iSpindelBattery"),
                 TopicISpindelGravity = configurationRoot.GetSanitizedValue<string>("Mqtt:Topics:iSpindelGravity"),

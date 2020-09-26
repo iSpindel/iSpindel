@@ -14,7 +14,8 @@ using iSpindel.App.Realtime;
 
 namespace iSpindel.App.Controllers
 {
-	[Authorize]
+	//TODO fix auth
+	//[Authorize]
 	[Route("api/[controller]")]
 	[ApiController]
 	public class DataSeriesController : ControllerBase

@@ -1,23 +1,84 @@
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using MQTTnet;
 
 namespace iSpindel.Database.Job
 {
     public class iSpindelClient : ISpindelService
     {
-        public Task<StatusCode> GetStatusAsync()
+        private readonly iSpindelClientOptions options;
+        private readonly string topicServerResponse;
+        private readonly string topicServerRequest;
+        private Dictionary<string, StatusCode> statusLookup;
+
+        public iSpindelClient(iSpindelClientOptions options)
         {
-            throw new System.NotImplementedException();
+            this.options = options;
+            this.topicServerResponse = options.TopicBasePath + options.TopicServerResponse;
+            this.topicServerRequest = options.TopicBasePath + options.TopicServerRequest;
+
+            this.statusLookup = Enum.GetValues(typeof(StatusCode))
+              .Cast<StatusCode>()
+              .ToDictionary(t => t.ToString(), t => t);
         }
 
-        public Task<bool> StartAsync(int id)
+        public async Task<StatusCode> GetStatusAsync()
         {
-            throw new System.NotImplementedException();
+            var payload = await sendRpcRequest("Status");
+
+            if (statusLookup.TryGetValue(payload, out var statusCode))
+            {
+                return statusCode;
+            }
+            else
+            {
+                return StatusCode.UNKNOWN;
+            }
+
         }
 
-        public Task<bool> StopAsync()
+        public async Task<bool> StartAsync(int id)
         {
-            throw new System.NotImplementedException();
+            var payload = await sendRpcRequest($"Start|{id}");
+
+            if (payload.Equals("Start Successful"))
+            {
+                return true;
+            }
+
+            return false;
+
+        }
+
+        public async Task<bool> StopAsync()
+        {
+            var payload = await sendRpcRequest("Stop");
+
+            if (payload.Equals("Stop Successful"))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+
+        private async Task<string> sendRpcRequest(string payload)
+        {
+            var mqttClient = await options.MqttClientFactory();
+            var mqttRpcService = new MqttRpcService(topicServerRequest, topicServerResponse, mqttClient);
+
+            var response = await mqttRpcService.ExecuteAsyncRpcRequest(payload);
+            var responsePayload = Encoding.UTF8.GetString(response);
+            Console.WriteLine($"Payload {responsePayload}");
+
+            return responsePayload;
+
         }
     }
 }

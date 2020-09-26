@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -9,19 +10,19 @@ using MQTTnet.Extensions.ManagedClient;
 
 namespace iSpindel.Database.Job
 {
-    public class ControlBridge : IDisposable
+    public class ControlBridge //: IDisposable
     {
         private readonly ControlBridgeOptions options;
         private readonly ISpindelService server;
         private IManagedMqttClient mqttClient;
-        private readonly string topicRecordRequest;
-        private readonly string topicServerStatusRequest;
+        private readonly string topicServerResponse;
+        private readonly string topicServerRequest;
 
         public ControlBridge(ControlBridgeOptions options)
         {
             this.options = options;
-            this.topicRecordRequest = options.TopicBasePath + options.TopicRecordRequest;
-            this.topicServerStatusRequest = options.TopicBasePath + options.TopicServerStatusRequest;
+            this.topicServerResponse = options.TopicBasePath + options.ServerResponse;
+            this.topicServerRequest = options.TopicBasePath + options.ServerRequest;
             this.server = options.SpindelService;
         }
 
@@ -42,55 +43,65 @@ namespace iSpindel.Database.Job
 
         private async Task subscribeToControlTopics()
         {
-            await mqttClient.SubscribeAsync(this.topicRecordRequest);
-            await mqttClient.SubscribeAsync(this.topicServerStatusRequest);
+            await mqttClient.SubscribeAsync(this.topicServerRequest);
             mqttClient.UseApplicationMessageReceivedHandler(async e =>
             {
-                if (e.ApplicationMessage.Topic == this.topicRecordRequest)
+                if (e.ApplicationMessage.Topic == this.topicServerResponse)
                 {
-                    await handleStartStop(Encoding.UTF8.GetString(e.ApplicationMessage.Payload));
-                }
-                else if (e.ApplicationMessage.Topic == this.topicServerStatusRequest)
-                {
-                    await handleRecordStatus(Encoding.UTF8.GetString(e.ApplicationMessage.Payload));
+                    await handleMessage(Encoding.UTF8.GetString(e.ApplicationMessage.Payload));
                 }
             });
         }
 
-        private async Task handleRecordStatus(string payload)
+        private async Task handleMessage(string payload)
         {
-            var currentStatus = await server.GetStatusAsync();
+            if (payload.Equals("Stop"))
+            {
+                var rc = await server.StopAsync();
+                await sendRpcReply(rc ? "Stop Successful" : "Stop Failed");
+            }
+            else if (payload.Contains("Start"))
+            {
+                var rc = false;
+                string stringId;
+                try { stringId = payload.Split('|').Last(); }
+                catch (Exception)
+                {
+                    // If no number is supplied, record to default sequence
+                    stringId = "-1";
+                }
+
+                if (Int32.TryParse(stringId, out var id))
+                { rc = await server.StartAsync(id); }
+                await sendRpcReply(rc ? "Start Successful" : "Start Failed");
+            }
+            else if (payload.Equals("Status"))
+            {
+                var currentStatus = await server.GetStatusAsync();
+                await sendRpcReply("Status " + currentStatus.ToString());
+            }
+
+        }
+
+        private async Task sendRpcReply(string payload)
+        {
+
             var message = new MqttApplicationMessageBuilder()
-            .WithTopic(this.topicServerStatusRequest)
-            .WithPayload(currentStatus.ToString())
+            .WithTopic(this.topicServerResponse)
+            .WithPayload(payload)
             .Build();
 
             await mqttClient.PublishAsync(message, CancellationToken.None);
+
         }
 
-        private async Task handleStartStop(string payload)
-        {
-            bool rc;
-            if (payload.Equals("stop"))
-            {
-                rc = await server.StopAsync();
-            }
-            else
-            {
-                if (Int32.TryParse(payload, out var id))
+        /*
+                public void Dispose()
                 {
-                    rc = await server.StartAsync(id);
+                    throw new NotImplementedException();
                 }
-            }
-            // TODO do something with the return code, publish back?
-        }
 
-        public void Dispose()
-        {
-            throw new NotImplementedException();
-        }
-
-        // TODO do a proper cleanup, probably via Disposable
-        // TODO handle Reconnect => do this in a connection factory shared with iSpindelServer
+                // TODO do a proper cleanup, probably via Disposable
+                */
     }
 }

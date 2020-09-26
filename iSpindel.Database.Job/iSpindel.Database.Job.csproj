@@ -7,10 +7,11 @@
   <ItemGroup>
     <PackageReference Include="MQTTnet" Version="3.0.9" />
     <PackageReference Include="MQTTnet.Extensions.ManagedClient" Version="3.0.9" />
+    <PackageReference Include="MQTTnet.Extensions.Rpc" Version="3.0.9" />
   </ItemGroup>
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
     <RootNamespace>iSpindel.Database.Job</RootNamespace>
     <LangVersion>8</LangVersion>
     <Deterministic>true</Deterministic>

@@ -1,18 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import * as CanvasJS from '../../assets/canvasjs/canvasjs.min';
-import { TiltDefinition, RssiDefinition } from 'src/mock/MockAxisYDefinitions';
-import { Observable, zip } from 'rxjs';
 import { GraphService } from 'src/services/graph.service';
+import { Subject, Observable } from 'rxjs';
 import { IDataPoint } from 'src/classes/Data/IDataPoint';
-import { Temperature } from 'src/classes/Data/Temperature';
-import { TemperatureDefinition } from 'src/classes/AxisDefinitions/TemperatureDefinition';
-import { BatteryDefinition } from 'src/classes/AxisDefinitions/BatteryDefinition';
-import { GravityDefinition } from 'src/classes/AxisDefinitions/GravityDefinition';
-import { Gravity } from 'src/classes/Data/Gravity';
-import { Battery } from 'src/classes/Data/Battery';
-import { GraphConfig } from 'src/classes/GraphConfig';
-import { map } from 'rxjs/operators';
-import { MqttSubscriptionService } from 'src/services/mqtt.service';
+
+export class Range {
+  public Name: string;
+  public Class: string;
+  public Min: number;
+  public Max: number;
+
+  public Scale(value: number): number
+  public Scale(value: IDataPoint): number
+  public Scale(value: number|IDataPoint): number {
+    if(typeof(value) == 'number') 
+      return (value - this.Min) / (this.Max - this.Min);
+    return this.Scale(this.Accessor(value));
+  }
+  public Accessor: (point: IDataPoint) => number;
+}
 
 @Component({
   selector: 'app-graph',
@@ -20,78 +25,60 @@ import { MqttSubscriptionService } from 'src/services/mqtt.service';
   styleUrls: ['./graph.component.scss']
 })
 export class GraphComponent implements OnInit {
+  protected dataGenerator: Subject<IDataPoint> = new Subject<IDataPoint>();
 
-  public chart: CanvasJS.Chart;
-  public graphConfig: GraphConfig;
-  private _temperatureDataList$: Observable<IDataPoint[]>;
-  public temperature: Temperature = new Temperature('red', 0);
-  public temperatureDef: TemperatureDefinition = new TemperatureDefinition(this.temperature.name, this.temperature.color);
+  public BatteryStream: Observable<number> = this._graphService.BatteryStream$;
+  public TemperatureStream: Observable<number> = this._graphService.TemperatureStream$;
+  public GravityStream: Observable<number> = this._graphService.GravityStream$;
 
-  private _batteryDataList$: Observable<IDataPoint[]>;
-  public battery: Battery = new Battery('#7F6089', 1)
-  public batteryDef: BatteryDefinition = new BatteryDefinition(this.battery.name, this.battery.color);
+  public CurrentData$: Observable<IDataPoint[]> = this._graphService.CurrentData$;
+  public CurrentData: IDataPoint[];
 
-  private _gravityDataList$: Observable<IDataPoint[]>;
-  public gravity: Gravity = new Gravity('green', 2)
-  public gravityDef: GravityDefinition = new GravityDefinition(this.gravity.name, this.gravity.color);
+  public SvgWidth: number = 600;
+  public SvgHeight: number = 300;
+  public Ranges: Array<Range> = new Array<Range>();
 
-  multi: any[];
-  view: any[] = [700, 300];
+  // eslint-disable-next-line no-unused-vars
+  constructor(private _graphService: GraphService) {
+    this.Ranges.push(this.createScale('Battery', 'battery', 3.2, 4.4, x => x.battery));
+    this.Ranges.push(this.createScale('Temperature', 'temperature', 0, 45, x => x.temperature));
+    this.Ranges.push(this.createScale('Gravity', 'gravity', 0, 10, x => x.gravity));
+  }
 
-  // options
-  legend: boolean = true;
-  showLabels: boolean = true;
-  animations: boolean = true;
-  xAxis: boolean = true;
-  yAxis: boolean = true;
-  showYAxisLabel: boolean = true;
-  showXAxisLabel: boolean = true;
-  xAxisLabel: string = 'Date';
-  yAxisLabel: string = 'Measurement';
-  timeline: boolean = true;
+  private createScale(name: string, classes: string, min: number, max: number, acc: (x: IDataPoint) => number): Range {
+    const range = new Range();
+    range.Name = name;
+    range.Min = min;
+    range.Max = max;
+    range.Class = classes;
+    range.Accessor = acc;
 
-  colorScheme = {
-    domain: ['#5AA454', '#E44D25', '#CFC0BB', '#7aa3e5', '#a8385d', '#aae3f5']
-  };
-
-  constructor(private _graphService: GraphService, private _mqttService: MqttSubscriptionService) {
+    return range;
   }
 
   ngOnInit() {
+    this.CurrentData$.subscribe(x => this.CurrentData = x);
 
-    this._temperatureDataList$ = this._graphService.getTemperatureList(1, 2);
-    this._batteryDataList$ = this._graphService.getBatteryList(1, 2);
-    this._gravityDataList$ = this._graphService.getGravityList(1, 2);
-
-    zip(this._temperatureDataList$, this._batteryDataList$, this._gravityDataList$).pipe(
-      map(([tempData, batteryData, gravityData]) => {
-        this.temperature.dataPoints = tempData;
-        this.gravity.dataPoints = gravityData;
-        this.battery.dataPoints = batteryData;
-      })
-    ).subscribe(() => this.initChart());
+    this._graphService.loadData(2);
+  }
+  ngAfterViewInit() {
+    //TODO replace with angular way
+    //const chartArea = document.getElementById('chartArea');
+    //console.log(chartArea);
+    //fromEvent(chartArea, 'mouseover').pipe(debounce(() => interval(100))).subscribe(x => {
+    //  console.log(x);
+    //});
   }
 
-
-  onSelect(data): void {
-    console.log('Item clicked', JSON.parse(JSON.stringify(data)));
+  public calculateX(index: number): number {
+    if (index == 0) return 0;
+    const scaleRatio = index / (this.CurrentData.length - 1);
+    return this.SvgWidth * scaleRatio;
   }
-
-  onActivate(data): void {
-    console.log('Activate', JSON.parse(JSON.stringify(data)));
+  public calculateY(range: Range, point: IDataPoint): number {
+    const value = range.Accessor(point);
+    const relativePos = range.Scale(value);
+    return this.SvgHeight * relativePos;
   }
-
-  onDeactivate(data): void {
-    console.log('Deactivate', JSON.parse(JSON.stringify(data)));
-  }
-
-  private initChart(): void {
-    console.log(this.temperature);
-    this.graphConfig = new GraphConfig([this.temperatureDef, this.batteryDef, this.gravityDef], [this.temperature, this.battery, this.gravity]);
-    this.chart = new CanvasJS.Chart("chartContainer", this.graphConfig);
-
-    this.chart.render();
-  }
-
 
 }

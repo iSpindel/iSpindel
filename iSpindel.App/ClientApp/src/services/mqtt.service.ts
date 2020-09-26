@@ -6,7 +6,7 @@ import { BatterySensor } from 'src/classes/Sensors/BatterySensor';
 import { GravitySensor } from 'src/classes/Sensors/GravitySensor';
 import { ISensor } from 'src/classes/Sensors/ISensor';
 import { map, tap } from 'rxjs/operators';
-import { SENSOR_DATA_TYPE } from 'src/classes/Sensors/SensorTypes'
+import { SENSOR_DATA_TYPE } from 'src/classes/Sensors/SensorTypes';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -42,20 +42,20 @@ export class MqttSubscriptionService implements OnDestroy {
         map(msg => msg.payload.toString()),
         tap((msg: string) => {
           switch (sensor.data_type) {
-            case SENSOR_DATA_TYPE.NUMBER:
-              sensor.value.next(Number(msg))
-              break;
-            case SENSOR_DATA_TYPE.BOOL:
-              if (msg == 'on') {
-                sensor.value.next(true)
-              } else {
-                sensor.value.next(false)
-              }
-              break;
-            case SENSOR_DATA_TYPE.STRING:
-            default:
-              sensor.value.next(msg);
-              break;
+          case SENSOR_DATA_TYPE.NUMBER:
+            sensor.value.next(Number(msg));
+            break;
+          case SENSOR_DATA_TYPE.BOOL:
+            if (msg == 'on') {
+              sensor.value.next(true);
+            } else {
+              sensor.value.next(false);
+            }
+            break;
+          case SENSOR_DATA_TYPE.STRING:
+          default:
+            sensor.value.next(msg);
+            break;
           }
         })
       ).subscribe();
@@ -67,7 +67,7 @@ export class MqttSubscriptionService implements OnDestroy {
 
   public getTemperature(): Observable<number> {
     if (!environment.production)
-      return generate(0, x => x < 30, x => x = this._randomInt(0, 30));
+      return generate(0, x => x < 30, _ => this._randomInt(0, 30));
     return this.temperatureSensor.value.asObservable();
   }
 
@@ -77,13 +77,13 @@ export class MqttSubscriptionService implements OnDestroy {
 
   public getBattery(): Observable<number> {
     if (!environment.production)
-      return generate(0, x => x < 100, x => x = this._randomInt(0, 100));
+      return generate(0, x => x < 100, _ => this._randomInt(0, 100));
     return this.batterySensor.value.asObservable();
   }
 
   public getGravity(): Observable<number> {
     if (!environment.production)
-      return generate(0, x => x < 20, x => x = this._randomInt(0, 20));
+      return generate(0, x => x < 20, _ => this._randomInt(0, 20));
     return this.gravitySensor.value.asObservable();
   }
 

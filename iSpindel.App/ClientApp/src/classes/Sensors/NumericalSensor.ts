@@ -1,4 +1,4 @@
-import { ISensor } from "./ISensor";
+import { ISensor } from './ISensor';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { SENSOR_TYPE, SENSOR_DATA_TYPE } from './SensorTypes';
 
@@ -12,9 +12,9 @@ export abstract class NumericalSensor implements ISensor {
     value: BehaviorSubject<number>;
 
     constructor(name: string, topic: string) {
-        this.name = name;
-        this.topic = topic;
-        this.value = new BehaviorSubject<number>(0);
+      this.name = name;
+      this.topic = topic;
+      this.value = new BehaviorSubject<number>(0);
     }
 
 }

@@ -1,9 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
 
 import { MqttModule, IMqttServiceOptions } from 'ngx-mqtt';
 
@@ -15,25 +14,19 @@ import { AppRoutingModule } from './app-routing.module';
 import { GraphComponent } from './graph/graph.component';
 import { LiveDataComponent } from './live-data/live-data.component';
 import { NewMeasureComponent } from './new-measure/new-measure.component';
-import { Routes, RouterModule } from '@angular/router';
-import { AuthorizeGuard } from 'src/api-authorization/authorize.guard';
+import { Routes } from '@angular/router';
+//import { AuthorizeGuard } from 'src/api-authorization/authorize.guard';
 
 //TODO replace with server sided configuration
 export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions =
 {
-  hostname: "localhost",//environment.mqttBroker.hostname,
+  hostname: 'localhost',//environment.mqttBroker.hostname,
   port: 1883,//environment.mqttBroker.port,
-  username: "ispindel",//environment.mqttBroker.username,
-  password: "ispindel123",//environment.mqttBroker.password,
-  clientId: "angular",//environment.mqttBroker.clientId,
-  path: "/test",//environment.mqttBroker.path,
+  username: 'ispindel',//environment.mqttBroker.username,
+  password: 'ispindel123',//environment.mqttBroker.password,
+  clientId: 'angular',//environment.mqttBroker.clientId,
+  path: '/test',//environment.mqttBroker.path,
 };
-
-const routes: Routes = [
-  { path: '', component: LiveDataComponent },
-  { path: 'newMeasure', component: NewMeasureComponent },
-  { path: 'viewMeasure', component: GraphComponent, canActivate: [AuthorizeGuard] },
-];
 
 @NgModule({
   declarations: [
@@ -51,8 +44,8 @@ const routes: Routes = [
     ApiAuthorizationModule,
     //custom modules start here
     CustomMaterialModule,
-    //TODO replace with app-routing module
-    RouterModule.forRoot(routes),
+    AppRoutingModule,
+    //RouterModule.forRoot(routes),
     MqttModule.forRoot(MQTT_SERVICE_OPTIONS),
   ],
   providers: [
