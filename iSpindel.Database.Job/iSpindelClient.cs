@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using MQTTnet;
+using MQTTnet.Client;
 
 namespace iSpindel.Database.Job
 {
@@ -14,6 +14,7 @@ namespace iSpindel.Database.Job
         private readonly iSpindelClientOptions options;
         private readonly string topicServerResponse;
         private readonly string topicServerRequest;
+        private IMqttClient mqttClient;
         private Dictionary<string, StatusCode> statusLookup;
 
         public iSpindelClient(iSpindelClientOptions options)
@@ -25,6 +26,10 @@ namespace iSpindel.Database.Job
             this.statusLookup = Enum.GetValues(typeof(StatusCode))
               .Cast<StatusCode>()
               .ToDictionary(t => t.ToString(), t => t);
+        }
+
+        public async Task InitConnection()
+        {
         }
 
         public async Task<StatusCode> GetStatusAsync()
@@ -67,10 +72,10 @@ namespace iSpindel.Database.Job
             return false;
         }
 
-
         private async Task<string> sendRpcRequest(string payload)
         {
-            var mqttClient = await options.MqttClientFactory();
+            mqttClient = await options.MqttClientFactory();
+
             var mqttRpcService = new MqttRpcService(topicServerRequest, topicServerResponse, mqttClient);
 
             var response = await mqttRpcService.ExecuteAsyncRpcRequest(payload);

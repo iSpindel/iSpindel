@@ -68,7 +68,7 @@ namespace iSpindel.Database.Job.Runner
 
         }
 
-        private IMqttClientOptions BuildClientOpts(string ClientId)
+        public IMqttClientOptions BuildClientOpts(string ClientId)
         {
             return new MqttClientOptionsBuilder()
                         .WithClientId(ClientId)
@@ -77,15 +77,15 @@ namespace iSpindel.Database.Job.Runner
                         .Build();
         }
 
-        private ManagedMqttClientOptions BuildManagedClientOpts(IMqttClientOptions ClientOpts)
+        public ManagedMqttClientOptions BuildManagedClientOpts(IMqttClientOptions ClientOpts)
         {
             return new ManagedMqttClientOptionsBuilder()
-            .WithAutoReconnectDelay(TimeSpan.FromSeconds(5))
+            .WithAutoReconnectDelay(TimeSpan.FromSeconds(10))
             .WithClientOptions(ClientOpts)
             .Build();
         }
 
-        private Func<Task<IMqttClient>> BuildClientFactory(IMqttClientOptions ClientOpts)
+        public Func<Task<IMqttClient>> BuildClientFactory(IMqttClientOptions ClientOpts)
         {
             return async () =>
                             {
@@ -97,7 +97,7 @@ namespace iSpindel.Database.Job.Runner
 
         }
 
-        private Func<Task<IManagedMqttClient>> BuildManagedClientFactory(ManagedMqttClientOptions ClientOpts)
+        public Func<Task<IManagedMqttClient>> BuildManagedClientFactory(ManagedMqttClientOptions ClientOpts)
         {
             return async () =>
                             {

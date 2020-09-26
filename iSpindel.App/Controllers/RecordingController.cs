@@ -8,23 +8,26 @@ using MQTTnet;
 using MQTTnet.Client;
 using MQTTnet.Client.Options;
 using MQTTnet.Extensions.ManagedClient;
+using System.Threading;
 
 namespace iSpindel.App.Controllers
 {
     //[Authorize]
-	[Route("api/[controller]")]
-	[ApiController]
-	public class RecordingController : ControllerBase
-	{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class RecordingController : ControllerBase
+    {
         private readonly iSpindelClient _iSpindelClient;
 
-		public RecordingController(IOptions<MqttConnectionSettings> settings){
+        public RecordingController(IOptions<MqttConnectionSettings> settings)
+        {
             //iSpindelClientOptions options) {
-             var options = BuildISpindelClientOpts(settings.Value);   
+            var options = BuildISpindelClientOpts(settings.Value);
             _iSpindelClient = new iSpindelClient(options);
-		}
+        }
 
-        private iSpindelClientOptions BuildISpindelClientOpts(MqttConnectionSettings options){
+        private iSpindelClientOptions BuildISpindelClientOpts(MqttConnectionSettings options)
+        {
 
             var mqttClientOpts = new MqttClientOptionsBuilder()
             .WithTcpServer(options.Host, options.Port)
@@ -35,19 +38,20 @@ namespace iSpindel.App.Controllers
             .WithAutoReconnectDelay(TimeSpan.FromSeconds(5))
             .WithClientOptions(mqttClientOpts)
             .Build();
-            
-            Func<Task<IManagedMqttClient>> managedMqttClientFactory = async () =>
+
+            Func<Task<IMqttClient>> mqttClientFactory = async () =>
                 {
                     var factory = new MqttFactory();
-                    var client = factory.CreateManagedMqttClient();
+                    var client = factory.CreateMqttClient();
                     Console.WriteLine($"Starting mqtt client");
-                    await client.StartAsync(managedMqttClientOpts);
+                    var authResult = await client.ConnectAsync(mqttClientOpts, CancellationToken.None);
                     return client;
                 };
 
-            var iSpindelOpts = new iSpindelClientOptions(){
-                MqttClientFactory = managedMqttClientFactory,
-                TopicBasePath = options.iSpindelTopicBasePath ,
+            var iSpindelOpts = new iSpindelClientOptions()
+            {
+                MqttClientFactory = mqttClientFactory,
+                TopicBasePath = options.iSpindelTopicBasePath,
                 TopicServerRequest = options.ServerRequest,
                 TopicServerResponse = options.ServerResponse
 
@@ -57,26 +61,29 @@ namespace iSpindel.App.Controllers
 
         }
 
-		// GET: api/Recording
-		[HttpGet]
-		public async Task<string> GetRecording() {
-             var status = await _iSpindelClient.GetStatusAsync();
-             return status.ToString();
-		}
+        // GET: api/Recording
+        [HttpGet]
+        public async Task<string> GetRecording()
+        {
+            var status = await _iSpindelClient.GetStatusAsync();
+            return status.ToString();
+        }
 
-		// POST: api/Recording
-		[HttpPost("{id}")]
-		public async Task<bool> PostRecording(int id) {
-            
+        // POST: api/Recording
+        [HttpPost("{id}")]
+        public async Task<bool> PostRecording(int id)
+        {
+
             return await _iSpindelClient.StartAsync(id);
 
-		}
+        }
 
-		// PUT: api/Recording
-		[HttpPut]
-		public async Task<bool> PutRecording() {
+        // PUT: api/Recording
+        [HttpPut]
+        public async Task<bool> PutRecording()
+        {
             return await _iSpindelClient.StopAsync();
-		}
+        }
         /*
 		// DELETE: api/DataSeries/5
 		[HttpDelete("{id}")]

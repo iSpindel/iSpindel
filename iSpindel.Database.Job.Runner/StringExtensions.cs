@@ -1,6 +1,6 @@
 namespace iSpindel.Database.Job.Runner
 {
-    internal static class StringExtensions
+    public static class StringExtensions
     {
         public static string AppendTerminatorChar(this string prefix)
         {

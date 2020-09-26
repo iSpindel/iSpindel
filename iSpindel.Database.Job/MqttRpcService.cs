@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Threading;
 using System.Threading.Tasks;
 using MQTTnet;
+using MQTTnet.Client;
 using MQTTnet.Exceptions;
 using MQTTnet.Extensions.ManagedClient;
 using MQTTnet.Extensions.Rpc;
@@ -15,14 +16,14 @@ namespace iSpindel.Database.Job
         private readonly ConcurrentDictionary<string, TaskCompletionSource<byte[]>> waitingCalls = new ConcurrentDictionary<string, TaskCompletionSource<byte[]>>();
 
         protected readonly string topicServerResponse;
-        private readonly IManagedMqttClient mqttClient;
+        private readonly IMqttClient mqttClient;
         protected readonly string topicServerRequest;
         private readonly TimeSpan timeout = TimeSpan.FromSeconds(30);
         private const MqttQualityOfServiceLevel qos = MqttQualityOfServiceLevel.AtMostOnce;
         private readonly CancellationToken cancellationToken = CancellationToken.None;
         private readonly RpcAwareApplicationMessageReceivedHandler applicationMessageReceivedHandler;
 
-        public MqttRpcService(string topicServerRequest, string topicServerResponse, IManagedMqttClient mqttClient)
+        public MqttRpcService(string topicServerRequest, string topicServerResponse, IMqttClient mqttClient)
         {
             this.topicServerRequest = topicServerRequest;
             this.topicServerResponse = topicServerResponse;

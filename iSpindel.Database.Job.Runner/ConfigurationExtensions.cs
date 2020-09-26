@@ -3,7 +3,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace iSpindel.Database.Job.Runner
 {
-    internal static class ConfigurationExtensions
+    public static class ConfigurationExtensions
     {
         public static T GetSanitizedValue<T>(this IConfigurationRoot configurationRoot, string configKey, T defaultValue = default(T))
         {

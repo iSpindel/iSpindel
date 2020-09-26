@@ -5,14 +5,17 @@ using Microsoft.Extensions.Configuration;
 using MQTTnet;
 using MQTTnet.Client.Options;
 using MQTTnet.Extensions.ManagedClient;
+using iSpindel.Database.Job.Runner;
 using Xunit;
+using System.Threading;
 
 namespace iSpindel.Database.Job.Test
 {
     public class TestSpindelClient
     {
-        private readonly iSpindelClientOptions _clientOpts;
         private readonly IConfigurationSection mqttOpts;
+        private RunnerOptions runnerOptions;
+        private Runner.Runner runner;
 
         public TestSpindelClient()
         {
@@ -25,8 +28,7 @@ namespace iSpindel.Database.Job.Test
             var mqttOpts = configurationRoot.GetSection("Mqtt");
             this.mqttOpts = mqttOpts;
 
-            _clientOpts = BuildISpindelClientOpts(mqttOpts);
-
+            runner = InitializeRunner(configurationRoot);
         }
 
         [Fact]
@@ -42,19 +44,16 @@ namespace iSpindel.Database.Job.Test
         [Fact]
         public void TestCreateClient()
         {
-            Assert.NotNull(_clientOpts);
-            Assert.NotNull(_clientOpts.TopicServerRequest);
-            Assert.NotNull(_clientOpts.TopicBasePath);
-            Assert.NotNull(_clientOpts.TopicServerResponse);
-            var _iSpindelClient = new iSpindelClient(_clientOpts);
-
+            var _iSpindelClient = BuildSpindelClient(runner);
+            Assert.IsType<iSpindelClient>(_iSpindelClient);
         }
+
 
         [Fact]
         public void TestStart()
         {
 
-            var _iSpindelClient = new iSpindelClient(_clientOpts);
+            var _iSpindelClient = BuildSpindelClient(runner);
             var startTask = _iSpindelClient.StartAsync(-1);
             startTask.Wait();
 
@@ -67,61 +66,76 @@ namespace iSpindel.Database.Job.Test
         public void TestStop()
         {
 
-            var _iSpindelClient = new iSpindelClient(_clientOpts);
+            /*var _iSpindelClient = new iSpindelClient(_clientOpts);
             var stopTask = _iSpindelClient.StopAsync();
             stopTask.Wait();
 
             var status = stopTask.Result;
             Assert.True(status);
+            */
         }
 
         [Fact(Skip = "Skipping Status Test")]
         public void TestStatus()
         {
 
-            var _iSpindelClient = new iSpindelClient(_clientOpts);
+            /* var _iSpindelClient = new iSpindelClient(_clientOpts);
             var statusTask = _iSpindelClient.GetStatusAsync();
             statusTask.Wait();
 
             var status = statusTask.Result;
             Assert.Equal(StatusCode.IDLE, status);
+            */
 
 
         }
 
-        private iSpindelClientOptions BuildISpindelClientOpts(IConfigurationSection options)
+        private Runner.Runner InitializeRunner(IConfigurationRoot configurationRoot)
         {
+            runnerOptions = new RunnerOptions()
+            {
+                ConnectionString = configurationRoot.GetConnectionString("DefaultConnection"),
+                MqttHost = configurationRoot.GetSanitizedValue<string>("Mqtt:Host"),
+                MqttPort = configurationRoot.GetSanitizedValue<int?>("Mqtt:Port", 1833).Value,
+                MqttUsername = configurationRoot.GetSanitizedValue<string>("Mqtt:Credentials:Username"),
+                MqttPassword = configurationRoot.GetSanitizedValue<string>("Mqtt:Credentials:Password"),
 
+                TopicControlBridgeBasePath = configurationRoot.GetSanitizedValue<string>("Mqtt:Topics:ControlBridgeTopicBasePath", "spindelControl/").AppendTerminatorChar(),
+                TopicISpindelBasePath = configurationRoot.GetSanitizedValue<string>("Mqtt:Topics:iSpindelTopicBasePath").AppendTerminatorChar(),
+                TopicServerRequest = configurationRoot.GetSanitizedValue<string>("Mqtt:Topics:ServerRequest", "Request"),
+                TopicServerResponse = configurationRoot.GetSanitizedValue<string>("Mqtt:Topics:ServerResponse", "Response"),
+                TopicISpindelTemperature = configurationRoot.GetSanitizedValue<string>("Mqtt:Topics:iSpindelTemperature"),
+                TopicISpindelBattery = configurationRoot.GetSanitizedValue<string>("Mqtt:Topics:iSpindelBattery"),
+                TopicISpindelGravity = configurationRoot.GetSanitizedValue<string>("Mqtt:Topics:iSpindelGravity"),
+            };
 
-            var mqttClientOpts = new MqttClientOptionsBuilder()
-            .WithTcpServer(options.GetValue<string>("Host"), options.GetValue<int>("Port"))
-            .WithCredentials(options.GetValue<string>("Username"), options.GetValue<string>("Password"))
-            .Build();
+            return new Runner.Runner(runnerOptions);
+        }
+        private iSpindelClient BuildSpindelClient(Runner.Runner runner)
+        {
+            var mqttClientOpts = runner.BuildClientOpts("XUnit-Client");
 
-            var managedMqttClientOpts = new ManagedMqttClientOptionsBuilder()
-            .WithAutoReconnectDelay(TimeSpan.FromSeconds(30))
-            .WithClientOptions(mqttClientOpts)
-            .Build();
-
-            Func<Task<IManagedMqttClient>> managedMqttClientFactory = async () =>
-                {
-                    var factory = new MqttFactory();
-                    var client = factory.CreateManagedMqttClient();
-                    Console.WriteLine($"Starting mqtt client");
-                    await client.StartAsync(managedMqttClientOpts);
-                    return client;
-                };
+            Func<Task<MQTTnet.Client.IMqttClient>> mqttClientFactory = async () =>
+            {
+                var factory = new MqttFactory();
+                var client = factory.CreateMqttClient();
+                var authResult = await client.ConnectAsync(mqttClientOpts, CancellationToken.None);
+                Console.Write(authResult.ResponseInformation);
+                return client;
+            };
 
             var iSpindelOpts = new iSpindelClientOptions()
             {
-                MqttClientFactory = managedMqttClientFactory,
-                TopicBasePath = options.GetValue<string>("Topics:iSpindelTopicBasePath"),
-                TopicServerRequest = options.GetValue<string>("Topics:ServerRequest"),
-                TopicServerResponse = options.GetValue<string>("Topics:ServerResponse")
-
+                MqttClientFactory = mqttClientFactory,
+                TopicBasePath = runnerOptions.TopicISpindelBasePath,
+                TopicServerRequest = runnerOptions.TopicServerRequest,
+                TopicServerResponse = runnerOptions.TopicServerResponse
             };
 
-            return iSpindelOpts;
+            var _iSpindelClient = new iSpindelClient(iSpindelOpts);
+
+            return _iSpindelClient;
+
 
         }
     }
