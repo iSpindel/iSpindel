@@ -62,31 +62,28 @@ namespace iSpindel.Database.Job.Test
 
         }
 
-        [Fact(Skip = "Skipping Stop Test")]
+        [Fact]
         public void TestStop()
         {
 
-            /*var _iSpindelClient = new iSpindelClient(_clientOpts);
+            var _iSpindelClient = BuildSpindelClient(runner);
             var stopTask = _iSpindelClient.StopAsync();
             stopTask.Wait();
 
             var status = stopTask.Result;
             Assert.True(status);
-            */
         }
 
-        [Fact(Skip = "Skipping Status Test")]
+        [Fact]
         public void TestStatus()
         {
 
-            /* var _iSpindelClient = new iSpindelClient(_clientOpts);
+            var _iSpindelClient = BuildSpindelClient(runner);
             var statusTask = _iSpindelClient.GetStatusAsync();
             statusTask.Wait();
 
             var status = statusTask.Result;
             Assert.Equal(StatusCode.IDLE, status);
-            */
-
 
         }
 
