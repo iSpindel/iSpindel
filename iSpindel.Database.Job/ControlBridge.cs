@@ -36,7 +36,7 @@ namespace iSpindel.Database.Job
             await subscribeToControlTopics();
         }
 
-        private async Task VerifyConnection(MqttClientConnectedEventArgs connectArgs)
+        private void VerifyConnection(MqttClientConnectedEventArgs connectArgs)
         {
             if (connectArgs.AuthenticateResult.ResultCode != MqttClientConnectResultCode.Success)
             {
