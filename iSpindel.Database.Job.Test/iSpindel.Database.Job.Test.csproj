@@ -22,7 +22,8 @@
 
   <ItemGroup>
     <Content Include="appsettings.json;appsettings.Production.json">
-      <CopyToPublishDirectory Condition="Exists(%(Identity))">PreserveNewest</CopyToPublishDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
 </Project>
