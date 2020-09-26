@@ -9,6 +9,8 @@ using iSpindel.Database;
 using iSpindel.App.DTO;
 using System.Linq.Expressions;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.SignalR;
+using iSpindel.App.Realtime;
 
 namespace iSpindel.App.Controllers
 {
@@ -19,54 +21,92 @@ namespace iSpindel.App.Controllers
 	public class DataSeriesController : ControllerBase
 	{
 		private readonly iSpindelContext _context;
+		private readonly IHubContext<NotifyHub, IClientSpindelDataHub> hubContext;
 
-		public DataSeriesController(iSpindelContext context) {
+		public DataSeriesController(iSpindelContext context, IHubContext<NotifyHub, IClientSpindelDataHub> hubContext)
+		{
 			_context = context;
+			this.hubContext = hubContext;
 		}
 
 		// GET: api/DataSeries
 		[HttpGet]
-		public async Task<ActionResult<IEnumerable<DataSeriesDTO>>> GetDataSeries() {
+		public async Task<ActionResult<IEnumerable<DataSeriesDTO>>> GetDataSeries()
+		{
 			return await _context.DataSeries
 				.OrderByDescending(x => x.Id)
 				.Select(SeriesToDTO)
 				.ToListAsync();
 		}
 
+		[HttpGet("doTest")]
+		public async Task<IActionResult> DoTest(int target)
+		{
+			await this.hubContext.Clients.Group($"grp{target}").Notify(new DataPointDTO() {
+				Battery = 1,
+				Gravity = 2,
+				Temperature = 3,
+				RecordTime = DateTime.Now
+			});
+			return Ok();
+		}
+
 		// GET: api/DataSeries/5
 		[HttpGet("{id}")]
-		public async Task<ActionResult<DataSeries>> GetDataSeries(int id) {
+		public async Task<ActionResult<DataSeriesWithDataPointsDTO>> GetDataSeries(int id)
+		{
 			var dataSeries = await _context.DataSeries
 				.Include(x => x.DataPoints)
 				.SingleOrDefaultAsync(x => x.Id == id);
 
-			if (dataSeries == null) {
+			if (dataSeries == null)
+			{
 				return NotFound();
 			}
-
-			return dataSeries;
+			return new DataSeriesWithDataPointsDTO()
+			{
+				Id = dataSeries.Id,
+				Name = dataSeries.Name,
+				Description = dataSeries.Description,
+				Start = dataSeries.Start,
+				End = dataSeries.End,
+				Datapoints = dataSeries.DataPoints.Select(x => new DataPointDTO()
+				{
+					Id = x.Id,
+					Battery = x.Battery,
+					Gravity = x.Gravity,
+					Temperature = x.Temperature,
+					RecordTime = x.RecordTime
+				})
+			};
 		}
 
 
 		// PUT: api/DataSeries/5
 		[HttpPut("{id}")]
-		public async Task<IActionResult> PutDataSeries(int id, DataSeriesDTO dataSeries) {
-			if (id != dataSeries.Id) {
+		public async Task<IActionResult> PutDataSeries(int id, DataSeriesDTO dataSeries)
+		{
+			if (id != dataSeries.Id)
+			{
 				return BadRequest();
 			}
 
 			var dbDataSeries = await _context.DataSeries.FindAsync(id);
 
-			if (dataSeries == null) {
+			if (dataSeries == null)
+			{
 				return NotFound();
 			}
 
 			dbDataSeries.Name = dataSeries.Name;
 			dbDataSeries.Description = dataSeries.Description;
 
-			try {
+			try
+			{
 				await _context.SaveChangesAsync();
-			} catch (DbUpdateConcurrencyException) when (!DataSeriesExists(id)) {
+			}
+			catch (DbUpdateConcurrencyException) when (!DataSeriesExists(id))
+			{
 				return NotFound();
 			}
 
@@ -77,7 +117,8 @@ namespace iSpindel.App.Controllers
 		// To protect from overposting attacks, enable the specific properties you want to bind to, for
 		// more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
 		[HttpPost]
-		public async Task<ActionResult<DataSeries>> PostDataSeries(DataSeries dataSeries) {
+		public async Task<ActionResult<DataSeries>> PostDataSeries(DataSeries dataSeries)
+		{
 			_context.DataSeries.Add(dataSeries);
 			await _context.SaveChangesAsync();
 
@@ -86,9 +127,11 @@ namespace iSpindel.App.Controllers
 
 		// DELETE: api/DataSeries/5
 		[HttpDelete("{id}")]
-		public async Task<ActionResult<DataSeries>> DeleteDataSeries(int id) {
+		public async Task<ActionResult<DataSeries>> DeleteDataSeries(int id)
+		{
 			var dataSeries = await _context.DataSeries.FindAsync(id);
-			if (dataSeries == null) {
+			if (dataSeries == null)
+			{
 				return NotFound();
 			}
 
@@ -98,17 +141,19 @@ namespace iSpindel.App.Controllers
 			return dataSeries;
 		}
 
-		private bool DataSeriesExists(int id) {
+		private bool DataSeriesExists(int id)
+		{
 			return _context.DataSeries.Any(e => e.Id == id);
 		}
 
 		private static readonly Expression<Func<DataSeries, DataSeriesDTO>> SeriesToDTO =
-			(DataSeries dataSeries) => new DataSeriesDTO() {
-			Id = dataSeries.Id,
-			Name = dataSeries.Name,
-			Description = dataSeries.Description,
-			Start = dataSeries.Start,
-			End = dataSeries.End
+			(DataSeries dataSeries) => new DataSeriesDTO()
+			{
+				Id = dataSeries.Id,
+				Name = dataSeries.Name,
+				Description = dataSeries.Description,
+				Start = dataSeries.Start,
+				End = dataSeries.End
 			};
 	}
 }

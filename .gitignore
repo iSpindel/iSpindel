@@ -435,3 +435,4 @@ $RECYCLE.BIN/
 appsettings.Production.json
 appsettings.Development.json
 README.production.md
+iSpindel.Database.Test/README.production.md
