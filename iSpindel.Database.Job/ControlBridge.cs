@@ -85,7 +85,7 @@ namespace iSpindel.Database.Job
                 if (Int32.TryParse(stringId, out var id))
                 { rc = await server.StartAsync(id); }
 
-                Console.WriteLine($"Start returned {rc.ToString()}");
+                Console.WriteLine($"Start returned {rc}");
 
                 await sendRpcReply(rc ? "Start Successful" : "Start Failed");
             }
@@ -93,8 +93,8 @@ namespace iSpindel.Database.Job
             {
                 Console.WriteLine("Status signal received");
                 var currentStatus = await server.GetStatusAsync();
-                Console.WriteLine($"Status: {currentStatus.ToString()}");
-                await sendRpcReply("Status " + currentStatus.ToString());
+                Console.WriteLine($"Status: {currentStatus}");
+                await sendRpcReply(currentStatus.ToString());
             }
 
         }

@@ -6,7 +6,7 @@ namespace iSpindel.App
         public int Port { get; set; }
         public string ServerResponse { get; set; }
         public string ServerRequest { get; set; }
-        public string iSpindelTopicBasePath { get; set; }
+        public string ControlBridgeTopicBasePath { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
     }

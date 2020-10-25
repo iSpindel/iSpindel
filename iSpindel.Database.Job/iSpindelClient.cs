@@ -9,7 +9,7 @@ using MQTTnet.Client;
 
 namespace iSpindel.Database.Job
 {
-    public class iSpindelClient : ISpindelService
+    public class iSpindelClient : ISpindelService, IDisposable
     {
         private readonly iSpindelClientOptions options;
         private readonly string topicServerResponse;
@@ -26,10 +26,6 @@ namespace iSpindel.Database.Job
             this.statusLookup = Enum.GetValues(typeof(StatusCode))
               .Cast<StatusCode>()
               .ToDictionary(t => t.ToString(), t => t);
-        }
-
-        public async Task InitConnection()
-        {
         }
 
         public async Task<StatusCode> GetStatusAsync()
@@ -84,6 +80,12 @@ namespace iSpindel.Database.Job
 
             return responsePayload;
 
+        }
+
+        public void Dispose()
+        {
+            mqttClient?.DisconnectAsync().Wait();
+            mqttClient?.Dispose();
         }
     }
 }

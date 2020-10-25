@@ -17,13 +17,11 @@ namespace iSpindel.App.Controllers
     [ApiController]
     public class RecordingController : ControllerBase
     {
-        private readonly iSpindelClient _iSpindelClient;
+        private readonly iSpindelClientOptions iSpindelClientOptions;
 
         public RecordingController(IOptions<MqttConnectionSettings> settings)
         {
-            //iSpindelClientOptions options) {
-            var options = BuildISpindelClientOpts(settings.Value);
-            _iSpindelClient = new iSpindelClient(options);
+            iSpindelClientOptions = BuildISpindelClientOpts(settings.Value);
         }
 
         private iSpindelClientOptions BuildISpindelClientOpts(MqttConnectionSettings options)
@@ -51,10 +49,9 @@ namespace iSpindel.App.Controllers
             var iSpindelOpts = new iSpindelClientOptions()
             {
                 MqttClientFactory = mqttClientFactory,
-                TopicBasePath = options.iSpindelTopicBasePath,
+                TopicBasePath = options.ControlBridgeTopicBasePath,
                 TopicServerRequest = options.ServerRequest,
                 TopicServerResponse = options.ServerResponse
-
             };
 
             return iSpindelOpts;
@@ -62,10 +59,11 @@ namespace iSpindel.App.Controllers
         }
 
         // GET: api/Recording
-        [HttpGet]
-        public async Task<string> GetRecording()
+        [HttpGet("RecordingStatus")]
+        public async Task<string> RecordingStatus()
         {
-            var status = await _iSpindelClient.GetStatusAsync();
+            using var iSpindelClient = new iSpindelClient(iSpindelClientOptions);
+            var status = await iSpindelClient.GetStatusAsync();
             return status.ToString();
         }
 
@@ -74,15 +72,19 @@ namespace iSpindel.App.Controllers
         public async Task<bool> PostRecording(int id)
         {
 
-            return await _iSpindelClient.StartAsync(id);
+            using var iSpindelClient = new iSpindelClient(iSpindelClientOptions);
+            var status = await iSpindelClient.StartAsync(id);
+            return status;
 
         }
 
         // PUT: api/Recording
-        [HttpPut]
-        public async Task<bool> PutRecording()
+        [HttpGet("StopRecording")]
+        public async Task<bool> StopRecording()
         {
-            return await _iSpindelClient.StopAsync();
+            using var iSpindelClient = new iSpindelClient(iSpindelClientOptions);
+            var status = await iSpindelClient.StopAsync();
+            return status;
         }
         /*
 		// DELETE: api/DataSeries/5
@@ -98,6 +100,6 @@ namespace iSpindel.App.Controllers
 
 			return dataSeries;
 		}
-        */
+       */
     }
 }

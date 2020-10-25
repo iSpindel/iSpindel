@@ -86,7 +86,8 @@ namespace iSpindel.Database.Job
             finally
             {
                 waitingCalls.TryRemove(topicServerResponse, out _);
-                await mqttClient.UnsubscribeAsync(topicServerResponse).ConfigureAwait(false);
+                if(mqttClient.IsConnected)
+                    await mqttClient.UnsubscribeAsync(topicServerResponse).ConfigureAwait(false);
             }
 
         }
