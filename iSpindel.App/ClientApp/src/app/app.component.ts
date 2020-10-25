@@ -7,7 +7,7 @@ import { NotifyService } from 'src/services/notify.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'iSpindel Overview';
+  title = 'iSpindel Datenübersicht';
   screenWidth: number;
 
   constructor(notifyService: NotifyService) {
