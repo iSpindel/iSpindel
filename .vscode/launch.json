@@ -13,7 +13,7 @@
             "args": [],
             "cwd": "${workspaceFolder}/iSpindel.Database.Job.Runner",
             "stopAtEntry": false,
-            "console": "internalConsole"
+            "console": "integratedTerminal"
         },
         {
             "name": "iSpindel Web App",
