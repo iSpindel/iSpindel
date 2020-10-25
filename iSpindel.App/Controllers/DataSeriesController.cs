@@ -34,6 +34,7 @@ namespace iSpindel.App.Controllers
 		public async Task<ActionResult<IEnumerable<DataSeriesDTO>>> GetDataSeries()
 		{
 			return await _context.DataSeries
+				.Include(x => x.DataPoints)
 				.OrderByDescending(x => x.Id)
 				.Select(SeriesToDTO)
 				.ToListAsync();

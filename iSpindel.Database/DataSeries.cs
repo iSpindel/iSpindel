@@ -15,7 +15,7 @@ namespace iSpindel.Database
 		public string Description { get; set; }
 		[InverseProperty("DataSeries")]
 		public virtual ICollection<DataPoint> DataPoints { get; set; }
-		public DateTime? Start { get => DataPoints?.Min<DataPoint, DateTime?>(x => x.RecordTime); }
-		public DateTime? End { get => DataPoints?.Max<DataPoint, DateTime?>(x => x.RecordTime); }
+		public DateTime? Start { get; set; }
+		public DateTime? End { get; set; }
 	}
 }

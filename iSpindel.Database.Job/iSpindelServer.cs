@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
@@ -137,6 +138,10 @@ namespace iSpindel.Database.Job
             // TODO - check if id already exists in Database 
             CurrentId = id;
 
+            using var dbContext = options.DbContextFactory();
+            var currentSeries = dbContext.DataSeries.Single(x => x.Id == id);
+            currentSeries.Start = DateTime.Now;
+
             // TODO - return false if another recording is already in progress
             return true;
         }
@@ -151,6 +156,11 @@ namespace iSpindel.Database.Job
             // TODO - check if all this was successful before returning
             await unsubscribeFromSensorTopics();
             //await mqttClient.StopAsync();
+
+            using var dbContext = options.DbContextFactory();
+            var currentSeries = dbContext.DataSeries.Single(x => x.Id == CurrentId);
+            currentSeries.End = DateTime.Now;
+
             mqttClient = null;
             CurrentId = null;
             return true;

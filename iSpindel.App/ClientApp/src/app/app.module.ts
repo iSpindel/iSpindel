@@ -14,6 +14,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { GraphComponent } from './graph/graph.component';
 import { LiveDataComponent } from './live-data/live-data.component';
 import { NewMeasureComponent } from './new-measure/new-measure.component';
+import { ListMeasuresComponent } from './list-measures/list-measures.component';
 import { CurrentMeasureComponent } from './current-measure/current-measure.component';
 import { Routes } from '@angular/router';
 //import { AuthorizeGuard } from 'src/api-authorization/authorize.guard';
@@ -35,6 +36,7 @@ export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions =
     GraphComponent,
     LiveDataComponent,
     NewMeasureComponent,
+    ListMeasuresComponent,
     CurrentMeasureComponent,
   ],
   imports: [

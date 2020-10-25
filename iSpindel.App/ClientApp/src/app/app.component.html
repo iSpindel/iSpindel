@@ -15,7 +15,8 @@
         <mat-list role="list">
             <mat-list-item role="listitem">
                 <a class="sidenav-link" mat-button [routerLink]="['/']">
-                    <mat-icon>timer</mat-icon>
+                    <!--<mat-icon>timer</mat-icon>-->
+                    <mat-icon svgIcon="router-wireless"></mat-icon>
                     <span>&nbsp;Live Spindel-Daten</span>
                 </a>
             </mat-list-item>
@@ -24,7 +25,8 @@
 
             <mat-list-item role="listitem">
                 <a class="sidenav-link" mat-button [routerLink]="['/newMeasure']">
-                    <mat-icon>timeline</mat-icon>
+                    <!--<mat-icon>timeline</mat-icon>-->
+                    <mat-icon svgIcon="timeline-plus"></mat-icon>
                     <span>&nbsp;Neue Messreihe</span>
                 </a>
             </mat-list-item>
@@ -33,10 +35,13 @@
 
             <mat-list-item role="listitem">
                 <a class="sidenav-link" mat-button [routerLink]="['/currentMeasure']">
-                    <mat-icon svgIcon="account-clock"></mat-icon>
+                    <!--<mat-icon svgIcon="account-clock"></mat-icon>-->
+                    <mat-icon svgIcon="timeline-clock"></mat-icon>
                     <span>&nbsp;Laufende Messung</span>
                 </a>
             </mat-list-item>
+
+            <mat-divider></mat-divider>
 
             <mat-list-item role="listitem">
                 <a class="sidenav-link" mat-button [routerLink]="['/viewMeasure']">

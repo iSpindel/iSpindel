@@ -1,0 +1,12 @@
+<mat-card *ngFor="let dataSeries of (AllDataSeries$ | async)">
+    <mat-card-header>
+        <mat-card-title>{{dataSeries.name}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <ul>
+            <li>Start: {{ dataSeries.start }}</li>
+            <li>Ende: {{ dataSeries.end }}</li>
+            <li>Beschreibung: {{ dataSeries.description}}</li>
+        </ul>
+    </mat-card-content>
+</mat-card>
