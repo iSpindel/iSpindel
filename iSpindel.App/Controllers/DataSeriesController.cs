@@ -116,18 +116,24 @@ namespace iSpindel.App.Controllers
 		// POST: api/DataSeries
 		// To protect from overposting attacks, enable the specific properties you want to bind to, for
 		// more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+
+		//TODO: Validation!
 		[HttpPost]
-		public async Task<ActionResult<DataSeries>> PostDataSeries(DataSeries dataSeries)
+		public async Task<ActionResult<DataSeriesDTO>> PostDataSeries(CreateDataSeriesDTO dataSeries)
 		{
-			_context.DataSeries.Add(dataSeries);
+			var newDataSeries = new DataSeries{
+				Name = dataSeries.Name,
+				Description = dataSeries.Description
+			};
+			_context.DataSeries.Add(newDataSeries);
 			await _context.SaveChangesAsync();
 
-			return CreatedAtAction("GetDataSeries", new { id = dataSeries.Id }, dataSeries);
+			return CreatedAtAction("GetDataSeries", new { id = newDataSeries.Id }, null);
 		}
 
 		// DELETE: api/DataSeries/5
 		[HttpDelete("{id}")]
-		public async Task<ActionResult<DataSeries>> DeleteDataSeries(int id)
+		public async Task<ActionResult<DataSeriesDTO>> DeleteDataSeries(int id)
 		{
 			var dataSeries = await _context.DataSeries.FindAsync(id);
 			if (dataSeries == null)
@@ -138,7 +144,7 @@ namespace iSpindel.App.Controllers
 			_context.DataSeries.Remove(dataSeries);
 			await _context.SaveChangesAsync();
 
-			return dataSeries;
+			return SeriesToDTO.Compile()(dataSeries);
 		}
 
 		private bool DataSeriesExists(int id)

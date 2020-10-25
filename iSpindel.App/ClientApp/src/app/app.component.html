@@ -25,11 +25,18 @@
             <mat-list-item role="listitem">
                 <a class="sidenav-link" mat-button [routerLink]="['/newMeasure']">
                     <mat-icon>timeline</mat-icon>
-                    <span>&nbsp;Neue Messung</span>
+                    <span>&nbsp;Neue Messreihe</span>
                 </a>
             </mat-list-item>
 
             <mat-divider></mat-divider>
+
+            <mat-list-item role="listitem">
+                <a class="sidenav-link" mat-button [routerLink]="['/currentMeasure']">
+                    <mat-icon svgIcon="account-clock"></mat-icon>
+                    <span>&nbsp;Laufende Messung</span>
+                </a>
+            </mat-list-item>
 
             <mat-list-item role="listitem">
                 <a class="sidenav-link" mat-button [routerLink]="['/viewMeasure']">

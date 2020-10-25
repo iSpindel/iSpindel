@@ -16,7 +16,7 @@
             <g *ngFor="let range of Ranges; index as i" transform="translate(0 50)">
                 <text>{{range.Name}}</text>
             </g>
-            <g transform="translate(0 0) scale(1 1)" *ngIf="(CurrentData$ | async)?.length > 0" id="chartArea">
+            <g transform="translate(0 0) scale(1 1)" *ngIf="CurrentData?.length > 0" id="chartArea">
                 <rect fill="transparent" stroke-width="2" stroke="orange" [attr.width]="SvgWidth"
                     [attr.height]="SvgHeight">
                 </rect>

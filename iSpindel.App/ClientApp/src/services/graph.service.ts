@@ -19,35 +19,42 @@ export class GraphService {
   public readonly DataStream$: Observable<IDataPoint>;
   public readonly CurrentData$: Observable<IDataPoint[]>;
 
-  public readonly BatteryStream$: Observable<number> = this.DataStream$.pipe(map(x => x.battery));
-  public readonly TemperatureStream$: Observable<number> = this.DataStream$.pipe(map(x => x.temperature));
-  public readonly GravityStream$: Observable<number> = this.DataStream$.pipe(map(x => x.gravity));
+  public readonly BatteryStream$: Observable<number>;
+  public readonly TemperatureStream$: Observable<number>;
+  public readonly GravityStream$: Observable<number>;
 
   constructor(protected httpClient: HttpClient) {
     this.CurrentSeries$ = this._seriesId.pipe(
-      mergeMap(x => 
-        this.httpClient.get(`/api/DataSeries/${x}`) as Observable<IDataSeries> ),
-      tap(_ =>
-      //reset current accumulator
-        this._resetChannel$.next(null)
+      mergeMap(x =>
+        this.httpClient.get(`/api/DataSeries/${x}`) as Observable<IDataSeries>),
+      tap(_ => {
+        //reset current accumulator
+        this._resetChannel$.next(null);
+      }
       ));
-    
-    const nullFilter = filter<IDataPoint>(f => f!= null);
-    const initialPoints = this.CurrentSeries$.pipe(mergeMap(x => from(x.dataPoints)), nullFilter);
+
+    const nullFilter = filter<IDataPoint>(f => f != null);
+    const initialPoints = this.CurrentSeries$.pipe(mergeMap(x => from(x.datapoints)), nullFilter);
 
     this.DataStream$ = merge(
       this._resetChannel$,
       this._signalrPoints$.pipe(nullFilter),
       initialPoints);
 
+    this.DataStream$.pipe(map(x => x.battery));
+    this.DataStream$.pipe(map(x => x.temperature));
+    this.DataStream$.pipe(map(x => x.gravity));
+
     this.CurrentData$ = this.DataStream$.pipe(
       scan((acc, val, _) => {
-        if(val == null) //reset signal
+        if (val == null) //reset signal
+        {
           acc = new Array<IDataPoint>();
-        acc.push(val);
+        } else {
+          acc.push(val);
+        }
         return acc;
-      }, new Array<IDataPoint>()),
-    );
+      }, new Array<IDataPoint>()));
   }
 
   public loadData(seriesId: number): void {

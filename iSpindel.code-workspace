@@ -2,6 +2,9 @@
 	"folders": [
 		{
 			"path": "."
+		},
+		{
+			"path": "iSpindel.App\\ClientApp"
 		}
 	],
 	"settings": {}

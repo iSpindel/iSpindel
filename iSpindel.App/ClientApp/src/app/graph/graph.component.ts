@@ -57,8 +57,11 @@ export class GraphComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.CurrentData$.subscribe(x => this.CurrentData = x);
-
+    this.CurrentData$.subscribe(x => {
+      this.CurrentData = x;
+      console.log(this.CurrentData);
+    });
+    console.log('loading graph data');
     this._graphService.loadData(2);
   }
   ngAfterViewInit() {
