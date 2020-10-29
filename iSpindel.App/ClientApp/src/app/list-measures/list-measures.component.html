@@ -1,12 +1,41 @@
+<!--
+<table mat-table [dataSource]="AllDataSeries$" matSort class="mat-elevation-z8">
+
+  <ng-container matColumnDef="position">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Id. </th>
+    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="weight">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Start </th>
+    <td mat-cell *matCellDef="let element"> {{element.start}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="symbol">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Ende </th>
+    <td mat-cell *matCellDef="let element"> {{element.end}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+-->
 <mat-card *ngFor="let dataSeries of (AllDataSeries$ | async)">
     <mat-card-header>
-        <mat-card-title>{{dataSeries.name}}</mat-card-title>
+        <mat-card-title>{{dataSeries.name}} &nbsp;&nbsp; {{ getDate(dataSeries.start) }} - {{ getDate(dataSeries.end) }}</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-        <ul>
-            <li>Start: {{ dataSeries.start }}</li>
-            <li>Ende: {{ dataSeries.end }}</li>
+      <ul>
             <li>Beschreibung: {{ dataSeries.description}}</li>
-        </ul>
+            <li>Plato Anfangswert: 12P</li>
+            <li>Alkoholgehalt: 5,6%</li>
+            <li>EVG: 60%</li>
+            <li>IBU: 30</li>
+    </ul>
     </mat-card-content>
 </mat-card>

@@ -4,9 +4,9 @@ namespace iSpindel.App
     {
         public string Host { get; set; }
         public int Port { get; set; }
-        public string ServerResponse { get; set; }
-        public string ServerRequest { get; set; }
-        public string ControlBridgeTopicBasePath { get; set; }
+        public string TopicServerResponse { get; set; }
+        public string TopicServerRequest { get; set; }
+        public string TopicControlBridgeBasePath { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
     }

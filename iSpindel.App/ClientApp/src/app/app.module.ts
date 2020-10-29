@@ -17,6 +17,8 @@ import { NewMeasureComponent } from './new-measure/new-measure.component';
 import { ListMeasuresComponent } from './list-measures/list-measures.component';
 import { CurrentMeasureComponent } from './current-measure/current-measure.component';
 import { Routes } from '@angular/router';
+import { BeerDetailsComponent } from './beer-details/beer-details.component';
+import { BrewCalculatorsComponent } from './brew-calculators/brew-calculators.component';
 //import { AuthorizeGuard } from 'src/api-authorization/authorize.guard';
 
 //TODO replace with server sided configuration
@@ -38,6 +40,8 @@ export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions =
     NewMeasureComponent,
     ListMeasuresComponent,
     CurrentMeasureComponent,
+    BeerDetailsComponent,
+    BrewCalculatorsComponent,
   ],
   imports: [
     //BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

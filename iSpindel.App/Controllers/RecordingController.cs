@@ -49,9 +49,9 @@ namespace iSpindel.App.Controllers
             var iSpindelOpts = new iSpindelClientOptions()
             {
                 MqttClientFactory = mqttClientFactory,
-                TopicBasePath = options.ControlBridgeTopicBasePath,
-                TopicServerRequest = options.ServerRequest,
-                TopicServerResponse = options.ServerResponse
+                TopicBasePath = options.TopicControlBridgeBasePath,
+                TopicServerRequest = options.TopicServerRequest,
+                TopicServerResponse = options.TopicServerResponse
             };
 
             return iSpindelOpts;
