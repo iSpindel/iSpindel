@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using iSpindel.Database;
@@ -9,9 +10,10 @@ using iSpindel.Database;
 namespace iSpindel.Database.Migrations
 {
     [DbContext(typeof(iSpindelContext))]
-    partial class iSpindelContextModelSnapshot : ModelSnapshot
+    [Migration("20201107155749_RefactorGeneratorFunction")]
+    partial class RefactorGeneratorFunction
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -7600,31 +7602,25 @@ namespace iSpindel.Database.Migrations
                         {
                             Id = -1,
                             Description = "This is the default Data Series for iSpindel Projects.",
-                            Name = "Default Data Series",
-                            Start = new DateTime(2020, 5, 1, 23, 0, 0, 0, DateTimeKind.Unspecified)
+                            Name = "Default Data Series"
                         },
                         new
                         {
                             Id = 1,
                             Description = "This is the first test dataset",
-                            End = new DateTime(2020, 5, 1, 23, 45, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Test Series 1",
-                            Start = new DateTime(2020, 5, 1, 23, 0, 0, 0, DateTimeKind.Unspecified)
+                            Name = "Test Series 1"
                         },
                         new
                         {
                             Id = 2,
                             Description = "This is the second test dataset",
-                            End = new DateTime(2020, 5, 2, 6, 30, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Test Series 2",
-                            Start = new DateTime(2020, 5, 1, 23, 50, 0, 0, DateTimeKind.Unspecified)
+                            Name = "Test Series 2"
                         },
                         new
                         {
                             Id = 3,
                             Description = "This is the third test dataset",
-                            Name = "Test Series 3",
-                            Start = new DateTime(2020, 5, 1, 23, 50, 0, 0, DateTimeKind.Unspecified)
+                            Name = "Test Series 3"
                         });
                 });
 

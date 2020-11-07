@@ -232,3 +232,4 @@ _Pvt_Extensions
 
 appsettings.Production.json
 appsettings.Development.json
+config/

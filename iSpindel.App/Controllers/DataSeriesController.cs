@@ -31,12 +31,12 @@ namespace iSpindel.App.Controllers
 
 		// GET: api/DataSeries
 		[HttpGet]
-		public async Task<ActionResult<IEnumerable<DataSeriesDTO>>> GetDataSeries()
+		public async Task<ActionResult<IEnumerable<DataSeriesWithBeerCharacteristicsDTO>>> GetDataSeries()
 		{
 			return await _context.DataSeries
-				.Include(x => x.DataPoints)
+				.Include(x => x.BeerCharacteristics)
 				.OrderByDescending(x => x.Id)
-				.Select(SeriesToDTO)
+				.Select(SeriesToDTOWithBeer)
 				.ToListAsync();
 		}
 
@@ -162,5 +162,30 @@ namespace iSpindel.App.Controllers
 				Start = dataSeries.Start,
 				End = dataSeries.End
 			};
+		private static readonly Expression<Func<DataSeries, DataSeriesWithBeerCharacteristicsDTO>> SeriesToDTOWithBeer =
+			(DataSeries dataSeries) => new DataSeriesWithBeerCharacteristicsDTO()
+			{
+				Id = dataSeries.Id,
+				Name = dataSeries.Name,
+				Description = dataSeries.Description,
+				BeerCharacteristics = BeerToDTO.Compile()(dataSeries.BeerCharacteristics),
+				Start = dataSeries.Start,
+				End = dataSeries.End
+			};
+
+		private static readonly Expression<Func<BeerCharacteristics, BeerCharacteristicsDTO>> BeerToDTO = 
+		(BeerCharacteristics beer) => new BeerCharacteristicsDTO() {
+			AddedSugar = beer.AddedSugar,
+			AdjustedAlcoholLevel = beer.AdjustedAlcoholLevel,
+			AmountOfWort = beer.AmountOfWort,
+			Bitterness = beer.Bitterness,
+			BrewhouseEfficency = beer.BrewhouseEfficency,
+			ColorScale = beer.ColorScale,
+			EVG = beer.EVG,
+			TargetCarbonation  =beer.TargetCarbonation,
+			YeastType = beer.YeastType,
+			Notes = beer.Notes
+
+		};
 	}
 }

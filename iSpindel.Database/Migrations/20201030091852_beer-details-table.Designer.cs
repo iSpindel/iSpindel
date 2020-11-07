@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using iSpindel.Database;
@@ -9,9 +10,10 @@ using iSpindel.Database;
 namespace iSpindel.Database.Migrations
 {
     [DbContext(typeof(iSpindelContext))]
-    partial class iSpindelContextModelSnapshot : ModelSnapshot
+    [Migration("20201030091852_beer-details-table")]
+    partial class beerdetailstable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,9 +36,6 @@ namespace iSpindel.Database.Migrations
 
                     b.Property<double?>("AmountOfWort")
                         .HasColumnType("double precision");
-
-                    b.Property<string>("BeerStyle")
-                        .HasColumnType("text");
 
                     b.Property<int?>("Bitterness")
                         .HasColumnType("integer");
@@ -195,7 +194,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.2000000000000002,
                             DataSeriesId = 2,
                             Gravity = 0.0,
-                            RecordTime = new DateTime(2020, 5, 2, 3, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 30, 14, 18, 8, 949, DateTimeKind.Local).AddTicks(7181),
                             Temperature = 20.0
                         },
                         new
@@ -204,7 +203,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.1500000000000004,
                             DataSeriesId = 2,
                             Gravity = 0.5,
-                            RecordTime = new DateTime(2020, 5, 2, 4, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 30, 14, 38, 8, 953, DateTimeKind.Local).AddTicks(4872),
                             Temperature = 21.545084971874736
                         },
                         new
@@ -213,7 +212,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.1000000000000005,
                             DataSeriesId = 2,
                             Gravity = 1.0,
-                            RecordTime = new DateTime(2020, 5, 2, 4, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 30, 14, 58, 8, 953, DateTimeKind.Local).AddTicks(5035),
                             Temperature = 22.938926261462367
                         },
                         new
@@ -222,7 +221,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.0499999999999998,
                             DataSeriesId = 2,
                             Gravity = 1.5,
-                            RecordTime = new DateTime(2020, 5, 2, 4, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 30, 15, 18, 8, 953, DateTimeKind.Local).AddTicks(5045),
                             Temperature = 24.045084971874736
                         },
                         new
@@ -231,7 +230,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.0,
                             DataSeriesId = 2,
                             Gravity = 2.0,
-                            RecordTime = new DateTime(2020, 5, 2, 5, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 30, 15, 38, 8, 953, DateTimeKind.Local).AddTicks(5050),
                             Temperature = 24.755282581475768
                         },
                         new
@@ -240,7 +239,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.9500000000000002,
                             DataSeriesId = 2,
                             Gravity = 2.5,
-                            RecordTime = new DateTime(2020, 5, 2, 5, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 30, 15, 58, 8, 953, DateTimeKind.Local).AddTicks(5054),
                             Temperature = 25.0
                         },
                         new
@@ -249,7 +248,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.9000000000000004,
                             DataSeriesId = 2,
                             Gravity = 3.0,
-                            RecordTime = new DateTime(2020, 5, 2, 5, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 30, 16, 18, 8, 953, DateTimeKind.Local).AddTicks(5059),
                             Temperature = 24.755282581475768
                         },
                         new
@@ -258,7 +257,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.8500000000000001,
                             DataSeriesId = 2,
                             Gravity = 3.5,
-                            RecordTime = new DateTime(2020, 5, 2, 6, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 30, 16, 38, 8, 953, DateTimeKind.Local).AddTicks(5078),
                             Temperature = 24.045084971874736
                         },
                         new
@@ -267,7 +266,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.8000000000000003,
                             DataSeriesId = 2,
                             Gravity = 4.0,
-                            RecordTime = new DateTime(2020, 5, 2, 6, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 30, 16, 58, 8, 953, DateTimeKind.Local).AddTicks(5083),
                             Temperature = 22.938926261462367
                         },
                         new
@@ -276,7 +275,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.75,
                             DataSeriesId = 2,
                             Gravity = 4.5,
-                            RecordTime = new DateTime(2020, 5, 2, 6, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 30, 17, 18, 8, 953, DateTimeKind.Local).AddTicks(5088),
                             Temperature = 21.545084971874736
                         },
                         new
@@ -285,7 +284,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.7000000000000002,
                             DataSeriesId = 2,
                             Gravity = 5.0,
-                            RecordTime = new DateTime(2020, 5, 2, 7, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 30, 17, 38, 8, 953, DateTimeKind.Local).AddTicks(5092),
                             Temperature = 20.0
                         },
                         new
@@ -294,7 +293,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.6500000000000004,
                             DataSeriesId = 2,
                             Gravity = 5.5,
-                            RecordTime = new DateTime(2020, 5, 2, 7, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 30, 17, 58, 8, 953, DateTimeKind.Local).AddTicks(5096),
                             Temperature = 18.45491502812526
                         },
                         new
@@ -303,7 +302,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.6000000000000001,
                             DataSeriesId = 2,
                             Gravity = 6.0,
-                            RecordTime = new DateTime(2020, 5, 2, 7, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 30, 18, 18, 8, 953, DateTimeKind.Local).AddTicks(5100),
                             Temperature = 17.061073738537637
                         },
                         new
@@ -312,7 +311,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.5500000000000003,
                             DataSeriesId = 2,
                             Gravity = 6.5,
-                            RecordTime = new DateTime(2020, 5, 2, 8, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 30, 18, 38, 8, 953, DateTimeKind.Local).AddTicks(5105),
                             Temperature = 15.954915028125264
                         },
                         new
@@ -321,7 +320,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.5,
                             DataSeriesId = 2,
                             Gravity = 7.0,
-                            RecordTime = new DateTime(2020, 5, 2, 8, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 30, 18, 58, 8, 953, DateTimeKind.Local).AddTicks(5109),
                             Temperature = 15.244717418524232
                         },
                         new
@@ -330,7 +329,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.4500000000000002,
                             DataSeriesId = 2,
                             Gravity = 7.5,
-                            RecordTime = new DateTime(2020, 5, 2, 8, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 30, 19, 18, 8, 953, DateTimeKind.Local).AddTicks(5113),
                             Temperature = 15.0
                         },
                         new
@@ -339,7 +338,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.4000000000000004,
                             DataSeriesId = 2,
                             Gravity = 8.0,
-                            RecordTime = new DateTime(2020, 5, 2, 9, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 30, 19, 38, 8, 953, DateTimeKind.Local).AddTicks(5117),
                             Temperature = 15.244717418524232
                         },
                         new
@@ -348,7 +347,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.3500000000000001,
                             DataSeriesId = 2,
                             Gravity = 8.5,
-                            RecordTime = new DateTime(2020, 5, 2, 9, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 30, 19, 58, 8, 953, DateTimeKind.Local).AddTicks(5139),
                             Temperature = 15.954915028125262
                         },
                         new
@@ -357,7 +356,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.3000000000000003,
                             DataSeriesId = 2,
                             Gravity = 9.0,
-                            RecordTime = new DateTime(2020, 5, 2, 9, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 30, 20, 18, 8, 953, DateTimeKind.Local).AddTicks(5144),
                             Temperature = 17.061073738537633
                         },
                         new
@@ -366,7 +365,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.25,
                             DataSeriesId = 2,
                             Gravity = 9.5,
-                            RecordTime = new DateTime(2020, 5, 2, 10, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 30, 20, 38, 8, 953, DateTimeKind.Local).AddTicks(5148),
                             Temperature = 18.45491502812526
                         },
                         new
@@ -375,7 +374,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.2000000000000002,
                             DataSeriesId = 3,
                             Gravity = 0.0,
-                            RecordTime = new DateTime(2020, 5, 2, 10, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 30, 20, 58, 8, 953, DateTimeKind.Local).AddTicks(6580),
                             Temperature = 20.0
                         },
                         new
@@ -384,7 +383,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.1987500000000004,
                             DataSeriesId = 3,
                             Gravity = 0.012500000000000001,
-                            RecordTime = new DateTime(2020, 5, 2, 10, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 30, 21, 18, 8, 953, DateTimeKind.Local).AddTicks(6656),
                             Temperature = 20.039269504443556
                         },
                         new
@@ -393,7 +392,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.1974999999999998,
                             DataSeriesId = 3,
                             Gravity = 0.025000000000000001,
-                            RecordTime = new DateTime(2020, 5, 2, 11, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 30, 21, 38, 8, 953, DateTimeKind.Local).AddTicks(6662),
                             Temperature = 20.078536586559103
                         },
                         new
@@ -402,7 +401,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.19625,
                             DataSeriesId = 3,
                             Gravity = 0.037499999999999999,
-                            RecordTime = new DateTime(2020, 5, 2, 11, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 30, 21, 58, 8, 953, DateTimeKind.Local).AddTicks(6674),
                             Temperature = 20.117798824168052
                         },
                         new
@@ -411,7 +410,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.1950000000000003,
                             DataSeriesId = 3,
                             Gravity = 0.050000000000000003,
-                            RecordTime = new DateTime(2020, 5, 2, 11, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 30, 22, 18, 8, 953, DateTimeKind.Local).AddTicks(6679),
                             Temperature = 20.157053795390642
                         },
                         new
@@ -420,7 +419,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.1937500000000005,
                             DataSeriesId = 3,
                             Gravity = 0.0625,
-                            RecordTime = new DateTime(2020, 5, 2, 12, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 30, 22, 38, 8, 953, DateTimeKind.Local).AddTicks(6683),
                             Temperature = 20.196299078795342
                         },
                         new
@@ -429,7 +428,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.1924999999999999,
                             DataSeriesId = 3,
                             Gravity = 0.074999999999999997,
-                            RecordTime = new DateTime(2020, 5, 2, 12, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 30, 22, 58, 8, 953, DateTimeKind.Local).AddTicks(6687),
                             Temperature = 20.235532253548214
                         },
                         new
@@ -438,7 +437,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.1912500000000001,
                             DataSeriesId = 3,
                             Gravity = 0.087500000000000008,
-                            RecordTime = new DateTime(2020, 5, 2, 12, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 30, 23, 18, 8, 953, DateTimeKind.Local).AddTicks(6691),
                             Temperature = 20.274750899562228
                         },
                         new
@@ -447,7 +446,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.1900000000000004,
                             DataSeriesId = 3,
                             Gravity = 0.10000000000000001,
-                            RecordTime = new DateTime(2020, 5, 2, 13, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 30, 23, 38, 8, 953, DateTimeKind.Local).AddTicks(6695),
                             Temperature = 20.313952597646566
                         },
                         new
@@ -456,7 +455,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.1887499999999998,
                             DataSeriesId = 3,
                             Gravity = 0.11249999999999999,
-                            RecordTime = new DateTime(2020, 5, 2, 13, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 30, 23, 58, 8, 953, DateTimeKind.Local).AddTicks(6699),
                             Temperature = 20.353134929655834
                         },
                         new
@@ -465,7 +464,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.1875,
                             DataSeriesId = 3,
                             Gravity = 0.125,
-                            RecordTime = new DateTime(2020, 5, 2, 13, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 31, 0, 18, 8, 953, DateTimeKind.Local).AddTicks(6703),
                             Temperature = 20.392295478639223
                         },
                         new
@@ -474,7 +473,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.1862500000000002,
                             DataSeriesId = 3,
                             Gravity = 0.13750000000000001,
-                            RecordTime = new DateTime(2020, 5, 2, 14, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 31, 0, 38, 8, 953, DateTimeKind.Local).AddTicks(6707),
                             Temperature = 20.431431828989616
                         },
                         new
@@ -483,7 +482,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.1850000000000005,
                             DataSeriesId = 3,
                             Gravity = 0.14999999999999999,
-                            RecordTime = new DateTime(2020, 5, 2, 14, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 31, 0, 58, 8, 953, DateTimeKind.Local).AddTicks(6712),
                             Temperature = 20.470541566592573
                         },
                         new
@@ -492,7 +491,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.1837499999999999,
                             DataSeriesId = 3,
                             Gravity = 0.16250000000000001,
-                            RecordTime = new DateTime(2020, 5, 2, 14, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 31, 1, 18, 8, 953, DateTimeKind.Local).AddTicks(6716),
                             Temperature = 20.50962227897525
                         },
                         new
@@ -501,7 +500,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.1825000000000001,
                             DataSeriesId = 3,
                             Gravity = 0.17500000000000002,
-                            RecordTime = new DateTime(2020, 5, 2, 15, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 31, 1, 38, 8, 953, DateTimeKind.Local).AddTicks(6720),
                             Temperature = 20.548671555455226
                         },
                         new
@@ -510,7 +509,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.1812500000000004,
                             DataSeriesId = 3,
                             Gravity = 0.1875,
-                            RecordTime = new DateTime(2020, 5, 2, 15, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 31, 1, 58, 8, 953, DateTimeKind.Local).AddTicks(6724),
                             Temperature = 20.587686987289189
                         },
                         new
@@ -519,7 +518,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.1800000000000006,
                             DataSeriesId = 3,
                             Gravity = 0.20000000000000001,
-                            RecordTime = new DateTime(2020, 5, 2, 15, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 31, 2, 18, 8, 953, DateTimeKind.Local).AddTicks(6728),
                             Temperature = 20.626666167821522
                         },
                         new
@@ -528,7 +527,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.17875,
                             DataSeriesId = 3,
                             Gravity = 0.21250000000000002,
-                            RecordTime = new DateTime(2020, 5, 2, 16, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 31, 2, 38, 8, 953, DateTimeKind.Local).AddTicks(6732),
                             Temperature = 20.66560669263276
                         },
                         new
@@ -537,7 +536,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.1775000000000002,
                             DataSeriesId = 3,
                             Gravity = 0.22499999999999998,
-                            RecordTime = new DateTime(2020, 5, 2, 16, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 31, 2, 58, 8, 953, DateTimeKind.Local).AddTicks(6736),
                             Temperature = 20.704506159687913
                         },
                         new
@@ -546,7 +545,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.1762500000000005,
                             DataSeriesId = 3,
                             Gravity = 0.23749999999999999,
-                            RecordTime = new DateTime(2020, 5, 2, 16, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 31, 3, 18, 8, 953, DateTimeKind.Local).AddTicks(6740),
                             Temperature = 20.743362169484616
                         },
                         new
@@ -555,7 +554,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.1749999999999998,
                             DataSeriesId = 3,
                             Gravity = 0.25,
-                            RecordTime = new DateTime(2020, 5, 2, 17, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 31, 3, 38, 8, 953, DateTimeKind.Local).AddTicks(6744),
                             Temperature = 20.782172325201156
                         },
                         new
@@ -564,7 +563,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.1737500000000001,
                             DataSeriesId = 3,
                             Gravity = 0.26250000000000001,
-                            RecordTime = new DateTime(2020, 5, 2, 17, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 31, 3, 58, 8, 953, DateTimeKind.Local).AddTicks(6748),
                             Temperature = 20.820934232844316
                         },
                         new
@@ -573,7 +572,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.1725000000000003,
                             DataSeriesId = 3,
                             Gravity = 0.27500000000000002,
-                            RecordTime = new DateTime(2020, 5, 2, 17, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 31, 4, 18, 8, 953, DateTimeKind.Local).AddTicks(6752),
                             Temperature = 20.859645501397047
                         },
                         new
@@ -582,7 +581,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.1712500000000006,
                             DataSeriesId = 3,
                             Gravity = 0.28750000000000003,
-                            RecordTime = new DateTime(2020, 5, 2, 18, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 31, 4, 38, 8, 953, DateTimeKind.Local).AddTicks(6756),
                             Temperature = 20.898303742965961
                         },
                         new
@@ -591,7 +590,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.1699999999999999,
                             DataSeriesId = 3,
                             Gravity = 0.29999999999999999,
-                            RecordTime = new DateTime(2020, 5, 2, 18, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 31, 4, 58, 8, 953, DateTimeKind.Local).AddTicks(6760),
                             Temperature = 20.936906572928624
                         },
                         new
@@ -600,7 +599,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.1687500000000002,
                             DataSeriesId = 3,
                             Gravity = 0.3125,
-                            RecordTime = new DateTime(2020, 5, 2, 18, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 31, 5, 18, 8, 953, DateTimeKind.Local).AddTicks(6764),
                             Temperature = 20.97545161008064
                         },
                         new
@@ -609,7 +608,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.1675000000000004,
                             DataSeriesId = 3,
                             Gravity = 0.32500000000000001,
-                            RecordTime = new DateTime(2020, 5, 2, 19, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 31, 5, 38, 8, 953, DateTimeKind.Local).AddTicks(6768),
                             Temperature = 21.013936476782561
                         },
                         new
@@ -618,7 +617,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.1662499999999998,
                             DataSeriesId = 3,
                             Gravity = 0.33750000000000002,
-                            RecordTime = new DateTime(2020, 5, 2, 19, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 31, 5, 58, 8, 953, DateTimeKind.Local).AddTicks(6772),
                             Temperature = 21.052358799106528
                         },
                         new
@@ -627,7 +626,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.165,
                             DataSeriesId = 3,
                             Gravity = 0.35000000000000003,
-                            RecordTime = new DateTime(2020, 5, 2, 19, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 31, 6, 18, 8, 953, DateTimeKind.Local).AddTicks(6776),
                             Temperature = 21.090716206982712
                         },
                         new
@@ -636,7 +635,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.1637500000000003,
                             DataSeriesId = 3,
                             Gravity = 0.36249999999999999,
-                            RecordTime = new DateTime(2020, 5, 2, 20, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 31, 6, 38, 8, 953, DateTimeKind.Local).AddTicks(6780),
                             Temperature = 21.129006334345519
                         },
                         new
@@ -645,7 +644,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.1625000000000005,
                             DataSeriesId = 3,
                             Gravity = 0.375,
-                            RecordTime = new DateTime(2020, 5, 2, 20, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 31, 6, 58, 8, 953, DateTimeKind.Local).AddTicks(6784),
                             Temperature = 21.167226819279527
                         },
                         new
@@ -654,7 +653,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.1612499999999999,
                             DataSeriesId = 3,
                             Gravity = 0.38750000000000001,
-                            RecordTime = new DateTime(2020, 5, 2, 20, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 31, 7, 18, 8, 953, DateTimeKind.Local).AddTicks(6788),
                             Temperature = 21.205375304165194
                         },
                         new
@@ -663,7 +662,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.1600000000000001,
                             DataSeriesId = 3,
                             Gravity = 0.40000000000000002,
-                            RecordTime = new DateTime(2020, 5, 2, 21, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 31, 7, 38, 8, 953, DateTimeKind.Local).AddTicks(6793),
                             Temperature = 21.243449435824274
                         },
                         new
@@ -672,7 +671,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.1587500000000004,
                             DataSeriesId = 3,
                             Gravity = 0.41250000000000003,
-                            RecordTime = new DateTime(2020, 5, 2, 21, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 31, 7, 58, 8, 953, DateTimeKind.Local).AddTicks(6797),
                             Temperature = 21.281446865664982
                         },
                         new
@@ -681,7 +680,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.1574999999999998,
                             DataSeriesId = 3,
                             Gravity = 0.42500000000000004,
-                            RecordTime = new DateTime(2020, 5, 2, 21, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 31, 8, 18, 8, 953, DateTimeKind.Local).AddTicks(6801),
                             Temperature = 21.319365249826866
                         },
                         new
@@ -690,7 +689,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.15625,
                             DataSeriesId = 3,
                             Gravity = 0.4375,
-                            RecordTime = new DateTime(2020, 5, 2, 22, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 31, 8, 38, 8, 953, DateTimeKind.Local).AddTicks(6807),
                             Temperature = 21.357202249325372
                         },
                         new
@@ -699,7 +698,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.1550000000000002,
                             DataSeriesId = 3,
                             Gravity = 0.44999999999999996,
-                            RecordTime = new DateTime(2020, 5, 2, 22, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 31, 8, 58, 8, 953, DateTimeKind.Local).AddTicks(6811),
                             Temperature = 21.394955530196146
                         },
                         new
@@ -708,7 +707,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.1537500000000005,
                             DataSeriesId = 3,
                             Gravity = 0.46250000000000002,
-                            RecordTime = new DateTime(2020, 5, 2, 22, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 31, 9, 18, 8, 953, DateTimeKind.Local).AddTicks(6816),
                             Temperature = 21.432622763638992
                         },
                         new
@@ -717,7 +716,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.1524999999999999,
                             DataSeriesId = 3,
                             Gravity = 0.47499999999999998,
-                            RecordTime = new DateTime(2020, 5, 2, 23, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 31, 9, 38, 8, 953, DateTimeKind.Local).AddTicks(6820),
                             Temperature = 21.470201626161519
                         },
                         new
@@ -726,7 +725,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.1512500000000001,
                             DataSeriesId = 3,
                             Gravity = 0.48750000000000004,
-                            RecordTime = new DateTime(2020, 5, 2, 23, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 31, 9, 58, 8, 953, DateTimeKind.Local).AddTicks(6824),
                             Temperature = 21.507689799722478
                         },
                         new
@@ -735,7 +734,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.1500000000000004,
                             DataSeriesId = 3,
                             Gravity = 0.5,
-                            RecordTime = new DateTime(2020, 5, 2, 23, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 31, 10, 18, 8, 953, DateTimeKind.Local).AddTicks(6828),
                             Temperature = 21.545084971874736
                         },
                         new
@@ -744,7 +743,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.1487500000000006,
                             DataSeriesId = 3,
                             Gravity = 0.51249999999999996,
-                            RecordTime = new DateTime(2020, 5, 3, 0, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 31, 10, 38, 8, 953, DateTimeKind.Local).AddTicks(6832),
                             Temperature = 21.582384835907931
                         },
                         new
@@ -753,7 +752,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.1475,
                             DataSeriesId = 3,
                             Gravity = 0.52500000000000002,
-                            RecordTime = new DateTime(2020, 5, 3, 0, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 31, 10, 58, 8, 953, DateTimeKind.Local).AddTicks(6836),
                             Temperature = 21.619587090990748
                         },
                         new
@@ -762,7 +761,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.1462500000000002,
                             DataSeriesId = 3,
                             Gravity = 0.53749999999999998,
-                            RecordTime = new DateTime(2020, 5, 3, 0, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 31, 11, 18, 8, 953, DateTimeKind.Local).AddTicks(6840),
                             Temperature = 21.656689442312853
                         },
                         new
@@ -771,7 +770,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.1450000000000005,
                             DataSeriesId = 3,
                             Gravity = 0.55000000000000004,
-                            RecordTime = new DateTime(2020, 5, 3, 1, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 31, 11, 38, 8, 953, DateTimeKind.Local).AddTicks(6844),
                             Temperature = 21.693689601226456
                         },
                         new
@@ -780,7 +779,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.1437499999999998,
                             DataSeriesId = 3,
                             Gravity = 0.5625,
-                            RecordTime = new DateTime(2020, 5, 3, 1, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 31, 11, 58, 8, 953, DateTimeKind.Local).AddTicks(6848),
                             Temperature = 21.730585285387466
                         },
                         new
@@ -789,7 +788,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.1425000000000001,
                             DataSeriesId = 3,
                             Gravity = 0.57500000000000007,
-                            RecordTime = new DateTime(2020, 5, 3, 1, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 31, 12, 18, 8, 953, DateTimeKind.Local).AddTicks(6852),
                             Temperature = 21.767374218896286
                         },
                         new
@@ -798,7 +797,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.1412500000000003,
                             DataSeriesId = 3,
                             Gravity = 0.58749999999999991,
-                            RecordTime = new DateTime(2020, 5, 3, 2, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 31, 12, 38, 8, 953, DateTimeKind.Local).AddTicks(6856),
                             Temperature = 21.80405413243821
                         },
                         new
@@ -807,7 +806,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.1400000000000006,
                             DataSeriesId = 3,
                             Gravity = 0.59999999999999998,
-                            RecordTime = new DateTime(2020, 5, 3, 2, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 31, 12, 58, 8, 953, DateTimeKind.Local).AddTicks(6860),
                             Temperature = 21.84062276342339
                         },
                         new
@@ -816,7 +815,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.1387499999999999,
                             DataSeriesId = 3,
                             Gravity = 0.61250000000000004,
-                            RecordTime = new DateTime(2020, 5, 3, 2, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 31, 13, 18, 8, 953, DateTimeKind.Local).AddTicks(6864),
                             Temperature = 21.877077856126416
                         },
                         new
@@ -825,7 +824,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.1375000000000002,
                             DataSeriesId = 3,
                             Gravity = 0.625,
-                            RecordTime = new DateTime(2020, 5, 3, 3, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 31, 13, 38, 8, 953, DateTimeKind.Local).AddTicks(6868),
                             Temperature = 21.91341716182545
                         },
                         new
@@ -834,7 +833,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.1362500000000004,
                             DataSeriesId = 3,
                             Gravity = 0.63749999999999996,
-                            RecordTime = new DateTime(2020, 5, 3, 3, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 31, 13, 58, 8, 953, DateTimeKind.Local).AddTicks(6872),
                             Temperature = 21.949638438940941
                         },
                         new
@@ -843,7 +842,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.1349999999999998,
                             DataSeriesId = 3,
                             Gravity = 0.65000000000000002,
-                            RecordTime = new DateTime(2020, 5, 3, 3, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 31, 14, 18, 8, 953, DateTimeKind.Local).AddTicks(6876),
                             Temperature = 21.985739453173903
                         },
                         new
@@ -852,7 +851,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.13375,
                             DataSeriesId = 3,
                             Gravity = 0.66250000000000009,
-                            RecordTime = new DateTime(2020, 5, 3, 4, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 31, 14, 38, 8, 953, DateTimeKind.Local).AddTicks(6880),
                             Temperature = 22.021717977643725
                         },
                         new
@@ -861,7 +860,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.1325000000000003,
                             DataSeriesId = 3,
                             Gravity = 0.67500000000000004,
-                            RecordTime = new DateTime(2020, 5, 3, 4, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 31, 14, 58, 8, 953, DateTimeKind.Local).AddTicks(6884),
                             Temperature = 22.057571793025545
                         },
                         new
@@ -870,7 +869,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.1312500000000005,
                             DataSeriesId = 3,
                             Gravity = 0.6875,
-                            RecordTime = new DateTime(2020, 5, 3, 4, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 31, 15, 18, 8, 953, DateTimeKind.Local).AddTicks(6888),
                             Temperature = 22.093298687687142
                         },
                         new
@@ -879,7 +878,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.1299999999999999,
                             DataSeriesId = 3,
                             Gravity = 0.70000000000000007,
-                            RecordTime = new DateTime(2020, 5, 3, 5, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 31, 15, 38, 8, 953, DateTimeKind.Local).AddTicks(6892),
                             Temperature = 22.128896457825363
                         },
                         new
@@ -888,7 +887,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.1287500000000001,
                             DataSeriesId = 3,
                             Gravity = 0.71249999999999991,
-                            RecordTime = new DateTime(2020, 5, 3, 5, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 31, 15, 58, 8, 953, DateTimeKind.Local).AddTicks(6897),
                             Temperature = 22.164362907602069
                         },
                         new
@@ -897,7 +896,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.1275000000000004,
                             DataSeriesId = 3,
                             Gravity = 0.72499999999999998,
-                            RecordTime = new DateTime(2020, 5, 3, 5, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 31, 16, 18, 8, 953, DateTimeKind.Local).AddTicks(6992),
                             Temperature = 22.199695849279575
                         },
                         new
@@ -906,7 +905,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.1262499999999998,
                             DataSeriesId = 3,
                             Gravity = 0.73749999999999993,
-                            RecordTime = new DateTime(2020, 5, 3, 6, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 31, 16, 38, 8, 953, DateTimeKind.Local).AddTicks(6998),
                             Temperature = 22.234893103355606
                         },
                         new
@@ -915,7 +914,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.125,
                             DataSeriesId = 3,
                             Gravity = 0.75,
-                            RecordTime = new DateTime(2020, 5, 3, 6, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 31, 16, 58, 8, 953, DateTimeKind.Local).AddTicks(7002),
                             Temperature = 22.269952498697734
                         },
                         new
@@ -924,7 +923,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.1237500000000002,
                             DataSeriesId = 3,
                             Gravity = 0.76249999999999996,
-                            RecordTime = new DateTime(2020, 5, 3, 6, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 31, 17, 18, 8, 953, DateTimeKind.Local).AddTicks(7006),
                             Temperature = 22.30487187267731
                         },
                         new
@@ -933,7 +932,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.1225000000000005,
                             DataSeriesId = 3,
                             Gravity = 0.77500000000000002,
-                            RecordTime = new DateTime(2020, 5, 3, 7, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 31, 17, 38, 8, 953, DateTimeKind.Local).AddTicks(7010),
                             Temperature = 22.339649071302865
                         },
                         new
@@ -942,7 +941,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.1212499999999999,
                             DataSeriesId = 3,
                             Gravity = 0.78749999999999998,
-                            RecordTime = new DateTime(2020, 5, 3, 7, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 31, 17, 58, 8, 953, DateTimeKind.Local).AddTicks(7014),
                             Temperature = 22.374281949352973
                         },
                         new
@@ -951,7 +950,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.1200000000000001,
                             DataSeriesId = 3,
                             Gravity = 0.80000000000000004,
-                            RecordTime = new DateTime(2020, 5, 3, 7, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 31, 18, 18, 8, 953, DateTimeKind.Local).AddTicks(7018),
                             Temperature = 22.408768370508575
                         },
                         new
@@ -960,7 +959,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.1187500000000004,
                             DataSeriesId = 3,
                             Gravity = 0.8125,
-                            RecordTime = new DateTime(2020, 5, 3, 8, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 31, 18, 38, 8, 953, DateTimeKind.Local).AddTicks(7022),
                             Temperature = 22.443106207484774
                         },
                         new
@@ -969,7 +968,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.1175000000000006,
                             DataSeriesId = 3,
                             Gravity = 0.82500000000000007,
-                            RecordTime = new DateTime(2020, 5, 3, 8, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 31, 18, 58, 8, 953, DateTimeKind.Local).AddTicks(7026),
                             Temperature = 22.477293342162039
                         },
                         new
@@ -978,7 +977,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.11625,
                             DataSeriesId = 3,
                             Gravity = 0.83750000000000002,
-                            RecordTime = new DateTime(2020, 5, 3, 8, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 31, 19, 18, 8, 953, DateTimeKind.Local).AddTicks(7030),
                             Temperature = 22.511327665716863
                         },
                         new
@@ -987,7 +986,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.1150000000000002,
                             DataSeriesId = 3,
                             Gravity = 0.85000000000000009,
-                            RecordTime = new DateTime(2020, 5, 3, 9, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 31, 19, 38, 8, 953, DateTimeKind.Local).AddTicks(7034),
                             Temperature = 22.545207078751858
                         },
                         new
@@ -996,7 +995,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.1137500000000005,
                             DataSeriesId = 3,
                             Gravity = 0.86249999999999993,
-                            RecordTime = new DateTime(2020, 5, 3, 9, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 31, 19, 58, 8, 953, DateTimeKind.Local).AddTicks(7038),
                             Temperature = 22.578929491425235
                         },
                         new
@@ -1005,7 +1004,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.1124999999999998,
                             DataSeriesId = 3,
                             Gravity = 0.875,
-                            RecordTime = new DateTime(2020, 5, 3, 9, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 31, 20, 18, 8, 953, DateTimeKind.Local).AddTicks(7042),
                             Temperature = 22.612492823579743
                         },
                         new
@@ -1014,7 +1013,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.1112500000000001,
                             DataSeriesId = 3,
                             Gravity = 0.88749999999999996,
-                            RecordTime = new DateTime(2020, 5, 3, 10, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 31, 20, 38, 8, 953, DateTimeKind.Local).AddTicks(7046),
                             Temperature = 22.645895004870951
                         },
                         new
@@ -1023,7 +1022,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.1100000000000003,
                             DataSeriesId = 3,
                             Gravity = 0.89999999999999991,
-                            RecordTime = new DateTime(2020, 5, 3, 10, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 31, 20, 58, 8, 953, DateTimeKind.Local).AddTicks(7050),
                             Temperature = 22.679133974894985
                         },
                         new
@@ -1032,7 +1031,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.1087500000000006,
                             DataSeriesId = 3,
                             Gravity = 0.91249999999999998,
-                            RecordTime = new DateTime(2020, 5, 3, 10, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 31, 21, 18, 8, 953, DateTimeKind.Local).AddTicks(7054),
                             Temperature = 22.712207683315594
                         },
                         new
@@ -1041,7 +1040,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.1074999999999999,
                             DataSeriesId = 3,
                             Gravity = 0.92500000000000004,
-                            RecordTime = new DateTime(2020, 5, 3, 11, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 31, 21, 38, 8, 953, DateTimeKind.Local).AddTicks(7058),
                             Temperature = 22.745114089990658
                         },
                         new
@@ -1050,7 +1049,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.1062500000000002,
                             DataSeriesId = 3,
                             Gravity = 0.9375,
-                            RecordTime = new DateTime(2020, 5, 3, 11, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 31, 21, 58, 8, 953, DateTimeKind.Local).AddTicks(7062),
                             Temperature = 22.77785116509801
                         },
                         new
@@ -1059,7 +1058,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.1050000000000004,
                             DataSeriesId = 3,
                             Gravity = 0.94999999999999996,
-                            RecordTime = new DateTime(2020, 5, 3, 11, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 31, 22, 18, 8, 953, DateTimeKind.Local).AddTicks(7066),
                             Temperature = 22.810416889260651
                         },
                         new
@@ -1068,7 +1067,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.1037499999999998,
                             DataSeriesId = 3,
                             Gravity = 0.96250000000000002,
-                            RecordTime = new DateTime(2020, 5, 3, 12, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 31, 22, 38, 8, 953, DateTimeKind.Local).AddTicks(7070),
                             Temperature = 22.842809253671319
                         },
                         new
@@ -1077,7 +1076,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.1025,
                             DataSeriesId = 3,
                             Gravity = 0.97500000000000009,
-                            RecordTime = new DateTime(2020, 5, 3, 12, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 31, 22, 58, 8, 953, DateTimeKind.Local).AddTicks(7075),
                             Temperature = 22.875026260216394
                         },
                         new
@@ -1086,7 +1085,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.1012500000000003,
                             DataSeriesId = 3,
                             Gravity = 0.98750000000000004,
-                            RecordTime = new DateTime(2020, 5, 3, 12, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 31, 23, 18, 8, 953, DateTimeKind.Local).AddTicks(7079),
                             Temperature = 22.907065921599152
                         },
                         new
@@ -1095,7 +1094,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.1000000000000005,
                             DataSeriesId = 3,
                             Gravity = 1.0,
-                            RecordTime = new DateTime(2020, 5, 3, 13, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 31, 23, 38, 8, 953, DateTimeKind.Local).AddTicks(7083),
                             Temperature = 22.938926261462367
                         },
                         new
@@ -1104,7 +1103,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.0987499999999999,
                             DataSeriesId = 3,
                             Gravity = 1.0125000000000002,
-                            RecordTime = new DateTime(2020, 5, 3, 13, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 10, 31, 23, 58, 8, 953, DateTimeKind.Local).AddTicks(7153),
                             Temperature = 22.970605314510195
                         },
                         new
@@ -1113,7 +1112,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.0975000000000001,
                             DataSeriesId = 3,
                             Gravity = 1.0249999999999999,
-                            RecordTime = new DateTime(2020, 5, 3, 13, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 1, 0, 18, 8, 953, DateTimeKind.Local).AddTicks(7159),
                             Temperature = 23.00210112662942
                         },
                         new
@@ -1122,7 +1121,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.0962500000000004,
                             DataSeriesId = 3,
                             Gravity = 1.0374999999999999,
-                            RecordTime = new DateTime(2020, 5, 3, 14, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 1, 0, 38, 8, 953, DateTimeKind.Local).AddTicks(7164),
                             Temperature = 23.033411755009997
                         },
                         new
@@ -1131,7 +1130,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.0949999999999998,
                             DataSeriesId = 3,
                             Gravity = 1.05,
-                            RecordTime = new DateTime(2020, 5, 3, 14, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 1, 0, 58, 8, 953, DateTimeKind.Local).AddTicks(7169),
                             Temperature = 23.064535268264883
                         },
                         new
@@ -1140,7 +1139,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.09375,
                             DataSeriesId = 3,
                             Gravity = 1.0625,
-                            RecordTime = new DateTime(2020, 5, 3, 14, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 1, 1, 18, 8, 953, DateTimeKind.Local).AddTicks(7175),
                             Temperature = 23.095469746549171
                         },
                         new
@@ -1149,7 +1148,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.0925000000000002,
                             DataSeriesId = 3,
                             Gravity = 1.075,
-                            RecordTime = new DateTime(2020, 5, 3, 15, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 1, 1, 38, 8, 953, DateTimeKind.Local).AddTicks(7180),
                             Temperature = 23.126213281678524
                         },
                         new
@@ -1158,7 +1157,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.0912500000000005,
                             DataSeriesId = 3,
                             Gravity = 1.0874999999999999,
-                            RecordTime = new DateTime(2020, 5, 3, 15, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 1, 1, 58, 8, 953, DateTimeKind.Local).AddTicks(7186),
                             Temperature = 23.156763977246889
                         },
                         new
@@ -1167,7 +1166,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.0899999999999999,
                             DataSeriesId = 3,
                             Gravity = 1.1000000000000001,
-                            RecordTime = new DateTime(2020, 5, 3, 15, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 1, 2, 18, 8, 953, DateTimeKind.Local).AddTicks(7191),
                             Temperature = 23.187119948743447
                         },
                         new
@@ -1176,7 +1175,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.0887500000000001,
                             DataSeriesId = 3,
                             Gravity = 1.1125,
-                            RecordTime = new DateTime(2020, 5, 3, 16, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 1, 2, 38, 8, 953, DateTimeKind.Local).AddTicks(7197),
                             Temperature = 23.217279323668894
                         },
                         new
@@ -1185,7 +1184,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.0875000000000004,
                             DataSeriesId = 3,
                             Gravity = 1.125,
-                            RecordTime = new DateTime(2020, 5, 3, 16, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 1, 2, 58, 8, 953, DateTimeKind.Local).AddTicks(7203),
                             Temperature = 23.247240241650918
                         },
                         new
@@ -1194,7 +1193,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.0862500000000006,
                             DataSeriesId = 3,
                             Gravity = 1.1375,
-                            RecordTime = new DateTime(2020, 5, 3, 16, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 1, 3, 18, 8, 953, DateTimeKind.Local).AddTicks(7209),
                             Temperature = 23.27700085455897
                         },
                         new
@@ -1203,7 +1202,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.085,
                             DataSeriesId = 3,
                             Gravity = 1.1500000000000001,
-                            RecordTime = new DateTime(2020, 5, 3, 17, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 1, 3, 38, 8, 953, DateTimeKind.Local).AddTicks(7215),
                             Temperature = 23.30655932661826
                         },
                         new
@@ -1212,7 +1211,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.0837500000000002,
                             DataSeriesId = 3,
                             Gravity = 1.1625000000000001,
-                            RecordTime = new DateTime(2020, 5, 3, 17, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 1, 3, 58, 8, 953, DateTimeKind.Local).AddTicks(7221),
                             Temperature = 23.335913834522998
                         },
                         new
@@ -1221,7 +1220,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.0825000000000005,
                             DataSeriesId = 3,
                             Gravity = 1.1749999999999998,
-                            RecordTime = new DateTime(2020, 5, 3, 17, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 1, 4, 18, 8, 953, DateTimeKind.Local).AddTicks(7227),
                             Temperature = 23.365062567548865
                         },
                         new
@@ -1230,7 +1229,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.0812499999999998,
                             DataSeriesId = 3,
                             Gravity = 1.1875,
-                            RecordTime = new DateTime(2020, 5, 3, 18, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 1, 4, 38, 8, 953, DateTimeKind.Local).AddTicks(7233),
                             Temperature = 23.39400372766471
                         },
                         new
@@ -1239,7 +1238,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.0800000000000001,
                             DataSeriesId = 3,
                             Gravity = 1.2,
-                            RecordTime = new DateTime(2020, 5, 3, 18, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 1, 4, 58, 8, 953, DateTimeKind.Local).AddTicks(7238),
                             Temperature = 23.422735529643443
                         },
                         new
@@ -1248,7 +1247,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.0787500000000003,
                             DataSeriesId = 3,
                             Gravity = 1.2124999999999999,
-                            RecordTime = new DateTime(2020, 5, 3, 18, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 1, 5, 18, 8, 953, DateTimeKind.Local).AddTicks(7243),
                             Temperature = 23.451256201172185
                         },
                         new
@@ -1257,7 +1256,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.0775000000000006,
                             DataSeriesId = 3,
                             Gravity = 1.2250000000000001,
-                            RecordTime = new DateTime(2020, 5, 3, 19, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 1, 5, 38, 8, 953, DateTimeKind.Local).AddTicks(7249),
                             Temperature = 23.479563982961572
                         },
                         new
@@ -1266,7 +1265,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.0762499999999999,
                             DataSeriesId = 3,
                             Gravity = 1.2375,
-                            RecordTime = new DateTime(2020, 5, 3, 19, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 1, 5, 58, 8, 953, DateTimeKind.Local).AddTicks(7259),
                             Temperature = 23.507657128854277
                         },
                         new
@@ -1275,7 +1274,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.0750000000000002,
                             DataSeriesId = 3,
                             Gravity = 1.25,
-                            RecordTime = new DateTime(2020, 5, 3, 19, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 1, 6, 18, 8, 953, DateTimeKind.Local).AddTicks(7266),
                             Temperature = 23.535533905932738
                         },
                         new
@@ -1284,7 +1283,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.0737500000000004,
                             DataSeriesId = 3,
                             Gravity = 1.2625,
-                            RecordTime = new DateTime(2020, 5, 3, 20, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 1, 6, 38, 8, 953, DateTimeKind.Local).AddTicks(7274),
                             Temperature = 23.563192594626027
                         },
                         new
@@ -1293,7 +1292,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.0724999999999998,
                             DataSeriesId = 3,
                             Gravity = 1.2749999999999999,
-                            RecordTime = new DateTime(2020, 5, 3, 20, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 1, 6, 58, 8, 953, DateTimeKind.Local).AddTicks(7280),
                             Temperature = 23.590631488815944
                         },
                         new
@@ -1302,7 +1301,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.07125,
                             DataSeriesId = 3,
                             Gravity = 1.2875000000000001,
-                            RecordTime = new DateTime(2020, 5, 3, 20, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 1, 7, 18, 8, 953, DateTimeKind.Local).AddTicks(7286),
                             Temperature = 23.617848895942245
                         },
                         new
@@ -1311,7 +1310,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.0700000000000003,
                             DataSeriesId = 3,
                             Gravity = 1.3,
-                            RecordTime = new DateTime(2020, 5, 3, 21, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 1, 7, 38, 8, 953, DateTimeKind.Local).AddTicks(7292),
                             Temperature = 23.64484313710706
                         },
                         new
@@ -1320,7 +1319,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.0687500000000005,
                             DataSeriesId = 3,
                             Gravity = 1.3125,
-                            RecordTime = new DateTime(2020, 5, 3, 21, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 1, 7, 58, 8, 953, DateTimeKind.Local).AddTicks(7298),
                             Temperature = 23.671612547178427
                         },
                         new
@@ -1329,7 +1328,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.0674999999999999,
                             DataSeriesId = 3,
                             Gravity = 1.3250000000000002,
-                            RecordTime = new DateTime(2020, 5, 3, 21, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 1, 8, 18, 8, 953, DateTimeKind.Local).AddTicks(7304),
                             Temperature = 23.698155474893049
                         },
                         new
@@ -1338,7 +1337,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.0662500000000001,
                             DataSeriesId = 3,
                             Gravity = 1.3375000000000001,
-                            RecordTime = new DateTime(2020, 5, 3, 22, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 1, 8, 38, 8, 953, DateTimeKind.Local).AddTicks(7310),
                             Temperature = 23.724470282958109
                         },
                         new
@@ -1347,7 +1346,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.0650000000000004,
                             DataSeriesId = 3,
                             Gravity = 1.3500000000000001,
-                            RecordTime = new DateTime(2020, 5, 3, 22, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 1, 8, 58, 8, 953, DateTimeKind.Local).AddTicks(7317),
                             Temperature = 23.750555348152297
                         },
                         new
@@ -1356,7 +1355,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.0637499999999998,
                             DataSeriesId = 3,
                             Gravity = 1.3625,
-                            RecordTime = new DateTime(2020, 5, 3, 22, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 1, 9, 18, 8, 953, DateTimeKind.Local).AddTicks(7386),
                             Temperature = 23.77640906142592
                         },
                         new
@@ -1365,7 +1364,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.0625,
                             DataSeriesId = 3,
                             Gravity = 1.375,
-                            RecordTime = new DateTime(2020, 5, 3, 23, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 1, 9, 38, 8, 953, DateTimeKind.Local).AddTicks(7392),
                             Temperature = 23.802029828000155
                         },
                         new
@@ -1374,7 +1373,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.0612500000000002,
                             DataSeriesId = 3,
                             Gravity = 1.3875000000000002,
-                            RecordTime = new DateTime(2020, 5, 3, 23, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 1, 9, 58, 8, 953, DateTimeKind.Local).AddTicks(7399),
                             Temperature = 23.827416067465442
                         },
                         new
@@ -1383,7 +1382,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.0600000000000005,
                             DataSeriesId = 3,
                             Gravity = 1.4000000000000001,
-                            RecordTime = new DateTime(2020, 5, 3, 23, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 1, 10, 18, 8, 953, DateTimeKind.Local).AddTicks(7405),
                             Temperature = 23.852566213878944
                         },
                         new
@@ -1392,7 +1391,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.0587499999999999,
                             DataSeriesId = 3,
                             Gravity = 1.4124999999999999,
-                            RecordTime = new DateTime(2020, 5, 4, 0, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 1, 10, 38, 8, 953, DateTimeKind.Local).AddTicks(7411),
                             Temperature = 23.877478715861173
                         },
                         new
@@ -1401,7 +1400,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.0575000000000001,
                             DataSeriesId = 3,
                             Gravity = 1.4249999999999998,
-                            RecordTime = new DateTime(2020, 5, 4, 0, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 1, 10, 58, 8, 953, DateTimeKind.Local).AddTicks(7417),
                             Temperature = 23.90215203669165
                         },
                         new
@@ -1410,7 +1409,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.0562500000000004,
                             DataSeriesId = 3,
                             Gravity = 1.4375,
-                            RecordTime = new DateTime(2020, 5, 4, 0, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 1, 11, 18, 8, 953, DateTimeKind.Local).AddTicks(7425),
                             Temperature = 23.926584654403726
                         },
                         new
@@ -1419,7 +1418,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.0550000000000006,
                             DataSeriesId = 3,
                             Gravity = 1.45,
-                            RecordTime = new DateTime(2020, 5, 4, 1, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 1, 11, 38, 8, 953, DateTimeKind.Local).AddTicks(7429),
                             Temperature = 23.950775061878453
                         },
                         new
@@ -1428,7 +1427,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.05375,
                             DataSeriesId = 3,
                             Gravity = 1.4624999999999999,
-                            RecordTime = new DateTime(2020, 5, 4, 1, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 1, 11, 58, 8, 953, DateTimeKind.Local).AddTicks(7433),
                             Temperature = 23.974721766937549
                         },
                         new
@@ -1437,7 +1436,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.0525000000000002,
                             DataSeriesId = 3,
                             Gravity = 1.4749999999999999,
-                            RecordTime = new DateTime(2020, 5, 4, 1, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 1, 12, 18, 8, 953, DateTimeKind.Local).AddTicks(7437),
                             Temperature = 23.998423292435454
                         },
                         new
@@ -1446,7 +1445,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.0512500000000005,
                             DataSeriesId = 3,
                             Gravity = 1.4874999999999998,
-                            RecordTime = new DateTime(2020, 5, 4, 2, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 1, 12, 38, 8, 953, DateTimeKind.Local).AddTicks(7441),
                             Temperature = 24.02187817635042
                         },
                         new
@@ -1455,7 +1454,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.0499999999999998,
                             DataSeriesId = 3,
                             Gravity = 1.5,
-                            RecordTime = new DateTime(2020, 5, 4, 2, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 1, 12, 58, 8, 953, DateTimeKind.Local).AddTicks(7445),
                             Temperature = 24.045084971874736
                         },
                         new
@@ -1464,7 +1463,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.0487500000000001,
                             DataSeriesId = 3,
                             Gravity = 1.5125,
-                            RecordTime = new DateTime(2020, 5, 4, 2, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 1, 13, 18, 8, 953, DateTimeKind.Local).AddTicks(7450),
                             Temperature = 24.068042247503936
                         },
                         new
@@ -1473,7 +1472,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.0475000000000003,
                             DataSeriesId = 3,
                             Gravity = 1.5249999999999999,
-                            RecordTime = new DateTime(2020, 5, 4, 3, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 1, 13, 38, 8, 953, DateTimeKind.Local).AddTicks(7454),
                             Temperature = 24.090748587125116
                         },
                         new
@@ -1482,7 +1481,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.0462500000000006,
                             DataSeriesId = 3,
                             Gravity = 1.5375000000000001,
-                            RecordTime = new DateTime(2020, 5, 4, 3, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 1, 13, 58, 8, 953, DateTimeKind.Local).AddTicks(7458),
                             Temperature = 24.113202590104301
                         },
                         new
@@ -1491,7 +1490,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.0449999999999999,
                             DataSeriesId = 3,
                             Gravity = 1.55,
-                            RecordTime = new DateTime(2020, 5, 4, 3, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 1, 14, 18, 8, 953, DateTimeKind.Local).AddTicks(7462),
                             Temperature = 24.135402871372811
                         },
                         new
@@ -1500,7 +1499,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.0437500000000002,
                             DataSeriesId = 3,
                             Gravity = 1.5625,
-                            RecordTime = new DateTime(2020, 5, 4, 4, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 1, 14, 38, 8, 953, DateTimeKind.Local).AddTicks(7466),
                             Temperature = 24.157348061512728
                         },
                         new
@@ -1509,7 +1508,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.0425000000000004,
                             DataSeriesId = 3,
                             Gravity = 1.575,
-                            RecordTime = new DateTime(2020, 5, 4, 4, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 1, 14, 58, 8, 953, DateTimeKind.Local).AddTicks(7471),
                             Temperature = 24.179036806841353
                         },
                         new
@@ -1518,7 +1517,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.0412499999999998,
                             DataSeriesId = 3,
                             Gravity = 1.5874999999999999,
-                            RecordTime = new DateTime(2020, 5, 4, 4, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 1, 15, 18, 8, 953, DateTimeKind.Local).AddTicks(7475),
                             Temperature = 24.200467769494708
                         },
                         new
@@ -1527,7 +1526,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.04,
                             DataSeriesId = 3,
                             Gravity = 1.6000000000000001,
-                            RecordTime = new DateTime(2020, 5, 4, 5, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 1, 15, 38, 8, 953, DateTimeKind.Local).AddTicks(7479),
                             Temperature = 24.221639627510076
                         },
                         new
@@ -1536,7 +1535,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.0387500000000003,
                             DataSeriesId = 3,
                             Gravity = 1.6125,
-                            RecordTime = new DateTime(2020, 5, 4, 5, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 1, 15, 58, 8, 953, DateTimeKind.Local).AddTicks(7483),
                             Temperature = 24.242551074907517
                         },
                         new
@@ -1545,7 +1544,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.0375000000000005,
                             DataSeriesId = 3,
                             Gravity = 1.625,
-                            RecordTime = new DateTime(2020, 5, 4, 5, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 1, 16, 18, 8, 953, DateTimeKind.Local).AddTicks(7487),
                             Temperature = 24.263200821770461
                         },
                         new
@@ -1554,7 +1553,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.0362499999999999,
                             DataSeriesId = 3,
                             Gravity = 1.6375000000000002,
-                            RecordTime = new DateTime(2020, 5, 4, 6, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 1, 16, 38, 8, 953, DateTimeKind.Local).AddTicks(7492),
                             Temperature = 24.283587594325247
                         },
                         new
@@ -1563,7 +1562,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.0350000000000001,
                             DataSeriesId = 3,
                             Gravity = 1.6500000000000001,
-                            RecordTime = new DateTime(2020, 5, 4, 6, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 1, 16, 58, 8, 953, DateTimeKind.Local).AddTicks(7496),
                             Temperature = 24.30371013501972
                         },
                         new
@@ -1572,7 +1571,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.0337500000000004,
                             DataSeriesId = 3,
                             Gravity = 1.6625000000000001,
-                            RecordTime = new DateTime(2020, 5, 4, 6, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 1, 17, 18, 8, 953, DateTimeKind.Local).AddTicks(7500),
                             Temperature = 24.323567202600778
                         },
                         new
@@ -1581,7 +1580,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.0324999999999998,
                             DataSeriesId = 3,
                             Gravity = 1.675,
-                            RecordTime = new DateTime(2020, 5, 4, 7, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 1, 17, 38, 8, 953, DateTimeKind.Local).AddTicks(7504),
                             Temperature = 24.343157572190957
                         },
                         new
@@ -1590,7 +1589,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.03125,
                             DataSeriesId = 3,
                             Gravity = 1.6875,
-                            RecordTime = new DateTime(2020, 5, 4, 7, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 1, 17, 58, 8, 953, DateTimeKind.Local).AddTicks(7508),
                             Temperature = 24.362480035363987
                         },
                         new
@@ -1599,7 +1598,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.0300000000000002,
                             DataSeriesId = 3,
                             Gravity = 1.7000000000000002,
-                            RecordTime = new DateTime(2020, 5, 4, 7, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 1, 18, 18, 8, 953, DateTimeKind.Local).AddTicks(7512),
                             Temperature = 24.381533400219318
                         },
                         new
@@ -1608,7 +1607,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.0287500000000005,
                             DataSeriesId = 3,
                             Gravity = 1.7125000000000001,
-                            RecordTime = new DateTime(2020, 5, 4, 8, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 1, 18, 38, 8, 953, DateTimeKind.Local).AddTicks(7516),
                             Temperature = 24.400316491455659
                         },
                         new
@@ -1617,7 +1616,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.0274999999999999,
                             DataSeriesId = 3,
                             Gravity = 1.7249999999999999,
-                            RecordTime = new DateTime(2020, 5, 4, 8, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 1, 18, 58, 8, 953, DateTimeKind.Local).AddTicks(7520),
                             Temperature = 24.418828150443467
                         },
                         new
@@ -1626,7 +1625,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.0262500000000001,
                             DataSeriesId = 3,
                             Gravity = 1.7374999999999998,
-                            RecordTime = new DateTime(2020, 5, 4, 8, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 1, 19, 18, 8, 953, DateTimeKind.Local).AddTicks(7524),
                             Temperature = 24.437067235296418
                         },
                         new
@@ -1635,7 +1634,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.0250000000000004,
                             DataSeriesId = 3,
                             Gravity = 1.75,
-                            RecordTime = new DateTime(2020, 5, 4, 9, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 1, 19, 38, 8, 953, DateTimeKind.Local).AddTicks(7529),
                             Temperature = 24.455032620941839
                         },
                         new
@@ -1644,7 +1643,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.0237500000000006,
                             DataSeriesId = 3,
                             Gravity = 1.7625,
-                            RecordTime = new DateTime(2020, 5, 4, 9, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 1, 19, 58, 8, 953, DateTimeKind.Local).AddTicks(7533),
                             Temperature = 24.472723199190124
                         },
                         new
@@ -1653,7 +1652,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.0225,
                             DataSeriesId = 3,
                             Gravity = 1.7749999999999999,
-                            RecordTime = new DateTime(2020, 5, 4, 9, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 1, 20, 18, 8, 953, DateTimeKind.Local).AddTicks(7537),
                             Temperature = 24.490137878803075
                         },
                         new
@@ -1662,7 +1661,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.0212500000000002,
                             DataSeriesId = 3,
                             Gravity = 1.7874999999999999,
-                            RecordTime = new DateTime(2020, 5, 4, 10, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 1, 20, 38, 8, 953, DateTimeKind.Local).AddTicks(7595),
                             Temperature = 24.507275585561228
                         },
                         new
@@ -1671,7 +1670,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.0200000000000005,
                             DataSeriesId = 3,
                             Gravity = 1.7999999999999998,
-                            RecordTime = new DateTime(2020, 5, 4, 10, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 1, 20, 58, 8, 953, DateTimeKind.Local).AddTicks(7600),
                             Temperature = 24.524135262330098
                         },
                         new
@@ -1680,7 +1679,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.0187499999999998,
                             DataSeriesId = 3,
                             Gravity = 1.8125,
-                            RecordTime = new DateTime(2020, 5, 4, 10, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 1, 21, 18, 8, 953, DateTimeKind.Local).AddTicks(7604),
                             Temperature = 24.540715869125407
                         },
                         new
@@ -1689,7 +1688,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.0175000000000001,
                             DataSeriesId = 3,
                             Gravity = 1.825,
-                            RecordTime = new DateTime(2020, 5, 4, 11, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 1, 21, 38, 8, 953, DateTimeKind.Local).AddTicks(7608),
                             Temperature = 24.557016383177228
                         },
                         new
@@ -1698,7 +1697,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.0162500000000003,
                             DataSeriesId = 3,
                             Gravity = 1.8374999999999999,
-                            RecordTime = new DateTime(2020, 5, 4, 11, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 1, 21, 58, 8, 953, DateTimeKind.Local).AddTicks(7612),
                             Temperature = 24.573035798993068
                         },
                         new
@@ -1707,7 +1706,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.0150000000000006,
                             DataSeriesId = 3,
                             Gravity = 1.8500000000000001,
-                            RecordTime = new DateTime(2020, 5, 4, 11, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 1, 22, 18, 8, 953, DateTimeKind.Local).AddTicks(7616),
                             Temperature = 24.588773128419906
                         },
                         new
@@ -1716,7 +1715,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.0137499999999999,
                             DataSeriesId = 3,
                             Gravity = 1.8625,
-                            RecordTime = new DateTime(2020, 5, 4, 12, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 1, 22, 38, 8, 953, DateTimeKind.Local).AddTicks(7620),
                             Temperature = 24.604227400705131
                         },
                         new
@@ -1725,7 +1724,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.0125000000000002,
                             DataSeriesId = 3,
                             Gravity = 1.875,
-                            RecordTime = new DateTime(2020, 5, 4, 12, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 1, 22, 58, 8, 953, DateTimeKind.Local).AddTicks(7624),
                             Temperature = 24.619397662556434
                         },
                         new
@@ -1734,7 +1733,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.0112500000000004,
                             DataSeriesId = 3,
                             Gravity = 1.8875,
-                            RecordTime = new DateTime(2020, 5, 4, 12, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 1, 23, 18, 8, 953, DateTimeKind.Local).AddTicks(7628),
                             Temperature = 24.634282978200602
                         },
                         new
@@ -1743,7 +1742,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.0099999999999998,
                             DataSeriesId = 3,
                             Gravity = 1.8999999999999999,
-                            RecordTime = new DateTime(2020, 5, 4, 13, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 1, 23, 38, 8, 953, DateTimeKind.Local).AddTicks(7633),
                             Temperature = 24.648882429441258
                         },
                         new
@@ -1752,7 +1751,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.00875,
                             DataSeriesId = 3,
                             Gravity = 1.9125000000000001,
-                            RecordTime = new DateTime(2020, 5, 4, 13, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 1, 23, 58, 8, 953, DateTimeKind.Local).AddTicks(7637),
                             Temperature = 24.663195115715471
                         },
                         new
@@ -1761,7 +1760,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.0075000000000003,
                             DataSeriesId = 3,
                             Gravity = 1.925,
-                            RecordTime = new DateTime(2020, 5, 4, 13, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 2, 0, 18, 8, 953, DateTimeKind.Local).AddTicks(7641),
                             Temperature = 24.677220154149335
                         },
                         new
@@ -1770,7 +1769,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.0062500000000005,
                             DataSeriesId = 3,
                             Gravity = 1.9375,
-                            RecordTime = new DateTime(2020, 5, 4, 14, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 2, 0, 38, 8, 953, DateTimeKind.Local).AddTicks(7645),
                             Temperature = 24.69095667961242
                         },
                         new
@@ -1779,7 +1778,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.0049999999999999,
                             DataSeriesId = 3,
                             Gravity = 1.9500000000000002,
-                            RecordTime = new DateTime(2020, 5, 4, 14, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 2, 0, 58, 8, 953, DateTimeKind.Local).AddTicks(7649),
                             Temperature = 24.704403844771129
                         },
                         new
@@ -1788,7 +1787,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.0037500000000001,
                             DataSeriesId = 3,
                             Gravity = 1.9625000000000001,
-                            RecordTime = new DateTime(2020, 5, 4, 14, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 2, 1, 18, 8, 953, DateTimeKind.Local).AddTicks(7653),
                             Temperature = 24.717560820140967
                         },
                         new
@@ -1797,7 +1796,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.0025000000000004,
                             DataSeriesId = 3,
                             Gravity = 1.9750000000000001,
-                            RecordTime = new DateTime(2020, 5, 4, 15, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 2, 1, 38, 8, 953, DateTimeKind.Local).AddTicks(7657),
                             Temperature = 24.730426794137728
                         },
                         new
@@ -1806,7 +1805,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.0012499999999998,
                             DataSeriesId = 3,
                             Gravity = 1.9875,
-                            RecordTime = new DateTime(2020, 5, 4, 15, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 2, 1, 58, 8, 953, DateTimeKind.Local).AddTicks(7662),
                             Temperature = 24.743000973127522
                         },
                         new
@@ -1815,7 +1814,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 4.0,
                             DataSeriesId = 3,
                             Gravity = 2.0,
-                            RecordTime = new DateTime(2020, 5, 4, 15, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 2, 2, 18, 8, 953, DateTimeKind.Local).AddTicks(7666),
                             Temperature = 24.755282581475768
                         },
                         new
@@ -1824,7 +1823,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.9987500000000002,
                             DataSeriesId = 3,
                             Gravity = 2.0125000000000002,
-                            RecordTime = new DateTime(2020, 5, 4, 16, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 2, 2, 38, 8, 953, DateTimeKind.Local).AddTicks(7670),
                             Temperature = 24.767270861595009
                         },
                         new
@@ -1833,7 +1832,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.9975000000000001,
                             DataSeriesId = 3,
                             Gravity = 2.0250000000000004,
-                            RecordTime = new DateTime(2020, 5, 4, 16, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 2, 2, 58, 8, 953, DateTimeKind.Local).AddTicks(7674),
                             Temperature = 24.77896507399165
                         },
                         new
@@ -1842,7 +1841,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.9962500000000003,
                             DataSeriesId = 3,
                             Gravity = 2.0374999999999996,
-                            RecordTime = new DateTime(2020, 5, 4, 16, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 2, 3, 18, 8, 953, DateTimeKind.Local).AddTicks(7678),
                             Temperature = 24.790364497311597
                         },
                         new
@@ -1851,7 +1850,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.9950000000000001,
                             DataSeriesId = 3,
                             Gravity = 2.0499999999999998,
-                            RecordTime = new DateTime(2020, 5, 4, 17, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 2, 3, 38, 8, 953, DateTimeKind.Local).AddTicks(7682),
                             Temperature = 24.801468428384716
                         },
                         new
@@ -1860,7 +1859,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.9937500000000004,
                             DataSeriesId = 3,
                             Gravity = 2.0625,
-                            RecordTime = new DateTime(2020, 5, 4, 17, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 2, 3, 58, 8, 953, DateTimeKind.Local).AddTicks(7686),
                             Temperature = 24.812276182268235
                         },
                         new
@@ -1869,7 +1868,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.9925000000000002,
                             DataSeriesId = 3,
                             Gravity = 2.0749999999999997,
-                            RecordTime = new DateTime(2020, 5, 4, 17, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 2, 4, 18, 8, 953, DateTimeKind.Local).AddTicks(7690),
                             Temperature = 24.822787092288991
                         },
                         new
@@ -1878,7 +1877,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.99125,
                             DataSeriesId = 3,
                             Gravity = 2.0874999999999999,
-                            RecordTime = new DateTime(2020, 5, 4, 18, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 2, 4, 38, 8, 953, DateTimeKind.Local).AddTicks(7695),
                             Temperature = 24.833000510084538
                         },
                         new
@@ -1887,7 +1886,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.9900000000000002,
                             DataSeriesId = 3,
                             Gravity = 2.1000000000000001,
-                            RecordTime = new DateTime(2020, 5, 4, 18, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 2, 4, 58, 8, 953, DateTimeKind.Local).AddTicks(7699),
                             Temperature = 24.842915805643155
                         },
                         new
@@ -1896,7 +1895,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.98875,
                             DataSeriesId = 3,
                             Gravity = 2.1124999999999998,
-                            RecordTime = new DateTime(2020, 5, 4, 18, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 2, 5, 18, 8, 953, DateTimeKind.Local).AddTicks(7703),
                             Temperature = 24.852532367342711
                         },
                         new
@@ -1905,7 +1904,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.9875000000000003,
                             DataSeriesId = 3,
                             Gravity = 2.125,
-                            RecordTime = new DateTime(2020, 5, 4, 19, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 2, 5, 38, 8, 953, DateTimeKind.Local).AddTicks(7707),
                             Temperature = 24.861849601988382
                         },
                         new
@@ -1914,7 +1913,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.9862500000000001,
                             DataSeriesId = 3,
                             Gravity = 2.1375000000000002,
-                            RecordTime = new DateTime(2020, 5, 4, 19, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 2, 5, 58, 8, 953, DateTimeKind.Local).AddTicks(7711),
                             Temperature = 24.870866934849246
                         },
                         new
@@ -1923,7 +1922,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.9850000000000003,
                             DataSeriesId = 3,
                             Gravity = 2.1499999999999999,
-                            RecordTime = new DateTime(2020, 5, 4, 19, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 2, 6, 18, 8, 953, DateTimeKind.Local).AddTicks(7715),
                             Temperature = 24.879583809693735
                         },
                         new
@@ -1932,7 +1931,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.9837500000000001,
                             DataSeriesId = 3,
                             Gravity = 2.1625000000000001,
-                            RecordTime = new DateTime(2020, 5, 4, 20, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 2, 6, 38, 8, 953, DateTimeKind.Local).AddTicks(7720),
                             Temperature = 24.887999688823953
                         },
                         new
@@ -1941,7 +1940,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.9825000000000004,
                             DataSeriesId = 3,
                             Gravity = 2.1749999999999998,
-                            RecordTime = new DateTime(2020, 5, 4, 20, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 2, 6, 58, 8, 953, DateTimeKind.Local).AddTicks(7724),
                             Temperature = 24.896114053108828
                         },
                         new
@@ -1950,7 +1949,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.9812500000000002,
                             DataSeriesId = 3,
                             Gravity = 2.1875,
-                            RecordTime = new DateTime(2020, 5, 4, 20, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 2, 7, 18, 8, 953, DateTimeKind.Local).AddTicks(7728),
                             Temperature = 24.903926402016154
                         },
                         new
@@ -1959,7 +1958,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.98,
                             DataSeriesId = 3,
                             Gravity = 2.2000000000000002,
-                            RecordTime = new DateTime(2020, 5, 4, 21, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 2, 7, 38, 8, 953, DateTimeKind.Local).AddTicks(7732),
                             Temperature = 24.911436253643444
                         },
                         new
@@ -1968,7 +1967,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.9787500000000002,
                             DataSeriesId = 3,
                             Gravity = 2.2124999999999999,
-                            RecordTime = new DateTime(2020, 5, 4, 21, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 2, 7, 58, 8, 953, DateTimeKind.Local).AddTicks(7736),
                             Temperature = 24.91864314474768
                         },
                         new
@@ -1977,7 +1976,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.9775,
                             DataSeriesId = 3,
                             Gravity = 2.2250000000000001,
-                            RecordTime = new DateTime(2020, 5, 4, 21, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 2, 8, 18, 8, 953, DateTimeKind.Local).AddTicks(7740),
                             Temperature = 24.925546630773869
                         },
                         new
@@ -1986,7 +1985,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.9762500000000003,
                             DataSeriesId = 3,
                             Gravity = 2.2374999999999998,
-                            RecordTime = new DateTime(2020, 5, 4, 22, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 2, 8, 38, 8, 953, DateTimeKind.Local).AddTicks(7744),
                             Temperature = 24.932146285882478
                         },
                         new
@@ -1995,7 +1994,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.9750000000000001,
                             DataSeriesId = 3,
                             Gravity = 2.25,
-                            RecordTime = new DateTime(2020, 5, 4, 22, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 2, 8, 58, 8, 953, DateTimeKind.Local).AddTicks(7748),
                             Temperature = 24.938441702975688
                         },
                         new
@@ -2004,7 +2003,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.9737500000000003,
                             DataSeriesId = 3,
                             Gravity = 2.2625000000000002,
-                            RecordTime = new DateTime(2020, 5, 4, 22, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 2, 9, 18, 8, 953, DateTimeKind.Local).AddTicks(7752),
                             Temperature = 24.944432493722523
                         },
                         new
@@ -2013,7 +2012,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.9725000000000001,
                             DataSeriesId = 3,
                             Gravity = 2.2749999999999999,
-                            RecordTime = new DateTime(2020, 5, 4, 23, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 2, 9, 38, 8, 953, DateTimeKind.Local).AddTicks(7756),
                             Temperature = 24.950118288582786
                         },
                         new
@@ -2022,7 +2021,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.9712500000000004,
                             DataSeriesId = 3,
                             Gravity = 2.2875000000000001,
-                            RecordTime = new DateTime(2020, 5, 4, 23, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 2, 9, 58, 8, 953, DateTimeKind.Local).AddTicks(7760),
                             Temperature = 24.955498736829874
                         },
                         new
@@ -2031,7 +2030,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.9700000000000002,
                             DataSeriesId = 3,
                             Gravity = 2.3000000000000003,
-                            RecordTime = new DateTime(2020, 5, 4, 23, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 2, 10, 18, 8, 953, DateTimeKind.Local).AddTicks(7764),
                             Temperature = 24.960573506572388
                         },
                         new
@@ -2040,7 +2039,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.96875,
                             DataSeriesId = 3,
                             Gravity = 2.3125,
-                            RecordTime = new DateTime(2020, 5, 5, 0, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 2, 10, 38, 8, 953, DateTimeKind.Local).AddTicks(7769),
                             Temperature = 24.965342284774632
                         },
                         new
@@ -2049,7 +2048,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.9675000000000002,
                             DataSeriesId = 3,
                             Gravity = 2.3250000000000002,
-                            RecordTime = new DateTime(2020, 5, 5, 0, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 2, 10, 58, 8, 953, DateTimeKind.Local).AddTicks(7773),
                             Temperature = 24.969804777275897
                         },
                         new
@@ -2058,7 +2057,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.9662500000000001,
                             DataSeriesId = 3,
                             Gravity = 2.3375000000000004,
-                            RecordTime = new DateTime(2020, 5, 5, 0, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 2, 11, 18, 8, 953, DateTimeKind.Local).AddTicks(7777),
                             Temperature = 24.973960708808633
                         },
                         new
@@ -2067,7 +2066,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.9650000000000003,
                             DataSeriesId = 3,
                             Gravity = 2.3499999999999996,
-                            RecordTime = new DateTime(2020, 5, 5, 1, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 2, 11, 38, 8, 953, DateTimeKind.Local).AddTicks(7781),
                             Temperature = 24.977809823015399
                         },
                         new
@@ -2076,7 +2075,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.9637500000000001,
                             DataSeriesId = 3,
                             Gravity = 2.3624999999999998,
-                            RecordTime = new DateTime(2020, 5, 5, 1, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 2, 11, 58, 8, 953, DateTimeKind.Local).AddTicks(7785),
                             Temperature = 24.981351882464708
                         },
                         new
@@ -2085,7 +2084,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.9625000000000004,
                             DataSeriesId = 3,
                             Gravity = 2.375,
-                            RecordTime = new DateTime(2020, 5, 5, 1, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 2, 12, 18, 8, 953, DateTimeKind.Local).AddTicks(7789),
                             Temperature = 24.984586668665639
                         },
                         new
@@ -2094,7 +2093,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.9612500000000002,
                             DataSeriesId = 3,
                             Gravity = 2.3874999999999997,
-                            RecordTime = new DateTime(2020, 5, 5, 2, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 2, 12, 38, 8, 953, DateTimeKind.Local).AddTicks(7793),
                             Temperature = 24.987513982081349
                         },
                         new
@@ -2103,7 +2102,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.96,
                             DataSeriesId = 3,
                             Gravity = 2.3999999999999999,
-                            RecordTime = new DateTime(2020, 5, 5, 2, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 2, 12, 58, 8, 953, DateTimeKind.Local).AddTicks(7797),
                             Temperature = 24.990133642141359
                         },
                         new
@@ -2112,7 +2111,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.9587500000000002,
                             DataSeriesId = 3,
                             Gravity = 2.4125000000000001,
-                            RecordTime = new DateTime(2020, 5, 5, 2, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 2, 13, 18, 8, 953, DateTimeKind.Local).AddTicks(7801),
                             Temperature = 24.992445487252688
                         },
                         new
@@ -2121,7 +2120,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.9575,
                             DataSeriesId = 3,
                             Gravity = 2.4249999999999998,
-                            RecordTime = new DateTime(2020, 5, 5, 3, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 2, 13, 38, 8, 953, DateTimeKind.Local).AddTicks(7806),
                             Temperature = 24.99444937480985
                         },
                         new
@@ -2130,7 +2129,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.9562500000000003,
                             DataSeriesId = 3,
                             Gravity = 2.4375,
-                            RecordTime = new DateTime(2020, 5, 5, 3, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 2, 13, 58, 8, 953, DateTimeKind.Local).AddTicks(7810),
                             Temperature = 24.996145181203616
                         },
                         new
@@ -2139,7 +2138,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.9550000000000001,
                             DataSeriesId = 3,
                             Gravity = 2.4500000000000002,
-                            RecordTime = new DateTime(2020, 5, 5, 3, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 2, 14, 18, 8, 953, DateTimeKind.Local).AddTicks(7814),
                             Temperature = 24.997532801828658
                         },
                         new
@@ -2148,7 +2147,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.9537500000000003,
                             DataSeriesId = 3,
                             Gravity = 2.4624999999999999,
-                            RecordTime = new DateTime(2020, 5, 5, 4, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 2, 14, 38, 8, 953, DateTimeKind.Local).AddTicks(7818),
                             Temperature = 24.998612151090001
                         },
                         new
@@ -2157,7 +2156,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.9525000000000001,
                             DataSeriesId = 3,
                             Gravity = 2.4750000000000001,
-                            RecordTime = new DateTime(2020, 5, 5, 4, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 2, 14, 58, 8, 953, DateTimeKind.Local).AddTicks(7822),
                             Temperature = 24.999383162408304
                         },
                         new
@@ -2166,7 +2165,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.9512500000000004,
                             DataSeriesId = 3,
                             Gravity = 2.4874999999999998,
-                            RecordTime = new DateTime(2020, 5, 5, 4, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 2, 15, 18, 8, 953, DateTimeKind.Local).AddTicks(7826),
                             Temperature = 24.999845788223947
                         },
                         new
@@ -2175,7 +2174,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.9500000000000002,
                             DataSeriesId = 3,
                             Gravity = 2.5,
-                            RecordTime = new DateTime(2020, 5, 5, 5, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 2, 15, 38, 8, 953, DateTimeKind.Local).AddTicks(7830),
                             Temperature = 25.0
                         },
                         new
@@ -2184,7 +2183,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.9487500000000004,
                             DataSeriesId = 3,
                             Gravity = 2.5124999999999997,
-                            RecordTime = new DateTime(2020, 5, 5, 5, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 2, 15, 58, 8, 953, DateTimeKind.Local).AddTicks(7834),
                             Temperature = 24.999845788223947
                         },
                         new
@@ -2193,7 +2192,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.9475000000000002,
                             DataSeriesId = 3,
                             Gravity = 2.5249999999999999,
-                            RecordTime = new DateTime(2020, 5, 5, 5, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 2, 16, 18, 8, 953, DateTimeKind.Local).AddTicks(7838),
                             Temperature = 24.999383162408304
                         },
                         new
@@ -2202,7 +2201,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.94625,
                             DataSeriesId = 3,
                             Gravity = 2.5374999999999996,
-                            RecordTime = new DateTime(2020, 5, 5, 6, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 2, 16, 38, 8, 953, DateTimeKind.Local).AddTicks(7842),
                             Temperature = 24.998612151090001
                         },
                         new
@@ -2211,7 +2210,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.9450000000000003,
                             DataSeriesId = 3,
                             Gravity = 2.5499999999999998,
-                            RecordTime = new DateTime(2020, 5, 5, 6, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 2, 16, 58, 8, 953, DateTimeKind.Local).AddTicks(7847),
                             Temperature = 24.997532801828658
                         },
                         new
@@ -2220,7 +2219,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.9437500000000001,
                             DataSeriesId = 3,
                             Gravity = 2.5625,
-                            RecordTime = new DateTime(2020, 5, 5, 6, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 2, 17, 18, 8, 953, DateTimeKind.Local).AddTicks(7851),
                             Temperature = 24.996145181203616
                         },
                         new
@@ -2229,7 +2228,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.9425000000000003,
                             DataSeriesId = 3,
                             Gravity = 2.5750000000000002,
-                            RecordTime = new DateTime(2020, 5, 5, 7, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 2, 17, 38, 8, 953, DateTimeKind.Local).AddTicks(7855),
                             Temperature = 24.99444937480985
                         },
                         new
@@ -2238,7 +2237,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.9412500000000001,
                             DataSeriesId = 3,
                             Gravity = 2.5874999999999999,
-                            RecordTime = new DateTime(2020, 5, 5, 7, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 2, 17, 58, 8, 953, DateTimeKind.Local).AddTicks(7859),
                             Temperature = 24.992445487252688
                         },
                         new
@@ -2247,7 +2246,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.9400000000000004,
                             DataSeriesId = 3,
                             Gravity = 2.6000000000000001,
-                            RecordTime = new DateTime(2020, 5, 5, 7, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 2, 18, 18, 8, 953, DateTimeKind.Local).AddTicks(7863),
                             Temperature = 24.990133642141359
                         },
                         new
@@ -2256,7 +2255,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.9387500000000002,
                             DataSeriesId = 3,
                             Gravity = 2.6124999999999998,
-                            RecordTime = new DateTime(2020, 5, 5, 8, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 2, 18, 38, 8, 953, DateTimeKind.Local).AddTicks(7867),
                             Temperature = 24.987513982081353
                         },
                         new
@@ -2265,7 +2264,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.9375,
                             DataSeriesId = 3,
                             Gravity = 2.625,
-                            RecordTime = new DateTime(2020, 5, 5, 8, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 2, 18, 58, 8, 953, DateTimeKind.Local).AddTicks(7871),
                             Temperature = 24.984586668665639
                         },
                         new
@@ -2274,7 +2273,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.9362500000000002,
                             DataSeriesId = 3,
                             Gravity = 2.6374999999999997,
-                            RecordTime = new DateTime(2020, 5, 5, 8, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 2, 19, 18, 8, 953, DateTimeKind.Local).AddTicks(7875),
                             Temperature = 24.981351882464708
                         },
                         new
@@ -2283,7 +2282,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.9350000000000001,
                             DataSeriesId = 3,
                             Gravity = 2.6500000000000004,
-                            RecordTime = new DateTime(2020, 5, 5, 9, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 2, 19, 38, 8, 953, DateTimeKind.Local).AddTicks(7879),
                             Temperature = 24.977809823015399
                         },
                         new
@@ -2292,7 +2291,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.9337500000000003,
                             DataSeriesId = 3,
                             Gravity = 2.6624999999999996,
-                            RecordTime = new DateTime(2020, 5, 5, 9, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 2, 19, 58, 8, 953, DateTimeKind.Local).AddTicks(7883),
                             Temperature = 24.973960708808633
                         },
                         new
@@ -2301,7 +2300,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.9325000000000001,
                             DataSeriesId = 3,
                             Gravity = 2.6750000000000003,
-                            RecordTime = new DateTime(2020, 5, 5, 9, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 2, 20, 18, 8, 953, DateTimeKind.Local).AddTicks(7888),
                             Temperature = 24.969804777275897
                         },
                         new
@@ -2310,7 +2309,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.9312500000000004,
                             DataSeriesId = 3,
                             Gravity = 2.6875,
-                            RecordTime = new DateTime(2020, 5, 5, 10, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 2, 20, 38, 8, 953, DateTimeKind.Local).AddTicks(7892),
                             Temperature = 24.965342284774632
                         },
                         new
@@ -2319,7 +2318,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.9300000000000002,
                             DataSeriesId = 3,
                             Gravity = 2.7000000000000002,
-                            RecordTime = new DateTime(2020, 5, 5, 10, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 2, 20, 58, 8, 953, DateTimeKind.Local).AddTicks(7896),
                             Temperature = 24.960573506572388
                         },
                         new
@@ -2328,7 +2327,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.92875,
                             DataSeriesId = 3,
                             Gravity = 2.7124999999999999,
-                            RecordTime = new DateTime(2020, 5, 5, 10, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 2, 21, 18, 8, 953, DateTimeKind.Local).AddTicks(7900),
                             Temperature = 24.955498736829874
                         },
                         new
@@ -2337,7 +2336,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.9275000000000002,
                             DataSeriesId = 3,
                             Gravity = 2.7250000000000001,
-                            RecordTime = new DateTime(2020, 5, 5, 11, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 2, 21, 38, 8, 953, DateTimeKind.Local).AddTicks(7904),
                             Temperature = 24.950118288582786
                         },
                         new
@@ -2346,7 +2345,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.92625,
                             DataSeriesId = 3,
                             Gravity = 2.7374999999999998,
-                            RecordTime = new DateTime(2020, 5, 5, 11, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 2, 21, 58, 8, 953, DateTimeKind.Local).AddTicks(7908),
                             Temperature = 24.944432493722523
                         },
                         new
@@ -2355,7 +2354,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.9250000000000003,
                             DataSeriesId = 3,
                             Gravity = 2.75,
-                            RecordTime = new DateTime(2020, 5, 5, 11, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 2, 22, 18, 8, 953, DateTimeKind.Local).AddTicks(7912),
                             Temperature = 24.938441702975688
                         },
                         new
@@ -2364,7 +2363,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.9237500000000001,
                             DataSeriesId = 3,
                             Gravity = 2.7625000000000002,
-                            RecordTime = new DateTime(2020, 5, 5, 12, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 2, 22, 38, 8, 953, DateTimeKind.Local).AddTicks(7916),
                             Temperature = 24.932146285882478
                         },
                         new
@@ -2373,7 +2372,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.9225000000000003,
                             DataSeriesId = 3,
                             Gravity = 2.7750000000000004,
-                            RecordTime = new DateTime(2020, 5, 5, 12, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 2, 22, 58, 8, 953, DateTimeKind.Local).AddTicks(7920),
                             Temperature = 24.925546630773869
                         },
                         new
@@ -2382,7 +2381,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.9212500000000001,
                             DataSeriesId = 3,
                             Gravity = 2.7875000000000001,
-                            RecordTime = new DateTime(2020, 5, 5, 12, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 2, 23, 18, 8, 953, DateTimeKind.Local).AddTicks(7925),
                             Temperature = 24.91864314474768
                         },
                         new
@@ -2391,7 +2390,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.9199999999999999,
                             DataSeriesId = 3,
                             Gravity = 2.8000000000000003,
-                            RecordTime = new DateTime(2020, 5, 5, 13, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 2, 23, 38, 8, 953, DateTimeKind.Local).AddTicks(7929),
                             Temperature = 24.911436253643444
                         },
                         new
@@ -2400,7 +2399,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.9187500000000002,
                             DataSeriesId = 3,
                             Gravity = 2.8125,
-                            RecordTime = new DateTime(2020, 5, 5, 13, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 2, 23, 58, 8, 953, DateTimeKind.Local).AddTicks(7933),
                             Temperature = 24.903926402016154
                         },
                         new
@@ -2409,7 +2408,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.9175000000000004,
                             DataSeriesId = 3,
                             Gravity = 2.8249999999999997,
-                            RecordTime = new DateTime(2020, 5, 5, 13, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 3, 0, 18, 8, 953, DateTimeKind.Local).AddTicks(7937),
                             Temperature = 24.896114053108828
                         },
                         new
@@ -2418,7 +2417,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.9162500000000002,
                             DataSeriesId = 3,
                             Gravity = 2.8374999999999999,
-                            RecordTime = new DateTime(2020, 5, 5, 14, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 3, 0, 38, 8, 953, DateTimeKind.Local).AddTicks(8030),
                             Temperature = 24.887999688823953
                         },
                         new
@@ -2427,7 +2426,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.915,
                             DataSeriesId = 3,
                             Gravity = 2.8499999999999996,
-                            RecordTime = new DateTime(2020, 5, 5, 14, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 3, 0, 58, 8, 953, DateTimeKind.Local).AddTicks(8035),
                             Temperature = 24.879583809693738
                         },
                         new
@@ -2436,7 +2435,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.9137500000000003,
                             DataSeriesId = 3,
                             Gravity = 2.8624999999999998,
-                            RecordTime = new DateTime(2020, 5, 5, 14, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 3, 1, 18, 8, 953, DateTimeKind.Local).AddTicks(8039),
                             Temperature = 24.870866934849246
                         },
                         new
@@ -2445,7 +2444,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.9125000000000001,
                             DataSeriesId = 3,
                             Gravity = 2.875,
-                            RecordTime = new DateTime(2020, 5, 5, 15, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 3, 1, 38, 8, 953, DateTimeKind.Local).AddTicks(8043),
                             Temperature = 24.861849601988382
                         },
                         new
@@ -2454,7 +2453,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.9112500000000003,
                             DataSeriesId = 3,
                             Gravity = 2.8875000000000002,
-                            RecordTime = new DateTime(2020, 5, 5, 15, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 3, 1, 58, 8, 953, DateTimeKind.Local).AddTicks(8048),
                             Temperature = 24.852532367342711
                         },
                         new
@@ -2463,7 +2462,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.9100000000000001,
                             DataSeriesId = 3,
                             Gravity = 2.8999999999999999,
-                            RecordTime = new DateTime(2020, 5, 5, 15, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 3, 2, 18, 8, 953, DateTimeKind.Local).AddTicks(8052),
                             Temperature = 24.842915805643155
                         },
                         new
@@ -2472,7 +2471,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.9087500000000004,
                             DataSeriesId = 3,
                             Gravity = 2.9125000000000001,
-                            RecordTime = new DateTime(2020, 5, 5, 16, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 3, 2, 38, 8, 953, DateTimeKind.Local).AddTicks(8056),
                             Temperature = 24.833000510084538
                         },
                         new
@@ -2481,7 +2480,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.9075000000000002,
                             DataSeriesId = 3,
                             Gravity = 2.9249999999999998,
-                            RecordTime = new DateTime(2020, 5, 5, 16, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 3, 2, 58, 8, 953, DateTimeKind.Local).AddTicks(8060),
                             Temperature = 24.822787092288991
                         },
                         new
@@ -2490,7 +2489,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.90625,
                             DataSeriesId = 3,
                             Gravity = 2.9375,
-                            RecordTime = new DateTime(2020, 5, 5, 16, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 3, 3, 18, 8, 953, DateTimeKind.Local).AddTicks(8064),
                             Temperature = 24.812276182268235
                         },
                         new
@@ -2499,7 +2498,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.9050000000000002,
                             DataSeriesId = 3,
                             Gravity = 2.9499999999999997,
-                            RecordTime = new DateTime(2020, 5, 5, 17, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 3, 3, 38, 8, 953, DateTimeKind.Local).AddTicks(8068),
                             Temperature = 24.801468428384716
                         },
                         new
@@ -2508,7 +2507,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.9037500000000001,
                             DataSeriesId = 3,
                             Gravity = 2.9625000000000004,
-                            RecordTime = new DateTime(2020, 5, 5, 17, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 3, 3, 58, 8, 953, DateTimeKind.Local).AddTicks(8072),
                             Temperature = 24.790364497311597
                         },
                         new
@@ -2517,7 +2516,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.9025000000000003,
                             DataSeriesId = 3,
                             Gravity = 2.9749999999999996,
-                            RecordTime = new DateTime(2020, 5, 5, 17, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 3, 4, 18, 8, 953, DateTimeKind.Local).AddTicks(8076),
                             Temperature = 24.77896507399165
                         },
                         new
@@ -2526,7 +2525,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.9012500000000001,
                             DataSeriesId = 3,
                             Gravity = 2.9875000000000003,
-                            RecordTime = new DateTime(2020, 5, 5, 18, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 3, 4, 38, 8, 953, DateTimeKind.Local).AddTicks(8080),
                             Temperature = 24.767270861595005
                         },
                         new
@@ -2535,7 +2534,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.9000000000000004,
                             DataSeriesId = 3,
                             Gravity = 3.0,
-                            RecordTime = new DateTime(2020, 5, 5, 18, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 3, 4, 58, 8, 953, DateTimeKind.Local).AddTicks(8084),
                             Temperature = 24.755282581475768
                         },
                         new
@@ -2544,7 +2543,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.8987500000000002,
                             DataSeriesId = 3,
                             Gravity = 3.0125000000000002,
-                            RecordTime = new DateTime(2020, 5, 5, 18, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 3, 5, 18, 8, 953, DateTimeKind.Local).AddTicks(8089),
                             Temperature = 24.743000973127522
                         },
                         new
@@ -2553,7 +2552,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.8975,
                             DataSeriesId = 3,
                             Gravity = 3.0249999999999999,
-                            RecordTime = new DateTime(2020, 5, 5, 19, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 3, 5, 38, 8, 953, DateTimeKind.Local).AddTicks(8093),
                             Temperature = 24.730426794137728
                         },
                         new
@@ -2562,7 +2561,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.8962500000000002,
                             DataSeriesId = 3,
                             Gravity = 3.0375000000000001,
-                            RecordTime = new DateTime(2020, 5, 5, 19, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 3, 5, 58, 8, 953, DateTimeKind.Local).AddTicks(8097),
                             Temperature = 24.717560820140967
                         },
                         new
@@ -2571,7 +2570,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.895,
                             DataSeriesId = 3,
                             Gravity = 3.0499999999999998,
-                            RecordTime = new DateTime(2020, 5, 5, 19, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 3, 6, 18, 8, 953, DateTimeKind.Local).AddTicks(8101),
                             Temperature = 24.704403844771129
                         },
                         new
@@ -2580,7 +2579,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.8937500000000003,
                             DataSeriesId = 3,
                             Gravity = 3.0625,
-                            RecordTime = new DateTime(2020, 5, 5, 20, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 3, 6, 38, 8, 953, DateTimeKind.Local).AddTicks(8105),
                             Temperature = 24.69095667961242
                         },
                         new
@@ -2589,7 +2588,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.8925000000000001,
                             DataSeriesId = 3,
                             Gravity = 3.0750000000000002,
-                            RecordTime = new DateTime(2020, 5, 5, 20, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 3, 6, 58, 8, 953, DateTimeKind.Local).AddTicks(8109),
                             Temperature = 24.677220154149339
                         },
                         new
@@ -2598,7 +2597,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.8912500000000003,
                             DataSeriesId = 3,
                             Gravity = 3.0875000000000004,
-                            RecordTime = new DateTime(2020, 5, 5, 20, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 3, 7, 18, 8, 953, DateTimeKind.Local).AddTicks(8113),
                             Temperature = 24.663195115715471
                         },
                         new
@@ -2607,7 +2606,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.8900000000000001,
                             DataSeriesId = 3,
                             Gravity = 3.1000000000000001,
-                            RecordTime = new DateTime(2020, 5, 5, 21, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 3, 7, 38, 8, 953, DateTimeKind.Local).AddTicks(8117),
                             Temperature = 24.648882429441258
                         },
                         new
@@ -2616,7 +2615,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.8887499999999999,
                             DataSeriesId = 3,
                             Gravity = 3.1125000000000003,
-                            RecordTime = new DateTime(2020, 5, 5, 21, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 3, 7, 58, 8, 953, DateTimeKind.Local).AddTicks(8122),
                             Temperature = 24.634282978200602
                         },
                         new
@@ -2625,7 +2624,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.8875000000000002,
                             DataSeriesId = 3,
                             Gravity = 3.125,
-                            RecordTime = new DateTime(2020, 5, 5, 21, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 3, 8, 18, 8, 953, DateTimeKind.Local).AddTicks(8126),
                             Temperature = 24.619397662556434
                         },
                         new
@@ -2634,7 +2633,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.8862500000000004,
                             DataSeriesId = 3,
                             Gravity = 3.1374999999999997,
-                            RecordTime = new DateTime(2020, 5, 5, 22, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 3, 8, 38, 8, 953, DateTimeKind.Local).AddTicks(8130),
                             Temperature = 24.604227400705131
                         },
                         new
@@ -2643,7 +2642,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.8850000000000002,
                             DataSeriesId = 3,
                             Gravity = 3.1499999999999999,
-                            RecordTime = new DateTime(2020, 5, 5, 22, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 3, 8, 58, 8, 953, DateTimeKind.Local).AddTicks(8134),
                             Temperature = 24.588773128419906
                         },
                         new
@@ -2652,7 +2651,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.88375,
                             DataSeriesId = 3,
                             Gravity = 3.1624999999999996,
-                            RecordTime = new DateTime(2020, 5, 5, 22, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 3, 9, 18, 8, 953, DateTimeKind.Local).AddTicks(8138),
                             Temperature = 24.573035798993068
                         },
                         new
@@ -2661,7 +2660,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.8825000000000003,
                             DataSeriesId = 3,
                             Gravity = 3.1749999999999998,
-                            RecordTime = new DateTime(2020, 5, 5, 23, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 3, 9, 38, 8, 953, DateTimeKind.Local).AddTicks(8142),
                             Temperature = 24.557016383177228
                         },
                         new
@@ -2670,7 +2669,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.8812500000000001,
                             DataSeriesId = 3,
                             Gravity = 3.1875,
-                            RecordTime = new DateTime(2020, 5, 5, 23, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 3, 9, 58, 8, 953, DateTimeKind.Local).AddTicks(8146),
                             Temperature = 24.540715869125407
                         },
                         new
@@ -2679,7 +2678,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.8800000000000003,
                             DataSeriesId = 3,
                             Gravity = 3.2000000000000002,
-                            RecordTime = new DateTime(2020, 5, 5, 23, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 3, 10, 18, 8, 953, DateTimeKind.Local).AddTicks(8150),
                             Temperature = 24.524135262330098
                         },
                         new
@@ -2688,7 +2687,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.8787500000000001,
                             DataSeriesId = 3,
                             Gravity = 3.2124999999999999,
-                            RecordTime = new DateTime(2020, 5, 6, 0, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 3, 10, 38, 8, 953, DateTimeKind.Local).AddTicks(8155),
                             Temperature = 24.507275585561231
                         },
                         new
@@ -2697,7 +2696,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.8775000000000004,
                             DataSeriesId = 3,
                             Gravity = 3.2250000000000001,
-                            RecordTime = new DateTime(2020, 5, 6, 0, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 3, 10, 58, 8, 953, DateTimeKind.Local).AddTicks(8159),
                             Temperature = 24.490137878803079
                         },
                         new
@@ -2706,7 +2705,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.8762500000000002,
                             DataSeriesId = 3,
                             Gravity = 3.2374999999999998,
-                            RecordTime = new DateTime(2020, 5, 6, 0, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 3, 11, 18, 8, 953, DateTimeKind.Local).AddTicks(8163),
                             Temperature = 24.472723199190128
                         },
                         new
@@ -2715,7 +2714,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.875,
                             DataSeriesId = 3,
                             Gravity = 3.25,
-                            RecordTime = new DateTime(2020, 5, 6, 1, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 3, 11, 38, 8, 953, DateTimeKind.Local).AddTicks(8167),
                             Temperature = 24.455032620941839
                         },
                         new
@@ -2724,7 +2723,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.8737500000000002,
                             DataSeriesId = 3,
                             Gravity = 3.2624999999999997,
-                            RecordTime = new DateTime(2020, 5, 6, 1, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 3, 11, 58, 8, 953, DateTimeKind.Local).AddTicks(8171),
                             Temperature = 24.437067235296418
                         },
                         new
@@ -2733,7 +2732,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.8725000000000001,
                             DataSeriesId = 3,
                             Gravity = 3.2750000000000004,
-                            RecordTime = new DateTime(2020, 5, 6, 1, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 3, 12, 18, 8, 953, DateTimeKind.Local).AddTicks(8175),
                             Temperature = 24.418828150443467
                         },
                         new
@@ -2742,7 +2741,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.8712500000000003,
                             DataSeriesId = 3,
                             Gravity = 3.2874999999999996,
-                            RecordTime = new DateTime(2020, 5, 6, 2, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 3, 12, 38, 8, 953, DateTimeKind.Local).AddTicks(8179),
                             Temperature = 24.400316491455662
                         },
                         new
@@ -2751,7 +2750,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.8700000000000001,
                             DataSeriesId = 3,
                             Gravity = 3.3000000000000003,
-                            RecordTime = new DateTime(2020, 5, 6, 2, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 3, 12, 58, 8, 953, DateTimeKind.Local).AddTicks(8183),
                             Temperature = 24.381533400219318
                         },
                         new
@@ -2760,7 +2759,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.8687500000000004,
                             DataSeriesId = 3,
                             Gravity = 3.3125,
-                            RecordTime = new DateTime(2020, 5, 6, 2, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 3, 13, 18, 8, 953, DateTimeKind.Local).AddTicks(8187),
                             Temperature = 24.362480035363987
                         },
                         new
@@ -2769,7 +2768,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.8675000000000002,
                             DataSeriesId = 3,
                             Gravity = 3.3250000000000002,
-                            RecordTime = new DateTime(2020, 5, 6, 3, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 3, 13, 38, 8, 953, DateTimeKind.Local).AddTicks(8192),
                             Temperature = 24.343157572190954
                         },
                         new
@@ -2778,7 +2777,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.86625,
                             DataSeriesId = 3,
                             Gravity = 3.3374999999999999,
-                            RecordTime = new DateTime(2020, 5, 6, 3, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 3, 13, 58, 8, 953, DateTimeKind.Local).AddTicks(8196),
                             Temperature = 24.323567202600778
                         },
                         new
@@ -2787,7 +2786,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.8650000000000002,
                             DataSeriesId = 3,
                             Gravity = 3.3500000000000001,
-                            RecordTime = new DateTime(2020, 5, 6, 3, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 3, 14, 18, 8, 953, DateTimeKind.Local).AddTicks(8200),
                             Temperature = 24.30371013501972
                         },
                         new
@@ -2796,7 +2795,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.86375,
                             DataSeriesId = 3,
                             Gravity = 3.3624999999999998,
-                            RecordTime = new DateTime(2020, 5, 6, 4, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 3, 14, 38, 8, 953, DateTimeKind.Local).AddTicks(8204),
                             Temperature = 24.283587594325247
                         },
                         new
@@ -2805,7 +2804,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.8625000000000003,
                             DataSeriesId = 3,
                             Gravity = 3.375,
-                            RecordTime = new DateTime(2020, 5, 6, 4, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 3, 14, 58, 8, 953, DateTimeKind.Local).AddTicks(8208),
                             Temperature = 24.263200821770461
                         },
                         new
@@ -2814,7 +2813,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.8612500000000001,
                             DataSeriesId = 3,
                             Gravity = 3.3875000000000002,
-                            RecordTime = new DateTime(2020, 5, 6, 4, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 3, 15, 18, 8, 953, DateTimeKind.Local).AddTicks(8212),
                             Temperature = 24.242551074907517
                         },
                         new
@@ -2823,7 +2822,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.8600000000000003,
                             DataSeriesId = 3,
                             Gravity = 3.4000000000000004,
-                            RecordTime = new DateTime(2020, 5, 6, 5, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 3, 15, 38, 8, 953, DateTimeKind.Local).AddTicks(8216),
                             Temperature = 24.221639627510076
                         },
                         new
@@ -2832,7 +2831,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.8587500000000001,
                             DataSeriesId = 3,
                             Gravity = 3.4125000000000001,
-                            RecordTime = new DateTime(2020, 5, 6, 5, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 3, 15, 58, 8, 953, DateTimeKind.Local).AddTicks(8221),
                             Temperature = 24.200467769494711
                         },
                         new
@@ -2841,7 +2840,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.8574999999999999,
                             DataSeriesId = 3,
                             Gravity = 3.4250000000000003,
-                            RecordTime = new DateTime(2020, 5, 6, 5, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 3, 16, 18, 8, 953, DateTimeKind.Local).AddTicks(8225),
                             Temperature = 24.179036806841353
                         },
                         new
@@ -2850,7 +2849,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.8562500000000002,
                             DataSeriesId = 3,
                             Gravity = 3.4375,
-                            RecordTime = new DateTime(2020, 5, 6, 6, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 3, 16, 38, 8, 953, DateTimeKind.Local).AddTicks(8229),
                             Temperature = 24.157348061512728
                         },
                         new
@@ -2859,7 +2858,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.8550000000000004,
                             DataSeriesId = 3,
                             Gravity = 3.4499999999999997,
-                            RecordTime = new DateTime(2020, 5, 6, 6, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 3, 16, 58, 8, 953, DateTimeKind.Local).AddTicks(8233),
                             Temperature = 24.135402871372811
                         },
                         new
@@ -2868,7 +2867,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.8537500000000002,
                             DataSeriesId = 3,
                             Gravity = 3.4624999999999999,
-                            RecordTime = new DateTime(2020, 5, 6, 6, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 3, 17, 18, 8, 953, DateTimeKind.Local).AddTicks(8237),
                             Temperature = 24.113202590104301
                         },
                         new
@@ -2877,7 +2876,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.8525,
                             DataSeriesId = 3,
                             Gravity = 3.4749999999999996,
-                            RecordTime = new DateTime(2020, 5, 6, 7, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 3, 17, 38, 8, 953, DateTimeKind.Local).AddTicks(8241),
                             Temperature = 24.09074858712512
                         },
                         new
@@ -2886,7 +2885,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.8512500000000003,
                             DataSeriesId = 3,
                             Gravity = 3.4874999999999998,
-                            RecordTime = new DateTime(2020, 5, 6, 7, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 3, 17, 58, 8, 953, DateTimeKind.Local).AddTicks(8246),
                             Temperature = 24.068042247503936
                         },
                         new
@@ -2895,7 +2894,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.8500000000000001,
                             DataSeriesId = 3,
                             Gravity = 3.5,
-                            RecordTime = new DateTime(2020, 5, 6, 7, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 3, 18, 18, 8, 953, DateTimeKind.Local).AddTicks(8250),
                             Temperature = 24.045084971874736
                         },
                         new
@@ -2904,7 +2903,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.8487500000000003,
                             DataSeriesId = 3,
                             Gravity = 3.5125000000000002,
-                            RecordTime = new DateTime(2020, 5, 6, 8, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 3, 18, 38, 8, 953, DateTimeKind.Local).AddTicks(8254),
                             Temperature = 24.021878176350423
                         },
                         new
@@ -2913,7 +2912,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.8475000000000001,
                             DataSeriesId = 3,
                             Gravity = 3.5249999999999999,
-                            RecordTime = new DateTime(2020, 5, 6, 8, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 3, 18, 58, 8, 953, DateTimeKind.Local).AddTicks(8258),
                             Temperature = 23.998423292435454
                         },
                         new
@@ -2922,7 +2921,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.8462500000000004,
                             DataSeriesId = 3,
                             Gravity = 3.5375000000000001,
-                            RecordTime = new DateTime(2020, 5, 6, 8, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 3, 19, 18, 8, 953, DateTimeKind.Local).AddTicks(8262),
                             Temperature = 23.974721766937552
                         },
                         new
@@ -2931,7 +2930,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.8450000000000002,
                             DataSeriesId = 3,
                             Gravity = 3.5499999999999998,
-                            RecordTime = new DateTime(2020, 5, 6, 9, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 3, 19, 38, 8, 953, DateTimeKind.Local).AddTicks(8266),
                             Temperature = 23.950775061878453
                         },
                         new
@@ -2940,7 +2939,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.84375,
                             DataSeriesId = 3,
                             Gravity = 3.5625,
-                            RecordTime = new DateTime(2020, 5, 6, 9, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 3, 19, 58, 8, 953, DateTimeKind.Local).AddTicks(8270),
                             Temperature = 23.926584654403726
                         },
                         new
@@ -2949,7 +2948,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.8425000000000002,
                             DataSeriesId = 3,
                             Gravity = 3.5749999999999997,
-                            RecordTime = new DateTime(2020, 5, 6, 9, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 3, 20, 18, 8, 953, DateTimeKind.Local).AddTicks(8274),
                             Temperature = 23.90215203669165
                         },
                         new
@@ -2958,7 +2957,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.8412500000000001,
                             DataSeriesId = 3,
                             Gravity = 3.5875000000000004,
-                            RecordTime = new DateTime(2020, 5, 6, 10, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 3, 20, 38, 8, 953, DateTimeKind.Local).AddTicks(8278),
                             Temperature = 23.877478715861173
                         },
                         new
@@ -2967,7 +2966,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.8400000000000003,
                             DataSeriesId = 3,
                             Gravity = 3.5999999999999996,
-                            RecordTime = new DateTime(2020, 5, 6, 10, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 3, 20, 58, 8, 953, DateTimeKind.Local).AddTicks(8282),
                             Temperature = 23.852566213878944
                         },
                         new
@@ -2976,7 +2975,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.8387500000000001,
                             DataSeriesId = 3,
                             Gravity = 3.6125000000000003,
-                            RecordTime = new DateTime(2020, 5, 6, 10, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 3, 21, 18, 8, 953, DateTimeKind.Local).AddTicks(8286),
                             Temperature = 23.827416067465442
                         },
                         new
@@ -2985,7 +2984,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.8375000000000004,
                             DataSeriesId = 3,
                             Gravity = 3.625,
-                            RecordTime = new DateTime(2020, 5, 6, 11, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 3, 21, 38, 8, 953, DateTimeKind.Local).AddTicks(8291),
                             Temperature = 23.802029828000155
                         },
                         new
@@ -2994,7 +2993,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.8362500000000002,
                             DataSeriesId = 3,
                             Gravity = 3.6375000000000002,
-                            RecordTime = new DateTime(2020, 5, 6, 11, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 3, 21, 58, 8, 953, DateTimeKind.Local).AddTicks(8295),
                             Temperature = 23.77640906142592
                         },
                         new
@@ -3003,7 +3002,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.835,
                             DataSeriesId = 3,
                             Gravity = 3.6499999999999999,
-                            RecordTime = new DateTime(2020, 5, 6, 11, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 3, 22, 18, 8, 953, DateTimeKind.Local).AddTicks(8299),
                             Temperature = 23.750555348152297
                         },
                         new
@@ -3012,7 +3011,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.8337500000000002,
                             DataSeriesId = 3,
                             Gravity = 3.6625000000000001,
-                            RecordTime = new DateTime(2020, 5, 6, 12, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 3, 22, 38, 8, 953, DateTimeKind.Local).AddTicks(8303),
                             Temperature = 23.724470282958109
                         },
                         new
@@ -3021,7 +3020,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.8325,
                             DataSeriesId = 3,
                             Gravity = 3.6749999999999998,
-                            RecordTime = new DateTime(2020, 5, 6, 12, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 3, 22, 58, 8, 953, DateTimeKind.Local).AddTicks(8307),
                             Temperature = 23.698155474893049
                         },
                         new
@@ -3030,7 +3029,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.8312500000000003,
                             DataSeriesId = 3,
                             Gravity = 3.6875,
-                            RecordTime = new DateTime(2020, 5, 6, 12, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 3, 23, 18, 8, 953, DateTimeKind.Local).AddTicks(8311),
                             Temperature = 23.671612547178427
                         },
                         new
@@ -3039,7 +3038,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.8300000000000001,
                             DataSeriesId = 3,
                             Gravity = 3.7000000000000002,
-                            RecordTime = new DateTime(2020, 5, 6, 13, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 3, 23, 38, 8, 953, DateTimeKind.Local).AddTicks(8315),
                             Temperature = 23.644843137107056
                         },
                         new
@@ -3048,7 +3047,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.8287500000000003,
                             DataSeriesId = 3,
                             Gravity = 3.7125000000000004,
-                            RecordTime = new DateTime(2020, 5, 6, 13, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 3, 23, 58, 8, 953, DateTimeKind.Local).AddTicks(8319),
                             Temperature = 23.617848895942245
                         },
                         new
@@ -3057,7 +3056,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.8275000000000001,
                             DataSeriesId = 3,
                             Gravity = 3.7250000000000001,
-                            RecordTime = new DateTime(2020, 5, 6, 13, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 4, 0, 18, 8, 953, DateTimeKind.Local).AddTicks(8323),
                             Temperature = 23.590631488815944
                         },
                         new
@@ -3066,7 +3065,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.8262499999999999,
                             DataSeriesId = 3,
                             Gravity = 3.7375000000000003,
-                            RecordTime = new DateTime(2020, 5, 6, 14, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 4, 0, 38, 8, 953, DateTimeKind.Local).AddTicks(8327),
                             Temperature = 23.563192594626027
                         },
                         new
@@ -3075,7 +3074,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.8250000000000002,
                             DataSeriesId = 3,
                             Gravity = 3.75,
-                            RecordTime = new DateTime(2020, 5, 6, 14, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 4, 0, 58, 8, 953, DateTimeKind.Local).AddTicks(8332),
                             Temperature = 23.535533905932738
                         },
                         new
@@ -3084,7 +3083,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.8237500000000004,
                             DataSeriesId = 3,
                             Gravity = 3.7624999999999997,
-                            RecordTime = new DateTime(2020, 5, 6, 14, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 4, 1, 18, 8, 953, DateTimeKind.Local).AddTicks(8336),
                             Temperature = 23.50765712885428
                         },
                         new
@@ -3093,7 +3092,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.8225000000000002,
                             DataSeriesId = 3,
                             Gravity = 3.7749999999999999,
-                            RecordTime = new DateTime(2020, 5, 6, 15, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 4, 1, 38, 8, 953, DateTimeKind.Local).AddTicks(8340),
                             Temperature = 23.479563982961572
                         },
                         new
@@ -3102,7 +3101,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.82125,
                             DataSeriesId = 3,
                             Gravity = 3.7874999999999996,
-                            RecordTime = new DateTime(2020, 5, 6, 15, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 4, 1, 58, 8, 953, DateTimeKind.Local).AddTicks(8344),
                             Temperature = 23.451256201172185
                         },
                         new
@@ -3111,7 +3110,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.8200000000000003,
                             DataSeriesId = 3,
                             Gravity = 3.7999999999999998,
-                            RecordTime = new DateTime(2020, 5, 6, 15, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 4, 2, 18, 8, 953, DateTimeKind.Local).AddTicks(8348),
                             Temperature = 23.422735529643443
                         },
                         new
@@ -3120,7 +3119,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.8187500000000001,
                             DataSeriesId = 3,
                             Gravity = 3.8125,
-                            RecordTime = new DateTime(2020, 5, 6, 16, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 4, 2, 38, 8, 953, DateTimeKind.Local).AddTicks(8352),
                             Temperature = 23.39400372766471
                         },
                         new
@@ -3129,7 +3128,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.8175000000000003,
                             DataSeriesId = 3,
                             Gravity = 3.8250000000000002,
-                            RecordTime = new DateTime(2020, 5, 6, 16, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 4, 2, 58, 8, 953, DateTimeKind.Local).AddTicks(8357),
                             Temperature = 23.365062567548868
                         },
                         new
@@ -3138,7 +3137,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.8162500000000001,
                             DataSeriesId = 3,
                             Gravity = 3.8374999999999999,
-                            RecordTime = new DateTime(2020, 5, 6, 16, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 4, 3, 18, 8, 953, DateTimeKind.Local).AddTicks(8361),
                             Temperature = 23.335913834522998
                         },
                         new
@@ -3147,7 +3146,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.8150000000000004,
                             DataSeriesId = 3,
                             Gravity = 3.8500000000000001,
-                            RecordTime = new DateTime(2020, 5, 6, 17, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 4, 3, 38, 8, 953, DateTimeKind.Local).AddTicks(8365),
                             Temperature = 23.30655932661826
                         },
                         new
@@ -3156,7 +3155,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.8137500000000002,
                             DataSeriesId = 3,
                             Gravity = 3.8624999999999998,
-                            RecordTime = new DateTime(2020, 5, 6, 17, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 4, 3, 58, 8, 953, DateTimeKind.Local).AddTicks(8369),
                             Temperature = 23.27700085455897
                         },
                         new
@@ -3165,7 +3164,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.8125,
                             DataSeriesId = 3,
                             Gravity = 3.875,
-                            RecordTime = new DateTime(2020, 5, 6, 17, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 4, 4, 18, 8, 953, DateTimeKind.Local).AddTicks(8373),
                             Temperature = 23.247240241650918
                         },
                         new
@@ -3174,7 +3173,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.8112500000000002,
                             DataSeriesId = 3,
                             Gravity = 3.8874999999999997,
-                            RecordTime = new DateTime(2020, 5, 6, 18, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 4, 4, 38, 8, 953, DateTimeKind.Local).AddTicks(8377),
                             Temperature = 23.217279323668894
                         },
                         new
@@ -3183,7 +3182,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.8100000000000001,
                             DataSeriesId = 3,
                             Gravity = 3.9000000000000004,
-                            RecordTime = new DateTime(2020, 5, 6, 18, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 4, 4, 58, 8, 953, DateTimeKind.Local).AddTicks(8381),
                             Temperature = 23.187119948743451
                         },
                         new
@@ -3192,7 +3191,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.8087500000000003,
                             DataSeriesId = 3,
                             Gravity = 3.9124999999999996,
-                            RecordTime = new DateTime(2020, 5, 6, 18, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 4, 5, 18, 8, 953, DateTimeKind.Local).AddTicks(8449),
                             Temperature = 23.156763977246889
                         },
                         new
@@ -3201,7 +3200,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.8075000000000001,
                             DataSeriesId = 3,
                             Gravity = 3.9250000000000003,
-                            RecordTime = new DateTime(2020, 5, 6, 19, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 4, 5, 38, 8, 953, DateTimeKind.Local).AddTicks(8454),
                             Temperature = 23.126213281678524
                         },
                         new
@@ -3210,7 +3209,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.8062500000000004,
                             DataSeriesId = 3,
                             Gravity = 3.9375,
-                            RecordTime = new DateTime(2020, 5, 6, 19, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 4, 5, 58, 8, 953, DateTimeKind.Local).AddTicks(8458),
                             Temperature = 23.095469746549171
                         },
                         new
@@ -3219,7 +3218,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.8050000000000002,
                             DataSeriesId = 3,
                             Gravity = 3.9500000000000002,
-                            RecordTime = new DateTime(2020, 5, 6, 19, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 4, 6, 18, 8, 953, DateTimeKind.Local).AddTicks(8462),
                             Temperature = 23.064535268264883
                         },
                         new
@@ -3228,7 +3227,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.80375,
                             DataSeriesId = 3,
                             Gravity = 3.9624999999999999,
-                            RecordTime = new DateTime(2020, 5, 6, 20, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 4, 6, 38, 8, 953, DateTimeKind.Local).AddTicks(8466),
                             Temperature = 23.033411755009997
                         },
                         new
@@ -3237,7 +3236,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.8025000000000002,
                             DataSeriesId = 3,
                             Gravity = 3.9750000000000001,
-                            RecordTime = new DateTime(2020, 5, 6, 20, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 4, 6, 58, 8, 953, DateTimeKind.Local).AddTicks(8471),
                             Temperature = 23.00210112662942
                         },
                         new
@@ -3246,7 +3245,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.80125,
                             DataSeriesId = 3,
                             Gravity = 3.9874999999999998,
-                            RecordTime = new DateTime(2020, 5, 6, 20, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 4, 7, 18, 8, 953, DateTimeKind.Local).AddTicks(8475),
                             Temperature = 22.970605314510195
                         },
                         new
@@ -3255,7 +3254,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.8000000000000003,
                             DataSeriesId = 3,
                             Gravity = 4.0,
-                            RecordTime = new DateTime(2020, 5, 6, 21, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 4, 7, 38, 8, 953, DateTimeKind.Local).AddTicks(8479),
                             Temperature = 22.938926261462367
                         },
                         new
@@ -3264,7 +3263,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.7987500000000001,
                             DataSeriesId = 3,
                             Gravity = 4.0125000000000002,
-                            RecordTime = new DateTime(2020, 5, 6, 21, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 4, 7, 58, 8, 953, DateTimeKind.Local).AddTicks(8483),
                             Temperature = 22.907065921599155
                         },
                         new
@@ -3273,7 +3272,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.7975000000000003,
                             DataSeriesId = 3,
                             Gravity = 4.0250000000000004,
-                            RecordTime = new DateTime(2020, 5, 6, 21, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 4, 8, 18, 8, 953, DateTimeKind.Local).AddTicks(8487),
                             Temperature = 22.875026260216391
                         },
                         new
@@ -3282,7 +3281,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.7962500000000001,
                             DataSeriesId = 3,
                             Gravity = 4.0374999999999996,
-                            RecordTime = new DateTime(2020, 5, 6, 22, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 4, 8, 38, 8, 953, DateTimeKind.Local).AddTicks(8491),
                             Temperature = 22.842809253671319
                         },
                         new
@@ -3291,7 +3290,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.7949999999999999,
                             DataSeriesId = 3,
                             Gravity = 4.0500000000000007,
-                            RecordTime = new DateTime(2020, 5, 6, 22, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 4, 8, 58, 8, 953, DateTimeKind.Local).AddTicks(8495),
                             Temperature = 22.810416889260651
                         },
                         new
@@ -3300,7 +3299,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.7937500000000002,
                             DataSeriesId = 3,
                             Gravity = 4.0625,
-                            RecordTime = new DateTime(2020, 5, 6, 22, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 4, 9, 18, 8, 953, DateTimeKind.Local).AddTicks(8500),
                             Temperature = 22.77785116509801
                         },
                         new
@@ -3309,7 +3308,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.7925000000000004,
                             DataSeriesId = 3,
                             Gravity = 4.0749999999999993,
-                            RecordTime = new DateTime(2020, 5, 6, 23, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 4, 9, 38, 8, 953, DateTimeKind.Local).AddTicks(8504),
                             Temperature = 22.745114089990661
                         },
                         new
@@ -3318,7 +3317,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.7912500000000002,
                             DataSeriesId = 3,
                             Gravity = 4.0875000000000004,
-                            RecordTime = new DateTime(2020, 5, 6, 23, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 4, 9, 58, 8, 953, DateTimeKind.Local).AddTicks(8508),
                             Temperature = 22.712207683315594
                         },
                         new
@@ -3327,7 +3326,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.79,
                             DataSeriesId = 3,
                             Gravity = 4.0999999999999996,
-                            RecordTime = new DateTime(2020, 5, 6, 23, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 4, 10, 18, 8, 953, DateTimeKind.Local).AddTicks(8512),
                             Temperature = 22.679133974894985
                         },
                         new
@@ -3336,7 +3335,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.7887500000000003,
                             DataSeriesId = 3,
                             Gravity = 4.1124999999999998,
-                            RecordTime = new DateTime(2020, 5, 7, 0, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 4, 10, 38, 8, 953, DateTimeKind.Local).AddTicks(8516),
                             Temperature = 22.645895004870955
                         },
                         new
@@ -3345,7 +3344,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.7875000000000001,
                             DataSeriesId = 3,
                             Gravity = 4.125,
-                            RecordTime = new DateTime(2020, 5, 7, 0, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 4, 10, 58, 8, 953, DateTimeKind.Local).AddTicks(8520),
                             Temperature = 22.612492823579743
                         },
                         new
@@ -3354,7 +3353,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.7862500000000003,
                             DataSeriesId = 3,
                             Gravity = 4.1375000000000002,
-                            RecordTime = new DateTime(2020, 5, 7, 0, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 4, 11, 18, 8, 953, DateTimeKind.Local).AddTicks(8524),
                             Temperature = 22.578929491425239
                         },
                         new
@@ -3363,7 +3362,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.7850000000000001,
                             DataSeriesId = 3,
                             Gravity = 4.1499999999999995,
-                            RecordTime = new DateTime(2020, 5, 7, 1, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 4, 11, 38, 8, 953, DateTimeKind.Local).AddTicks(8529),
                             Temperature = 22.545207078751858
                         },
                         new
@@ -3372,7 +3371,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.7837500000000004,
                             DataSeriesId = 3,
                             Gravity = 4.1624999999999996,
-                            RecordTime = new DateTime(2020, 5, 7, 1, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 4, 11, 58, 8, 953, DateTimeKind.Local).AddTicks(8533),
                             Temperature = 22.511327665716863
                         },
                         new
@@ -3381,7 +3380,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.7825000000000002,
                             DataSeriesId = 3,
                             Gravity = 4.1749999999999998,
-                            RecordTime = new DateTime(2020, 5, 7, 1, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 4, 12, 18, 8, 953, DateTimeKind.Local).AddTicks(8537),
                             Temperature = 22.477293342162039
                         },
                         new
@@ -3390,7 +3389,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.78125,
                             DataSeriesId = 3,
                             Gravity = 4.1875,
-                            RecordTime = new DateTime(2020, 5, 7, 2, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 4, 12, 38, 8, 953, DateTimeKind.Local).AddTicks(8541),
                             Temperature = 22.443106207484774
                         },
                         new
@@ -3399,7 +3398,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.7800000000000002,
                             DataSeriesId = 3,
                             Gravity = 4.2000000000000002,
-                            RecordTime = new DateTime(2020, 5, 7, 2, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 4, 12, 58, 8, 953, DateTimeKind.Local).AddTicks(8545),
                             Temperature = 22.408768370508579
                         },
                         new
@@ -3408,7 +3407,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.7787500000000001,
                             DataSeriesId = 3,
                             Gravity = 4.2125000000000004,
-                            RecordTime = new DateTime(2020, 5, 7, 2, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 4, 13, 18, 8, 953, DateTimeKind.Local).AddTicks(8550),
                             Temperature = 22.374281949352973
                         },
                         new
@@ -3417,7 +3416,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.7775000000000003,
                             DataSeriesId = 3,
                             Gravity = 4.2249999999999996,
-                            RecordTime = new DateTime(2020, 5, 7, 3, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 4, 13, 38, 8, 953, DateTimeKind.Local).AddTicks(8554),
                             Temperature = 22.339649071302865
                         },
                         new
@@ -3426,7 +3425,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.7762500000000001,
                             DataSeriesId = 3,
                             Gravity = 4.2374999999999998,
-                            RecordTime = new DateTime(2020, 5, 7, 3, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 4, 13, 58, 8, 953, DateTimeKind.Local).AddTicks(8558),
                             Temperature = 22.30487187267731
                         },
                         new
@@ -3435,7 +3434,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.7750000000000004,
                             DataSeriesId = 3,
                             Gravity = 4.25,
-                            RecordTime = new DateTime(2020, 5, 7, 3, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 4, 14, 18, 8, 953, DateTimeKind.Local).AddTicks(8562),
                             Temperature = 22.269952498697734
                         },
                         new
@@ -3444,7 +3443,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.7737500000000002,
                             DataSeriesId = 3,
                             Gravity = 4.2625000000000002,
-                            RecordTime = new DateTime(2020, 5, 7, 4, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 4, 14, 38, 8, 953, DateTimeKind.Local).AddTicks(8566),
                             Temperature = 22.234893103355606
                         },
                         new
@@ -3453,7 +3452,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.7725,
                             DataSeriesId = 3,
                             Gravity = 4.2750000000000004,
-                            RecordTime = new DateTime(2020, 5, 7, 4, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 4, 14, 58, 8, 953, DateTimeKind.Local).AddTicks(8570),
                             Temperature = 22.199695849279578
                         },
                         new
@@ -3462,7 +3461,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.7712500000000002,
                             DataSeriesId = 3,
                             Gravity = 4.2875000000000005,
-                            RecordTime = new DateTime(2020, 5, 7, 4, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 4, 15, 18, 8, 953, DateTimeKind.Local).AddTicks(8574),
                             Temperature = 22.164362907602069
                         },
                         new
@@ -3471,7 +3470,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.77,
                             DataSeriesId = 3,
                             Gravity = 4.2999999999999998,
-                            RecordTime = new DateTime(2020, 5, 7, 5, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 4, 15, 38, 8, 953, DateTimeKind.Local).AddTicks(8578),
                             Temperature = 22.128896457825363
                         },
                         new
@@ -3480,7 +3479,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.7687500000000003,
                             DataSeriesId = 3,
                             Gravity = 4.3125,
-                            RecordTime = new DateTime(2020, 5, 7, 5, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 4, 15, 58, 8, 953, DateTimeKind.Local).AddTicks(8583),
                             Temperature = 22.093298687687138
                         },
                         new
@@ -3489,7 +3488,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.7675000000000001,
                             DataSeriesId = 3,
                             Gravity = 4.3250000000000002,
-                            RecordTime = new DateTime(2020, 5, 7, 5, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 4, 16, 18, 8, 953, DateTimeKind.Local).AddTicks(8587),
                             Temperature = 22.057571793025545
                         },
                         new
@@ -3498,7 +3497,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.7662500000000003,
                             DataSeriesId = 3,
                             Gravity = 4.3375000000000004,
-                            RecordTime = new DateTime(2020, 5, 7, 6, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 4, 16, 38, 8, 953, DateTimeKind.Local).AddTicks(8591),
                             Temperature = 22.021717977643725
                         },
                         new
@@ -3507,7 +3506,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.7650000000000001,
                             DataSeriesId = 3,
                             Gravity = 4.3499999999999996,
-                            RecordTime = new DateTime(2020, 5, 7, 6, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 4, 16, 58, 8, 953, DateTimeKind.Local).AddTicks(8595),
                             Temperature = 21.985739453173903
                         },
                         new
@@ -3516,7 +3515,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.7637499999999999,
                             DataSeriesId = 3,
                             Gravity = 4.3625000000000007,
-                            RecordTime = new DateTime(2020, 5, 7, 6, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 4, 17, 18, 8, 953, DateTimeKind.Local).AddTicks(8599),
                             Temperature = 21.949638438940941
                         },
                         new
@@ -3525,7 +3524,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.7625000000000002,
                             DataSeriesId = 3,
                             Gravity = 4.375,
-                            RecordTime = new DateTime(2020, 5, 7, 7, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 4, 17, 38, 8, 953, DateTimeKind.Local).AddTicks(8603),
                             Temperature = 21.91341716182545
                         },
                         new
@@ -3534,7 +3533,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.7612500000000004,
                             DataSeriesId = 3,
                             Gravity = 4.3874999999999993,
-                            RecordTime = new DateTime(2020, 5, 7, 7, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 4, 17, 58, 8, 953, DateTimeKind.Local).AddTicks(8608),
                             Temperature = 21.877077856126416
                         },
                         new
@@ -3543,7 +3542,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.7600000000000002,
                             DataSeriesId = 3,
                             Gravity = 4.4000000000000004,
-                            RecordTime = new DateTime(2020, 5, 7, 7, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 4, 18, 18, 8, 953, DateTimeKind.Local).AddTicks(8612),
                             Temperature = 21.84062276342339
                         },
                         new
@@ -3552,7 +3551,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.75875,
                             DataSeriesId = 3,
                             Gravity = 4.4124999999999996,
-                            RecordTime = new DateTime(2020, 5, 7, 8, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 4, 18, 38, 8, 953, DateTimeKind.Local).AddTicks(8616),
                             Temperature = 21.80405413243821
                         },
                         new
@@ -3561,7 +3560,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.7575000000000003,
                             DataSeriesId = 3,
                             Gravity = 4.4249999999999998,
-                            RecordTime = new DateTime(2020, 5, 7, 8, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 4, 18, 58, 8, 953, DateTimeKind.Local).AddTicks(8620),
                             Temperature = 21.767374218896286
                         },
                         new
@@ -3570,7 +3569,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.7562500000000001,
                             DataSeriesId = 3,
                             Gravity = 4.4375,
-                            RecordTime = new DateTime(2020, 5, 7, 8, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 4, 19, 18, 8, 953, DateTimeKind.Local).AddTicks(8624),
                             Temperature = 21.730585285387466
                         },
                         new
@@ -3579,7 +3578,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.7550000000000003,
                             DataSeriesId = 3,
                             Gravity = 4.4500000000000002,
-                            RecordTime = new DateTime(2020, 5, 7, 9, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 4, 19, 38, 8, 953, DateTimeKind.Local).AddTicks(8628),
                             Temperature = 21.693689601226456
                         },
                         new
@@ -3588,7 +3587,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.7537500000000001,
                             DataSeriesId = 3,
                             Gravity = 4.4624999999999995,
-                            RecordTime = new DateTime(2020, 5, 7, 9, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 4, 19, 58, 8, 953, DateTimeKind.Local).AddTicks(8633),
                             Temperature = 21.656689442312857
                         },
                         new
@@ -3597,7 +3596,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.7525000000000004,
                             DataSeriesId = 3,
                             Gravity = 4.4749999999999996,
-                            RecordTime = new DateTime(2020, 5, 7, 9, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 4, 20, 18, 8, 953, DateTimeKind.Local).AddTicks(8637),
                             Temperature = 21.619587090990748
                         },
                         new
@@ -3606,7 +3605,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.7512500000000002,
                             DataSeriesId = 3,
                             Gravity = 4.4874999999999998,
-                            RecordTime = new DateTime(2020, 5, 7, 10, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 4, 20, 38, 8, 953, DateTimeKind.Local).AddTicks(8641),
                             Temperature = 21.582384835907931
                         },
                         new
@@ -3615,7 +3614,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.75,
                             DataSeriesId = 3,
                             Gravity = 4.5,
-                            RecordTime = new DateTime(2020, 5, 7, 10, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 4, 20, 58, 8, 953, DateTimeKind.Local).AddTicks(8645),
                             Temperature = 21.545084971874736
                         },
                         new
@@ -3624,7 +3623,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.7487500000000002,
                             DataSeriesId = 3,
                             Gravity = 4.5125000000000002,
-                            RecordTime = new DateTime(2020, 5, 7, 10, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 4, 21, 18, 8, 953, DateTimeKind.Local).AddTicks(8649),
                             Temperature = 21.507689799722478
                         },
                         new
@@ -3633,7 +3632,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.7475000000000001,
                             DataSeriesId = 3,
                             Gravity = 4.5250000000000004,
-                            RecordTime = new DateTime(2020, 5, 7, 11, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 4, 21, 38, 8, 953, DateTimeKind.Local).AddTicks(8653),
                             Temperature = 21.470201626161522
                         },
                         new
@@ -3642,7 +3641,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.7462500000000003,
                             DataSeriesId = 3,
                             Gravity = 4.5374999999999996,
-                            RecordTime = new DateTime(2020, 5, 7, 11, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 4, 21, 58, 8, 953, DateTimeKind.Local).AddTicks(8657),
                             Temperature = 21.432622763638992
                         },
                         new
@@ -3651,7 +3650,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.7450000000000001,
                             DataSeriesId = 3,
                             Gravity = 4.5499999999999998,
-                            RecordTime = new DateTime(2020, 5, 7, 11, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 4, 22, 18, 8, 953, DateTimeKind.Local).AddTicks(8661),
                             Temperature = 21.394955530196146
                         },
                         new
@@ -3660,7 +3659,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.7437500000000004,
                             DataSeriesId = 3,
                             Gravity = 4.5625,
-                            RecordTime = new DateTime(2020, 5, 7, 12, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 4, 22, 38, 8, 953, DateTimeKind.Local).AddTicks(8666),
                             Temperature = 21.357202249325372
                         },
                         new
@@ -3669,7 +3668,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.7425000000000002,
                             DataSeriesId = 3,
                             Gravity = 4.5750000000000002,
-                            RecordTime = new DateTime(2020, 5, 7, 12, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 4, 22, 58, 8, 953, DateTimeKind.Local).AddTicks(8670),
                             Temperature = 21.319365249826863
                         },
                         new
@@ -3678,7 +3677,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.74125,
                             DataSeriesId = 3,
                             Gravity = 4.5875000000000004,
-                            RecordTime = new DateTime(2020, 5, 7, 12, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 4, 23, 18, 8, 953, DateTimeKind.Local).AddTicks(8674),
                             Temperature = 21.281446865664982
                         },
                         new
@@ -3687,7 +3686,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.7400000000000002,
                             DataSeriesId = 3,
                             Gravity = 4.6000000000000005,
-                            RecordTime = new DateTime(2020, 5, 7, 13, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 4, 23, 38, 8, 953, DateTimeKind.Local).AddTicks(8678),
                             Temperature = 21.243449435824274
                         },
                         new
@@ -3696,7 +3695,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.73875,
                             DataSeriesId = 3,
                             Gravity = 4.6124999999999998,
-                            RecordTime = new DateTime(2020, 5, 7, 13, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 4, 23, 58, 8, 953, DateTimeKind.Local).AddTicks(8682),
                             Temperature = 21.205375304165194
                         },
                         new
@@ -3705,7 +3704,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.7375000000000003,
                             DataSeriesId = 3,
                             Gravity = 4.625,
-                            RecordTime = new DateTime(2020, 5, 7, 13, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 5, 0, 18, 8, 953, DateTimeKind.Local).AddTicks(8687),
                             Temperature = 21.167226819279527
                         },
                         new
@@ -3714,7 +3713,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.7362500000000001,
                             DataSeriesId = 3,
                             Gravity = 4.6375000000000002,
-                            RecordTime = new DateTime(2020, 5, 7, 14, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 5, 0, 38, 8, 953, DateTimeKind.Local).AddTicks(8691),
                             Temperature = 21.129006334345519
                         },
                         new
@@ -3723,7 +3722,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.7350000000000003,
                             DataSeriesId = 3,
                             Gravity = 4.6500000000000004,
-                            RecordTime = new DateTime(2020, 5, 7, 14, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 5, 0, 58, 8, 953, DateTimeKind.Local).AddTicks(8695),
                             Temperature = 21.090716206982712
                         },
                         new
@@ -3732,7 +3731,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.7337500000000001,
                             DataSeriesId = 3,
                             Gravity = 4.6624999999999996,
-                            RecordTime = new DateTime(2020, 5, 7, 14, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 5, 1, 18, 8, 953, DateTimeKind.Local).AddTicks(8699),
                             Temperature = 21.052358799106528
                         },
                         new
@@ -3741,7 +3740,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.7324999999999999,
                             DataSeriesId = 3,
                             Gravity = 4.6750000000000007,
-                            RecordTime = new DateTime(2020, 5, 7, 15, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 5, 1, 38, 8, 953, DateTimeKind.Local).AddTicks(8703),
                             Temperature = 21.013936476782561
                         },
                         new
@@ -3750,7 +3749,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.7312500000000002,
                             DataSeriesId = 3,
                             Gravity = 4.6875,
-                            RecordTime = new DateTime(2020, 5, 7, 15, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 5, 1, 58, 8, 953, DateTimeKind.Local).AddTicks(8707),
                             Temperature = 20.975451610080643
                         },
                         new
@@ -3759,7 +3758,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.7300000000000004,
                             DataSeriesId = 3,
                             Gravity = 4.6999999999999993,
-                            RecordTime = new DateTime(2020, 5, 7, 15, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 5, 2, 18, 8, 953, DateTimeKind.Local).AddTicks(8712),
                             Temperature = 20.936906572928624
                         },
                         new
@@ -3768,7 +3767,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.7287500000000002,
                             DataSeriesId = 3,
                             Gravity = 4.7125000000000004,
-                            RecordTime = new DateTime(2020, 5, 7, 16, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 5, 2, 38, 8, 953, DateTimeKind.Local).AddTicks(8716),
                             Temperature = 20.898303742965961
                         },
                         new
@@ -3777,7 +3776,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.7275,
                             DataSeriesId = 3,
                             Gravity = 4.7249999999999996,
-                            RecordTime = new DateTime(2020, 5, 7, 16, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 5, 2, 58, 8, 953, DateTimeKind.Local).AddTicks(8720),
                             Temperature = 20.859645501397051
                         },
                         new
@@ -3786,7 +3785,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.7262500000000003,
                             DataSeriesId = 3,
                             Gravity = 4.7374999999999998,
-                            RecordTime = new DateTime(2020, 5, 7, 16, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 5, 3, 18, 8, 953, DateTimeKind.Local).AddTicks(8724),
                             Temperature = 20.820934232844316
                         },
                         new
@@ -3795,7 +3794,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.7250000000000001,
                             DataSeriesId = 3,
                             Gravity = 4.75,
-                            RecordTime = new DateTime(2020, 5, 7, 17, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 5, 3, 38, 8, 953, DateTimeKind.Local).AddTicks(8728),
                             Temperature = 20.782172325201156
                         },
                         new
@@ -3804,7 +3803,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.7237500000000003,
                             DataSeriesId = 3,
                             Gravity = 4.7625000000000002,
-                            RecordTime = new DateTime(2020, 5, 7, 17, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 5, 3, 58, 8, 953, DateTimeKind.Local).AddTicks(8732),
                             Temperature = 20.743362169484616
                         },
                         new
@@ -3813,7 +3812,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.7225000000000001,
                             DataSeriesId = 3,
                             Gravity = 4.7749999999999995,
-                            RecordTime = new DateTime(2020, 5, 7, 17, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 5, 4, 18, 8, 953, DateTimeKind.Local).AddTicks(8737),
                             Temperature = 20.704506159687913
                         },
                         new
@@ -3822,7 +3821,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.7212500000000004,
                             DataSeriesId = 3,
                             Gravity = 4.7874999999999996,
-                            RecordTime = new DateTime(2020, 5, 7, 18, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 5, 4, 38, 8, 953, DateTimeKind.Local).AddTicks(8741),
                             Temperature = 20.665606692632764
                         },
                         new
@@ -3831,7 +3830,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.7200000000000002,
                             DataSeriesId = 3,
                             Gravity = 4.7999999999999998,
-                            RecordTime = new DateTime(2020, 5, 7, 18, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 5, 4, 58, 8, 953, DateTimeKind.Local).AddTicks(8745),
                             Temperature = 20.626666167821522
                         },
                         new
@@ -3840,7 +3839,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.71875,
                             DataSeriesId = 3,
                             Gravity = 4.8125,
-                            RecordTime = new DateTime(2020, 5, 7, 18, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 5, 5, 18, 8, 953, DateTimeKind.Local).AddTicks(8749),
                             Temperature = 20.587686987289189
                         },
                         new
@@ -3849,7 +3848,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.7175000000000002,
                             DataSeriesId = 3,
                             Gravity = 4.8250000000000002,
-                            RecordTime = new DateTime(2020, 5, 7, 19, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 5, 5, 38, 8, 953, DateTimeKind.Local).AddTicks(8753),
                             Temperature = 20.548671555455229
                         },
                         new
@@ -3858,7 +3857,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.7162500000000001,
                             DataSeriesId = 3,
                             Gravity = 4.8375000000000004,
-                            RecordTime = new DateTime(2020, 5, 7, 19, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 5, 5, 58, 8, 953, DateTimeKind.Local).AddTicks(8757),
                             Temperature = 20.50962227897525
                         },
                         new
@@ -3867,7 +3866,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.7150000000000003,
                             DataSeriesId = 3,
                             Gravity = 4.8499999999999996,
-                            RecordTime = new DateTime(2020, 5, 7, 19, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 5, 6, 18, 8, 953, DateTimeKind.Local).AddTicks(8761),
                             Temperature = 20.470541566592573
                         },
                         new
@@ -3876,7 +3875,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.7137500000000001,
                             DataSeriesId = 3,
                             Gravity = 4.8624999999999998,
-                            RecordTime = new DateTime(2020, 5, 7, 20, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 5, 6, 38, 8, 953, DateTimeKind.Local).AddTicks(8765),
                             Temperature = 20.431431828989616
                         },
                         new
@@ -3885,7 +3884,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.7125000000000004,
                             DataSeriesId = 3,
                             Gravity = 4.875,
-                            RecordTime = new DateTime(2020, 5, 7, 20, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 5, 6, 58, 8, 953, DateTimeKind.Local).AddTicks(8770),
                             Temperature = 20.392295478639227
                         },
                         new
@@ -3894,7 +3893,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.7112500000000002,
                             DataSeriesId = 3,
                             Gravity = 4.8875000000000002,
-                            RecordTime = new DateTime(2020, 5, 7, 20, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 5, 7, 18, 8, 953, DateTimeKind.Local).AddTicks(8774),
                             Temperature = 20.353134929655834
                         },
                         new
@@ -3903,7 +3902,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.71,
                             DataSeriesId = 3,
                             Gravity = 4.9000000000000004,
-                            RecordTime = new DateTime(2020, 5, 7, 21, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 5, 7, 38, 8, 953, DateTimeKind.Local).AddTicks(8778),
                             Temperature = 20.313952597646569
                         },
                         new
@@ -3912,7 +3911,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.7087500000000002,
                             DataSeriesId = 3,
                             Gravity = 4.9125000000000005,
-                            RecordTime = new DateTime(2020, 5, 7, 21, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 5, 7, 58, 8, 953, DateTimeKind.Local).AddTicks(8782),
                             Temperature = 20.274750899562228
                         },
                         new
@@ -3921,7 +3920,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.7075,
                             DataSeriesId = 3,
                             Gravity = 4.9249999999999998,
-                            RecordTime = new DateTime(2020, 5, 7, 21, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 5, 8, 18, 8, 953, DateTimeKind.Local).AddTicks(8786),
                             Temperature = 20.235532253548214
                         },
                         new
@@ -3930,7 +3929,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.7062500000000003,
                             DataSeriesId = 3,
                             Gravity = 4.9375,
-                            RecordTime = new DateTime(2020, 5, 7, 22, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 5, 8, 38, 8, 953, DateTimeKind.Local).AddTicks(8790),
                             Temperature = 20.196299078795342
                         },
                         new
@@ -3939,7 +3938,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.7050000000000001,
                             DataSeriesId = 3,
                             Gravity = 4.9500000000000002,
-                            RecordTime = new DateTime(2020, 5, 7, 22, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 5, 8, 58, 8, 953, DateTimeKind.Local).AddTicks(8795),
                             Temperature = 20.157053795390642
                         },
                         new
@@ -3948,7 +3947,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.7037500000000003,
                             DataSeriesId = 3,
                             Gravity = 4.9625000000000004,
-                            RecordTime = new DateTime(2020, 5, 7, 22, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 5, 9, 18, 8, 953, DateTimeKind.Local).AddTicks(8799),
                             Temperature = 20.117798824168052
                         },
                         new
@@ -3957,7 +3956,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.7025000000000001,
                             DataSeriesId = 3,
                             Gravity = 4.9749999999999996,
-                            RecordTime = new DateTime(2020, 5, 7, 23, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 5, 9, 38, 8, 953, DateTimeKind.Local).AddTicks(8803),
                             Temperature = 20.078536586559103
                         },
                         new
@@ -3966,7 +3965,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.7012499999999999,
                             DataSeriesId = 3,
                             Gravity = 4.9875000000000007,
-                            RecordTime = new DateTime(2020, 5, 7, 23, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 5, 9, 58, 8, 953, DateTimeKind.Local).AddTicks(8807),
                             Temperature = 20.039269504443556
                         },
                         new
@@ -3975,7 +3974,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.7000000000000002,
                             DataSeriesId = 3,
                             Gravity = 5.0,
-                            RecordTime = new DateTime(2020, 5, 7, 23, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 5, 10, 18, 8, 953, DateTimeKind.Local).AddTicks(8811),
                             Temperature = 20.0
                         },
                         new
@@ -3984,7 +3983,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.6987500000000004,
                             DataSeriesId = 3,
                             Gravity = 5.0124999999999993,
-                            RecordTime = new DateTime(2020, 5, 8, 0, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 5, 10, 38, 8, 953, DateTimeKind.Local).AddTicks(8815),
                             Temperature = 19.960730495556444
                         },
                         new
@@ -3993,7 +3992,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.6975000000000002,
                             DataSeriesId = 3,
                             Gravity = 5.0249999999999995,
-                            RecordTime = new DateTime(2020, 5, 8, 0, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 5, 10, 58, 8, 953, DateTimeKind.Local).AddTicks(8819),
                             Temperature = 19.9214634134409
                         },
                         new
@@ -4002,7 +4001,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.69625,
                             DataSeriesId = 3,
                             Gravity = 5.0375000000000005,
-                            RecordTime = new DateTime(2020, 5, 8, 0, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 5, 11, 18, 8, 953, DateTimeKind.Local).AddTicks(8824),
                             Temperature = 19.882201175831948
                         },
                         new
@@ -4011,7 +4010,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.6950000000000003,
                             DataSeriesId = 3,
                             Gravity = 5.0499999999999998,
-                            RecordTime = new DateTime(2020, 5, 8, 1, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 5, 11, 38, 8, 953, DateTimeKind.Local).AddTicks(8828),
                             Temperature = 19.842946204609358
                         },
                         new
@@ -4020,7 +4019,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.6937500000000001,
                             DataSeriesId = 3,
                             Gravity = 5.0625,
-                            RecordTime = new DateTime(2020, 5, 8, 1, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 5, 11, 58, 8, 953, DateTimeKind.Local).AddTicks(8832),
                             Temperature = 19.803700921204658
                         },
                         new
@@ -4029,7 +4028,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.6925000000000003,
                             DataSeriesId = 3,
                             Gravity = 5.0749999999999993,
-                            RecordTime = new DateTime(2020, 5, 8, 1, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 5, 12, 18, 8, 953, DateTimeKind.Local).AddTicks(8836),
                             Temperature = 19.764467746451789
                         },
                         new
@@ -4038,7 +4037,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.6912500000000001,
                             DataSeriesId = 3,
                             Gravity = 5.0875000000000004,
-                            RecordTime = new DateTime(2020, 5, 8, 2, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 5, 12, 38, 8, 953, DateTimeKind.Local).AddTicks(8840),
                             Temperature = 19.725249100437772
                         },
                         new
@@ -4047,7 +4046,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.6900000000000004,
                             DataSeriesId = 3,
                             Gravity = 5.0999999999999996,
-                            RecordTime = new DateTime(2020, 5, 8, 2, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 5, 12, 58, 8, 953, DateTimeKind.Local).AddTicks(8844),
                             Temperature = 19.686047402353434
                         },
                         new
@@ -4056,7 +4055,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.6887500000000002,
                             DataSeriesId = 3,
                             Gravity = 5.1124999999999998,
-                            RecordTime = new DateTime(2020, 5, 8, 2, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 5, 13, 18, 8, 953, DateTimeKind.Local).AddTicks(8848),
                             Temperature = 19.646865070344166
                         },
                         new
@@ -4065,7 +4064,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.6875,
                             DataSeriesId = 3,
                             Gravity = 5.125,
-                            RecordTime = new DateTime(2020, 5, 8, 3, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 5, 13, 38, 8, 953, DateTimeKind.Local).AddTicks(8852),
                             Temperature = 19.607704521360777
                         },
                         new
@@ -4074,7 +4073,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.6862500000000002,
                             DataSeriesId = 3,
                             Gravity = 5.1375000000000002,
-                            RecordTime = new DateTime(2020, 5, 8, 3, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 5, 13, 58, 8, 953, DateTimeKind.Local).AddTicks(8856),
                             Temperature = 19.56856817101038
                         },
                         new
@@ -4083,7 +4082,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.6850000000000001,
                             DataSeriesId = 3,
                             Gravity = 5.1500000000000004,
-                            RecordTime = new DateTime(2020, 5, 8, 3, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 5, 14, 18, 8, 953, DateTimeKind.Local).AddTicks(8861),
                             Temperature = 19.529458433407431
                         },
                         new
@@ -4092,7 +4091,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.6837500000000003,
                             DataSeriesId = 3,
                             Gravity = 5.1624999999999996,
-                            RecordTime = new DateTime(2020, 5, 8, 4, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 5, 14, 38, 8, 953, DateTimeKind.Local).AddTicks(8865),
                             Temperature = 19.49037772102475
                         },
                         new
@@ -4101,7 +4100,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.6825000000000001,
                             DataSeriesId = 3,
                             Gravity = 5.1749999999999998,
-                            RecordTime = new DateTime(2020, 5, 8, 4, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 5, 14, 58, 8, 953, DateTimeKind.Local).AddTicks(8869),
                             Temperature = 19.451328444544774
                         },
                         new
@@ -4110,7 +4109,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.6812500000000004,
                             DataSeriesId = 3,
                             Gravity = 5.1875,
-                            RecordTime = new DateTime(2020, 5, 8, 4, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 5, 15, 18, 8, 953, DateTimeKind.Local).AddTicks(8873),
                             Temperature = 19.412313012710811
                         },
                         new
@@ -4119,7 +4118,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.6800000000000002,
                             DataSeriesId = 3,
                             Gravity = 5.2000000000000002,
-                            RecordTime = new DateTime(2020, 5, 8, 5, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 5, 15, 38, 8, 953, DateTimeKind.Local).AddTicks(8877),
                             Temperature = 19.373333832178478
                         },
                         new
@@ -4128,7 +4127,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.67875,
                             DataSeriesId = 3,
                             Gravity = 5.2125000000000004,
-                            RecordTime = new DateTime(2020, 5, 8, 5, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 5, 15, 58, 8, 953, DateTimeKind.Local).AddTicks(8881),
                             Temperature = 19.33439330736724
                         },
                         new
@@ -4137,7 +4136,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.6775000000000002,
                             DataSeriesId = 3,
                             Gravity = 5.2249999999999996,
-                            RecordTime = new DateTime(2020, 5, 8, 5, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 5, 16, 18, 8, 953, DateTimeKind.Local).AddTicks(8886),
                             Temperature = 19.295493840312091
                         },
                         new
@@ -4146,7 +4145,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.67625,
                             DataSeriesId = 3,
                             Gravity = 5.2375000000000007,
-                            RecordTime = new DateTime(2020, 5, 8, 6, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 5, 16, 38, 8, 953, DateTimeKind.Local).AddTicks(8890),
                             Temperature = 19.256637830515384
                         },
                         new
@@ -4155,7 +4154,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.6750000000000003,
                             DataSeriesId = 3,
                             Gravity = 5.25,
-                            RecordTime = new DateTime(2020, 5, 8, 6, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 5, 16, 58, 8, 953, DateTimeKind.Local).AddTicks(8894),
                             Temperature = 19.217827674798848
                         },
                         new
@@ -4164,7 +4163,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.6737500000000001,
                             DataSeriesId = 3,
                             Gravity = 5.2625000000000002,
-                            RecordTime = new DateTime(2020, 5, 8, 6, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 5, 17, 18, 8, 953, DateTimeKind.Local).AddTicks(8898),
                             Temperature = 19.179065767155688
                         },
                         new
@@ -4173,7 +4172,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.6725000000000003,
                             DataSeriesId = 3,
                             Gravity = 5.2749999999999995,
-                            RecordTime = new DateTime(2020, 5, 8, 7, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 5, 17, 38, 8, 953, DateTimeKind.Local).AddTicks(8902),
                             Temperature = 19.140354498602953
                         },
                         new
@@ -4182,7 +4181,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.6712500000000001,
                             DataSeriesId = 3,
                             Gravity = 5.2875000000000005,
-                            RecordTime = new DateTime(2020, 5, 8, 7, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 5, 17, 58, 8, 953, DateTimeKind.Local).AddTicks(8906),
                             Temperature = 19.101696257034035
                         },
                         new
@@ -4191,7 +4190,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.6699999999999999,
                             DataSeriesId = 3,
                             Gravity = 5.3000000000000007,
-                            RecordTime = new DateTime(2020, 5, 8, 7, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 5, 18, 18, 8, 953, DateTimeKind.Local).AddTicks(8910),
                             Temperature = 19.063093427071376
                         },
                         new
@@ -4200,7 +4199,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.6687500000000002,
                             DataSeriesId = 3,
                             Gravity = 5.3125,
-                            RecordTime = new DateTime(2020, 5, 8, 8, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 5, 18, 38, 8, 953, DateTimeKind.Local).AddTicks(8915),
                             Temperature = 19.024548389919357
                         },
                         new
@@ -4209,7 +4208,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.6675000000000004,
                             DataSeriesId = 3,
                             Gravity = 5.3249999999999993,
-                            RecordTime = new DateTime(2020, 5, 8, 8, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 5, 18, 58, 8, 953, DateTimeKind.Local).AddTicks(8966),
                             Temperature = 18.986063523217439
                         },
                         new
@@ -4218,7 +4217,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.6662500000000002,
                             DataSeriesId = 3,
                             Gravity = 5.3374999999999995,
-                            RecordTime = new DateTime(2020, 5, 8, 8, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 5, 19, 18, 8, 953, DateTimeKind.Local).AddTicks(8971),
                             Temperature = 18.947641200893475
                         },
                         new
@@ -4227,7 +4226,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.665,
                             DataSeriesId = 3,
                             Gravity = 5.3500000000000005,
-                            RecordTime = new DateTime(2020, 5, 8, 9, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 5, 19, 38, 8, 953, DateTimeKind.Local).AddTicks(8975),
                             Temperature = 18.909283793017288
                         },
                         new
@@ -4236,7 +4235,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.6637500000000003,
                             DataSeriesId = 3,
                             Gravity = 5.3624999999999998,
-                            RecordTime = new DateTime(2020, 5, 8, 9, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 5, 19, 58, 8, 953, DateTimeKind.Local).AddTicks(8979),
                             Temperature = 18.870993665654481
                         },
                         new
@@ -4245,7 +4244,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.6625000000000001,
                             DataSeriesId = 3,
                             Gravity = 5.375,
-                            RecordTime = new DateTime(2020, 5, 8, 9, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 5, 20, 18, 8, 953, DateTimeKind.Local).AddTicks(8984),
                             Temperature = 18.832773180720473
                         },
                         new
@@ -4254,7 +4253,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.6612500000000003,
                             DataSeriesId = 3,
                             Gravity = 5.3874999999999993,
-                            RecordTime = new DateTime(2020, 5, 8, 10, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 5, 20, 38, 8, 953, DateTimeKind.Local).AddTicks(8988),
                             Temperature = 18.794624695834809
                         },
                         new
@@ -4263,7 +4262,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.6600000000000001,
                             DataSeriesId = 3,
                             Gravity = 5.4000000000000004,
-                            RecordTime = new DateTime(2020, 5, 8, 10, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 5, 20, 58, 8, 953, DateTimeKind.Local).AddTicks(8992),
                             Temperature = 18.756550564175726
                         },
                         new
@@ -4272,7 +4271,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.6587500000000004,
                             DataSeriesId = 3,
                             Gravity = 5.4124999999999996,
-                            RecordTime = new DateTime(2020, 5, 8, 10, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 5, 21, 18, 8, 953, DateTimeKind.Local).AddTicks(8996),
                             Temperature = 18.718553134335018
                         },
                         new
@@ -4281,7 +4280,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.6575000000000002,
                             DataSeriesId = 3,
                             Gravity = 5.4249999999999998,
-                            RecordTime = new DateTime(2020, 5, 8, 11, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 5, 21, 38, 8, 953, DateTimeKind.Local).AddTicks(9000),
                             Temperature = 18.680634750173137
                         },
                         new
@@ -4290,7 +4289,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.65625,
                             DataSeriesId = 3,
                             Gravity = 5.4375,
-                            RecordTime = new DateTime(2020, 5, 8, 11, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 5, 21, 58, 8, 953, DateTimeKind.Local).AddTicks(9004),
                             Temperature = 18.642797750674632
                         },
                         new
@@ -4299,7 +4298,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.6550000000000002,
                             DataSeriesId = 3,
                             Gravity = 5.4500000000000002,
-                            RecordTime = new DateTime(2020, 5, 8, 11, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 5, 22, 18, 8, 953, DateTimeKind.Local).AddTicks(9009),
                             Temperature = 18.605044469803854
                         },
                         new
@@ -4308,7 +4307,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.6537500000000001,
                             DataSeriesId = 3,
                             Gravity = 5.4625000000000004,
-                            RecordTime = new DateTime(2020, 5, 8, 12, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 5, 22, 38, 8, 953, DateTimeKind.Local).AddTicks(9013),
                             Temperature = 18.567377236361008
                         },
                         new
@@ -4317,7 +4316,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.6525000000000003,
                             DataSeriesId = 3,
                             Gravity = 5.4749999999999996,
-                            RecordTime = new DateTime(2020, 5, 8, 12, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 5, 22, 58, 8, 953, DateTimeKind.Local).AddTicks(9017),
                             Temperature = 18.529798373838481
                         },
                         new
@@ -4326,7 +4325,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.6512500000000001,
                             DataSeriesId = 3,
                             Gravity = 5.4874999999999998,
-                            RecordTime = new DateTime(2020, 5, 8, 12, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 5, 23, 18, 8, 953, DateTimeKind.Local).AddTicks(9021),
                             Temperature = 18.492310200277522
                         },
                         new
@@ -4335,7 +4334,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.6500000000000004,
                             DataSeriesId = 3,
                             Gravity = 5.5,
-                            RecordTime = new DateTime(2020, 5, 8, 13, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 5, 23, 38, 8, 953, DateTimeKind.Local).AddTicks(9025),
                             Temperature = 18.45491502812526
                         },
                         new
@@ -4344,7 +4343,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.6487500000000002,
                             DataSeriesId = 3,
                             Gravity = 5.5125000000000002,
-                            RecordTime = new DateTime(2020, 5, 8, 13, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 5, 23, 58, 8, 953, DateTimeKind.Local).AddTicks(9029),
                             Temperature = 18.417615164092069
                         },
                         new
@@ -4353,7 +4352,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.6475,
                             DataSeriesId = 3,
                             Gravity = 5.5250000000000004,
-                            RecordTime = new DateTime(2020, 5, 8, 13, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 6, 0, 18, 8, 953, DateTimeKind.Local).AddTicks(9033),
                             Temperature = 18.380412909009255
                         },
                         new
@@ -4362,7 +4361,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.6462500000000002,
                             DataSeriesId = 3,
                             Gravity = 5.5374999999999996,
-                            RecordTime = new DateTime(2020, 5, 8, 14, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 6, 0, 38, 8, 953, DateTimeKind.Local).AddTicks(9038),
                             Temperature = 18.343310557687147
                         },
                         new
@@ -4371,7 +4370,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.645,
                             DataSeriesId = 3,
                             Gravity = 5.5500000000000007,
-                            RecordTime = new DateTime(2020, 5, 8, 14, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 6, 0, 58, 8, 953, DateTimeKind.Local).AddTicks(9042),
                             Temperature = 18.306310398773544
                         },
                         new
@@ -4380,7 +4379,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.6437500000000003,
                             DataSeriesId = 3,
                             Gravity = 5.5625,
-                            RecordTime = new DateTime(2020, 5, 8, 14, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 6, 1, 18, 8, 953, DateTimeKind.Local).AddTicks(9046),
                             Temperature = 18.269414714612534
                         },
                         new
@@ -4389,7 +4388,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.6425000000000001,
                             DataSeriesId = 3,
                             Gravity = 5.5750000000000002,
-                            RecordTime = new DateTime(2020, 5, 8, 15, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 6, 1, 38, 8, 953, DateTimeKind.Local).AddTicks(9050),
                             Temperature = 18.232625781103714
                         },
                         new
@@ -4398,7 +4397,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.6412500000000003,
                             DataSeriesId = 3,
                             Gravity = 5.5874999999999995,
-                            RecordTime = new DateTime(2020, 5, 8, 15, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 6, 1, 58, 8, 953, DateTimeKind.Local).AddTicks(9054),
                             Temperature = 18.195945867561793
                         },
                         new
@@ -4407,7 +4406,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.6400000000000001,
                             DataSeriesId = 3,
                             Gravity = 5.6000000000000005,
-                            RecordTime = new DateTime(2020, 5, 8, 15, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 6, 2, 18, 8, 953, DateTimeKind.Local).AddTicks(9058),
                             Temperature = 18.15937723657661
                         },
                         new
@@ -4416,7 +4415,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.6387499999999999,
                             DataSeriesId = 3,
                             Gravity = 5.6125000000000007,
-                            RecordTime = new DateTime(2020, 5, 8, 16, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 6, 2, 38, 8, 953, DateTimeKind.Local).AddTicks(9063),
                             Temperature = 18.122922143873584
                         },
                         new
@@ -4425,7 +4424,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.6375000000000002,
                             DataSeriesId = 3,
                             Gravity = 5.625,
-                            RecordTime = new DateTime(2020, 5, 8, 16, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 6, 2, 58, 8, 953, DateTimeKind.Local).AddTicks(9067),
                             Temperature = 18.08658283817455
                         },
                         new
@@ -4434,7 +4433,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.6362500000000004,
                             DataSeriesId = 3,
                             Gravity = 5.6374999999999993,
-                            RecordTime = new DateTime(2020, 5, 8, 16, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 6, 3, 18, 8, 953, DateTimeKind.Local).AddTicks(9071),
                             Temperature = 18.050361561059059
                         },
                         new
@@ -4443,7 +4442,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.6350000000000002,
                             DataSeriesId = 3,
                             Gravity = 5.6499999999999995,
-                            RecordTime = new DateTime(2020, 5, 8, 17, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 6, 3, 38, 8, 953, DateTimeKind.Local).AddTicks(9075),
                             Temperature = 18.014260546826101
                         },
                         new
@@ -4452,7 +4451,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.63375,
                             DataSeriesId = 3,
                             Gravity = 5.6625000000000005,
-                            RecordTime = new DateTime(2020, 5, 8, 17, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 6, 3, 58, 8, 953, DateTimeKind.Local).AddTicks(9079),
                             Temperature = 17.978282022356275
                         },
                         new
@@ -4461,7 +4460,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.6325000000000003,
                             DataSeriesId = 3,
                             Gravity = 5.6749999999999998,
-                            RecordTime = new DateTime(2020, 5, 8, 17, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 6, 4, 18, 8, 953, DateTimeKind.Local).AddTicks(9083),
                             Temperature = 17.942428206974459
                         },
                         new
@@ -4470,7 +4469,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.6312500000000001,
                             DataSeriesId = 3,
                             Gravity = 5.6875,
-                            RecordTime = new DateTime(2020, 5, 8, 18, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 6, 4, 38, 8, 953, DateTimeKind.Local).AddTicks(9088),
                             Temperature = 17.906701312312862
                         },
                         new
@@ -4479,7 +4478,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.6300000000000003,
                             DataSeriesId = 3,
                             Gravity = 5.6999999999999993,
-                            RecordTime = new DateTime(2020, 5, 8, 18, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 6, 4, 58, 8, 953, DateTimeKind.Local).AddTicks(9092),
                             Temperature = 17.871103542174637
                         },
                         new
@@ -4488,7 +4487,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.6287500000000001,
                             DataSeriesId = 3,
                             Gravity = 5.7125000000000004,
-                            RecordTime = new DateTime(2020, 5, 8, 18, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 6, 5, 18, 8, 953, DateTimeKind.Local).AddTicks(9096),
                             Temperature = 17.835637092397931
                         },
                         new
@@ -4497,7 +4496,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.6275000000000004,
                             DataSeriesId = 3,
                             Gravity = 5.7249999999999996,
-                            RecordTime = new DateTime(2020, 5, 8, 19, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 6, 5, 38, 8, 953, DateTimeKind.Local).AddTicks(9100),
                             Temperature = 17.800304150720425
                         },
                         new
@@ -4506,7 +4505,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.6262500000000002,
                             DataSeriesId = 3,
                             Gravity = 5.7374999999999998,
-                            RecordTime = new DateTime(2020, 5, 8, 19, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 6, 5, 58, 8, 953, DateTimeKind.Local).AddTicks(9104),
                             Temperature = 17.765106896644394
                         },
                         new
@@ -4515,7 +4514,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.625,
                             DataSeriesId = 3,
                             Gravity = 5.75,
-                            RecordTime = new DateTime(2020, 5, 8, 19, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 6, 6, 18, 8, 953, DateTimeKind.Local).AddTicks(9108),
                             Temperature = 17.73004750130227
                         },
                         new
@@ -4524,7 +4523,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.6237500000000002,
                             DataSeriesId = 3,
                             Gravity = 5.7625000000000002,
-                            RecordTime = new DateTime(2020, 5, 8, 20, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 6, 6, 38, 8, 953, DateTimeKind.Local).AddTicks(9112),
                             Temperature = 17.695128127322686
                         },
                         new
@@ -4533,7 +4532,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.6225000000000001,
                             DataSeriesId = 3,
                             Gravity = 5.7750000000000004,
-                            RecordTime = new DateTime(2020, 5, 8, 20, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 6, 6, 58, 8, 953, DateTimeKind.Local).AddTicks(9116),
                             Temperature = 17.660350928697135
                         },
                         new
@@ -4542,7 +4541,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.6212500000000003,
                             DataSeriesId = 3,
                             Gravity = 5.7874999999999996,
-                            RecordTime = new DateTime(2020, 5, 8, 20, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 6, 7, 18, 8, 953, DateTimeKind.Local).AddTicks(9121),
                             Temperature = 17.625718050647027
                         },
                         new
@@ -4551,7 +4550,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.6200000000000001,
                             DataSeriesId = 3,
                             Gravity = 5.7999999999999998,
-                            RecordTime = new DateTime(2020, 5, 8, 21, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 6, 7, 38, 8, 953, DateTimeKind.Local).AddTicks(9125),
                             Temperature = 17.591231629491425
                         },
                         new
@@ -4560,7 +4559,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.6187500000000004,
                             DataSeriesId = 3,
                             Gravity = 5.8125,
-                            RecordTime = new DateTime(2020, 5, 8, 21, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 6, 7, 58, 8, 953, DateTimeKind.Local).AddTicks(9129),
                             Temperature = 17.556893792515226
                         },
                         new
@@ -4569,7 +4568,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.6175000000000002,
                             DataSeriesId = 3,
                             Gravity = 5.8250000000000002,
-                            RecordTime = new DateTime(2020, 5, 8, 21, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 6, 8, 18, 8, 953, DateTimeKind.Local).AddTicks(9133),
                             Temperature = 17.522706657837961
                         },
                         new
@@ -4578,7 +4577,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.61625,
                             DataSeriesId = 3,
                             Gravity = 5.8375000000000004,
-                            RecordTime = new DateTime(2020, 5, 8, 22, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 6, 8, 38, 8, 953, DateTimeKind.Local).AddTicks(9138),
                             Temperature = 17.488672334283137
                         },
                         new
@@ -4587,7 +4586,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.6150000000000002,
                             DataSeriesId = 3,
                             Gravity = 5.8499999999999996,
-                            RecordTime = new DateTime(2020, 5, 8, 22, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 6, 8, 58, 8, 953, DateTimeKind.Local).AddTicks(9142),
                             Temperature = 17.454792921248146
                         },
                         new
@@ -4596,7 +4595,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.61375,
                             DataSeriesId = 3,
                             Gravity = 5.8625000000000007,
-                            RecordTime = new DateTime(2020, 5, 8, 22, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 6, 9, 18, 8, 953, DateTimeKind.Local).AddTicks(9146),
                             Temperature = 17.421070508574761
                         },
                         new
@@ -4605,7 +4604,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.6125000000000003,
                             DataSeriesId = 3,
                             Gravity = 5.875,
-                            RecordTime = new DateTime(2020, 5, 8, 23, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 6, 9, 38, 8, 953, DateTimeKind.Local).AddTicks(9150),
                             Temperature = 17.387507176420257
                         },
                         new
@@ -4614,7 +4613,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.6112500000000001,
                             DataSeriesId = 3,
                             Gravity = 5.8875000000000002,
-                            RecordTime = new DateTime(2020, 5, 8, 23, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 6, 9, 58, 8, 953, DateTimeKind.Local).AddTicks(9154),
                             Temperature = 17.354104995129049
                         },
                         new
@@ -4623,7 +4622,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.6100000000000003,
                             DataSeriesId = 3,
                             Gravity = 5.8999999999999995,
-                            RecordTime = new DateTime(2020, 5, 8, 23, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 6, 10, 18, 8, 953, DateTimeKind.Local).AddTicks(9158),
                             Temperature = 17.320866025105019
                         },
                         new
@@ -4632,7 +4631,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.6087500000000001,
                             DataSeriesId = 3,
                             Gravity = 5.9125000000000005,
-                            RecordTime = new DateTime(2020, 5, 9, 0, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 6, 10, 38, 8, 953, DateTimeKind.Local).AddTicks(9163),
                             Temperature = 17.287792316684406
                         },
                         new
@@ -4641,7 +4640,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.6074999999999999,
                             DataSeriesId = 3,
                             Gravity = 5.9250000000000007,
-                            RecordTime = new DateTime(2020, 5, 9, 0, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 6, 10, 58, 8, 953, DateTimeKind.Local).AddTicks(9167),
                             Temperature = 17.254885910009342
                         },
                         new
@@ -4650,7 +4649,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.6062500000000002,
                             DataSeriesId = 3,
                             Gravity = 5.9375,
-                            RecordTime = new DateTime(2020, 5, 9, 0, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 6, 11, 18, 8, 953, DateTimeKind.Local).AddTicks(9171),
                             Temperature = 17.22214883490199
                         },
                         new
@@ -4659,7 +4658,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.6050000000000004,
                             DataSeriesId = 3,
                             Gravity = 5.9499999999999993,
-                            RecordTime = new DateTime(2020, 5, 9, 1, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 6, 11, 38, 8, 953, DateTimeKind.Local).AddTicks(9175),
                             Temperature = 17.189583110739349
                         },
                         new
@@ -4668,7 +4667,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.6037500000000002,
                             DataSeriesId = 3,
                             Gravity = 5.9624999999999995,
-                            RecordTime = new DateTime(2020, 5, 9, 1, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 6, 11, 58, 8, 953, DateTimeKind.Local).AddTicks(9179),
                             Temperature = 17.157190746328681
                         },
                         new
@@ -4677,7 +4676,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.6025,
                             DataSeriesId = 3,
                             Gravity = 5.9750000000000005,
-                            RecordTime = new DateTime(2020, 5, 9, 1, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 6, 12, 18, 8, 953, DateTimeKind.Local).AddTicks(9183),
                             Temperature = 17.124973739783606
                         },
                         new
@@ -4686,7 +4685,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.6012500000000003,
                             DataSeriesId = 3,
                             Gravity = 5.9874999999999998,
-                            RecordTime = new DateTime(2020, 5, 9, 2, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 6, 12, 38, 8, 953, DateTimeKind.Local).AddTicks(9187),
                             Temperature = 17.092934078400848
                         },
                         new
@@ -4695,7 +4694,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.6000000000000001,
                             DataSeriesId = 3,
                             Gravity = 6.0,
-                            RecordTime = new DateTime(2020, 5, 9, 2, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 6, 12, 58, 8, 953, DateTimeKind.Local).AddTicks(9192),
                             Temperature = 17.061073738537637
                         },
                         new
@@ -4704,7 +4703,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.5987500000000003,
                             DataSeriesId = 3,
                             Gravity = 6.0124999999999993,
-                            RecordTime = new DateTime(2020, 5, 9, 2, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 6, 13, 18, 8, 953, DateTimeKind.Local).AddTicks(9196),
                             Temperature = 17.029394685489809
                         },
                         new
@@ -4713,7 +4712,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.5975000000000001,
                             DataSeriesId = 3,
                             Gravity = 6.0250000000000004,
-                            RecordTime = new DateTime(2020, 5, 9, 3, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 6, 13, 38, 8, 953, DateTimeKind.Local).AddTicks(9200),
                             Temperature = 16.99789887337058
                         },
                         new
@@ -4722,7 +4721,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.5962500000000004,
                             DataSeriesId = 3,
                             Gravity = 6.0374999999999996,
-                            RecordTime = new DateTime(2020, 5, 9, 3, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 6, 13, 58, 8, 953, DateTimeKind.Local).AddTicks(9275),
                             Temperature = 16.966588244990003
                         },
                         new
@@ -4731,7 +4730,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.5950000000000002,
                             DataSeriesId = 3,
                             Gravity = 6.0499999999999998,
-                            RecordTime = new DateTime(2020, 5, 9, 3, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 6, 14, 18, 8, 953, DateTimeKind.Local).AddTicks(9280),
                             Temperature = 16.93546473173512
                         },
                         new
@@ -4740,7 +4739,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.59375,
                             DataSeriesId = 3,
                             Gravity = 6.0625,
-                            RecordTime = new DateTime(2020, 5, 9, 4, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 6, 14, 38, 8, 953, DateTimeKind.Local).AddTicks(9285),
                             Temperature = 16.904530253450829
                         },
                         new
@@ -4749,7 +4748,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.5925000000000002,
                             DataSeriesId = 3,
                             Gravity = 6.0750000000000002,
-                            RecordTime = new DateTime(2020, 5, 9, 4, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 6, 14, 58, 8, 953, DateTimeKind.Local).AddTicks(9289),
                             Temperature = 16.873786718321476
                         },
                         new
@@ -4758,7 +4757,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.5912500000000001,
                             DataSeriesId = 3,
                             Gravity = 6.0875000000000004,
-                            RecordTime = new DateTime(2020, 5, 9, 4, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 6, 15, 18, 8, 953, DateTimeKind.Local).AddTicks(9293),
                             Temperature = 16.843236022753111
                         },
                         new
@@ -4767,7 +4766,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.5900000000000003,
                             DataSeriesId = 3,
                             Gravity = 6.0999999999999996,
-                            RecordTime = new DateTime(2020, 5, 9, 5, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 6, 15, 38, 8, 953, DateTimeKind.Local).AddTicks(9297),
                             Temperature = 16.812880051256553
                         },
                         new
@@ -4776,7 +4775,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.5887500000000001,
                             DataSeriesId = 3,
                             Gravity = 6.1124999999999998,
-                            RecordTime = new DateTime(2020, 5, 9, 5, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 6, 15, 58, 8, 953, DateTimeKind.Local).AddTicks(9302),
                             Temperature = 16.78272067633111
                         },
                         new
@@ -4785,7 +4784,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.5875000000000004,
                             DataSeriesId = 3,
                             Gravity = 6.125,
-                            RecordTime = new DateTime(2020, 5, 9, 5, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 6, 16, 18, 8, 953, DateTimeKind.Local).AddTicks(9306),
                             Temperature = 16.752759758349079
                         },
                         new
@@ -4794,7 +4793,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.5862500000000002,
                             DataSeriesId = 3,
                             Gravity = 6.1375000000000002,
-                            RecordTime = new DateTime(2020, 5, 9, 6, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 6, 16, 38, 8, 953, DateTimeKind.Local).AddTicks(9310),
                             Temperature = 16.72299914544103
                         },
                         new
@@ -4803,7 +4802,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.585,
                             DataSeriesId = 3,
                             Gravity = 6.1500000000000004,
-                            RecordTime = new DateTime(2020, 5, 9, 6, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 6, 16, 58, 8, 953, DateTimeKind.Local).AddTicks(9314),
                             Temperature = 16.69344067338174
                         },
                         new
@@ -4812,7 +4811,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.5837500000000002,
                             DataSeriesId = 3,
                             Gravity = 6.1624999999999996,
-                            RecordTime = new DateTime(2020, 5, 9, 6, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 6, 17, 18, 8, 953, DateTimeKind.Local).AddTicks(9319),
                             Temperature = 16.664086165477002
                         },
                         new
@@ -4821,7 +4820,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.5825,
                             DataSeriesId = 3,
                             Gravity = 6.1750000000000007,
-                            RecordTime = new DateTime(2020, 5, 9, 7, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 6, 17, 38, 8, 953, DateTimeKind.Local).AddTicks(9323),
                             Temperature = 16.634937432451132
                         },
                         new
@@ -4830,7 +4829,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.5812500000000003,
                             DataSeriesId = 3,
                             Gravity = 6.1875,
-                            RecordTime = new DateTime(2020, 5, 9, 7, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 6, 17, 58, 8, 953, DateTimeKind.Local).AddTicks(9327),
                             Temperature = 16.60599627233529
                         },
                         new
@@ -4839,7 +4838,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.5800000000000001,
                             DataSeriesId = 3,
                             Gravity = 6.2000000000000002,
-                            RecordTime = new DateTime(2020, 5, 9, 7, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 6, 18, 18, 8, 953, DateTimeKind.Local).AddTicks(9331),
                             Temperature = 16.577264470356557
                         },
                         new
@@ -4848,7 +4847,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.5787500000000003,
                             DataSeriesId = 3,
                             Gravity = 6.2124999999999995,
-                            RecordTime = new DateTime(2020, 5, 9, 8, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 6, 18, 38, 8, 953, DateTimeKind.Local).AddTicks(9335),
                             Temperature = 16.548743798827815
                         },
                         new
@@ -4857,7 +4856,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.5775000000000001,
                             DataSeriesId = 3,
                             Gravity = 6.2250000000000005,
-                            RecordTime = new DateTime(2020, 5, 9, 8, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 6, 18, 58, 8, 953, DateTimeKind.Local).AddTicks(9339),
                             Temperature = 16.520436017038428
                         },
                         new
@@ -4866,7 +4865,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.5762499999999999,
                             DataSeriesId = 3,
                             Gravity = 6.2375000000000007,
-                            RecordTime = new DateTime(2020, 5, 9, 8, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 6, 19, 18, 8, 953, DateTimeKind.Local).AddTicks(9343),
                             Temperature = 16.492342871145723
                         },
                         new
@@ -4875,7 +4874,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.5750000000000002,
                             DataSeriesId = 3,
                             Gravity = 6.25,
-                            RecordTime = new DateTime(2020, 5, 9, 9, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 6, 19, 38, 8, 953, DateTimeKind.Local).AddTicks(9348),
                             Temperature = 16.464466094067262
                         },
                         new
@@ -4884,7 +4883,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.5737500000000004,
                             DataSeriesId = 3,
                             Gravity = 6.2624999999999993,
-                            RecordTime = new DateTime(2020, 5, 9, 9, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 6, 19, 58, 8, 953, DateTimeKind.Local).AddTicks(9352),
                             Temperature = 16.436807405373973
                         },
                         new
@@ -4893,7 +4892,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.5725000000000002,
                             DataSeriesId = 3,
                             Gravity = 6.2749999999999995,
-                            RecordTime = new DateTime(2020, 5, 9, 9, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 6, 20, 18, 8, 953, DateTimeKind.Local).AddTicks(9356),
                             Temperature = 16.409368511184059
                         },
                         new
@@ -4902,7 +4901,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.57125,
                             DataSeriesId = 3,
                             Gravity = 6.2875000000000005,
-                            RecordTime = new DateTime(2020, 5, 9, 10, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 6, 20, 38, 8, 953, DateTimeKind.Local).AddTicks(9360),
                             Temperature = 16.382151104057755
                         },
                         new
@@ -4911,7 +4910,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.5700000000000003,
                             DataSeriesId = 3,
                             Gravity = 6.2999999999999998,
-                            RecordTime = new DateTime(2020, 5, 9, 10, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 6, 20, 58, 8, 953, DateTimeKind.Local).AddTicks(9364),
                             Temperature = 16.355156862892944
                         },
                         new
@@ -4920,7 +4919,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.5687500000000001,
                             DataSeriesId = 3,
                             Gravity = 6.3125,
-                            RecordTime = new DateTime(2020, 5, 9, 10, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 6, 21, 18, 8, 953, DateTimeKind.Local).AddTicks(9368),
                             Temperature = 16.328387452821573
                         },
                         new
@@ -4929,7 +4928,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.5675000000000003,
                             DataSeriesId = 3,
                             Gravity = 6.3249999999999993,
-                            RecordTime = new DateTime(2020, 5, 9, 11, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 6, 21, 38, 8, 953, DateTimeKind.Local).AddTicks(9372),
                             Temperature = 16.301844525106951
                         },
                         new
@@ -4938,7 +4937,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.5662500000000001,
                             DataSeriesId = 3,
                             Gravity = 6.3375000000000004,
-                            RecordTime = new DateTime(2020, 5, 9, 11, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 6, 21, 58, 8, 953, DateTimeKind.Local).AddTicks(9377),
                             Temperature = 16.275529717041891
                         },
                         new
@@ -4947,7 +4946,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.5650000000000004,
                             DataSeriesId = 3,
                             Gravity = 6.3499999999999996,
-                            RecordTime = new DateTime(2020, 5, 9, 11, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 6, 22, 18, 8, 953, DateTimeKind.Local).AddTicks(9381),
                             Temperature = 16.249444651847703
                         },
                         new
@@ -4956,7 +4955,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.5637500000000002,
                             DataSeriesId = 3,
                             Gravity = 6.3624999999999998,
-                            RecordTime = new DateTime(2020, 5, 9, 12, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 6, 22, 38, 8, 953, DateTimeKind.Local).AddTicks(9385),
                             Temperature = 16.223590938574084
                         },
                         new
@@ -4965,7 +4964,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.5625,
                             DataSeriesId = 3,
                             Gravity = 6.375,
-                            RecordTime = new DateTime(2020, 5, 9, 12, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 6, 22, 58, 8, 953, DateTimeKind.Local).AddTicks(9389),
                             Temperature = 16.197970171999849
                         },
                         new
@@ -4974,7 +4973,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.5612500000000002,
                             DataSeriesId = 3,
                             Gravity = 6.3875000000000002,
-                            RecordTime = new DateTime(2020, 5, 9, 12, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 6, 23, 18, 8, 953, DateTimeKind.Local).AddTicks(9393),
                             Temperature = 16.172583932534561
                         },
                         new
@@ -4983,7 +4982,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.5600000000000001,
                             DataSeriesId = 3,
                             Gravity = 6.4000000000000004,
-                            RecordTime = new DateTime(2020, 5, 9, 13, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 6, 23, 38, 8, 953, DateTimeKind.Local).AddTicks(9397),
                             Temperature = 16.147433786121052
                         },
                         new
@@ -4992,7 +4991,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.5587500000000003,
                             DataSeriesId = 3,
                             Gravity = 6.4124999999999996,
-                            RecordTime = new DateTime(2020, 5, 9, 13, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 6, 23, 58, 8, 953, DateTimeKind.Local).AddTicks(9401),
                             Temperature = 16.122521284138827
                         },
                         new
@@ -5001,7 +5000,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.5575000000000001,
                             DataSeriesId = 3,
                             Gravity = 6.4249999999999998,
-                            RecordTime = new DateTime(2020, 5, 9, 13, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 7, 0, 18, 8, 953, DateTimeKind.Local).AddTicks(9405),
                             Temperature = 16.097847963308354
                         },
                         new
@@ -5010,7 +5009,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.5562500000000004,
                             DataSeriesId = 3,
                             Gravity = 6.4375,
-                            RecordTime = new DateTime(2020, 5, 9, 14, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 7, 0, 38, 8, 953, DateTimeKind.Local).AddTicks(9410),
                             Temperature = 16.073415345596274
                         },
                         new
@@ -5019,7 +5018,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.5550000000000002,
                             DataSeriesId = 3,
                             Gravity = 6.4500000000000002,
-                            RecordTime = new DateTime(2020, 5, 9, 14, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 7, 0, 58, 8, 953, DateTimeKind.Local).AddTicks(9414),
                             Temperature = 16.049224938121547
                         },
                         new
@@ -5028,7 +5027,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.55375,
                             DataSeriesId = 3,
                             Gravity = 6.4625000000000004,
-                            RecordTime = new DateTime(2020, 5, 9, 14, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 7, 1, 18, 8, 953, DateTimeKind.Local).AddTicks(9418),
                             Temperature = 16.025278233062451
                         },
                         new
@@ -5037,7 +5036,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.5525000000000002,
                             DataSeriesId = 3,
                             Gravity = 6.4749999999999996,
-                            RecordTime = new DateTime(2020, 5, 9, 15, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 7, 1, 38, 8, 953, DateTimeKind.Local).AddTicks(9422),
                             Temperature = 16.001576707564546
                         },
                         new
@@ -5046,7 +5045,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.55125,
                             DataSeriesId = 3,
                             Gravity = 6.4875000000000007,
-                            RecordTime = new DateTime(2020, 5, 9, 15, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 7, 1, 58, 8, 953, DateTimeKind.Local).AddTicks(9426),
                             Temperature = 15.978121823649577
                         },
                         new
@@ -5055,7 +5054,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.5500000000000003,
                             DataSeriesId = 3,
                             Gravity = 6.5,
-                            RecordTime = new DateTime(2020, 5, 9, 15, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 7, 2, 18, 8, 953, DateTimeKind.Local).AddTicks(9430),
                             Temperature = 15.954915028125264
                         },
                         new
@@ -5064,7 +5063,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.5487500000000001,
                             DataSeriesId = 3,
                             Gravity = 6.5125000000000002,
-                            RecordTime = new DateTime(2020, 5, 9, 16, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 7, 2, 38, 8, 953, DateTimeKind.Local).AddTicks(9434),
                             Temperature = 15.931957752496064
                         },
                         new
@@ -5073,7 +5072,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.5475000000000003,
                             DataSeriesId = 3,
                             Gravity = 6.5249999999999995,
-                            RecordTime = new DateTime(2020, 5, 9, 16, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 7, 2, 58, 8, 953, DateTimeKind.Local).AddTicks(9438),
                             Temperature = 15.909251412874884
                         },
                         new
@@ -5082,7 +5081,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.5462500000000001,
                             DataSeriesId = 3,
                             Gravity = 6.5375000000000005,
-                            RecordTime = new DateTime(2020, 5, 9, 16, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 7, 3, 18, 8, 953, DateTimeKind.Local).AddTicks(9442),
                             Temperature = 15.886797409895699
                         },
                         new
@@ -5091,7 +5090,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.5449999999999999,
                             DataSeriesId = 3,
                             Gravity = 6.5500000000000007,
-                            RecordTime = new DateTime(2020, 5, 9, 17, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 7, 3, 38, 8, 953, DateTimeKind.Local).AddTicks(9446),
                             Temperature = 15.864597128627192
                         },
                         new
@@ -5100,7 +5099,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.5437500000000002,
                             DataSeriesId = 3,
                             Gravity = 6.5625,
-                            RecordTime = new DateTime(2020, 5, 9, 17, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 7, 3, 58, 8, 953, DateTimeKind.Local).AddTicks(9450),
                             Temperature = 15.842651938487274
                         },
                         new
@@ -5109,7 +5108,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.5425000000000004,
                             DataSeriesId = 3,
                             Gravity = 6.5749999999999993,
-                            RecordTime = new DateTime(2020, 5, 9, 17, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 7, 4, 18, 8, 953, DateTimeKind.Local).AddTicks(9454),
                             Temperature = 15.820963193158651
                         },
                         new
@@ -5118,7 +5117,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.5412500000000002,
                             DataSeriesId = 3,
                             Gravity = 6.5874999999999995,
-                            RecordTime = new DateTime(2020, 5, 9, 18, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 7, 4, 38, 8, 953, DateTimeKind.Local).AddTicks(9459),
                             Temperature = 15.799532230505292
                         },
                         new
@@ -5127,7 +5126,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.54,
                             DataSeriesId = 3,
                             Gravity = 6.6000000000000005,
-                            RecordTime = new DateTime(2020, 5, 9, 18, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 7, 4, 58, 8, 953, DateTimeKind.Local).AddTicks(9463),
                             Temperature = 15.778360372489924
                         },
                         new
@@ -5136,7 +5135,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.5387500000000003,
                             DataSeriesId = 3,
                             Gravity = 6.6124999999999998,
-                            RecordTime = new DateTime(2020, 5, 9, 18, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 7, 5, 18, 8, 953, DateTimeKind.Local).AddTicks(9467),
                             Temperature = 15.757448925092483
                         },
                         new
@@ -5145,7 +5144,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.5375000000000001,
                             DataSeriesId = 3,
                             Gravity = 6.625,
-                            RecordTime = new DateTime(2020, 5, 9, 19, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 7, 5, 38, 8, 953, DateTimeKind.Local).AddTicks(9471),
                             Temperature = 15.736799178229541
                         },
                         new
@@ -5154,7 +5153,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.5362500000000003,
                             DataSeriesId = 3,
                             Gravity = 6.6374999999999993,
-                            RecordTime = new DateTime(2020, 5, 9, 19, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 7, 5, 58, 8, 953, DateTimeKind.Local).AddTicks(9475),
                             Temperature = 15.716412405674753
                         },
                         new
@@ -5163,7 +5162,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.5350000000000001,
                             DataSeriesId = 3,
                             Gravity = 6.6500000000000004,
-                            RecordTime = new DateTime(2020, 5, 9, 19, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 7, 6, 18, 8, 953, DateTimeKind.Local).AddTicks(9479),
                             Temperature = 15.696289864980281
                         },
                         new
@@ -5172,7 +5171,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.5337500000000004,
                             DataSeriesId = 3,
                             Gravity = 6.6624999999999996,
-                            RecordTime = new DateTime(2020, 5, 9, 20, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 7, 6, 38, 8, 953, DateTimeKind.Local).AddTicks(9483),
                             Temperature = 15.676432797399226
                         },
                         new
@@ -5181,7 +5180,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.5325000000000002,
                             DataSeriesId = 3,
                             Gravity = 6.6749999999999998,
-                            RecordTime = new DateTime(2020, 5, 9, 20, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 7, 6, 58, 8, 953, DateTimeKind.Local).AddTicks(9487),
                             Temperature = 15.656842427809043
                         },
                         new
@@ -5190,7 +5189,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.53125,
                             DataSeriesId = 3,
                             Gravity = 6.6875,
-                            RecordTime = new DateTime(2020, 5, 9, 20, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 7, 7, 18, 8, 953, DateTimeKind.Local).AddTicks(9491),
                             Temperature = 15.637519964636015
                         },
                         new
@@ -5199,7 +5198,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.5300000000000002,
                             DataSeriesId = 3,
                             Gravity = 6.7000000000000002,
-                            RecordTime = new DateTime(2020, 5, 9, 21, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 7, 7, 38, 8, 953, DateTimeKind.Local).AddTicks(9496),
                             Temperature = 15.618466599780682
                         },
                         new
@@ -5208,7 +5207,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.5287500000000001,
                             DataSeriesId = 3,
                             Gravity = 6.7125000000000004,
-                            RecordTime = new DateTime(2020, 5, 9, 21, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 7, 7, 58, 8, 953, DateTimeKind.Local).AddTicks(9500),
                             Temperature = 15.599683508544341
                         },
                         new
@@ -5217,7 +5216,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.5275000000000003,
                             DataSeriesId = 3,
                             Gravity = 6.7249999999999996,
-                            RecordTime = new DateTime(2020, 5, 9, 21, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 7, 8, 18, 8, 953, DateTimeKind.Local).AddTicks(9504),
                             Temperature = 15.581171849556533
                         },
                         new
@@ -5226,7 +5225,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.5262500000000001,
                             DataSeriesId = 3,
                             Gravity = 6.7374999999999998,
-                            RecordTime = new DateTime(2020, 5, 9, 22, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 7, 8, 38, 8, 953, DateTimeKind.Local).AddTicks(9508),
                             Temperature = 15.562932764703586
                         },
                         new
@@ -5235,7 +5234,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.5250000000000004,
                             DataSeriesId = 3,
                             Gravity = 6.75,
-                            RecordTime = new DateTime(2020, 5, 9, 22, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 7, 8, 58, 8, 953, DateTimeKind.Local).AddTicks(9542),
                             Temperature = 15.544967379058161
                         },
                         new
@@ -5244,7 +5243,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.5237500000000002,
                             DataSeriesId = 3,
                             Gravity = 6.7625000000000002,
-                            RecordTime = new DateTime(2020, 5, 9, 22, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 7, 9, 18, 8, 953, DateTimeKind.Local).AddTicks(9546),
                             Temperature = 15.527276800809874
                         },
                         new
@@ -5253,7 +5252,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.5225,
                             DataSeriesId = 3,
                             Gravity = 6.7750000000000004,
-                            RecordTime = new DateTime(2020, 5, 9, 23, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 7, 9, 38, 8, 953, DateTimeKind.Local).AddTicks(9551),
                             Temperature = 15.509862121196923
                         },
                         new
@@ -5262,7 +5261,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.5212500000000002,
                             DataSeriesId = 3,
                             Gravity = 6.7874999999999996,
-                            RecordTime = new DateTime(2020, 5, 9, 23, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 7, 9, 58, 8, 953, DateTimeKind.Local).AddTicks(9555),
                             Temperature = 15.492724414438772
                         },
                         new
@@ -5271,7 +5270,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.52,
                             DataSeriesId = 3,
                             Gravity = 6.8000000000000007,
-                            RecordTime = new DateTime(2020, 5, 9, 23, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 7, 10, 18, 8, 953, DateTimeKind.Local).AddTicks(9559),
                             Temperature = 15.475864737669902
                         },
                         new
@@ -5280,7 +5279,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.5187500000000003,
                             DataSeriesId = 3,
                             Gravity = 6.8125,
-                            RecordTime = new DateTime(2020, 5, 10, 0, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 7, 10, 38, 8, 953, DateTimeKind.Local).AddTicks(9563),
                             Temperature = 15.459284130874593
                         },
                         new
@@ -5289,7 +5288,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.5175000000000001,
                             DataSeriesId = 3,
                             Gravity = 6.8250000000000002,
-                            RecordTime = new DateTime(2020, 5, 10, 0, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 7, 10, 58, 8, 953, DateTimeKind.Local).AddTicks(9567),
                             Temperature = 15.442983616822776
                         },
                         new
@@ -5298,7 +5297,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.5162500000000003,
                             DataSeriesId = 3,
                             Gravity = 6.8374999999999995,
-                            RecordTime = new DateTime(2020, 5, 10, 0, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 7, 11, 18, 8, 953, DateTimeKind.Local).AddTicks(9572),
                             Temperature = 15.426964201006932
                         },
                         new
@@ -5307,7 +5306,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.5150000000000001,
                             DataSeriesId = 3,
                             Gravity = 6.8500000000000005,
-                            RecordTime = new DateTime(2020, 5, 10, 1, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 7, 11, 38, 8, 953, DateTimeKind.Local).AddTicks(9576),
                             Temperature = 15.411226871580094
                         },
                         new
@@ -5316,7 +5315,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.5137499999999999,
                             DataSeriesId = 3,
                             Gravity = 6.8625000000000007,
-                            RecordTime = new DateTime(2020, 5, 10, 1, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 7, 11, 58, 8, 953, DateTimeKind.Local).AddTicks(9580),
                             Temperature = 15.395772599294869
                         },
                         new
@@ -5325,7 +5324,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.5125000000000002,
                             DataSeriesId = 3,
                             Gravity = 6.875,
-                            RecordTime = new DateTime(2020, 5, 10, 1, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 7, 12, 18, 8, 953, DateTimeKind.Local).AddTicks(9584),
                             Temperature = 15.380602337443568
                         },
                         new
@@ -5334,7 +5333,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.5112500000000004,
                             DataSeriesId = 3,
                             Gravity = 6.8874999999999993,
-                            RecordTime = new DateTime(2020, 5, 10, 2, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 7, 12, 38, 8, 953, DateTimeKind.Local).AddTicks(9588),
                             Temperature = 15.365717021799396
                         },
                         new
@@ -5343,7 +5342,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.5100000000000002,
                             DataSeriesId = 3,
                             Gravity = 6.8999999999999995,
-                            RecordTime = new DateTime(2020, 5, 10, 2, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 7, 12, 58, 8, 953, DateTimeKind.Local).AddTicks(9592),
                             Temperature = 15.351117570558745
                         },
                         new
@@ -5352,7 +5351,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.50875,
                             DataSeriesId = 3,
                             Gravity = 6.9125000000000005,
-                            RecordTime = new DateTime(2020, 5, 10, 2, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 7, 13, 18, 8, 953, DateTimeKind.Local).AddTicks(9596),
                             Temperature = 15.336804884284529
                         },
                         new
@@ -5361,7 +5360,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.5075000000000003,
                             DataSeriesId = 3,
                             Gravity = 6.9249999999999998,
-                            RecordTime = new DateTime(2020, 5, 10, 3, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 7, 13, 38, 8, 953, DateTimeKind.Local).AddTicks(9600),
                             Temperature = 15.322779845850663
                         },
                         new
@@ -5370,7 +5369,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.5062500000000001,
                             DataSeriesId = 3,
                             Gravity = 6.9375,
-                            RecordTime = new DateTime(2020, 5, 10, 3, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 7, 13, 58, 8, 953, DateTimeKind.Local).AddTicks(9604),
                             Temperature = 15.30904332038758
                         },
                         new
@@ -5379,7 +5378,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.5050000000000003,
                             DataSeriesId = 3,
                             Gravity = 6.9499999999999993,
-                            RecordTime = new DateTime(2020, 5, 10, 3, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 7, 14, 18, 8, 953, DateTimeKind.Local).AddTicks(9608),
                             Temperature = 15.295596155228875
                         },
                         new
@@ -5388,7 +5387,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.5037500000000001,
                             DataSeriesId = 3,
                             Gravity = 6.9625000000000004,
-                            RecordTime = new DateTime(2020, 5, 10, 4, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 7, 14, 38, 8, 953, DateTimeKind.Local).AddTicks(9613),
                             Temperature = 15.282439179859033
                         },
                         new
@@ -5397,7 +5396,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.5025000000000004,
                             DataSeriesId = 3,
                             Gravity = 6.9749999999999996,
-                            RecordTime = new DateTime(2020, 5, 10, 4, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 7, 14, 58, 8, 953, DateTimeKind.Local).AddTicks(9617),
                             Temperature = 15.269573205862272
                         },
                         new
@@ -5406,7 +5405,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.5012500000000002,
                             DataSeriesId = 3,
                             Gravity = 6.9874999999999998,
-                            RecordTime = new DateTime(2020, 5, 10, 4, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 7, 15, 18, 8, 953, DateTimeKind.Local).AddTicks(9621),
                             Temperature = 15.256999026872478
                         },
                         new
@@ -5415,7 +5414,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.5,
                             DataSeriesId = 3,
                             Gravity = 7.0,
-                            RecordTime = new DateTime(2020, 5, 10, 5, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 7, 15, 38, 8, 953, DateTimeKind.Local).AddTicks(9625),
                             Temperature = 15.244717418524232
                         },
                         new
@@ -5424,7 +5423,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.4987500000000002,
                             DataSeriesId = 3,
                             Gravity = 7.0125000000000002,
-                            RecordTime = new DateTime(2020, 5, 10, 5, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 7, 15, 58, 8, 953, DateTimeKind.Local).AddTicks(9629),
                             Temperature = 15.232729138404993
                         },
                         new
@@ -5433,7 +5432,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.4975000000000001,
                             DataSeriesId = 3,
                             Gravity = 7.0250000000000004,
-                            RecordTime = new DateTime(2020, 5, 10, 5, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 7, 16, 18, 8, 953, DateTimeKind.Local).AddTicks(9633),
                             Temperature = 15.22103492600835
                         },
                         new
@@ -5442,7 +5441,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.4962500000000003,
                             DataSeriesId = 3,
                             Gravity = 7.0374999999999996,
-                            RecordTime = new DateTime(2020, 5, 10, 6, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 7, 16, 38, 8, 953, DateTimeKind.Local).AddTicks(9637),
                             Temperature = 15.209635502688403
                         },
                         new
@@ -5451,7 +5450,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.4950000000000001,
                             DataSeriesId = 3,
                             Gravity = 7.0499999999999998,
-                            RecordTime = new DateTime(2020, 5, 10, 6, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 7, 16, 58, 8, 953, DateTimeKind.Local).AddTicks(9641),
                             Temperature = 15.198531571615284
                         },
                         new
@@ -5460,7 +5459,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.4937500000000004,
                             DataSeriesId = 3,
                             Gravity = 7.0625,
-                            RecordTime = new DateTime(2020, 5, 10, 6, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 7, 17, 18, 8, 953, DateTimeKind.Local).AddTicks(9646),
                             Temperature = 15.187723817731763
                         },
                         new
@@ -5469,7 +5468,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.4925000000000002,
                             DataSeriesId = 3,
                             Gravity = 7.0750000000000002,
-                            RecordTime = new DateTime(2020, 5, 10, 7, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 7, 17, 38, 8, 953, DateTimeKind.Local).AddTicks(9650),
                             Temperature = 15.177212907711009
                         },
                         new
@@ -5478,7 +5477,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.49125,
                             DataSeriesId = 3,
                             Gravity = 7.0875000000000004,
-                            RecordTime = new DateTime(2020, 5, 10, 7, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 7, 17, 58, 8, 953, DateTimeKind.Local).AddTicks(9654),
                             Temperature = 15.166999489915463
                         },
                         new
@@ -5487,7 +5486,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.4900000000000002,
                             DataSeriesId = 3,
                             Gravity = 7.0999999999999996,
-                            RecordTime = new DateTime(2020, 5, 10, 7, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 7, 18, 18, 8, 953, DateTimeKind.Local).AddTicks(9658),
                             Temperature = 15.157084194356845
                         },
                         new
@@ -5496,7 +5495,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.48875,
                             DataSeriesId = 3,
                             Gravity = 7.1125000000000007,
-                            RecordTime = new DateTime(2020, 5, 10, 8, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 7, 18, 38, 8, 953, DateTimeKind.Local).AddTicks(9662),
                             Temperature = 15.147467632657287
                         },
                         new
@@ -5505,7 +5504,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.4875000000000003,
                             DataSeriesId = 3,
                             Gravity = 7.125,
-                            RecordTime = new DateTime(2020, 5, 10, 8, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 7, 18, 58, 8, 953, DateTimeKind.Local).AddTicks(9666),
                             Temperature = 15.138150398011618
                         },
                         new
@@ -5514,7 +5513,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.4862500000000001,
                             DataSeriesId = 3,
                             Gravity = 7.1375000000000002,
-                            RecordTime = new DateTime(2020, 5, 10, 8, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 7, 19, 18, 8, 953, DateTimeKind.Local).AddTicks(9670),
                             Temperature = 15.129133065150754
                         },
                         new
@@ -5523,7 +5522,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.4850000000000003,
                             DataSeriesId = 3,
                             Gravity = 7.1499999999999995,
-                            RecordTime = new DateTime(2020, 5, 10, 9, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 7, 19, 38, 8, 953, DateTimeKind.Local).AddTicks(9674),
                             Temperature = 15.120416190306264
                         },
                         new
@@ -5532,7 +5531,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.4837500000000001,
                             DataSeriesId = 3,
                             Gravity = 7.1625000000000005,
-                            RecordTime = new DateTime(2020, 5, 10, 9, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 7, 19, 58, 8, 953, DateTimeKind.Local).AddTicks(9678),
                             Temperature = 15.112000311176047
                         },
                         new
@@ -5541,7 +5540,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.4824999999999999,
                             DataSeriesId = 3,
                             Gravity = 7.1750000000000007,
-                            RecordTime = new DateTime(2020, 5, 10, 9, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 7, 20, 18, 8, 953, DateTimeKind.Local).AddTicks(9682),
                             Temperature = 15.103885946891172
                         },
                         new
@@ -5550,7 +5549,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.4812500000000002,
                             DataSeriesId = 3,
                             Gravity = 7.1875,
-                            RecordTime = new DateTime(2020, 5, 10, 10, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 7, 20, 38, 8, 953, DateTimeKind.Local).AddTicks(9686),
                             Temperature = 15.09607359798385
                         },
                         new
@@ -5559,7 +5558,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.4800000000000004,
                             DataSeriesId = 3,
                             Gravity = 7.1999999999999993,
-                            RecordTime = new DateTime(2020, 5, 10, 10, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 7, 20, 58, 8, 953, DateTimeKind.Local).AddTicks(9690),
                             Temperature = 15.088563746356556
                         },
                         new
@@ -5568,7 +5567,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.4787500000000002,
                             DataSeriesId = 3,
                             Gravity = 7.2124999999999995,
-                            RecordTime = new DateTime(2020, 5, 10, 10, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 7, 21, 18, 8, 953, DateTimeKind.Local).AddTicks(9694),
                             Temperature = 15.08135685525232
                         },
                         new
@@ -5577,7 +5576,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.4775,
                             DataSeriesId = 3,
                             Gravity = 7.2250000000000005,
-                            RecordTime = new DateTime(2020, 5, 10, 11, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 7, 21, 38, 8, 953, DateTimeKind.Local).AddTicks(9699),
                             Temperature = 15.074453369226131
                         },
                         new
@@ -5586,7 +5585,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.4762500000000003,
                             DataSeriesId = 3,
                             Gravity = 7.2374999999999998,
-                            RecordTime = new DateTime(2020, 5, 10, 11, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 7, 21, 58, 8, 953, DateTimeKind.Local).AddTicks(9703),
                             Temperature = 15.067853714117522
                         },
                         new
@@ -5595,7 +5594,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.4750000000000001,
                             DataSeriesId = 3,
                             Gravity = 7.25,
-                            RecordTime = new DateTime(2020, 5, 10, 11, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 7, 22, 18, 8, 953, DateTimeKind.Local).AddTicks(9707),
                             Temperature = 15.061558297024312
                         },
                         new
@@ -5604,7 +5603,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.4737500000000003,
                             DataSeriesId = 3,
                             Gravity = 7.2624999999999993,
-                            RecordTime = new DateTime(2020, 5, 10, 12, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 7, 22, 38, 8, 953, DateTimeKind.Local).AddTicks(9711),
                             Temperature = 15.055567506277477
                         },
                         new
@@ -5613,7 +5612,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.4725000000000001,
                             DataSeriesId = 3,
                             Gravity = 7.2750000000000004,
-                            RecordTime = new DateTime(2020, 5, 10, 12, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 7, 22, 58, 8, 953, DateTimeKind.Local).AddTicks(9715),
                             Temperature = 15.049881711417212
                         },
                         new
@@ -5622,7 +5621,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.4712500000000004,
                             DataSeriesId = 3,
                             Gravity = 7.2874999999999996,
-                            RecordTime = new DateTime(2020, 5, 10, 12, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 7, 23, 18, 8, 953, DateTimeKind.Local).AddTicks(9719),
                             Temperature = 15.044501263170126
                         },
                         new
@@ -5631,7 +5630,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.4700000000000002,
                             DataSeriesId = 3,
                             Gravity = 7.2999999999999998,
-                            RecordTime = new DateTime(2020, 5, 10, 13, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 7, 23, 38, 8, 953, DateTimeKind.Local).AddTicks(9723),
                             Temperature = 15.039426493427612
                         },
                         new
@@ -5640,7 +5639,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.46875,
                             DataSeriesId = 3,
                             Gravity = 7.3125,
-                            RecordTime = new DateTime(2020, 5, 10, 13, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 7, 23, 58, 8, 953, DateTimeKind.Local).AddTicks(9727),
                             Temperature = 15.034657715225368
                         },
                         new
@@ -5649,7 +5648,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.4675000000000002,
                             DataSeriesId = 3,
                             Gravity = 7.3250000000000002,
-                            RecordTime = new DateTime(2020, 5, 10, 13, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 8, 0, 18, 8, 953, DateTimeKind.Local).AddTicks(9731),
                             Temperature = 15.030195222724101
                         },
                         new
@@ -5658,7 +5657,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.4662500000000001,
                             DataSeriesId = 3,
                             Gravity = 7.3375000000000004,
-                            RecordTime = new DateTime(2020, 5, 10, 14, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 8, 0, 38, 8, 953, DateTimeKind.Local).AddTicks(9736),
                             Temperature = 15.026039291191367
                         },
                         new
@@ -5667,7 +5666,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.4650000000000003,
                             DataSeriesId = 3,
                             Gravity = 7.3499999999999996,
-                            RecordTime = new DateTime(2020, 5, 10, 14, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 8, 0, 58, 8, 953, DateTimeKind.Local).AddTicks(9740),
                             Temperature = 15.0221901769846
                         },
                         new
@@ -5676,7 +5675,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.4637500000000001,
                             DataSeriesId = 3,
                             Gravity = 7.3624999999999998,
-                            RecordTime = new DateTime(2020, 5, 10, 14, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 8, 1, 18, 8, 953, DateTimeKind.Local).AddTicks(9744),
                             Temperature = 15.018648117535294
                         },
                         new
@@ -5685,7 +5684,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.4625000000000004,
                             DataSeriesId = 3,
                             Gravity = 7.375,
-                            RecordTime = new DateTime(2020, 5, 10, 15, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 8, 1, 38, 8, 953, DateTimeKind.Local).AddTicks(9748),
                             Temperature = 15.015413331334361
                         },
                         new
@@ -5694,7 +5693,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.4612500000000002,
                             DataSeriesId = 3,
                             Gravity = 7.3875000000000002,
-                            RecordTime = new DateTime(2020, 5, 10, 15, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 8, 1, 58, 8, 953, DateTimeKind.Local).AddTicks(9752),
                             Temperature = 15.012486017918651
                         },
                         new
@@ -5703,7 +5702,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.46,
                             DataSeriesId = 3,
                             Gravity = 7.4000000000000004,
-                            RecordTime = new DateTime(2020, 5, 10, 15, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 8, 2, 18, 8, 953, DateTimeKind.Local).AddTicks(9756),
                             Temperature = 15.009866357858641
                         },
                         new
@@ -5712,7 +5711,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.4587500000000002,
                             DataSeriesId = 3,
                             Gravity = 7.4124999999999996,
-                            RecordTime = new DateTime(2020, 5, 10, 16, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 8, 2, 38, 8, 953, DateTimeKind.Local).AddTicks(9760),
                             Temperature = 15.00755451274731
                         },
                         new
@@ -5721,7 +5720,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.4575,
                             DataSeriesId = 3,
                             Gravity = 7.4250000000000007,
-                            RecordTime = new DateTime(2020, 5, 10, 16, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 8, 2, 58, 8, 953, DateTimeKind.Local).AddTicks(9764),
                             Temperature = 15.00555062519015
                         },
                         new
@@ -5730,7 +5729,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.4562500000000003,
                             DataSeriesId = 3,
                             Gravity = 7.4375,
-                            RecordTime = new DateTime(2020, 5, 10, 16, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 8, 3, 18, 8, 953, DateTimeKind.Local).AddTicks(9768),
                             Temperature = 15.003854818796386
                         },
                         new
@@ -5739,7 +5738,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.4550000000000001,
                             DataSeriesId = 3,
                             Gravity = 7.4500000000000002,
-                            RecordTime = new DateTime(2020, 5, 10, 17, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 8, 3, 38, 8, 953, DateTimeKind.Local).AddTicks(9772),
                             Temperature = 15.002467198171342
                         },
                         new
@@ -5748,7 +5747,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.4537500000000003,
                             DataSeriesId = 3,
                             Gravity = 7.4624999999999995,
-                            RecordTime = new DateTime(2020, 5, 10, 17, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 8, 3, 58, 8, 953, DateTimeKind.Local).AddTicks(9776),
                             Temperature = 15.001387848909998
                         },
                         new
@@ -5757,7 +5756,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.4525000000000001,
                             DataSeriesId = 3,
                             Gravity = 7.4750000000000005,
-                            RecordTime = new DateTime(2020, 5, 10, 17, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 8, 4, 18, 8, 953, DateTimeKind.Local).AddTicks(9780),
                             Temperature = 15.000616837591696
                         },
                         new
@@ -5766,7 +5765,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.4512499999999999,
                             DataSeriesId = 3,
                             Gravity = 7.4875000000000007,
-                            RecordTime = new DateTime(2020, 5, 10, 18, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 8, 4, 38, 8, 953, DateTimeKind.Local).AddTicks(9784),
                             Temperature = 15.000154211776053
                         },
                         new
@@ -5775,7 +5774,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.4500000000000002,
                             DataSeriesId = 3,
                             Gravity = 7.5,
-                            RecordTime = new DateTime(2020, 5, 10, 18, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 8, 4, 58, 8, 953, DateTimeKind.Local).AddTicks(9788),
                             Temperature = 15.0
                         },
                         new
@@ -5784,7 +5783,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.4487500000000004,
                             DataSeriesId = 3,
                             Gravity = 7.5124999999999993,
-                            RecordTime = new DateTime(2020, 5, 10, 18, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 8, 5, 18, 8, 953, DateTimeKind.Local).AddTicks(9793),
                             Temperature = 15.000154211776053
                         },
                         new
@@ -5793,7 +5792,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.4475000000000002,
                             DataSeriesId = 3,
                             Gravity = 7.5249999999999995,
-                            RecordTime = new DateTime(2020, 5, 10, 19, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 8, 5, 38, 8, 953, DateTimeKind.Local).AddTicks(9797),
                             Temperature = 15.000616837591696
                         },
                         new
@@ -5802,7 +5801,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.44625,
                             DataSeriesId = 3,
                             Gravity = 7.5375000000000005,
-                            RecordTime = new DateTime(2020, 5, 10, 19, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 8, 5, 58, 8, 953, DateTimeKind.Local).AddTicks(9801),
                             Temperature = 15.001387848909998
                         },
                         new
@@ -5811,7 +5810,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.4450000000000003,
                             DataSeriesId = 3,
                             Gravity = 7.5499999999999998,
-                            RecordTime = new DateTime(2020, 5, 10, 19, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 8, 6, 18, 8, 953, DateTimeKind.Local).AddTicks(9805),
                             Temperature = 15.002467198171342
                         },
                         new
@@ -5820,7 +5819,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.4437500000000001,
                             DataSeriesId = 3,
                             Gravity = 7.5625,
-                            RecordTime = new DateTime(2020, 5, 10, 20, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 8, 6, 38, 8, 953, DateTimeKind.Local).AddTicks(9809),
                             Temperature = 15.003854818796386
                         },
                         new
@@ -5829,7 +5828,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.4425000000000003,
                             DataSeriesId = 3,
                             Gravity = 7.5749999999999993,
-                            RecordTime = new DateTime(2020, 5, 10, 20, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 8, 6, 58, 8, 953, DateTimeKind.Local).AddTicks(9813),
                             Temperature = 15.00555062519015
                         },
                         new
@@ -5838,7 +5837,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.4412500000000001,
                             DataSeriesId = 3,
                             Gravity = 7.5875000000000004,
-                            RecordTime = new DateTime(2020, 5, 10, 20, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 8, 7, 18, 8, 953, DateTimeKind.Local).AddTicks(9817),
                             Temperature = 15.00755451274731
                         },
                         new
@@ -5847,7 +5846,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.4400000000000004,
                             DataSeriesId = 3,
                             Gravity = 7.5999999999999996,
-                            RecordTime = new DateTime(2020, 5, 10, 21, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 8, 7, 38, 8, 953, DateTimeKind.Local).AddTicks(9821),
                             Temperature = 15.009866357858641
                         },
                         new
@@ -5856,7 +5855,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.4387500000000002,
                             DataSeriesId = 3,
                             Gravity = 7.6124999999999998,
-                            RecordTime = new DateTime(2020, 5, 10, 21, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 8, 7, 58, 8, 953, DateTimeKind.Local).AddTicks(9825),
                             Temperature = 15.012486017918649
                         },
                         new
@@ -5865,7 +5864,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.4375,
                             DataSeriesId = 3,
                             Gravity = 7.625,
-                            RecordTime = new DateTime(2020, 5, 10, 21, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 8, 8, 18, 8, 953, DateTimeKind.Local).AddTicks(9830),
                             Temperature = 15.01541333133436
                         },
                         new
@@ -5874,7 +5873,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.4362500000000002,
                             DataSeriesId = 3,
                             Gravity = 7.6375000000000002,
-                            RecordTime = new DateTime(2020, 5, 10, 22, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 8, 8, 38, 8, 953, DateTimeKind.Local).AddTicks(9834),
                             Temperature = 15.018648117535294
                         },
                         new
@@ -5883,7 +5882,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.4350000000000001,
                             DataSeriesId = 3,
                             Gravity = 7.6500000000000004,
-                            RecordTime = new DateTime(2020, 5, 10, 22, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 8, 8, 58, 8, 953, DateTimeKind.Local).AddTicks(9838),
                             Temperature = 15.0221901769846
                         },
                         new
@@ -5892,7 +5891,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.4337500000000003,
                             DataSeriesId = 3,
                             Gravity = 7.6624999999999996,
-                            RecordTime = new DateTime(2020, 5, 10, 22, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 8, 9, 18, 8, 953, DateTimeKind.Local).AddTicks(9842),
                             Temperature = 15.026039291191367
                         },
                         new
@@ -5901,7 +5900,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.4325000000000001,
                             DataSeriesId = 3,
                             Gravity = 7.6749999999999998,
-                            RecordTime = new DateTime(2020, 5, 10, 23, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 8, 9, 38, 8, 953, DateTimeKind.Local).AddTicks(9846),
                             Temperature = 15.030195222724101
                         },
                         new
@@ -5910,7 +5909,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.4312500000000004,
                             DataSeriesId = 3,
                             Gravity = 7.6875,
-                            RecordTime = new DateTime(2020, 5, 10, 23, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 8, 9, 58, 8, 953, DateTimeKind.Local).AddTicks(9850),
                             Temperature = 15.034657715225368
                         },
                         new
@@ -5919,7 +5918,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.4300000000000002,
                             DataSeriesId = 3,
                             Gravity = 7.7000000000000002,
-                            RecordTime = new DateTime(2020, 5, 10, 23, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 8, 10, 18, 8, 953, DateTimeKind.Local).AddTicks(9854),
                             Temperature = 15.039426493427611
                         },
                         new
@@ -5928,7 +5927,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.42875,
                             DataSeriesId = 3,
                             Gravity = 7.7125000000000004,
-                            RecordTime = new DateTime(2020, 5, 11, 0, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 8, 10, 38, 8, 953, DateTimeKind.Local).AddTicks(9858),
                             Temperature = 15.044501263170126
                         },
                         new
@@ -5937,7 +5936,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.4275000000000002,
                             DataSeriesId = 3,
                             Gravity = 7.7249999999999996,
-                            RecordTime = new DateTime(2020, 5, 11, 0, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 8, 10, 58, 8, 953, DateTimeKind.Local).AddTicks(9862),
                             Temperature = 15.049881711417212
                         },
                         new
@@ -5946,7 +5945,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.42625,
                             DataSeriesId = 3,
                             Gravity = 7.7375000000000007,
-                            RecordTime = new DateTime(2020, 5, 11, 0, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 8, 11, 18, 8, 953, DateTimeKind.Local).AddTicks(9866),
                             Temperature = 15.055567506277477
                         },
                         new
@@ -5955,7 +5954,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.4250000000000003,
                             DataSeriesId = 3,
                             Gravity = 7.75,
-                            RecordTime = new DateTime(2020, 5, 11, 1, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 8, 11, 38, 8, 953, DateTimeKind.Local).AddTicks(9870),
                             Temperature = 15.061558297024311
                         },
                         new
@@ -5964,7 +5963,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.4237500000000001,
                             DataSeriesId = 3,
                             Gravity = 7.7625000000000002,
-                            RecordTime = new DateTime(2020, 5, 11, 1, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 8, 11, 58, 8, 953, DateTimeKind.Local).AddTicks(9875),
                             Temperature = 15.067853714117522
                         },
                         new
@@ -5973,7 +5972,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.4225000000000003,
                             DataSeriesId = 3,
                             Gravity = 7.7749999999999995,
-                            RecordTime = new DateTime(2020, 5, 11, 1, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 8, 12, 18, 8, 953, DateTimeKind.Local).AddTicks(9879),
                             Temperature = 15.074453369226131
                         },
                         new
@@ -5982,7 +5981,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.4212500000000001,
                             DataSeriesId = 3,
                             Gravity = 7.7875000000000005,
-                            RecordTime = new DateTime(2020, 5, 11, 2, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 8, 12, 38, 8, 953, DateTimeKind.Local).AddTicks(9883),
                             Temperature = 15.08135685525232
                         },
                         new
@@ -5991,7 +5990,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.4199999999999999,
                             DataSeriesId = 3,
                             Gravity = 7.8000000000000007,
-                            RecordTime = new DateTime(2020, 5, 11, 2, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 8, 12, 58, 8, 953, DateTimeKind.Local).AddTicks(9887),
                             Temperature = 15.088563746356556
                         },
                         new
@@ -6000,7 +5999,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.4187500000000002,
                             DataSeriesId = 3,
                             Gravity = 7.8125,
-                            RecordTime = new DateTime(2020, 5, 11, 2, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 8, 13, 18, 8, 953, DateTimeKind.Local).AddTicks(9891),
                             Temperature = 15.096073597983848
                         },
                         new
@@ -6009,7 +6008,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.4175000000000004,
                             DataSeriesId = 3,
                             Gravity = 7.8249999999999993,
-                            RecordTime = new DateTime(2020, 5, 11, 3, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 8, 13, 38, 8, 953, DateTimeKind.Local).AddTicks(9895),
                             Temperature = 15.103885946891172
                         },
                         new
@@ -6018,7 +6017,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.4162500000000002,
                             DataSeriesId = 3,
                             Gravity = 7.8374999999999995,
-                            RecordTime = new DateTime(2020, 5, 11, 3, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 8, 13, 58, 8, 953, DateTimeKind.Local).AddTicks(9899),
                             Temperature = 15.112000311176045
                         },
                         new
@@ -6027,7 +6026,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.415,
                             DataSeriesId = 3,
                             Gravity = 7.8500000000000005,
-                            RecordTime = new DateTime(2020, 5, 11, 3, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 8, 14, 18, 8, 953, DateTimeKind.Local).AddTicks(9903),
                             Temperature = 15.120416190306264
                         },
                         new
@@ -6036,7 +6035,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.4137500000000003,
                             DataSeriesId = 3,
                             Gravity = 7.8624999999999998,
-                            RecordTime = new DateTime(2020, 5, 11, 4, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 8, 14, 38, 8, 953, DateTimeKind.Local).AddTicks(9908),
                             Temperature = 15.129133065150754
                         },
                         new
@@ -6045,7 +6044,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.4125000000000001,
                             DataSeriesId = 3,
                             Gravity = 7.875,
-                            RecordTime = new DateTime(2020, 5, 11, 4, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 8, 14, 58, 8, 953, DateTimeKind.Local).AddTicks(9912),
                             Temperature = 15.138150398011616
                         },
                         new
@@ -6054,7 +6053,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.4112500000000003,
                             DataSeriesId = 3,
                             Gravity = 7.8874999999999993,
-                            RecordTime = new DateTime(2020, 5, 11, 4, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 8, 15, 18, 8, 953, DateTimeKind.Local).AddTicks(9916),
                             Temperature = 15.147467632657287
                         },
                         new
@@ -6063,7 +6062,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.4100000000000001,
                             DataSeriesId = 3,
                             Gravity = 7.9000000000000004,
-                            RecordTime = new DateTime(2020, 5, 11, 5, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 8, 15, 38, 8, 953, DateTimeKind.Local).AddTicks(9920),
                             Temperature = 15.157084194356845
                         },
                         new
@@ -6072,7 +6071,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.4087500000000004,
                             DataSeriesId = 3,
                             Gravity = 7.9124999999999996,
-                            RecordTime = new DateTime(2020, 5, 11, 5, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 8, 15, 58, 8, 953, DateTimeKind.Local).AddTicks(9924),
                             Temperature = 15.166999489915463
                         },
                         new
@@ -6081,7 +6080,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.4075000000000002,
                             DataSeriesId = 3,
                             Gravity = 7.9249999999999998,
-                            RecordTime = new DateTime(2020, 5, 11, 5, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 8, 16, 18, 8, 953, DateTimeKind.Local).AddTicks(9928),
                             Temperature = 15.177212907711009
                         },
                         new
@@ -6090,7 +6089,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.40625,
                             DataSeriesId = 3,
                             Gravity = 7.9375,
-                            RecordTime = new DateTime(2020, 5, 11, 6, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 8, 16, 38, 8, 953, DateTimeKind.Local).AddTicks(9932),
                             Temperature = 15.187723817731763
                         },
                         new
@@ -6099,7 +6098,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.4050000000000002,
                             DataSeriesId = 3,
                             Gravity = 7.9500000000000002,
-                            RecordTime = new DateTime(2020, 5, 11, 6, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 8, 16, 58, 8, 953, DateTimeKind.Local).AddTicks(9936),
                             Temperature = 15.198531571615284
                         },
                         new
@@ -6108,7 +6107,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.4037500000000001,
                             DataSeriesId = 3,
                             Gravity = 7.9625000000000004,
-                            RecordTime = new DateTime(2020, 5, 11, 6, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 8, 17, 18, 8, 953, DateTimeKind.Local).AddTicks(9940),
                             Temperature = 15.209635502688403
                         },
                         new
@@ -6117,7 +6116,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.4025000000000003,
                             DataSeriesId = 3,
                             Gravity = 7.9749999999999996,
-                            RecordTime = new DateTime(2020, 5, 11, 7, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 8, 17, 38, 8, 953, DateTimeKind.Local).AddTicks(9944),
                             Temperature = 15.22103492600835
                         },
                         new
@@ -6126,7 +6125,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.4012500000000001,
                             DataSeriesId = 3,
                             Gravity = 7.9874999999999998,
-                            RecordTime = new DateTime(2020, 5, 11, 7, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 8, 17, 58, 8, 953, DateTimeKind.Local).AddTicks(9948),
                             Temperature = 15.232729138404993
                         },
                         new
@@ -6135,7 +6134,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.4000000000000004,
                             DataSeriesId = 3,
                             Gravity = 8.0,
-                            RecordTime = new DateTime(2020, 5, 11, 7, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 8, 18, 18, 8, 953, DateTimeKind.Local).AddTicks(9952),
                             Temperature = 15.244717418524232
                         },
                         new
@@ -6144,7 +6143,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.3987500000000002,
                             DataSeriesId = 3,
                             Gravity = 8.0124999999999993,
-                            RecordTime = new DateTime(2020, 5, 11, 8, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 8, 18, 38, 8, 953, DateTimeKind.Local).AddTicks(9956),
                             Temperature = 15.256999026872478
                         },
                         new
@@ -6153,7 +6152,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.3975,
                             DataSeriesId = 3,
                             Gravity = 8.0250000000000004,
-                            RecordTime = new DateTime(2020, 5, 11, 8, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 8, 18, 58, 8, 953, DateTimeKind.Local).AddTicks(9961),
                             Temperature = 15.269573205862272
                         },
                         new
@@ -6162,7 +6161,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.3962500000000002,
                             DataSeriesId = 3,
                             Gravity = 8.0374999999999996,
-                            RecordTime = new DateTime(2020, 5, 11, 8, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 8, 19, 18, 8, 953, DateTimeKind.Local).AddTicks(9965),
                             Temperature = 15.282439179859031
                         },
                         new
@@ -6171,7 +6170,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.395,
                             DataSeriesId = 3,
                             Gravity = 8.0500000000000007,
-                            RecordTime = new DateTime(2020, 5, 11, 9, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 8, 19, 38, 8, 953, DateTimeKind.Local).AddTicks(9969),
                             Temperature = 15.295596155228873
                         },
                         new
@@ -6180,7 +6179,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.3937500000000003,
                             DataSeriesId = 3,
                             Gravity = 8.0625,
-                            RecordTime = new DateTime(2020, 5, 11, 9, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 8, 19, 58, 8, 953, DateTimeKind.Local).AddTicks(9973),
                             Temperature = 15.30904332038758
                         },
                         new
@@ -6189,7 +6188,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.3925000000000001,
                             DataSeriesId = 3,
                             Gravity = 8.0749999999999993,
-                            RecordTime = new DateTime(2020, 5, 11, 9, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 8, 20, 18, 8, 953, DateTimeKind.Local).AddTicks(9977),
                             Temperature = 15.322779845850663
                         },
                         new
@@ -6198,7 +6197,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.3912500000000003,
                             DataSeriesId = 3,
                             Gravity = 8.0875000000000004,
-                            RecordTime = new DateTime(2020, 5, 11, 10, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 8, 20, 38, 8, 953, DateTimeKind.Local).AddTicks(9981),
                             Temperature = 15.336804884284529
                         },
                         new
@@ -6207,7 +6206,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.3900000000000001,
                             DataSeriesId = 3,
                             Gravity = 8.1000000000000014,
-                            RecordTime = new DateTime(2020, 5, 11, 10, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 8, 20, 58, 8, 953, DateTimeKind.Local).AddTicks(9985),
                             Temperature = 15.351117570558744
                         },
                         new
@@ -6216,7 +6215,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.3887499999999999,
                             DataSeriesId = 3,
                             Gravity = 8.1125000000000007,
-                            RecordTime = new DateTime(2020, 5, 11, 10, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 8, 21, 18, 8, 953, DateTimeKind.Local).AddTicks(9990),
                             Temperature = 15.365717021799394
                         },
                         new
@@ -6225,7 +6224,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.3875000000000002,
                             DataSeriesId = 3,
                             Gravity = 8.125,
-                            RecordTime = new DateTime(2020, 5, 11, 11, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 8, 21, 38, 8, 953, DateTimeKind.Local).AddTicks(9994),
                             Temperature = 15.380602337443566
                         },
                         new
@@ -6234,7 +6233,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.3862500000000004,
                             DataSeriesId = 3,
                             Gravity = 8.1374999999999993,
-                            RecordTime = new DateTime(2020, 5, 11, 11, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 8, 21, 58, 8, 953, DateTimeKind.Local).AddTicks(9998),
                             Temperature = 15.395772599294869
                         },
                         new
@@ -6243,7 +6242,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.3850000000000002,
                             DataSeriesId = 3,
                             Gravity = 8.1499999999999986,
-                            RecordTime = new DateTime(2020, 5, 11, 11, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 8, 22, 18, 8, 954, DateTimeKind.Local).AddTicks(88),
                             Temperature = 15.411226871580093
                         },
                         new
@@ -6252,7 +6251,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.38375,
                             DataSeriesId = 3,
                             Gravity = 8.1624999999999996,
-                            RecordTime = new DateTime(2020, 5, 11, 12, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 8, 22, 38, 8, 954, DateTimeKind.Local).AddTicks(93),
                             Temperature = 15.426964201006932
                         },
                         new
@@ -6261,7 +6260,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.3825000000000003,
                             DataSeriesId = 3,
                             Gravity = 8.1750000000000007,
-                            RecordTime = new DateTime(2020, 5, 11, 12, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 8, 22, 58, 8, 954, DateTimeKind.Local).AddTicks(97),
                             Temperature = 15.442983616822774
                         },
                         new
@@ -6270,7 +6269,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.3812500000000001,
                             DataSeriesId = 3,
                             Gravity = 8.1875,
-                            RecordTime = new DateTime(2020, 5, 11, 12, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 8, 23, 18, 8, 954, DateTimeKind.Local).AddTicks(101),
                             Temperature = 15.459284130874593
                         },
                         new
@@ -6279,7 +6278,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.3800000000000003,
                             DataSeriesId = 3,
                             Gravity = 8.1999999999999993,
-                            RecordTime = new DateTime(2020, 5, 11, 13, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 8, 23, 38, 8, 954, DateTimeKind.Local).AddTicks(105),
                             Temperature = 15.475864737669902
                         },
                         new
@@ -6288,7 +6287,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.3787500000000001,
                             DataSeriesId = 3,
                             Gravity = 8.2125000000000004,
-                            RecordTime = new DateTime(2020, 5, 11, 13, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 8, 23, 58, 8, 954, DateTimeKind.Local).AddTicks(109),
                             Temperature = 15.492724414438772
                         },
                         new
@@ -6297,7 +6296,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.3775000000000004,
                             DataSeriesId = 3,
                             Gravity = 8.2249999999999996,
-                            RecordTime = new DateTime(2020, 5, 11, 13, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 9, 0, 18, 8, 954, DateTimeKind.Local).AddTicks(113),
                             Temperature = 15.509862121196921
                         },
                         new
@@ -6306,7 +6305,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.3762500000000002,
                             DataSeriesId = 3,
                             Gravity = 8.2375000000000007,
-                            RecordTime = new DateTime(2020, 5, 11, 14, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 9, 0, 38, 8, 954, DateTimeKind.Local).AddTicks(117),
                             Temperature = 15.527276800809872
                         },
                         new
@@ -6315,7 +6314,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.375,
                             DataSeriesId = 3,
                             Gravity = 8.25,
-                            RecordTime = new DateTime(2020, 5, 11, 14, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 9, 0, 58, 8, 954, DateTimeKind.Local).AddTicks(121),
                             Temperature = 15.544967379058161
                         },
                         new
@@ -6324,7 +6323,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.3737500000000002,
                             DataSeriesId = 3,
                             Gravity = 8.2625000000000011,
-                            RecordTime = new DateTime(2020, 5, 11, 14, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 9, 1, 18, 8, 954, DateTimeKind.Local).AddTicks(125),
                             Temperature = 15.562932764703584
                         },
                         new
@@ -6333,7 +6332,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.3725000000000001,
                             DataSeriesId = 3,
                             Gravity = 8.2750000000000004,
-                            RecordTime = new DateTime(2020, 5, 11, 15, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 9, 1, 38, 8, 954, DateTimeKind.Local).AddTicks(130),
                             Temperature = 15.581171849556533
                         },
                         new
@@ -6342,7 +6341,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.3712500000000003,
                             DataSeriesId = 3,
                             Gravity = 8.2874999999999996,
-                            RecordTime = new DateTime(2020, 5, 11, 15, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 9, 1, 58, 8, 954, DateTimeKind.Local).AddTicks(134),
                             Temperature = 15.599683508544341
                         },
                         new
@@ -6351,7 +6350,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.3700000000000001,
                             DataSeriesId = 3,
                             Gravity = 8.2999999999999989,
-                            RecordTime = new DateTime(2020, 5, 11, 15, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 9, 2, 18, 8, 954, DateTimeKind.Local).AddTicks(138),
                             Temperature = 15.618466599780682
                         },
                         new
@@ -6360,7 +6359,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.3687500000000004,
                             DataSeriesId = 3,
                             Gravity = 8.3125,
-                            RecordTime = new DateTime(2020, 5, 11, 16, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 9, 2, 38, 8, 954, DateTimeKind.Local).AddTicks(142),
                             Temperature = 15.637519964636015
                         },
                         new
@@ -6369,7 +6368,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.3675000000000002,
                             DataSeriesId = 3,
                             Gravity = 8.3249999999999993,
-                            RecordTime = new DateTime(2020, 5, 11, 16, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 9, 2, 58, 8, 954, DateTimeKind.Local).AddTicks(146),
                             Temperature = 15.656842427809043
                         },
                         new
@@ -6378,7 +6377,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.36625,
                             DataSeriesId = 3,
                             Gravity = 8.3375000000000004,
-                            RecordTime = new DateTime(2020, 5, 11, 16, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 9, 3, 18, 8, 954, DateTimeKind.Local).AddTicks(150),
                             Temperature = 15.676432797399224
                         },
                         new
@@ -6387,7 +6386,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.3650000000000002,
                             DataSeriesId = 3,
                             Gravity = 8.3499999999999996,
-                            RecordTime = new DateTime(2020, 5, 11, 17, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 9, 3, 38, 8, 954, DateTimeKind.Local).AddTicks(154),
                             Temperature = 15.69628986498028
                         },
                         new
@@ -6396,7 +6395,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.36375,
                             DataSeriesId = 3,
                             Gravity = 8.3625000000000007,
-                            RecordTime = new DateTime(2020, 5, 11, 17, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 9, 3, 58, 8, 954, DateTimeKind.Local).AddTicks(158),
                             Temperature = 15.716412405674751
                         },
                         new
@@ -6405,7 +6404,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.3625000000000003,
                             DataSeriesId = 3,
                             Gravity = 8.375,
-                            RecordTime = new DateTime(2020, 5, 11, 17, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 9, 4, 18, 8, 954, DateTimeKind.Local).AddTicks(163),
                             Temperature = 15.736799178229539
                         },
                         new
@@ -6414,7 +6413,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.3612500000000001,
                             DataSeriesId = 3,
                             Gravity = 8.3874999999999993,
-                            RecordTime = new DateTime(2020, 5, 11, 18, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 9, 4, 38, 8, 954, DateTimeKind.Local).AddTicks(167),
                             Temperature = 15.757448925092481
                         },
                         new
@@ -6423,7 +6422,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.3600000000000003,
                             DataSeriesId = 3,
                             Gravity = 8.4000000000000004,
-                            RecordTime = new DateTime(2020, 5, 11, 18, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 9, 4, 58, 8, 954, DateTimeKind.Local).AddTicks(171),
                             Temperature = 15.778360372489923
                         },
                         new
@@ -6432,7 +6431,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.3587500000000001,
                             DataSeriesId = 3,
                             Gravity = 8.4125000000000014,
-                            RecordTime = new DateTime(2020, 5, 11, 18, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 9, 5, 18, 8, 954, DateTimeKind.Local).AddTicks(175),
                             Temperature = 15.799532230505292
                         },
                         new
@@ -6441,7 +6440,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.3574999999999999,
                             DataSeriesId = 3,
                             Gravity = 8.4250000000000007,
-                            RecordTime = new DateTime(2020, 5, 11, 19, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 9, 5, 38, 8, 954, DateTimeKind.Local).AddTicks(179),
                             Temperature = 15.820963193158649
                         },
                         new
@@ -6450,7 +6449,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.3562500000000002,
                             DataSeriesId = 3,
                             Gravity = 8.4375,
-                            RecordTime = new DateTime(2020, 5, 11, 19, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 9, 5, 58, 8, 954, DateTimeKind.Local).AddTicks(183),
                             Temperature = 15.842651938487272
                         },
                         new
@@ -6459,7 +6458,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.3550000000000004,
                             DataSeriesId = 3,
                             Gravity = 8.4499999999999993,
-                            RecordTime = new DateTime(2020, 5, 11, 19, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 9, 6, 18, 8, 954, DateTimeKind.Local).AddTicks(187),
                             Temperature = 15.864597128627191
                         },
                         new
@@ -6468,7 +6467,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.3537500000000002,
                             DataSeriesId = 3,
                             Gravity = 8.4624999999999986,
-                            RecordTime = new DateTime(2020, 5, 11, 20, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 9, 6, 38, 8, 954, DateTimeKind.Local).AddTicks(191),
                             Temperature = 15.886797409895699
                         },
                         new
@@ -6477,7 +6476,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.3525,
                             DataSeriesId = 3,
                             Gravity = 8.4749999999999996,
-                            RecordTime = new DateTime(2020, 5, 11, 20, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 9, 6, 58, 8, 954, DateTimeKind.Local).AddTicks(195),
                             Temperature = 15.909251412874882
                         },
                         new
@@ -6486,7 +6485,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.3512500000000003,
                             DataSeriesId = 3,
                             Gravity = 8.4875000000000007,
-                            RecordTime = new DateTime(2020, 5, 11, 20, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 9, 7, 18, 8, 954, DateTimeKind.Local).AddTicks(200),
                             Temperature = 15.931957752496064
                         },
                         new
@@ -6495,7 +6494,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.3500000000000001,
                             DataSeriesId = 3,
                             Gravity = 8.5,
-                            RecordTime = new DateTime(2020, 5, 11, 21, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 9, 7, 38, 8, 954, DateTimeKind.Local).AddTicks(204),
                             Temperature = 15.954915028125262
                         },
                         new
@@ -6504,7 +6503,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.3487500000000003,
                             DataSeriesId = 3,
                             Gravity = 8.5124999999999993,
-                            RecordTime = new DateTime(2020, 5, 11, 21, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 9, 7, 58, 8, 954, DateTimeKind.Local).AddTicks(208),
                             Temperature = 15.978121823649575
                         },
                         new
@@ -6513,7 +6512,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.3475000000000001,
                             DataSeriesId = 3,
                             Gravity = 8.5250000000000004,
-                            RecordTime = new DateTime(2020, 5, 11, 21, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 9, 8, 18, 8, 954, DateTimeKind.Local).AddTicks(212),
                             Temperature = 16.001576707564546
                         },
                         new
@@ -6522,7 +6521,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.3462500000000004,
                             DataSeriesId = 3,
                             Gravity = 8.5374999999999996,
-                            RecordTime = new DateTime(2020, 5, 11, 22, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 9, 8, 38, 8, 954, DateTimeKind.Local).AddTicks(216),
                             Temperature = 16.025278233062451
                         },
                         new
@@ -6531,7 +6530,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.3450000000000002,
                             DataSeriesId = 3,
                             Gravity = 8.5500000000000007,
-                            RecordTime = new DateTime(2020, 5, 11, 22, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 9, 8, 58, 8, 954, DateTimeKind.Local).AddTicks(220),
                             Temperature = 16.049224938121547
                         },
                         new
@@ -6540,7 +6539,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.34375,
                             DataSeriesId = 3,
                             Gravity = 8.5625,
-                            RecordTime = new DateTime(2020, 5, 11, 22, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 9, 9, 18, 8, 954, DateTimeKind.Local).AddTicks(224),
                             Temperature = 16.073415345596274
                         },
                         new
@@ -6549,7 +6548,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.3425000000000002,
                             DataSeriesId = 3,
                             Gravity = 8.5750000000000011,
-                            RecordTime = new DateTime(2020, 5, 11, 23, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 9, 9, 38, 8, 954, DateTimeKind.Local).AddTicks(229),
                             Temperature = 16.097847963308354
                         },
                         new
@@ -6558,7 +6557,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.3412500000000001,
                             DataSeriesId = 3,
                             Gravity = 8.5875000000000004,
-                            RecordTime = new DateTime(2020, 5, 11, 23, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 9, 9, 58, 8, 954, DateTimeKind.Local).AddTicks(233),
                             Temperature = 16.122521284138827
                         },
                         new
@@ -6567,7 +6566,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.3400000000000003,
                             DataSeriesId = 3,
                             Gravity = 8.5999999999999996,
-                            RecordTime = new DateTime(2020, 5, 11, 23, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 9, 10, 18, 8, 954, DateTimeKind.Local).AddTicks(237),
                             Temperature = 16.147433786121052
                         },
                         new
@@ -6576,7 +6575,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.3387500000000001,
                             DataSeriesId = 3,
                             Gravity = 8.6124999999999989,
-                            RecordTime = new DateTime(2020, 5, 12, 0, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 9, 10, 38, 8, 954, DateTimeKind.Local).AddTicks(241),
                             Temperature = 16.172583932534558
                         },
                         new
@@ -6585,7 +6584,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.3375000000000004,
                             DataSeriesId = 3,
                             Gravity = 8.625,
-                            RecordTime = new DateTime(2020, 5, 12, 0, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 9, 10, 58, 8, 954, DateTimeKind.Local).AddTicks(245),
                             Temperature = 16.197970171999845
                         },
                         new
@@ -6594,7 +6593,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.3362500000000002,
                             DataSeriesId = 3,
                             Gravity = 8.6374999999999993,
-                            RecordTime = new DateTime(2020, 5, 12, 0, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 9, 11, 18, 8, 954, DateTimeKind.Local).AddTicks(249),
                             Temperature = 16.22359093857408
                         },
                         new
@@ -6603,7 +6602,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.335,
                             DataSeriesId = 3,
                             Gravity = 8.6500000000000004,
-                            RecordTime = new DateTime(2020, 5, 12, 1, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 9, 11, 38, 8, 954, DateTimeKind.Local).AddTicks(254),
                             Temperature = 16.249444651847703
                         },
                         new
@@ -6612,7 +6611,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.3337500000000002,
                             DataSeriesId = 3,
                             Gravity = 8.6624999999999996,
-                            RecordTime = new DateTime(2020, 5, 12, 1, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 9, 11, 58, 8, 954, DateTimeKind.Local).AddTicks(258),
                             Temperature = 16.275529717041888
                         },
                         new
@@ -6621,7 +6620,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.3325,
                             DataSeriesId = 3,
                             Gravity = 8.6750000000000007,
-                            RecordTime = new DateTime(2020, 5, 12, 1, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 9, 12, 18, 8, 954, DateTimeKind.Local).AddTicks(262),
                             Temperature = 16.301844525106951
                         },
                         new
@@ -6630,7 +6629,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.3312500000000003,
                             DataSeriesId = 3,
                             Gravity = 8.6875,
-                            RecordTime = new DateTime(2020, 5, 12, 2, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 9, 12, 38, 8, 954, DateTimeKind.Local).AddTicks(266),
                             Temperature = 16.32838745282157
                         },
                         new
@@ -6639,7 +6638,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.3300000000000001,
                             DataSeriesId = 3,
                             Gravity = 8.6999999999999993,
-                            RecordTime = new DateTime(2020, 5, 12, 2, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 9, 12, 58, 8, 954, DateTimeKind.Local).AddTicks(270),
                             Temperature = 16.35515686289294
                         },
                         new
@@ -6648,7 +6647,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.3287500000000003,
                             DataSeriesId = 3,
                             Gravity = 8.7125000000000004,
-                            RecordTime = new DateTime(2020, 5, 12, 2, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 9, 13, 18, 8, 954, DateTimeKind.Local).AddTicks(274),
                             Temperature = 16.382151104057751
                         },
                         new
@@ -6657,7 +6656,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.3275000000000001,
                             DataSeriesId = 3,
                             Gravity = 8.7250000000000014,
-                            RecordTime = new DateTime(2020, 5, 12, 3, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 9, 13, 38, 8, 954, DateTimeKind.Local).AddTicks(278),
                             Temperature = 16.409368511184056
                         },
                         new
@@ -6666,7 +6665,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.3262499999999999,
                             DataSeriesId = 3,
                             Gravity = 8.7375000000000007,
-                            RecordTime = new DateTime(2020, 5, 12, 3, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 9, 13, 58, 8, 954, DateTimeKind.Local).AddTicks(282),
                             Temperature = 16.436807405373973
                         },
                         new
@@ -6675,7 +6674,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.3250000000000002,
                             DataSeriesId = 3,
                             Gravity = 8.75,
-                            RecordTime = new DateTime(2020, 5, 12, 3, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 9, 14, 18, 8, 954, DateTimeKind.Local).AddTicks(286),
                             Temperature = 16.464466094067262
                         },
                         new
@@ -6684,7 +6683,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.3237500000000004,
                             DataSeriesId = 3,
                             Gravity = 8.7624999999999993,
-                            RecordTime = new DateTime(2020, 5, 12, 4, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 9, 14, 38, 8, 954, DateTimeKind.Local).AddTicks(291),
                             Temperature = 16.49234287114572
                         },
                         new
@@ -6693,7 +6692,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.3225000000000002,
                             DataSeriesId = 3,
                             Gravity = 8.7749999999999986,
-                            RecordTime = new DateTime(2020, 5, 12, 4, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 9, 14, 58, 8, 954, DateTimeKind.Local).AddTicks(295),
                             Temperature = 16.520436017038428
                         },
                         new
@@ -6702,7 +6701,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.32125,
                             DataSeriesId = 3,
                             Gravity = 8.7874999999999996,
-                            RecordTime = new DateTime(2020, 5, 12, 4, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 9, 15, 18, 8, 954, DateTimeKind.Local).AddTicks(299),
                             Temperature = 16.548743798827815
                         },
                         new
@@ -6711,7 +6710,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.3200000000000003,
                             DataSeriesId = 3,
                             Gravity = 8.8000000000000007,
-                            RecordTime = new DateTime(2020, 5, 12, 5, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 9, 15, 38, 8, 954, DateTimeKind.Local).AddTicks(303),
                             Temperature = 16.577264470356553
                         },
                         new
@@ -6720,7 +6719,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.3187500000000001,
                             DataSeriesId = 3,
                             Gravity = 8.8125,
-                            RecordTime = new DateTime(2020, 5, 12, 5, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 9, 15, 58, 8, 954, DateTimeKind.Local).AddTicks(307),
                             Temperature = 16.60599627233529
                         },
                         new
@@ -6729,7 +6728,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.3175000000000003,
                             DataSeriesId = 3,
                             Gravity = 8.8249999999999993,
-                            RecordTime = new DateTime(2020, 5, 12, 5, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 9, 16, 18, 8, 954, DateTimeKind.Local).AddTicks(311),
                             Temperature = 16.634937432451132
                         },
                         new
@@ -6738,7 +6737,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.3162500000000001,
                             DataSeriesId = 3,
                             Gravity = 8.8375000000000004,
-                            RecordTime = new DateTime(2020, 5, 12, 6, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 9, 16, 38, 8, 954, DateTimeKind.Local).AddTicks(316),
                             Temperature = 16.664086165477002
                         },
                         new
@@ -6747,7 +6746,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.3150000000000004,
                             DataSeriesId = 3,
                             Gravity = 8.8499999999999996,
-                            RecordTime = new DateTime(2020, 5, 12, 6, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 9, 16, 58, 8, 954, DateTimeKind.Local).AddTicks(320),
                             Temperature = 16.693440673381737
                         },
                         new
@@ -6756,7 +6755,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.3137500000000002,
                             DataSeriesId = 3,
                             Gravity = 8.8625000000000007,
-                            RecordTime = new DateTime(2020, 5, 12, 6, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 9, 17, 18, 8, 954, DateTimeKind.Local).AddTicks(324),
                             Temperature = 16.72299914544103
                         },
                         new
@@ -6765,7 +6764,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.3125,
                             DataSeriesId = 3,
                             Gravity = 8.875,
-                            RecordTime = new DateTime(2020, 5, 12, 7, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 9, 17, 38, 8, 954, DateTimeKind.Local).AddTicks(328),
                             Temperature = 16.752759758349079
                         },
                         new
@@ -6774,7 +6773,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.3112500000000002,
                             DataSeriesId = 3,
                             Gravity = 8.8875000000000011,
-                            RecordTime = new DateTime(2020, 5, 12, 7, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 9, 17, 58, 8, 954, DateTimeKind.Local).AddTicks(332),
                             Temperature = 16.782720676331103
                         },
                         new
@@ -6783,7 +6782,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.3100000000000001,
                             DataSeriesId = 3,
                             Gravity = 8.9000000000000004,
-                            RecordTime = new DateTime(2020, 5, 12, 7, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 9, 18, 18, 8, 954, DateTimeKind.Local).AddTicks(336),
                             Temperature = 16.812880051256553
                         },
                         new
@@ -6792,7 +6791,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.3087500000000003,
                             DataSeriesId = 3,
                             Gravity = 8.9124999999999996,
-                            RecordTime = new DateTime(2020, 5, 12, 8, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 9, 18, 38, 8, 954, DateTimeKind.Local).AddTicks(340),
                             Temperature = 16.843236022753111
                         },
                         new
@@ -6801,7 +6800,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.3075000000000001,
                             DataSeriesId = 3,
                             Gravity = 8.9249999999999989,
-                            RecordTime = new DateTime(2020, 5, 12, 8, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 9, 18, 58, 8, 954, DateTimeKind.Local).AddTicks(345),
                             Temperature = 16.873786718321469
                         },
                         new
@@ -6810,7 +6809,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.3062500000000004,
                             DataSeriesId = 3,
                             Gravity = 8.9375,
-                            RecordTime = new DateTime(2020, 5, 12, 8, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 9, 19, 18, 8, 954, DateTimeKind.Local).AddTicks(349),
                             Temperature = 16.904530253450833
                         },
                         new
@@ -6819,7 +6818,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.3050000000000002,
                             DataSeriesId = 3,
                             Gravity = 8.9499999999999993,
-                            RecordTime = new DateTime(2020, 5, 12, 9, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 9, 19, 38, 8, 954, DateTimeKind.Local).AddTicks(353),
                             Temperature = 16.935464731735117
                         },
                         new
@@ -6828,7 +6827,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.30375,
                             DataSeriesId = 3,
                             Gravity = 8.9625000000000004,
-                            RecordTime = new DateTime(2020, 5, 12, 9, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 9, 19, 58, 8, 954, DateTimeKind.Local).AddTicks(357),
                             Temperature = 16.96658824499
                         },
                         new
@@ -6837,7 +6836,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.3025000000000002,
                             DataSeriesId = 3,
                             Gravity = 8.9749999999999996,
-                            RecordTime = new DateTime(2020, 5, 12, 9, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 9, 20, 18, 8, 954, DateTimeKind.Local).AddTicks(361),
                             Temperature = 16.99789887337058
                         },
                         new
@@ -6846,7 +6845,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.30125,
                             DataSeriesId = 3,
                             Gravity = 8.9875000000000007,
-                            RecordTime = new DateTime(2020, 5, 12, 10, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 9, 20, 38, 8, 954, DateTimeKind.Local).AddTicks(365),
                             Temperature = 17.029394685489809
                         },
                         new
@@ -6855,7 +6854,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.3000000000000003,
                             DataSeriesId = 3,
                             Gravity = 9.0,
-                            RecordTime = new DateTime(2020, 5, 12, 10, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 9, 20, 58, 8, 954, DateTimeKind.Local).AddTicks(369),
                             Temperature = 17.061073738537633
                         },
                         new
@@ -6864,7 +6863,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.2987500000000001,
                             DataSeriesId = 3,
                             Gravity = 9.0124999999999993,
-                            RecordTime = new DateTime(2020, 5, 12, 10, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 9, 21, 18, 8, 954, DateTimeKind.Local).AddTicks(373),
                             Temperature = 17.092934078400848
                         },
                         new
@@ -6873,7 +6872,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.2975000000000003,
                             DataSeriesId = 3,
                             Gravity = 9.0250000000000004,
-                            RecordTime = new DateTime(2020, 5, 12, 11, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 9, 21, 38, 8, 954, DateTimeKind.Local).AddTicks(377),
                             Temperature = 17.124973739783606
                         },
                         new
@@ -6882,7 +6881,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.2962500000000001,
                             DataSeriesId = 3,
                             Gravity = 9.0375000000000014,
-                            RecordTime = new DateTime(2020, 5, 12, 11, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 9, 21, 58, 8, 954, DateTimeKind.Local).AddTicks(382),
                             Temperature = 17.157190746328681
                         },
                         new
@@ -6891,7 +6890,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.2949999999999999,
                             DataSeriesId = 3,
                             Gravity = 9.0500000000000007,
-                            RecordTime = new DateTime(2020, 5, 12, 11, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 9, 22, 18, 8, 954, DateTimeKind.Local).AddTicks(386),
                             Temperature = 17.189583110739346
                         },
                         new
@@ -6900,7 +6899,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.2937500000000002,
                             DataSeriesId = 3,
                             Gravity = 9.0625,
-                            RecordTime = new DateTime(2020, 5, 12, 12, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 9, 22, 38, 8, 954, DateTimeKind.Local).AddTicks(390),
                             Temperature = 17.22214883490199
                         },
                         new
@@ -6909,7 +6908,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.2925000000000004,
                             DataSeriesId = 3,
                             Gravity = 9.0749999999999993,
-                            RecordTime = new DateTime(2020, 5, 12, 12, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 9, 22, 58, 8, 954, DateTimeKind.Local).AddTicks(394),
                             Temperature = 17.254885910009339
                         },
                         new
@@ -6918,7 +6917,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.2912500000000002,
                             DataSeriesId = 3,
                             Gravity = 9.0874999999999986,
-                            RecordTime = new DateTime(2020, 5, 12, 12, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 9, 23, 18, 8, 954, DateTimeKind.Local).AddTicks(398),
                             Temperature = 17.287792316684403
                         },
                         new
@@ -6927,7 +6926,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.29,
                             DataSeriesId = 3,
                             Gravity = 9.0999999999999996,
-                            RecordTime = new DateTime(2020, 5, 12, 13, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 9, 23, 38, 8, 954, DateTimeKind.Local).AddTicks(402),
                             Temperature = 17.320866025105019
                         },
                         new
@@ -6936,7 +6935,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.2887500000000003,
                             DataSeriesId = 3,
                             Gravity = 9.1125000000000007,
-                            RecordTime = new DateTime(2020, 5, 12, 13, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 9, 23, 58, 8, 954, DateTimeKind.Local).AddTicks(407),
                             Temperature = 17.354104995129045
                         },
                         new
@@ -6945,7 +6944,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.2875000000000001,
                             DataSeriesId = 3,
                             Gravity = 9.125,
-                            RecordTime = new DateTime(2020, 5, 12, 13, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 10, 0, 18, 8, 954, DateTimeKind.Local).AddTicks(411),
                             Temperature = 17.387507176420254
                         },
                         new
@@ -6954,7 +6953,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.2862500000000003,
                             DataSeriesId = 3,
                             Gravity = 9.1374999999999993,
-                            RecordTime = new DateTime(2020, 5, 12, 14, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 10, 0, 38, 8, 954, DateTimeKind.Local).AddTicks(415),
                             Temperature = 17.421070508574761
                         },
                         new
@@ -6963,7 +6962,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.2850000000000001,
                             DataSeriesId = 3,
                             Gravity = 9.1500000000000004,
-                            RecordTime = new DateTime(2020, 5, 12, 14, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 10, 0, 58, 8, 954, DateTimeKind.Local).AddTicks(419),
                             Temperature = 17.454792921248142
                         },
                         new
@@ -6972,7 +6971,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.2837500000000004,
                             DataSeriesId = 3,
                             Gravity = 9.1624999999999996,
-                            RecordTime = new DateTime(2020, 5, 12, 14, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 10, 1, 18, 8, 954, DateTimeKind.Local).AddTicks(423),
                             Temperature = 17.488672334283137
                         },
                         new
@@ -6981,7 +6980,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.2825000000000002,
                             DataSeriesId = 3,
                             Gravity = 9.1750000000000007,
-                            RecordTime = new DateTime(2020, 5, 12, 15, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 10, 1, 38, 8, 954, DateTimeKind.Local).AddTicks(427),
                             Temperature = 17.522706657837961
                         },
                         new
@@ -6990,7 +6989,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.28125,
                             DataSeriesId = 3,
                             Gravity = 9.1875,
-                            RecordTime = new DateTime(2020, 5, 12, 15, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 10, 1, 58, 8, 954, DateTimeKind.Local).AddTicks(431),
                             Temperature = 17.556893792515222
                         },
                         new
@@ -6999,7 +6998,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.2800000000000002,
                             DataSeriesId = 3,
                             Gravity = 9.2000000000000011,
-                            RecordTime = new DateTime(2020, 5, 12, 15, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 10, 2, 18, 8, 954, DateTimeKind.Local).AddTicks(436),
                             Temperature = 17.591231629491425
                         },
                         new
@@ -7008,7 +7007,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.2787500000000001,
                             DataSeriesId = 3,
                             Gravity = 9.2125000000000004,
-                            RecordTime = new DateTime(2020, 5, 12, 16, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 10, 2, 38, 8, 954, DateTimeKind.Local).AddTicks(440),
                             Temperature = 17.625718050647023
                         },
                         new
@@ -7017,7 +7016,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.2775000000000003,
                             DataSeriesId = 3,
                             Gravity = 9.2249999999999996,
-                            RecordTime = new DateTime(2020, 5, 12, 16, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 10, 2, 58, 8, 954, DateTimeKind.Local).AddTicks(444),
                             Temperature = 17.660350928697131
                         },
                         new
@@ -7026,7 +7025,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.2762500000000001,
                             DataSeriesId = 3,
                             Gravity = 9.2374999999999989,
-                            RecordTime = new DateTime(2020, 5, 12, 16, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 10, 3, 18, 8, 954, DateTimeKind.Local).AddTicks(448),
                             Temperature = 17.695128127322686
                         },
                         new
@@ -7035,7 +7034,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.2750000000000004,
                             DataSeriesId = 3,
                             Gravity = 9.25,
-                            RecordTime = new DateTime(2020, 5, 12, 17, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 10, 3, 38, 8, 954, DateTimeKind.Local).AddTicks(452),
                             Temperature = 17.730047501302266
                         },
                         new
@@ -7044,7 +7043,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.2737500000000002,
                             DataSeriesId = 3,
                             Gravity = 9.2624999999999993,
-                            RecordTime = new DateTime(2020, 5, 12, 17, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 10, 3, 58, 8, 954, DateTimeKind.Local).AddTicks(456),
                             Temperature = 17.765106896644397
                         },
                         new
@@ -7053,7 +7052,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.2725,
                             DataSeriesId = 3,
                             Gravity = 9.2750000000000004,
-                            RecordTime = new DateTime(2020, 5, 12, 17, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 10, 4, 18, 8, 954, DateTimeKind.Local).AddTicks(461),
                             Temperature = 17.800304150720422
                         },
                         new
@@ -7062,7 +7061,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.2712500000000002,
                             DataSeriesId = 3,
                             Gravity = 9.2874999999999996,
-                            RecordTime = new DateTime(2020, 5, 12, 18, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 10, 4, 38, 8, 954, DateTimeKind.Local).AddTicks(465),
                             Temperature = 17.835637092397928
                         },
                         new
@@ -7071,7 +7070,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.27,
                             DataSeriesId = 3,
                             Gravity = 9.3000000000000007,
-                            RecordTime = new DateTime(2020, 5, 12, 18, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 10, 4, 58, 8, 954, DateTimeKind.Local).AddTicks(469),
                             Temperature = 17.871103542174637
                         },
                         new
@@ -7080,7 +7079,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.2687500000000003,
                             DataSeriesId = 3,
                             Gravity = 9.3125,
-                            RecordTime = new DateTime(2020, 5, 12, 18, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 10, 5, 18, 8, 954, DateTimeKind.Local).AddTicks(473),
                             Temperature = 17.906701312312858
                         },
                         new
@@ -7089,7 +7088,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.2675000000000001,
                             DataSeriesId = 3,
                             Gravity = 9.3249999999999993,
-                            RecordTime = new DateTime(2020, 5, 12, 19, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 10, 5, 38, 8, 954, DateTimeKind.Local).AddTicks(478),
                             Temperature = 17.942428206974455
                         },
                         new
@@ -7098,7 +7097,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.2662500000000003,
                             DataSeriesId = 3,
                             Gravity = 9.3375000000000004,
-                            RecordTime = new DateTime(2020, 5, 12, 19, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 10, 5, 58, 8, 954, DateTimeKind.Local).AddTicks(482),
                             Temperature = 17.978282022356275
                         },
                         new
@@ -7107,7 +7106,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.2650000000000001,
                             DataSeriesId = 3,
                             Gravity = 9.3500000000000014,
-                            RecordTime = new DateTime(2020, 5, 12, 19, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 10, 6, 18, 8, 954, DateTimeKind.Local).AddTicks(486),
                             Temperature = 18.014260546826097
                         },
                         new
@@ -7116,7 +7115,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.2637499999999999,
                             DataSeriesId = 3,
                             Gravity = 9.3625000000000007,
-                            RecordTime = new DateTime(2020, 5, 12, 20, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 10, 6, 38, 8, 954, DateTimeKind.Local).AddTicks(490),
                             Temperature = 18.050361561059059
                         },
                         new
@@ -7125,7 +7124,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.2625000000000002,
                             DataSeriesId = 3,
                             Gravity = 9.375,
-                            RecordTime = new DateTime(2020, 5, 12, 20, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 10, 6, 58, 8, 954, DateTimeKind.Local).AddTicks(495),
                             Temperature = 18.086582838174547
                         },
                         new
@@ -7134,7 +7133,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.2612500000000004,
                             DataSeriesId = 3,
                             Gravity = 9.3874999999999993,
-                            RecordTime = new DateTime(2020, 5, 12, 20, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 10, 7, 18, 8, 954, DateTimeKind.Local).AddTicks(499),
                             Temperature = 18.122922143873584
                         },
                         new
@@ -7143,7 +7142,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.2600000000000002,
                             DataSeriesId = 3,
                             Gravity = 9.3999999999999986,
-                            RecordTime = new DateTime(2020, 5, 12, 21, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 10, 7, 38, 8, 954, DateTimeKind.Local).AddTicks(503),
                             Temperature = 18.159377236576606
                         },
                         new
@@ -7152,7 +7151,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.25875,
                             DataSeriesId = 3,
                             Gravity = 9.4124999999999996,
-                            RecordTime = new DateTime(2020, 5, 12, 21, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 10, 7, 58, 8, 954, DateTimeKind.Local).AddTicks(507),
                             Temperature = 18.19594586756179
                         },
                         new
@@ -7161,7 +7160,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.2575000000000003,
                             DataSeriesId = 3,
                             Gravity = 9.4250000000000007,
-                            RecordTime = new DateTime(2020, 5, 12, 21, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 10, 8, 18, 8, 954, DateTimeKind.Local).AddTicks(511),
                             Temperature = 18.232625781103714
                         },
                         new
@@ -7170,7 +7169,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.2562500000000001,
                             DataSeriesId = 3,
                             Gravity = 9.4375,
-                            RecordTime = new DateTime(2020, 5, 12, 22, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 10, 8, 38, 8, 954, DateTimeKind.Local).AddTicks(516),
                             Temperature = 18.269414714612534
                         },
                         new
@@ -7179,7 +7178,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.2550000000000003,
                             DataSeriesId = 3,
                             Gravity = 9.4499999999999993,
-                            RecordTime = new DateTime(2020, 5, 12, 22, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 10, 8, 58, 8, 954, DateTimeKind.Local).AddTicks(520),
                             Temperature = 18.30631039877354
                         },
                         new
@@ -7188,7 +7187,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.2537500000000001,
                             DataSeriesId = 3,
                             Gravity = 9.4625000000000004,
-                            RecordTime = new DateTime(2020, 5, 12, 22, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 10, 9, 18, 8, 954, DateTimeKind.Local).AddTicks(524),
                             Temperature = 18.343310557687147
                         },
                         new
@@ -7197,7 +7196,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.2525000000000004,
                             DataSeriesId = 3,
                             Gravity = 9.4749999999999996,
-                            RecordTime = new DateTime(2020, 5, 12, 23, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 10, 9, 38, 8, 954, DateTimeKind.Local).AddTicks(528),
                             Temperature = 18.380412909009252
                         },
                         new
@@ -7206,7 +7205,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.2512500000000002,
                             DataSeriesId = 3,
                             Gravity = 9.4875000000000007,
-                            RecordTime = new DateTime(2020, 5, 12, 23, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 10, 9, 58, 8, 954, DateTimeKind.Local).AddTicks(533),
                             Temperature = 18.417615164092066
                         },
                         new
@@ -7215,7 +7214,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.25,
                             DataSeriesId = 3,
                             Gravity = 9.5,
-                            RecordTime = new DateTime(2020, 5, 12, 23, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 10, 10, 18, 8, 954, DateTimeKind.Local).AddTicks(537),
                             Temperature = 18.45491502812526
                         },
                         new
@@ -7224,7 +7223,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.2487500000000002,
                             DataSeriesId = 3,
                             Gravity = 9.5125000000000011,
-                            RecordTime = new DateTime(2020, 5, 13, 0, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 10, 10, 38, 8, 954, DateTimeKind.Local).AddTicks(541),
                             Temperature = 18.492310200277522
                         },
                         new
@@ -7233,7 +7232,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.2475000000000001,
                             DataSeriesId = 3,
                             Gravity = 9.5250000000000004,
-                            RecordTime = new DateTime(2020, 5, 13, 0, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 10, 10, 58, 8, 954, DateTimeKind.Local).AddTicks(546),
                             Temperature = 18.529798373838478
                         },
                         new
@@ -7242,7 +7241,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.2462500000000003,
                             DataSeriesId = 3,
                             Gravity = 9.5374999999999996,
-                            RecordTime = new DateTime(2020, 5, 13, 0, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 10, 11, 18, 8, 954, DateTimeKind.Local).AddTicks(550),
                             Temperature = 18.567377236361008
                         },
                         new
@@ -7251,7 +7250,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.2450000000000001,
                             DataSeriesId = 3,
                             Gravity = 9.5499999999999989,
-                            RecordTime = new DateTime(2020, 5, 13, 1, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 10, 11, 38, 8, 954, DateTimeKind.Local).AddTicks(554),
                             Temperature = 18.60504446980385
                         },
                         new
@@ -7260,7 +7259,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.2437500000000004,
                             DataSeriesId = 3,
                             Gravity = 9.5625,
-                            RecordTime = new DateTime(2020, 5, 13, 1, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 10, 11, 58, 8, 954, DateTimeKind.Local).AddTicks(558),
                             Temperature = 18.642797750674628
                         },
                         new
@@ -7269,7 +7268,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.2425000000000002,
                             DataSeriesId = 3,
                             Gravity = 9.5749999999999993,
-                            RecordTime = new DateTime(2020, 5, 13, 1, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 10, 12, 18, 8, 954, DateTimeKind.Local).AddTicks(610),
                             Temperature = 18.680634750173134
                         },
                         new
@@ -7278,7 +7277,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.24125,
                             DataSeriesId = 3,
                             Gravity = 9.5875000000000004,
-                            RecordTime = new DateTime(2020, 5, 13, 2, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 10, 12, 38, 8, 954, DateTimeKind.Local).AddTicks(615),
                             Temperature = 18.718553134335018
                         },
                         new
@@ -7287,7 +7286,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.2400000000000002,
                             DataSeriesId = 3,
                             Gravity = 9.5999999999999996,
-                            RecordTime = new DateTime(2020, 5, 13, 2, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 10, 12, 58, 8, 954, DateTimeKind.Local).AddTicks(619),
                             Temperature = 18.756550564175722
                         },
                         new
@@ -7296,7 +7295,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.23875,
                             DataSeriesId = 3,
                             Gravity = 9.6125000000000007,
-                            RecordTime = new DateTime(2020, 5, 13, 2, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 10, 13, 18, 8, 954, DateTimeKind.Local).AddTicks(623),
                             Temperature = 18.794624695834806
                         },
                         new
@@ -7305,7 +7304,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.2375000000000003,
                             DataSeriesId = 3,
                             Gravity = 9.625,
-                            RecordTime = new DateTime(2020, 5, 13, 3, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 10, 13, 38, 8, 954, DateTimeKind.Local).AddTicks(627),
                             Temperature = 18.832773180720473
                         },
                         new
@@ -7314,7 +7313,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.2362500000000001,
                             DataSeriesId = 3,
                             Gravity = 9.6374999999999993,
-                            RecordTime = new DateTime(2020, 5, 13, 3, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 10, 13, 58, 8, 954, DateTimeKind.Local).AddTicks(631),
                             Temperature = 18.870993665654481
                         },
                         new
@@ -7323,7 +7322,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.2350000000000003,
                             DataSeriesId = 3,
                             Gravity = 9.6500000000000004,
-                            RecordTime = new DateTime(2020, 5, 13, 3, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 10, 14, 18, 8, 954, DateTimeKind.Local).AddTicks(636),
                             Temperature = 18.909283793017284
                         },
                         new
@@ -7332,7 +7331,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.2337500000000001,
                             DataSeriesId = 3,
                             Gravity = 9.6625000000000014,
-                            RecordTime = new DateTime(2020, 5, 13, 4, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 10, 14, 38, 8, 954, DateTimeKind.Local).AddTicks(640),
                             Temperature = 18.947641200893475
                         },
                         new
@@ -7341,7 +7340,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.2324999999999999,
                             DataSeriesId = 3,
                             Gravity = 9.6750000000000007,
-                            RecordTime = new DateTime(2020, 5, 13, 4, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 10, 14, 58, 8, 954, DateTimeKind.Local).AddTicks(644),
                             Temperature = 18.986063523217439
                         },
                         new
@@ -7350,7 +7349,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.2312500000000002,
                             DataSeriesId = 3,
                             Gravity = 9.6875,
-                            RecordTime = new DateTime(2020, 5, 13, 4, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 10, 15, 18, 8, 954, DateTimeKind.Local).AddTicks(648),
                             Temperature = 19.024548389919357
                         },
                         new
@@ -7359,7 +7358,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.2300000000000004,
                             DataSeriesId = 3,
                             Gravity = 9.6999999999999993,
-                            RecordTime = new DateTime(2020, 5, 13, 5, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 10, 15, 38, 8, 954, DateTimeKind.Local).AddTicks(652),
                             Temperature = 19.063093427071376
                         },
                         new
@@ -7368,7 +7367,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.2287500000000002,
                             DataSeriesId = 3,
                             Gravity = 9.7124999999999986,
-                            RecordTime = new DateTime(2020, 5, 13, 5, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 10, 15, 58, 8, 954, DateTimeKind.Local).AddTicks(656),
                             Temperature = 19.101696257034035
                         },
                         new
@@ -7377,7 +7376,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.2275,
                             DataSeriesId = 3,
                             Gravity = 9.7249999999999996,
-                            RecordTime = new DateTime(2020, 5, 13, 5, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 10, 16, 18, 8, 954, DateTimeKind.Local).AddTicks(660),
                             Temperature = 19.140354498602953
                         },
                         new
@@ -7386,7 +7385,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.2262500000000003,
                             DataSeriesId = 3,
                             Gravity = 9.7375000000000007,
-                            RecordTime = new DateTime(2020, 5, 13, 6, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 10, 16, 38, 8, 954, DateTimeKind.Local).AddTicks(665),
                             Temperature = 19.179065767155681
                         },
                         new
@@ -7395,7 +7394,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.2250000000000001,
                             DataSeriesId = 3,
                             Gravity = 9.75,
-                            RecordTime = new DateTime(2020, 5, 13, 6, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 10, 16, 58, 8, 954, DateTimeKind.Local).AddTicks(669),
                             Temperature = 19.217827674798844
                         },
                         new
@@ -7404,7 +7403,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.2237500000000003,
                             DataSeriesId = 3,
                             Gravity = 9.7624999999999993,
-                            RecordTime = new DateTime(2020, 5, 13, 6, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 10, 17, 18, 8, 954, DateTimeKind.Local).AddTicks(673),
                             Temperature = 19.25663783051538
                         },
                         new
@@ -7413,7 +7412,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.2225000000000001,
                             DataSeriesId = 3,
                             Gravity = 9.7750000000000004,
-                            RecordTime = new DateTime(2020, 5, 13, 7, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 10, 17, 38, 8, 954, DateTimeKind.Local).AddTicks(677),
                             Temperature = 19.295493840312083
                         },
                         new
@@ -7422,7 +7421,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.2212500000000004,
                             DataSeriesId = 3,
                             Gravity = 9.7874999999999996,
-                            RecordTime = new DateTime(2020, 5, 13, 7, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 10, 17, 58, 8, 954, DateTimeKind.Local).AddTicks(681),
                             Temperature = 19.33439330736724
                         },
                         new
@@ -7431,7 +7430,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.2200000000000002,
                             DataSeriesId = 3,
                             Gravity = 9.8000000000000007,
-                            RecordTime = new DateTime(2020, 5, 13, 7, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 10, 18, 18, 8, 954, DateTimeKind.Local).AddTicks(685),
                             Temperature = 19.373333832178478
                         },
                         new
@@ -7440,7 +7439,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.21875,
                             DataSeriesId = 3,
                             Gravity = 9.8125,
-                            RecordTime = new DateTime(2020, 5, 13, 8, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 10, 18, 38, 8, 954, DateTimeKind.Local).AddTicks(689),
                             Temperature = 19.412313012710808
                         },
                         new
@@ -7449,7 +7448,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.2175000000000002,
                             DataSeriesId = 3,
                             Gravity = 9.8250000000000011,
-                            RecordTime = new DateTime(2020, 5, 13, 8, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 10, 18, 58, 8, 954, DateTimeKind.Local).AddTicks(693),
                             Temperature = 19.451328444544774
                         },
                         new
@@ -7458,7 +7457,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.2162500000000001,
                             DataSeriesId = 3,
                             Gravity = 9.8375000000000004,
-                            RecordTime = new DateTime(2020, 5, 13, 8, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 10, 19, 18, 8, 954, DateTimeKind.Local).AddTicks(697),
                             Temperature = 19.49037772102475
                         },
                         new
@@ -7467,7 +7466,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.2150000000000003,
                             DataSeriesId = 3,
                             Gravity = 9.8499999999999996,
-                            RecordTime = new DateTime(2020, 5, 13, 9, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 10, 19, 38, 8, 954, DateTimeKind.Local).AddTicks(702),
                             Temperature = 19.529458433407427
                         },
                         new
@@ -7476,7 +7475,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.2137500000000001,
                             DataSeriesId = 3,
                             Gravity = 9.8624999999999989,
-                            RecordTime = new DateTime(2020, 5, 13, 9, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 10, 19, 58, 8, 954, DateTimeKind.Local).AddTicks(706),
                             Temperature = 19.568568171010384
                         },
                         new
@@ -7485,7 +7484,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.2125000000000004,
                             DataSeriesId = 3,
                             Gravity = 9.875,
-                            RecordTime = new DateTime(2020, 5, 13, 9, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 10, 20, 18, 8, 954, DateTimeKind.Local).AddTicks(710),
                             Temperature = 19.607704521360777
                         },
                         new
@@ -7494,7 +7493,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.2112500000000002,
                             DataSeriesId = 3,
                             Gravity = 9.8874999999999993,
-                            RecordTime = new DateTime(2020, 5, 13, 10, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 10, 20, 38, 8, 954, DateTimeKind.Local).AddTicks(714),
                             Temperature = 19.646865070344166
                         },
                         new
@@ -7503,7 +7502,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.21,
                             DataSeriesId = 3,
                             Gravity = 9.9000000000000004,
-                            RecordTime = new DateTime(2020, 5, 13, 10, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 10, 20, 58, 8, 954, DateTimeKind.Local).AddTicks(718),
                             Temperature = 19.686047402353434
                         },
                         new
@@ -7512,7 +7511,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.2087500000000002,
                             DataSeriesId = 3,
                             Gravity = 9.9124999999999996,
-                            RecordTime = new DateTime(2020, 5, 13, 10, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 10, 21, 18, 8, 954, DateTimeKind.Local).AddTicks(722),
                             Temperature = 19.725249100437768
                         },
                         new
@@ -7521,7 +7520,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.2075,
                             DataSeriesId = 3,
                             Gravity = 9.9250000000000007,
-                            RecordTime = new DateTime(2020, 5, 13, 11, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 10, 21, 38, 8, 954, DateTimeKind.Local).AddTicks(726),
                             Temperature = 19.764467746451786
                         },
                         new
@@ -7530,7 +7529,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.2062500000000003,
                             DataSeriesId = 3,
                             Gravity = 9.9375,
-                            RecordTime = new DateTime(2020, 5, 13, 11, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 10, 21, 58, 8, 954, DateTimeKind.Local).AddTicks(731),
                             Temperature = 19.803700921204655
                         },
                         new
@@ -7539,7 +7538,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.2050000000000001,
                             DataSeriesId = 3,
                             Gravity = 9.9499999999999993,
-                            RecordTime = new DateTime(2020, 5, 13, 11, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 10, 22, 18, 8, 954, DateTimeKind.Local).AddTicks(735),
                             Temperature = 19.842946204609358
                         },
                         new
@@ -7548,7 +7547,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.2037500000000003,
                             DataSeriesId = 3,
                             Gravity = 9.9625000000000004,
-                            RecordTime = new DateTime(2020, 5, 13, 12, 10, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 10, 22, 38, 8, 954, DateTimeKind.Local).AddTicks(739),
                             Temperature = 19.882201175831945
                         },
                         new
@@ -7557,7 +7556,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.2025000000000001,
                             DataSeriesId = 3,
                             Gravity = 9.9750000000000014,
-                            RecordTime = new DateTime(2020, 5, 13, 12, 30, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 10, 22, 58, 8, 954, DateTimeKind.Local).AddTicks(743),
                             Temperature = 19.921463413440897
                         },
                         new
@@ -7566,7 +7565,7 @@ namespace iSpindel.Database.Migrations
                             Battery = 3.2012499999999999,
                             DataSeriesId = 3,
                             Gravity = 9.9875000000000007,
-                            RecordTime = new DateTime(2020, 5, 13, 12, 50, 0, 0, DateTimeKind.Unspecified),
+                            RecordTime = new DateTime(2020, 11, 10, 23, 18, 8, 954, DateTimeKind.Local).AddTicks(747),
                             Temperature = 19.960730495556444
                         });
                 });
@@ -7600,31 +7599,25 @@ namespace iSpindel.Database.Migrations
                         {
                             Id = -1,
                             Description = "This is the default Data Series for iSpindel Projects.",
-                            Name = "Default Data Series",
-                            Start = new DateTime(2020, 5, 1, 23, 0, 0, 0, DateTimeKind.Unspecified)
+                            Name = "Default Data Series"
                         },
                         new
                         {
                             Id = 1,
                             Description = "This is the first test dataset",
-                            End = new DateTime(2020, 5, 1, 23, 45, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Test Series 1",
-                            Start = new DateTime(2020, 5, 1, 23, 0, 0, 0, DateTimeKind.Unspecified)
+                            Name = "Test Series 1"
                         },
                         new
                         {
                             Id = 2,
                             Description = "This is the second test dataset",
-                            End = new DateTime(2020, 5, 2, 6, 30, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Test Series 2",
-                            Start = new DateTime(2020, 5, 1, 23, 50, 0, 0, DateTimeKind.Unspecified)
+                            Name = "Test Series 2"
                         },
                         new
                         {
                             Id = 3,
                             Description = "This is the third test dataset",
-                            Name = "Test Series 3",
-                            Start = new DateTime(2020, 5, 1, 23, 50, 0, 0, DateTimeKind.Unspecified)
+                            Name = "Test Series 3"
                         });
                 });
 
