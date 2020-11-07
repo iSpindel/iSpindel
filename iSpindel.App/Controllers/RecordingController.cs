@@ -9,6 +9,8 @@ using MQTTnet.Client;
 using MQTTnet.Client.Options;
 using MQTTnet.Extensions.ManagedClient;
 using System.Threading;
+using Microsoft.AspNetCore.SignalR;
+using iSpindel.App.Hubs;
 
 namespace iSpindel.App.Controllers
 {
@@ -18,10 +20,12 @@ namespace iSpindel.App.Controllers
     public class RecordingController : ControllerBase
     {
         private readonly iSpindelClientOptions iSpindelClientOptions;
+        private readonly IHubContext<NotifyHub, IClientSpindelDataHub> notifyHub;
 
-        public RecordingController(IOptions<MqttConnectionSettings> settings)
+        public RecordingController(IOptions<MqttConnectionSettings> settings, IHubContext<NotifyHub, IClientSpindelDataHub> notifyHub)
         {
-            iSpindelClientOptions = BuildISpindelClientOpts(settings.Value);
+            this.iSpindelClientOptions = BuildISpindelClientOpts(settings.Value);
+            this.notifyHub = notifyHub;
         }
 
         private iSpindelClientOptions BuildISpindelClientOpts(MqttConnectionSettings options)
@@ -63,8 +67,11 @@ namespace iSpindel.App.Controllers
         public async Task<string> RecordingStatus()
         {
             using var iSpindelClient = new iSpindelClient(iSpindelClientOptions);
-            var status = await iSpindelClient.GetStatusAsync();
-            return status.ToString();
+            var status = (await iSpindelClient.GetStatusAsync()).ToString();
+
+            await this.notifyHub.Clients.All.RecordingStatusUpdate(status);
+
+            return status;
         }
 
         // POST: api/Recording
