@@ -15,6 +15,8 @@ namespace iSpindel.Database
 		public string Description { get; set; }
 		[InverseProperty("DataSeries")]
 		public virtual ICollection<DataPoint> DataPoints { get; set; }
+		public int? BeerCharacteristicsId {get; set;}
+        [ForeignKey("BeerCharacteristicsId")]
 		public virtual BeerCharacteristics BeerCharacteristics {get; set;}
 		public DateTime? Start { get; set; }
 		public DateTime? End { get; set; }

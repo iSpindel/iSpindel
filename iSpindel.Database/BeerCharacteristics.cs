@@ -6,9 +6,8 @@ namespace iSpindel.Database {
     public class BeerCharacteristics {
         public int Id {get; set;}
 
-        [ForeignKey("DataSeriesId"),JsonIgnore]
+        [ForeignKey("DataSeriesId")]
         public virtual DataSeries DataSeries { get; set; }
-        [Required]
         public int DataSeriesId {get; set;}
         public double? EVG { get; set; }
         public int? Bitterness { get; set; }
