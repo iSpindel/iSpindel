@@ -1,21 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project>
   <Sdk Name="Microsoft.NET.Sdk.Web" />
-  <Sdk Name="Yarn.MSBuild" Version="1.22.5" />
-  
-  <PropertyGroup>
-    <YarnWorkingDir>$(MSBuildProjectDirectory)/ClientApp/</YarnWorkingDir>
-    <YarnBuildCommand>install</YarnBuildCommand>
-    <YarnBuildCommand Condition="'$(Configuration)' == 'Release'">run build --env.prod</YarnBuildCommand>
-  </PropertyGroup>
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
     <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
     <IsPackable>false</IsPackable>
-    <SpaRoot>ClientApp\</SpaRoot> 
-    
+    <SpaRoot>ClientApp\</SpaRoot>
+
     <DefaultItemExcludes>$(DefaultItemExcludes);$(SpaRoot)node_modules\**</DefaultItemExcludes>
     <!-- Set this to true if you enable server-side prerendering -->
     <BuildServerSideRenderer>false</BuildServerSideRenderer>
