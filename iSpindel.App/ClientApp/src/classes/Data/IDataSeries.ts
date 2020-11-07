@@ -1,3 +1,4 @@
+import { IBeerCharacteristics } from './IBeerCharacteristics';
 import { IDataPoint } from './IDataPoint'
 
 export interface IDataSeries {
@@ -5,7 +6,7 @@ export interface IDataSeries {
     name: string;
     description: string;
     datapoints: Array<IDataPoint>;
-    //TODO replace with real dates
+    beerCharacteristics: IBeerCharacteristics;
     start: string;
     end: string;
 }

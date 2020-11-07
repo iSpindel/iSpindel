@@ -2,7 +2,6 @@ import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { IDataSeries } from 'src/classes/Data/IDataSeries';
 import { Observable } from 'rxjs';
-import { threadId } from 'worker_threads';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +13,7 @@ export class DataseriesService {
   public readonly AllDataSeries$: Observable<IDataSeries[]>;
 
   constructor(private _http: HttpClient) {
-    this._baseUrl = 'api/DataSeries/';
+    this._baseUrl = 'api/DataSeries';
     this.AllDataSeries$ = this._http.get(`/api/DataSeries`) as Observable<IDataSeries[]>;
   }
 
@@ -27,5 +26,12 @@ export class DataseriesService {
     }, error => console.error(error));
   }
 
+  /*
+  public loadAllDataSeries ( ) : Observable<DataSeries[]> {
+    let allDataSeries = this._http.get(this._baseUrl).pipe(
+      
+    ) 
+ }
+ */
 
 }

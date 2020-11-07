@@ -21,11 +21,23 @@ export class ListMeasuresComponent implements OnInit {
 
   constructor(private _dataseriesService: DataseriesService) { }
 
+  public getEvg(dataSeries: IDataSeries): string {
+    if (dataSeries === null || dataSeries.beerCharacteristics === null ){
+      return "";
+    }
+
+    return dataSeries.beerCharacteristics.evg + "%";
+  }
+
   /**
    * getDatestring date : Date
    * 
    */
   public getDate(date: string) : string {
+    if (date === null) {
+      return "tbd"
+    }
+
      var theDate = new Date(date); 
      return theDate.getDate() + "." + theDate.getMonth() + "." + theDate.getFullYear();
 
