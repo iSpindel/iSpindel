@@ -16,6 +16,7 @@ namespace iSpindel.Database.Job.Runner
             var configurationRoot = new ConfigurationBuilder()
                     .SetBasePath(Path.Combine(Directory.GetCurrentDirectory()))
                     .AddJsonFile("appsettings.json", false, false)
+                    .AddJsonFile("appsettings.Development.json", true, false)
                     .AddJsonFile("appsettings.Production.json", true, false)
                     .Build();
 
