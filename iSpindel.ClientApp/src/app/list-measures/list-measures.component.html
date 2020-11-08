@@ -25,18 +25,53 @@
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
 -->
-<mat-card *ngFor="let dataSeries of (AllDataSeries$ | async)">
-    <mat-card-header>
-        <mat-card-title>{{dataSeries.name}} &nbsp;&nbsp; {{ dataSeries.getStart() }} - {{ dataSeries.getEnd() }} <button *ngIf="isRecordingStartPossible(dataSeries)" mat-icon-button color="warn"><mat-icon svgIcon="record-rec"></mat-icon></button>
-        </mat-card-title>
-    </mat-card-header>
+<a *ngFor="let dataSeries of (AllDataSeries$ | async)" [routerLink]="['/beerDetails', dataSeries.id]">
+  <mat-card>
     <mat-card-content>
-      <ul>
-            <li>Beschreibung: {{ dataSeries.description }}</li>
-            <li>Plato Anfangswert: {{ dataSeries.getFirstGravity() }}</li>
-            <li>Alkoholgehalt: 5,6%</li>
-            <li>EVG: {{ dataSeries.beerCharacteristics?.getEvg() }}</li>
-            <li>Bittere : {{ dataSeries.beerCharacteristics?.getBitterness() }}</li>
-    </ul>
+      <form>
+        <div class="container">
+          <mat-form-field class="item" appearance="standard">
+            <mat-label>Name</mat-label>
+            <input matInput placeholder="0" disabled value="{{ dataSeries.name }}">
+          </mat-form-field>
+          <mat-form-field class="item" appearance="standard">
+            <mat-label>Zeitraum</mat-label>
+            <input matInput placeholder="0" disabled value="{{ dataSeries.getStart() }} - {{ dataSeries.getEnd() }}">
+          </mat-form-field>
+          <mat-form-field class="item small-form-field" appearance="standard">
+            <mat-label>Plato Startwert</mat-label>
+            <input matInput placeholder="0" disabled value="{{dataSeries.getFirstGravity()}}">
+            <span matSuffix>°P </span>
+          </mat-form-field>
+          <mat-form-field class="item small-form-field" appearance="standard">
+            <mat-label>Alkoholgehalt</mat-label>
+            <!--<input matInput placeholder="0" disabled value="{{dataSeries.getAlcoholLevel()}}">-->
+            <input matInput placeholder="0" disabled value="20,5">
+            <span matSuffix>% </span>
+          </mat-form-field>
+          <mat-form-field class="item small-form-field" appearance="standard">
+            <mat-label>EVG (0-100%)</mat-label>
+            <input matInput placeholder="0" disabled value="{{dataSeries.beerCharacteristics?.evg}}">
+            <span matSuffix>%</span>
+          </mat-form-field>
+          <mat-form-field class="item small-form-field" appearance="standard">
+            <mat-label>Bittere (0-3000)</mat-label>
+            <input matInput placeholder="0" disabled value="{{dataSeries.beerCharacteristics?.bitterness}}">
+            <span matSuffix>IBU</span>
+          </mat-form-field>
+          <button class="item big-button" *ngIf="isRecordingStartPossible(dataSeries)" mat-icon-button color="warn">
+            <mat-icon svgIcon="record-rec"></mat-icon>
+          </button>
+        </div>
+
+        <div class="list-subtitle">
+          <mat-form-field class="fullwidth-textarea" appearance="standard">
+            <mat-label>Beschreibung</mat-label>
+            <textarea disabled matInput cdkTextareaAutosize cdkAutosizeMinRows="1"
+              cdkAutosizeMaxRows="5">{{dataSeries.description}}</textarea>
+          </mat-form-field>
+        </div>
+      </form>
     </mat-card-content>
-</mat-card>
+  </mat-card>
+</a>

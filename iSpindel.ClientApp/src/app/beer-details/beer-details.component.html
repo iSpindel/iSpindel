@@ -1,133 +1,148 @@
 <mat-card>
     <mat-card-header>
-        <mat-card-title>{{dataSeries.name}}</mat-card-title>
+        <mat-card-title>
+            {{dataSeries.name}}</mat-card-title>
         <mat-card-subtitle>{{dataSeries.getStart()}} - {{dataSeries.getEnd()}}</mat-card-subtitle>
+        <span class="menu-spacer"></span>
+        <button mat-icon-button class="example-icon" aria-label="Back to List" [routerLink]="['/viewMeasure']">
+            <mat-icon matTooltip="Zurück zur Liste" svgIcon="arrow-up-bold"></mat-icon>
+        </button>
         <button mat-icon-button color="warn">
-                    <mat-icon svgIcon="content-save-edit"></mat-icon>
+            <mat-icon matTooltip="Änderungen speichern" svgIcon="content-save-edit"></mat-icon>
         </button>
     </mat-card-header>
     <mat-card-content>
 
-        <h3>Braulogbuch</h3>
-        <mat-grid-list cols="3" rowHeight="80px">
-            <mat-grid-tile colspan="1" rowspan="1">
-                <mat-form-field appearance="outline">
-                    <mat-label>Angestrebter Bierstil</mat-label>
-                    <input matInput placeholder="Stil" value={{dataSeries.beerCharacteristics?.beerStyle}}>
-                </mat-form-field>
-            </mat-grid-tile>
-            <mat-grid-tile colspan="1" rowspan="1">
-                <mat-form-field appearance="outline">
-                    <mat-label>Hefesorte</mat-label>
-                    <input matInput placeholder="Hefe" value={{dataSeries.beerCharacteristics?.yeastType}}>
-                </mat-form-field>
-            </mat-grid-tile>
-            <mat-grid-tile colspan="1" rowspan="1">
-            </mat-grid-tile>
-        </mat-grid-list>
+        <mat-tab-group>
+            <mat-tab label="Werte Übersicht">
 
-        <mat-form-field class="fullwidth-textarea" appearance="outline">
-            <mat-label>Beschreibung</mat-label>
-            <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="3"
-                cdkAutosizeMaxRows="10">{{dataSeries.description}}</textarea>
-        </mat-form-field>
-        <mat-form-field class="fullwidth-textarea" appearance="outline">
-            <mat-label>Notizen</mat-label>
-            <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="3"
-                cdkAutosizeMaxRows="10">{{dataSeries.beerCharacteristics?.notes}}</textarea>
-        </mat-form-field>
-        <mat-divider></mat-divider>
-        <h3>Brau Ergebnis</h3>
-        <mat-grid-list cols="3" rowHeight="80px">
-            <mat-grid-tile colspan="1" rowspan="1">
-                <mat-form-field appearance="outline">
-                    <mat-label>Sudhaus-Ausbeute </mat-label>
-                    <input matInput placeholder="0" value="{{dataSeries.beerCharacteristics?.brewhouseEfficency}}">
-                    <span matSuffix>%</span>
-                </mat-form-field>
-            </mat-grid-tile>
-            <mat-grid-tile colspan="1" rowspan="1">
-                <mat-form-field appearance="outline">
-                    <mat-label>Biermenge (0-200l)</mat-label>
-                    <input matInput placeholder="0" value="{{dataSeries.beerCharacteristics?.amountOfWort}}">
-                    <span matSuffix>l</span>
-                </mat-form-field>
-            </mat-grid-tile>
-            <mat-grid-tile colspan="1" rowspan="1">
-            </mat-grid-tile>
+                <h3>Braulogbuch</h3>
+                <mat-grid-list cols="3" rowHeight="80px">
+                    <mat-grid-tile colspan="1" rowspan="1">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Angestrebter Bierstil</mat-label>
+                            <input matInput placeholder="Stil" value={{dataSeries.beerCharacteristics?.beerStyle}}>
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile colspan="1" rowspan="1">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Hefesorte</mat-label>
+                            <input matInput placeholder="Hefe" value={{dataSeries.beerCharacteristics?.yeastType}}>
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile colspan="1" rowspan="1">
+                    </mat-grid-tile>
+                </mat-grid-list>
 
-            <mat-grid-tile colspan="1" rowspan="1">
-                <mat-form-field appearance="outline">
-                    <mat-label>Mittlere Brautemperatur</mat-label>
-                    <input matInput placeholder="0" disabled value="{{dataSeries.getMeanTemperature()}}">
-                    <span matSuffix>°C</span>
+                <mat-form-field class="fullwidth-textarea" appearance="outline">
+                    <mat-label>Beschreibung</mat-label>
+                    <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="3"
+                        cdkAutosizeMaxRows="10">{{dataSeries.description}}</textarea>
                 </mat-form-field>
-            </mat-grid-tile>
-            <mat-grid-tile colspan="1" rowspan="1">
-                <mat-form-field appearance="outline">
-                    <mat-label>Plato Startwert (aus Daten)</mat-label>
-                    <input matInput placeholder="0" disabled value="{{dataSeries.getFirstGravity()}}">
-                    <span matSuffix>°P</span>
+                <mat-form-field class="fullwidth-textarea" appearance="outline">
+                    <mat-label>Notizen</mat-label>
+                    <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="3"
+                        cdkAutosizeMaxRows="10">{{dataSeries.beerCharacteristics?.notes}}</textarea>
                 </mat-form-field>
-            </mat-grid-tile>
-            <mat-grid-tile colspan="1" rowspan="1">
-                <mat-form-field appearance="outline">
-                    <mat-label>Alkoholgehalt (aus Daten + Zuschlag vom Karbonisieren)</mat-label>
-                    <input matInput placeholder="0" value="5,6">
-                    <span matSuffix>%</span>
-                </mat-form-field>
-            </mat-grid-tile>
+                <mat-divider></mat-divider>
+                <h3>Brau Ergebnis</h3>
+                <mat-grid-list cols="3" rowHeight="80px">
+                    <mat-grid-tile colspan="1" rowspan="1">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Sudhaus-Ausbeute </mat-label>
+                            <input matInput placeholder="0"
+                                value="{{dataSeries.beerCharacteristics?.brewhouseEfficency}}">
+                            <span matSuffix>%</span>
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile colspan="1" rowspan="1">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Biermenge (0-200l)</mat-label>
+                            <input matInput placeholder="0" value="{{dataSeries.beerCharacteristics?.amountOfWort}}">
+                            <span matSuffix>l</span>
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile colspan="1" rowspan="1">
+                    </mat-grid-tile>
 
-            <mat-grid-tile colspan="1" rowspan="1">
-                <mat-form-field appearance="outline">
-                    <mat-label>EVG (0-100%)</mat-label>
-                    <input matInput placeholder="0" value="{{dataSeries.beerCharacteristics?.evg}}">
-                    <span matSuffix>%</span>
-                </mat-form-field>
-            </mat-grid-tile>
-            <mat-grid-tile colspan="1" rowspan="1">
-                <mat-form-field appearance="outline">
-                    <mat-label>Bittere (0-3000)</mat-label>
-                    <input matInput placeholder="0" value="{{dataSeries.beerCharacteristics?.bitterness}}">
-                    <span matSuffix>IBU</span>
-                </mat-form-field>
-            </mat-grid-tile>
-            <mat-grid-tile colspan="1" rowspan="1">
-                <mat-form-field appearance="outline">
-                    <mat-label>Farbe (0-150)</mat-label>
-                    <input matInput placeholder="0" value="{{dataSeries.beerCharacteristics?.colorScale}}">
-                    <span matSuffix>EBC</span>
-                </mat-form-field>
-            </mat-grid-tile>
-        </mat-grid-list>
-        <mat-divider></mat-divider>
-        <h3>Karbonisierung</h3>
-        <mat-grid-list cols="3" rowHeight="80px">
-            <mat-grid-tile colspan="1" rowspan="1">
-                <mat-form-field appearance="outline">
-                    <mat-label>Zielwert CO2</mat-label>
-                    <input matInput placeholder="0" value="{{dataSeries.beerCharacteristics?.targetCarbonation}}">
-                    <span matSuffix>g/l</span>
-                </mat-form-field>
-            </mat-grid-tile>
-            <mat-grid-tile colspan="1" rowspan="1">
-                <mat-form-field appearance="outline">
-                    <mat-label>Zugegebener Zucker</mat-label>
-                    <input matInput placeholder="0" value="{{dataSeries.beerCharacteristics?.addedSugar}}">
-                    <span matSuffix>g/l</span>
-                </mat-form-field>
-            </mat-grid-tile>
-            <mat-grid-tile colspan="1" rowspan="1">
-                <mat-form-field appearance="outline">
-                    <mat-label>Erhöhung Alkoholgehalt</mat-label>
-                    <input matInput placeholder="0" value="{{dataSeries.beerCharacteristics?.adjustedAlcoholLevel}}">
-                    <span matSuffix>%vol.</span>
-                </mat-form-field>
-            </mat-grid-tile>
-        </mat-grid-list>
-        <br>
+                    <mat-grid-tile colspan="1" rowspan="1">
+                        <mat-form-field class="undiscernable-disabled-field" appearance="outline">
+                            <mat-label>Mittlere Brautemperatur</mat-label>
+                            <input matInput placeholder="0" disabled value="{{dataSeries.getMeanTemperature()}}">
+                            <span matSuffix>°C </span>
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile colspan="1" rowspan="1">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Plato Startwert</mat-label>
+                            <input matInput placeholder="0" disabled value="{{dataSeries.getFirstGravity()}}">
+                            <span matSuffix>°P </span>
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile colspan="1" rowspan="1">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Alkoholgehalt</mat-label>
+                            <input matInput placeholder="0" disabled value="{{dataSeries.getAlcoholLevel()}}">
+                            <span matSuffix>% </span>
+                        </mat-form-field>
+                    </mat-grid-tile>
 
-        FANCY DIAGRAMM
+                    <mat-grid-tile colspan="1" rowspan="1">
+                        <mat-form-field appearance="outline">
+                            <mat-label>EVG (0-100%)</mat-label>
+                            <input matInput placeholder="0" value="{{dataSeries.beerCharacteristics?.evg}}">
+                            <span matSuffix>%</span>
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile colspan="1" rowspan="1">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Bittere (0-3000)</mat-label>
+                            <input matInput placeholder="0" value="{{dataSeries.beerCharacteristics?.bitterness}}">
+                            <span matSuffix>IBU</span>
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile colspan="1" rowspan="1">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Farbe (0-150)</mat-label>
+                            <input matInput placeholder="0" value="{{dataSeries.beerCharacteristics?.colorScale}}">
+                            <span matSuffix>EBC</span>
+                        </mat-form-field>
+                    </mat-grid-tile>
+                </mat-grid-list>
+                <mat-divider></mat-divider>
+                <h3>Karbonisierung</h3>
+                <mat-grid-list cols="3" rowHeight="80px">
+                    <mat-grid-tile colspan="1" rowspan="1">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Zielwert CO2</mat-label>
+                            <input matInput placeholder="0"
+                                value="{{dataSeries.beerCharacteristics?.targetCarbonation}}">
+                            <span matSuffix>g/l</span>
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile colspan="1" rowspan="1">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Zugegebener Zucker</mat-label>
+                            <input matInput placeholder="0" value="{{dataSeries.beerCharacteristics?.addedSugar}}">
+                            <span matSuffix>g/l</span>
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile colspan="1" rowspan="1">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Erhöhung Alkoholgehalt</mat-label>
+                            <input matInput placeholder="0"
+                                value="{{dataSeries.beerCharacteristics?.adjustedAlcoholLevel}}">
+                            <span matSuffix>%vol.</span>
+                        </mat-form-field>
+                    </mat-grid-tile>
+                </mat-grid-list>
+            </mat-tab>
+
+
+            <mat-tab label="Verlaufs-Diagramm">
+                FANCY DIAGRAMM
+            </mat-tab>
+        </mat-tab-group>
     </mat-card-content>
 </mat-card>
 

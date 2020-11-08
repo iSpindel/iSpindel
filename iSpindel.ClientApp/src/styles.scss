@@ -24,6 +24,34 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+.menu-spacer {
+  flex: 1 1 auto;
+}
+
+.fullwidth-textarea{
+  width: 100%;
+}
+
 .mat-card {
   margin: 1em;
+}
+
+.mat-form-field-label {
+    color: rgba(0,0,0,.6) !important;
+}
+
+.mat-form-field-outline {
+    color: rgba(0,0,0,.12) !important;
+}
+
+.mat-input-element:disabled {
+    color: currentColor !important;
+}
+
+.small-form-field {
+  width: 6em !important;
+}
+
+.big-button svg {
+    scale: 1.5 !important;
 }
