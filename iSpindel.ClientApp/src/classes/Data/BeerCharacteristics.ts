@@ -20,7 +20,7 @@ export class BeerCharacteristics implements IBeerCharacteristics {
     public getBitterness() : string {
         return this.bitterness == null ? "" : this.bitterness.toString() + " IBU";
     }
-
+    
     public getColorScale(): string {
         return this.colorScale == null ? "" : this.colorScale.toString() + " EBC";
         
@@ -32,6 +32,10 @@ export class BeerCharacteristics implements IBeerCharacteristics {
 
     public getAmountOfWort() : string {
         return this.amountOfWort == null ? "" : this.amountOfWort.toString() + " L";
+    }
+
+    public getAmountOfWortUnit(): string{
+        return "L";
     }
 
     public getTargetCarbonation() : string {

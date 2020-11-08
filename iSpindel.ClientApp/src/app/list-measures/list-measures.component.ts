@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { DataseriesService } from 'src/services/dataseries.service';
 import { IDataPoint } from 'src/classes/Data/IDataPoint';
 import { IDataSeries } from 'src/classes/Data/IDataSeries';
+import { DataSeries } from 'src/classes/Data/DataSeries';
 //import {MatSort, MatTableDataSource} from '@angular/material';
 
 
@@ -12,8 +13,8 @@ import { IDataSeries } from 'src/classes/Data/IDataSeries';
   styleUrls: ['./list-measures.component.css']
 })
 export class ListMeasuresComponent implements OnInit {
-  public AllDataSeries$: Observable<IDataSeries[]> = this._dataseriesService.AllDataSeries$;
-  public AllDataSeries: IDataSeries[];
+  public AllDataSeries$: Observable<DataSeries[]>; 
+  public ServerIsRecording: Boolean = false;
   //displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   // dataSource = new MatTableDataSource(this.AllDataSeries$);
   
@@ -21,43 +22,24 @@ export class ListMeasuresComponent implements OnInit {
 
   constructor(private _dataseriesService: DataseriesService) { }
 
-  public getEvg(dataSeries: IDataSeries): string {
-    if (dataSeries === null || dataSeries.beerCharacteristics === null ){
-      return "";
+  public isRecordingStartPossible (dataseries: IDataSeries): boolean {
+    if (this.ServerIsRecording == true ) {
+      return false;
+    } 
+
+    if (dataseries.name === "Default Data Series"){
+      return false;
     }
-
-    return dataSeries.beerCharacteristics.evg + "%";
-  }
-
-  /**
-   * getDatestring date : Date
-   * 
-   */
-  public getDate(date: string) : string {
-    if (date === null) {
-      return "tbd"
-    }
-
-     var theDate = new Date(date); 
-     return theDate.getDate() + "." + theDate.getMonth() + "." + theDate.getFullYear();
-
     
+    if (dataseries.end != null ) {
+      return false;
+    }
+
+    return true;
   }
 
   ngOnInit(): void {
-    //this.dataSource.sort = this.sort;
-    /*
-    this.AllDataSeries$.subscribe( x => {
-      this.AllDataSeries = x;
-      console.log(this.AllDataSeries);
-      this.AllDataSeries.forEach(
-        (value, idx, array) => {
-          var date = new Date(value.start);
-          console.log(date.getDate() + "." + date.getMonth() + "." + date.getFullYear());
-           }
-        );
-    })
-    */
+    this.AllDataSeries$ = this._dataseriesService.loadAllDataSeries();
   }
 
 }

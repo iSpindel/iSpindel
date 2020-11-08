@@ -11,6 +11,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 @NgModule({
   imports: [
@@ -23,7 +25,9 @@ import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
     MatCardModule,
     MatSlideToggleModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatTabsModule,
+    MatGridListModule
   ],
   exports: [
     CommonModule,
@@ -35,7 +39,9 @@ import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
     MatCardModule,
     MatSlideToggleModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatTabsModule,
+    MatGridListModule
   ]
 })
 export class CustomMaterialModule {
