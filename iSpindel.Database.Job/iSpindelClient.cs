@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using MQTTnet.Client;
+using MQTTnet.Exceptions;
 
 namespace iSpindel.Database.Job
 {
@@ -30,39 +31,69 @@ namespace iSpindel.Database.Job
 
         public async Task<StatusCode> GetStatusAsync()
         {
-            var payload = await sendRpcRequest("Status");
-
-            if (statusLookup.TryGetValue(payload, out var statusCode))
+            try
             {
-                return statusCode;
-            }
-            else
-            {
-                return StatusCode.UNKNOWN;
-            }
+                var payload = await sendRpcRequest("Status");
 
+                if (statusLookup.TryGetValue(payload, out var statusCode))
+                {
+                    return statusCode;
+                }
+            }
+            catch (MqttCommunicationTimedOutException)
+            {
+            }
+            return StatusCode.UNKNOWN;
+        }
+
+        public async Task<int?> GetRecordingIdAsync()
+        {
+            try
+            {
+                var payload = await sendRpcRequest("Id");
+
+                int? id = null;
+                if (int.TryParse(payload, out var inId))
+                    id = inId;
+
+                return id;
+            }
+            catch (MqttCommunicationTimedOutException)
+            {
+            }
+            return null;
         }
 
         public async Task<bool> StartAsync(int id)
         {
-            var payload = await sendRpcRequest($"Start|{id}");
-
-            if (payload.Equals("Start Successful"))
+            try
             {
-                return true;
+                var payload = await sendRpcRequest($"Start|{id}");
+
+                if (payload.Equals("Start Successful"))
+                {
+                    return true;
+                }
             }
-
+            catch (MqttCommunicationTimedOutException)
+            {
+            }
             return false;
-
         }
 
         public async Task<bool> StopAsync()
         {
-            var payload = await sendRpcRequest("Stop");
-
-            if (payload.Equals("Stop Successful"))
+            try
             {
-                return true;
+                var payload = await sendRpcRequest("Stop");
+
+                if (payload.Equals("Stop Successful"))
+                {
+                    return true;
+                }
+            }
+            catch (MqttCommunicationTimedOutException)
+            {
             }
 
             return false;
@@ -79,7 +110,6 @@ namespace iSpindel.Database.Job
             Console.WriteLine($"Payload {responsePayload}");
 
             return responsePayload;
-
         }
 
         public void Dispose()

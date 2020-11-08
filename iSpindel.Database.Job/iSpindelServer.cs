@@ -135,7 +135,7 @@ namespace iSpindel.Database.Job
             // TODO - check if subscribe is successful, otherwise return false
             await subscribeToSensorTopics();
             // TODO - check if Database is alive
-            // TODO - check if id already exists in Database 
+            // TODO - check if id already exists in Database
             CurrentId = id;
 
             using var dbContext = options.DbContextFactory();
@@ -149,6 +149,11 @@ namespace iSpindel.Database.Job
         public Task<StatusCode> GetStatusAsync()
         {
             return Task.Run(() => CurrentId.HasValue ? StatusCode.RECORDING : StatusCode.IDLE);
+        }
+
+        public Task<int?> GetRecordingIdAsync()
+        {
+            return Task.Run(() => CurrentId);
         }
 
         public async Task<bool> StopAsync()
