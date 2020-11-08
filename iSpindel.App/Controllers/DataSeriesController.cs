@@ -10,7 +10,7 @@ using iSpindel.App.DTO;
 using System.Linq.Expressions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
-using iSpindel.App.Realtime;
+using iSpindel.App.Hubs;
 
 namespace iSpindel.App.Controllers
 {
@@ -33,7 +33,6 @@ namespace iSpindel.App.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<DataSeriesWithBeerCharacteristicsDTO>>> GetDataSeries()
         {
-
             var ds = await _context.DataSeries
                 .Include(x => x.BeerCharacteristics)
                 .OrderByDescending(x => x.Id)
@@ -85,7 +84,6 @@ namespace iSpindel.App.Controllers
                 })
             };
         }
-
 
         // PUT: api/DataSeries/5
         [HttpPut("{id}")]
@@ -186,7 +184,7 @@ namespace iSpindel.App.Controllers
                     YeastType = dataSeries.BeerCharacteristics.YeastType,
                     Notes = dataSeries.BeerCharacteristics.Notes,
                     BeerStyle = dataSeries.BeerCharacteristics.BeerStyle
-                } : null ,
+                } : null,
                 Start = dataSeries.Start,
                 End = dataSeries.End
             };
@@ -204,7 +202,7 @@ namespace iSpindel.App.Controllers
             TargetCarbonation = beer.TargetCarbonation,
             YeastType = beer.YeastType,
             Notes = beer.Notes,
-			BeerStyle = beer.BeerStyle
+            BeerStyle = beer.BeerStyle
         };
     }
 }

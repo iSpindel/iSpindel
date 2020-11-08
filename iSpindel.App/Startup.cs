@@ -14,7 +14,6 @@ using Microsoft.Extensions.Hosting;
 using iSpindel.Database;
 using Npgsql;
 using Microsoft.EntityFrameworkCore.Migrations;
-using iSpindel.App.Realtime;
 using iSpindel.App.Settings;
 using iSpindel.App.Extensions;
 using iSpindel.App.Hubs;
@@ -33,22 +32,14 @@ namespace iSpindel.App
 
         private void MapConfiguration()
         {
-            MapBrokerHostSettings();
-            MapClientSettings();
+            MapMQTTSettings();
         }
 
-        private void MapBrokerHostSettings()
+        private void MapMQTTSettings()
         {
-            MQTTHostSettings brokerHostSettings = new MQTTHostSettings();
-            Configuration.GetSection(nameof(MQTTHostSettings)).Bind(brokerHostSettings);
-            AppSettingsProvider.MQTTHostSettings = brokerHostSettings;
-        }
-
-        private void MapClientSettings()
-        {
-            ClientSettings clientSettings = new ClientSettings();
-            Configuration.GetSection(nameof(ClientSettings)).Bind(clientSettings);
-            AppSettingsProvider.ClientSettings = clientSettings;
+            MqttConnectionSettings mqttConnectionSettings = new MqttConnectionSettings();
+            Configuration.GetSection("Mqtt").Bind(mqttConnectionSettings);
+            AppSettingsProvider.MQTTSettings = mqttConnectionSettings;
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.

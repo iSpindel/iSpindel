@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.SignalR;
 
 namespace iSpindel.App.Hubs
 {
-
     public interface IClientSpindelDataHub : IClientProxy
     {
         Task Notify(DataPointDTO point);

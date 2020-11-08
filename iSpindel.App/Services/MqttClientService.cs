@@ -48,6 +48,7 @@ namespace iSpindel.App.Services
         {
             this.logger.LogInformation("connected to mqtt server");
 
+
             // TODO subscribe to topics
             await this.mqttClient.SubscribeAsync("cmnd/chaosSwitch1/power");
         }

@@ -14,13 +14,12 @@ namespace iSpindel.App.Extensions
         {
             services.AddMqttClientServiceWithConfig(aspOptionBuilder =>
             {
-                var clientSettinigs = AppSettingsProvider.ClientSettings;
-                var mqttHostSettings = AppSettingsProvider.MQTTHostSettings;
+                var mqttSettings = AppSettingsProvider.MQTTSettings;
 
                 aspOptionBuilder
-                .WithCredentials(clientSettinigs.UserName, clientSettinigs.Password)
-                .WithClientId(clientSettinigs.Id)
-                .WithTcpServer(mqttHostSettings.Host, mqttHostSettings.Port);
+                .WithCredentials(mqttSettings.Username, mqttSettings.Password)
+                .WithClientId(mqttSettings.ClientId)
+                .WithTcpServer(mqttSettings.Host, mqttSettings.Port);
             });
             return services;
         }

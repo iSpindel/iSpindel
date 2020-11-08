@@ -30,7 +30,6 @@ namespace iSpindel.App.Controllers
 
         private iSpindelClientOptions BuildISpindelClientOpts(MqttConnectionSettings options)
         {
-
             var mqttClientOpts = new MqttClientOptionsBuilder()
             .WithTcpServer(options.Host, options.Port)
             .WithCredentials(options.Username, options.Password)
@@ -81,6 +80,13 @@ namespace iSpindel.App.Controllers
 
             using var iSpindelClient = new iSpindelClient(iSpindelClientOptions);
             var status = await iSpindelClient.StartAsync(id);
+
+            if (status)
+            {
+                const StatusCode code = iSpindel.Database.Job.StatusCode.RECORDING;
+                await this.notifyHub.Clients.All.RecordingStatusUpdate(code.ToString());
+            }
+
             return status;
 
         }
@@ -91,6 +97,13 @@ namespace iSpindel.App.Controllers
         {
             using var iSpindelClient = new iSpindelClient(iSpindelClientOptions);
             var status = await iSpindelClient.StopAsync();
+
+            if (status)
+            {
+                const StatusCode code = iSpindel.Database.Job.StatusCode.RECORDING;
+                await this.notifyHub.Clients.All.RecordingStatusUpdate(code.ToString());
+            }
+
             return status;
         }
         /*
