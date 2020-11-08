@@ -40,25 +40,22 @@ namespace iSpindel.App.Controllers
             .WithClientOptions(mqttClientOpts)
             .Build();
 
-            Func<Task<IMqttClient>> mqttClientFactory = async () =>
-                {
-                    var factory = new MqttFactory();
-                    var client = factory.CreateMqttClient();
-                    Console.WriteLine($"Starting mqtt client");
-                    var authResult = await client.ConnectAsync(mqttClientOpts, CancellationToken.None);
-                    return client;
-                };
+            async Task<IMqttClient> mqttClientFactory()
+            {
+                var factory = new MqttFactory();
+                var client = factory.CreateMqttClient();
+                Console.WriteLine($"Starting mqtt client");
+                var authResult = await client.ConnectAsync(mqttClientOpts, CancellationToken.None);
+                return client;
+            }
 
-            var iSpindelOpts = new iSpindelClientOptions()
+            return new iSpindelClientOptions()
             {
                 MqttClientFactory = mqttClientFactory,
                 TopicBasePath = options.TopicControlBridgeBasePath,
                 TopicServerRequest = options.TopicServerRequest,
                 TopicServerResponse = options.TopicServerResponse
             };
-
-            return iSpindelOpts;
-
         }
 
         // GET: api/Recording
@@ -73,22 +70,33 @@ namespace iSpindel.App.Controllers
             return status;
         }
 
+        // GET: api/Recording
+        [HttpGet("RecordingId")]
+        public async Task<int?> RecordingId()
+        {
+            using var iSpindelClient = new iSpindelClient(iSpindelClientOptions);
+            var id = await iSpindelClient.GetRecordingIdAsync();
+
+            await this.notifyHub.Clients.All.RecordingChanged(id);
+
+            return id;
+        }
+
         // POST: api/Recording
         [HttpPost("{id}")]
         public async Task<bool> PostRecording(int id)
         {
-
             using var iSpindelClient = new iSpindelClient(iSpindelClientOptions);
             var status = await iSpindelClient.StartAsync(id);
 
             if (status)
             {
+                await this.notifyHub.Clients.All.RecordingChanged(id);
                 const StatusCode code = iSpindel.Database.Job.StatusCode.RECORDING;
                 await this.notifyHub.Clients.All.RecordingStatusUpdate(code.ToString());
             }
 
             return status;
-
         }
 
         // PUT: api/Recording
@@ -102,24 +110,25 @@ namespace iSpindel.App.Controllers
             {
                 const StatusCode code = iSpindel.Database.Job.StatusCode.RECORDING;
                 await this.notifyHub.Clients.All.RecordingStatusUpdate(code.ToString());
+                await this.notifyHub.Clients.All.RecordingChanged(null);
             }
 
             return status;
         }
         /*
-		// DELETE: api/DataSeries/5
-		[HttpDelete("{id}")]
-		public async Task<ActionResult<DataSeries>> DeleteDataSeries(int id) {
-			var dataSeries = await _context.DataSeries.FindAsync(id);
-			if (dataSeries == null) {
-				return NotFound();
-			}
+        // DELETE: api/DataSeries/5
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<DataSeries>> DeleteDataSeries(int id) {
+            var dataSeries = await _context.DataSeries.FindAsync(id);
+            if (dataSeries == null) {
+                return NotFound();
+            }
 
-			_context.DataSeries.Remove(dataSeries);
-			await _context.SaveChangesAsync();
+            _context.DataSeries.Remove(dataSeries);
+            await _context.SaveChangesAsync();
 
-			return dataSeries;
-		}
+            return dataSeries;
+        }
        */
     }
 }

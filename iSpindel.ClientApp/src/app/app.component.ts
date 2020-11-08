@@ -18,6 +18,5 @@ export class AppComponent {
   }
 
   ngOnInit() {
-    this.notifyService.StartConnection();
   }
 }

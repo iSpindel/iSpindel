@@ -9,6 +9,7 @@ export abstract class SignalRService<TClient, TServer> {
 
     constructor(protected _hub: string) {
         this._connection = this.createConnection();
+
         this.startConnection();
     }
 
@@ -30,6 +31,10 @@ export abstract class SignalRService<TClient, TServer> {
         TParameters extends Parameters<TCall>
     >(method: TMethod, handler: ((...params: TParameters) => void) ): void {
         this._connection.on(method as string, handler);
+    }
+
+    public OnSelf(this: TClient & SignalRService<TClient, TServer>, method: FunctionPropertyNames<TClient>) {
+        this._connection.on(method as string, (this as any)[method].bind(this));
     }
 
     protected createConnection(): HubConnection {

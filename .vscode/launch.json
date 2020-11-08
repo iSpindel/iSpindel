@@ -5,17 +5,6 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "iSpindel CLI Runner",
-            "type": "coreclr",
-            "request": "launch",
-            "preLaunchTask": "build-runner",
-            "program": "${workspaceFolder}/iSpindel.Database.Job.Runner/bin/Debug/netcoreapp3.1/iSpindel.Database.Job.Runner.dll",
-            "args": [],
-            "cwd": "${workspaceFolder}/iSpindel.Database.Job.Runner",
-            "stopAtEntry": false,
-            "console": "integratedTerminal"
-        },
-        {
             "name": "iSpindel Web App",
             "type": "coreclr",
             "request": "launch",
@@ -36,6 +25,17 @@
             "sourceFileMap": {
                 "/Views": "${workspaceFolder}/Views"
             }
+        },
+        {
+            "name": "iSpindel CLI Runner",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build-runner",
+            "program": "${workspaceFolder}/iSpindel.Database.Job.Runner/bin/Debug/netcoreapp3.1/iSpindel.Database.Job.Runner.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/iSpindel.Database.Job.Runner",
+            "stopAtEntry": false,
+            "console": "integratedTerminal"
         },
         {
             "name": ".NET Core Attach",

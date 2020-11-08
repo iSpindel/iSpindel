@@ -9,8 +9,9 @@ namespace iSpindel.App.Hubs
 {
     public interface IClientSpindelDataHub : IClientProxy
     {
-        Task Notify(DataPointDTO point);
         Task RecordingStatusUpdate(string status);
+        Task RecordingChanged(int? dataSeriesId);
+        Task NewDataPoint(DataPointDTO point);
     }
 
     public class NotifyHub : Hub<IClientSpindelDataHub>

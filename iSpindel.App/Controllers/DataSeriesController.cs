@@ -45,7 +45,7 @@ namespace iSpindel.App.Controllers
         [HttpGet("doTest")]
         public async Task<IActionResult> DoTest(int target)
         {
-            await this.hubContext.Clients.Group($"grp{target}").Notify(new DataPointDTO()
+            await this.hubContext.Clients.Group($"grp{target}").NewDataPoint(new DataPointDTO()
             {
                 Battery = 1,
                 Gravity = 2,
