@@ -10,12 +10,14 @@ export class AppComponent {
   title = 'iSpindel Datenübersicht';
   screenWidth: number;
 
-  constructor(notifyService: NotifyService) {
+  constructor(private notifyService: NotifyService) {
     this.screenWidth = window.innerWidth;
     window.onresize = () => {
       this.screenWidth = window.innerWidth;
     };
-    notifyService.StartConnection();
+  }
 
+  ngOnInit() {
+    this.notifyService.StartConnection();
   }
 }
