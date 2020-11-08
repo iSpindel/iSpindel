@@ -8,7 +8,7 @@ namespace iSpindel.Database {
 
         [ForeignKey("DataSeriesId")]
         public virtual DataSeries DataSeries { get; set; }
-        public int DataSeriesId {get; set;}
+        public int? DataSeriesId {get; set;}
         public double? EVG { get; set; }
         public int? Bitterness { get; set; }
         public double? ColorScale { get; set; }

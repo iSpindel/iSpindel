@@ -36,6 +36,7 @@ namespace iSpindel.App.Controllers
 
             var ds = await _context.DataSeries
                 .Include(x => x.BeerCharacteristics)
+                .Include(x => x.DataPoints)
                 .OrderByDescending(x => x.Id)
                 .Select(SeriesToDTOWithBeer)
                 .ToListAsync();
@@ -54,6 +55,52 @@ namespace iSpindel.App.Controllers
                 RecordTime = DateTime.Now
             });
             return Ok();
+        }
+
+        [HttpPut("{id}/BeerDetails")]
+        public async Task<IActionResult> PutDataSeriesDetails(int id, DataSeriesWithBeerCharacteristicsDTO dataSeries)
+        {
+            if (id != dataSeries.Id)
+            {
+                return BadRequest();
+            }
+
+            var dbDataSeries = await _context.DataSeries.FindAsync(id);
+
+            if (dataSeries == null)
+            {
+                return NotFound();
+            }
+
+            dbDataSeries.Description = dataSeries.Description;
+
+            if ( dataSeries.BeerCharacteristics != null ){
+                var beerData = dbDataSeries.BeerCharacteristics ?? new BeerCharacteristics() {DataSeriesId = dbDataSeries.Id};
+                beerData.AddedSugar = dataSeries.BeerCharacteristics.AddedSugar;
+                beerData.AdjustedAlcoholLevel = dataSeries.BeerCharacteristics.AdjustedAlcoholLevel;
+                beerData.AmountOfWort = dataSeries.BeerCharacteristics.AmountOfWort;
+                beerData.BeerStyle  = dataSeries.BeerCharacteristics.BeerStyle;
+                beerData.Bitterness = dataSeries.BeerCharacteristics.Bitterness;
+                beerData.BrewhouseEfficency = dataSeries.BeerCharacteristics.BrewhouseEfficency;
+                beerData.ColorScale = dataSeries.BeerCharacteristics.ColorScale;
+                beerData.EVG = dataSeries.BeerCharacteristics.EVG;
+                beerData.Notes = dataSeries.BeerCharacteristics.Notes;
+                beerData.TargetCarbonation = dataSeries.BeerCharacteristics.TargetCarbonation;
+                beerData.YeastType = dataSeries.BeerCharacteristics.YeastType;
+            }
+
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException) when (!DataSeriesExists(id))
+            {
+                return NotFound();
+            }
+
+            return NoContent();
+
         }
 
         // GET: api/DataSeries/5
@@ -188,6 +235,8 @@ namespace iSpindel.App.Controllers
                 Id = dataSeries.Id,
                 Name = dataSeries.Name,
                 Description = dataSeries.Description,
+                FirstPlato = dataSeries.DataPoints.OrderBy(x => x.Id).FirstOrDefault().Gravity,
+                LastPlato = dataSeries.DataPoints.OrderByDescending(x => x.Id).FirstOrDefault().Gravity,
                 BeerCharacteristics = dataSeries.BeerCharacteristics != null ? new BeerCharacteristicsDTO()
                 {
                     AddedSugar = dataSeries.BeerCharacteristics.AddedSugar,

@@ -10,6 +10,8 @@ namespace iSpindel.App.DTO
         public string Description { get; set; }
         public DateTime? Start { get; set; }
         public DateTime? End { get; set; }
+        public double? FirstPlato {get; set;}
+        public double? LastPlato {get; set;}
         public BeerCharacteristicsDTO BeerCharacteristics { get; set; }
         public IEnumerable<DataPointDTO> Datapoints { get; set; }
     }

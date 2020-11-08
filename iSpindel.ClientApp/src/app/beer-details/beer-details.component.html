@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card *ngIf="dataSeries$ | async">
     <mat-card-header>
         <mat-card-title>
             {{dataSeries.name}}</mat-card-title>

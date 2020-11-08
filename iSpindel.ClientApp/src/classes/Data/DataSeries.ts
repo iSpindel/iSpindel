@@ -9,36 +9,44 @@ export class DataSeries {
     description: string;
     datapoints: IDataPoint[];
     beerCharacteristics: BeerCharacteristics;
+    firstPlato : number;
+    lastPlato: number;
     start: Date;
     end: Date;
 
+    private dataPointsExist() : boolean {
+        if (this.datapoints === null || this.datapoints === undefined || this.datapoints.length == 0){
+            return false;
+        }
+
+        return true;
+    }
+
     public getFirstGravity() : number {
-        if (this.datapoints === null || this.datapoints === undefined){
+        if (!this.dataPointsExist()){
             return null;
         }
         return _.first(this.datapoints).gravity;
     }
 
     public getMeanTemperature() : number {
-        if (this.datapoints === null || this.datapoints === undefined){
+        if (!this.dataPointsExist()){
             return null;
         }
 
-        const sumTemp = _.sum(this.datapoints);
+        const sumTemp = _.sum(this.datapoints.map(x => x.temperature));
 
         return sumTemp/this.datapoints.length;
     }
 
     public getAlcoholByVolume() : number {
-        if (this.datapoints === null || this.datapoints === undefined){
+        if (this.firstPlato == null || this.firstPlato == undefined ||
+            this.lastPlato == null || this.lastPlato == undefined){
             return null;
         }
 
-        const firstPlato =_.first(this.datapoints).gravity;
-        let lastPlato = _.last(this.datapoints).gravity;
-
-        lastPlato = this.convertPlatoToSG(lastPlato);
-        const alcoholByVolume = firstPlato * (lastPlato/0.794);
+        let lastPlato = this.convertPlatoToSG(this.lastPlato);
+        const alcoholByVolume = this.firstPlato * (lastPlato/0.794);
 
         return _.round(alcoholByVolume, 2);
 
@@ -53,7 +61,6 @@ export class DataSeries {
         const adjustedAlcohol = this.beerCharacteristics?.adjustedAlcoholLevel;
 
         if (alcoholByVolume != null){
-            console.log("abv: "+ alcoholByVolume + ", adjAlc: " + adjustedAlcohol)
             return alcoholByVolume + adjustedAlcohol;
         }
 

@@ -6,6 +6,8 @@ export interface IDataSeries {
     name: string;
     description: string;
     datapoints: Array<IDataPoint>;
+    firstPlato : number;
+    lastPlato: number;
     beerCharacteristics: IBeerCharacteristics;
     start: string;
     end: string;
