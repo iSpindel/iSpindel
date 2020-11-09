@@ -2012,6 +2012,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/lodash@npm:^4.14.165":
+  version: 4.14.165
+  resolution: "@types/lodash@npm:4.14.165"
+  checksum: 525bfc34b0b591cc957125a961c70e63e5ad8b23cbd89b7594a5ea74823285b6d96993a7eec506e26b379ee52dc9dcd3a894ff210be4c97bccb536e62361dbc8
+  languageName: node
+  linkType: hard
+
 "@types/minimatch@npm:*":
   version: 3.0.3
   resolution: "@types/minimatch@npm:3.0.3"
@@ -7390,6 +7397,7 @@ fsevents@~2.1.2:
     "@types/d3": ^5.7.2
     "@types/jasmine": ~3.5.10
     "@types/jasminewd2": ~2.0.8
+    "@types/lodash": ^4.14.165
     "@types/node": ~13.13.5
     "@typescript-eslint/eslint-plugin": ^3.0.2
     "@typescript-eslint/parser": ^3.0.2
@@ -7403,6 +7411,7 @@ fsevents@~2.1.2:
     karma-coverage-istanbul-reporter: ~3.0.2
     karma-jasmine: ~4.0.0
     karma-jasmine-html-reporter: ^1.5.0
+    lodash: ^4.17.20
     oidc-client: ^1.10.1
     protractor: ~7.0.0
     rxjs: ^6.5.5
@@ -8022,7 +8031,7 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"lodash@npm:^4.17.11, lodash@npm:^4.17.14, lodash@npm:^4.17.15, lodash@npm:^4.17.19":
+"lodash@npm:^4.17.11, lodash@npm:^4.17.14, lodash@npm:^4.17.15, lodash@npm:^4.17.19, lodash@npm:^4.17.20":
   version: 4.17.20
   resolution: "lodash@npm:4.17.20"
   checksum: c62101d2500c383b5f174a7e9e6fe8098149ddd6e9ccfa85f36d4789446195f5c4afd3cfba433026bcaf3da271256566b04a2bf2618e5a39f6e67f8c12030cb6

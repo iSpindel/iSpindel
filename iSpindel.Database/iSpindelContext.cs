@@ -46,9 +46,29 @@ namespace iSpindel.Database
                 var currentTime = new DateTime(2020,05,01,23,50,00);
 
                 e.HasData(new DataSeries() { Id = -1, Name = "Default Data Series", Description = "This is the default Data Series for iSpindel Projects.", Start = new DateTime(2020, 5, 1, 23, 0, 0, 0)});
-                e.HasData(new DataSeries() { Id = 1, Name = "Test Series 1", Description = "This is the first test dataset", Start = new DateTime(2020,05,01,23,00,00), End = new DateTime(2020,05,01,23,45,00)});
+                e.HasData(new DataSeries() { Id = 1, Name = "Test Series 1", Description = "This is the first test dataset", Start = new DateTime(2020,05,01,23,00,00), End = new DateTime(2020,05,01,23,45,00), BeerCharacteristicsId = -1});
                 e.HasData(new DataSeries() { Id = 2, Name = "Test Series 2", Description = "This is the second test dataset", Start = currentTime, End = currentTime.AddMinutes( 20 * 20.0)  });
                 e.HasData(new DataSeries() { Id = 3, Name = "Test Series 3", Description = "This is the third test dataset", Start = currentTime });
+            });
+
+            modelBuilder.Entity<BeerCharacteristics>(e => 
+            {
+                e.HasData(new BeerCharacteristics() {
+                    Id = -1,
+                    DataSeriesId = 1,
+                    BeerStyle = "Lambic",
+                    YeastType = "Safale K-97",
+                    Notes = "- Should have added more Citra Hops \r\n- Like the fruityness",
+                    BrewhouseEfficency = 55,
+                    AmountOfWort = 20,
+                    EVG = 60,
+                    Bitterness = 10,
+                    ColorScale = 5.4,
+                    TargetCarbonation = 5.5,
+                    AddedSugar = 12,
+                    AdjustedAlcoholLevel = 3
+
+                });
             });
             modelBuilder.Entity<DataPoint>(e =>
             {

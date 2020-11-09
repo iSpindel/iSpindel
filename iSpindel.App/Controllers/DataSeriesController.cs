@@ -57,9 +57,10 @@ namespace iSpindel.App.Controllers
 
         // GET: api/DataSeries/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<DataSeriesWithDataPointsDTO>> GetDataSeries(int id)
+        public async Task<ActionResult<DataSeriesWithFullInformationDTO>> GetDataSeries(int id)
         {
             var dataSeries = await _context.DataSeries
+                .Include(x => x.BeerCharacteristics)
                 .Include(x => x.DataPoints)
                 .SingleOrDefaultAsync(x => x.Id == id);
 
@@ -67,13 +68,27 @@ namespace iSpindel.App.Controllers
             {
                 return NotFound();
             }
-            return new DataSeriesWithDataPointsDTO()
+            return new DataSeriesWithFullInformationDTO()
             {
                 Id = dataSeries.Id,
                 Name = dataSeries.Name,
                 Description = dataSeries.Description,
                 Start = dataSeries.Start,
                 End = dataSeries.End,
+                BeerCharacteristics = dataSeries.BeerCharacteristics == null ? null : new BeerCharacteristicsDTO()
+                {
+                    AddedSugar = dataSeries.BeerCharacteristics.AddedSugar,
+                    AdjustedAlcoholLevel = dataSeries.BeerCharacteristics.AdjustedAlcoholLevel,
+                    AmountOfWort = dataSeries.BeerCharacteristics.AmountOfWort,
+                    Bitterness = dataSeries.BeerCharacteristics.Bitterness,
+                    BrewhouseEfficency = dataSeries.BeerCharacteristics.BrewhouseEfficency,
+                    ColorScale = dataSeries.BeerCharacteristics.ColorScale,
+                    EVG = dataSeries.BeerCharacteristics.EVG,
+                    TargetCarbonation = dataSeries.BeerCharacteristics.TargetCarbonation,
+                    YeastType = dataSeries.BeerCharacteristics.YeastType,
+                    Notes = dataSeries.BeerCharacteristics.Notes,
+                    BeerStyle = dataSeries.BeerCharacteristics.BeerStyle
+                },
                 Datapoints = dataSeries.DataPoints.Select(x => new DataPointDTO()
                 {
                     Id = x.Id,

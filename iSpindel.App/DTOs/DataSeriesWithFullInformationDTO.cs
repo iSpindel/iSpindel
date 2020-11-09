@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace iSpindel.App.DTO
 {
-    public class DataSeriesWithBeerCharacteristicsDTO
+    public class DataSeriesWithFullInformationDTO
     {
         public int Id { get; set; }
         public string Name { get; set; }

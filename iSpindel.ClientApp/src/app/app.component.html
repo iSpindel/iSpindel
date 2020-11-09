@@ -1,13 +1,14 @@
 <mat-toolbar color="primary">
-    <mat-toolbar-row>
         <button mat-icon-button aria-label="Icon Button for Menu" (click)="drawer.toggle()">
             <mat-icon>menu</mat-icon>
         </button>
 
-        <span>{{title}}&nbsp;</span>
+        <span>{{title}}</span>
+        <span class="spacer"></span>
         <mat-icon svgIcon="glass-mug-variant"></mat-icon>
+        <!--
         <app-login-menu></app-login-menu>
-    </mat-toolbar-row>
+        -->
 </mat-toolbar>
 
 <mat-drawer-container class="container">
@@ -15,9 +16,8 @@
         <mat-list role="list">
             <mat-list-item role="listitem">
                 <a class="sidenav-link" mat-button [routerLink]="['/']">
-                    <!--<mat-icon>timer</mat-icon>-->
                     <mat-icon svgIcon="router-wireless"></mat-icon>
-                    <span>&nbsp;Live Spindel-Daten</span>
+                    <span>&nbsp;&nbsp;Live Spindel-Daten</span>
                 </a>
             </mat-list-item>
 
@@ -27,7 +27,7 @@
                 <a class="sidenav-link" mat-button [routerLink]="['/newMeasure']">
                     <!--<mat-icon>timeline</mat-icon>-->
                     <mat-icon svgIcon="timeline-plus"></mat-icon>
-                    <span>&nbsp;Neue Messreihe</span>
+                    <span>&nbsp;&nbsp;Neue Messreihe</span>
                 </a>
             </mat-list-item>
 
@@ -37,7 +37,7 @@
                 <a class="sidenav-link" mat-button [routerLink]="['/currentMeasure']">
                     <!--<mat-icon svgIcon="account-clock"></mat-icon>-->
                     <mat-icon svgIcon="timeline-clock"></mat-icon>
-                    <span>&nbsp;Laufende Messung</span>
+                    <span>&nbsp;&nbsp;Laufende Messung</span>
                 </a>
             </mat-list-item>
 
@@ -46,16 +46,7 @@
             <mat-list-item role="listitem">
                 <a class="sidenav-link" mat-button [routerLink]="['/viewMeasure']">
                     <mat-icon svgIcon="chart-timeline"></mat-icon>
-                    <span>&nbsp;Messungen anzeigen</span>
-                </a>
-            </mat-list-item>
-
-            <mat-divider></mat-divider>
-
-            <mat-list-item role="listitem">
-                <a class="sidenav-link" mat-button [routerLink]="['/beerDetails']">
-                    <mat-icon svgIcon="glass-mug-variant"></mat-icon>
-                    <span>&nbsp;Bier-Details</span>
+                    <span>&nbsp;&nbsp;Messungen anzeigen</span>
                 </a>
             </mat-list-item>
 
@@ -64,7 +55,7 @@
             <mat-list-item role="listitem">
                 <a class="sidenav-link" mat-button [routerLink]="['/brewCalc']">
                     <mat-icon svgIcon="calculator"></mat-icon>
-                    <span>&nbsp;Brau-Rechner</span>
+                    <span>&nbsp;&nbsp;Brau-Rechner</span>
                 </a>
             </mat-list-item>
         </mat-list>

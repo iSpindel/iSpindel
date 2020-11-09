@@ -14,7 +14,7 @@ const routes: Routes = [
     { path: 'currentMeasure', component: CurrentMeasureComponent },
     //{ path: 'viewMeasure', component: GraphComponent, canActivate: [AuthorizeGuard] },
     { path: 'viewMeasure', component: ListMeasuresComponent },
-    { path: 'beerDetails', component: BeerDetailsComponent },
+    { path: 'beerDetails/:id', component: BeerDetailsComponent },
     { path: 'brewCalc', component: BrewCalculatorsComponent },
 ];
 

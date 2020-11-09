@@ -4,7 +4,7 @@
 			"path": "."
 		},
 		{
-			"path": "iSpindel.App\\ClientApp"
+			"path": "iSpindel.ClientApp"
 		}
 	],
 	"settings": {}
