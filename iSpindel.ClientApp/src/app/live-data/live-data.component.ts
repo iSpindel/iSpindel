@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
+import { RecordingStatus } from 'src/services/notify.service';
+import { RecordingService } from 'src/services/recording.service';
 
 @Component({
   selector: 'app-live-data',
@@ -12,9 +14,16 @@ export class LiveDataComponent implements OnInit {
   public currentBattery$: Observable<number>;
   public currentGravity$: Observable<number>;
 
-  constructor() { }
+  public currentRecordingId$: Observable<number>;
+  public currentRecordingStatus$: Observable<RecordingStatus>;
+
+  constructor(public recordingService: RecordingService) {
+    this.currentRecordingId$ = this.recordingService.GetRecordingId();
+    this.currentRecordingStatus$ = this.recordingService.GetRecordingStatus();
+  }
 
   ngOnInit() {
+
   }
 
 }

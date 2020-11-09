@@ -96,6 +96,13 @@ namespace iSpindel.Database.Job
                 Console.WriteLine($"Status: {currentStatus}");
                 await sendRpcReply(currentStatus.ToString());
             }
+            else if (payload.Equals("Id"))
+            {
+                Console.WriteLine("Id signal received");
+                var currentId = await server.GetRecordingIdAsync();
+                Console.WriteLine($"Id: {currentId}");
+                await sendRpcReply(currentId.ToString());
+            }
 
         }
 

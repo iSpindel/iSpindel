@@ -12,21 +12,35 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using iSpindel.Database;
-using Microsoft.Data.SqlClient;
 using Npgsql;
 using Microsoft.EntityFrameworkCore.Migrations;
-using iSpindel.App.Realtime;
+using iSpindel.App.Settings;
+using iSpindel.App.Extensions;
+using iSpindel.App.Hubs;
 
 namespace iSpindel.App
 {
     public class Startup
     {
+        public IConfiguration Configuration { get; }
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            MapConfiguration();
         }
 
-        public IConfiguration Configuration { get; }
+        private void MapConfiguration()
+        {
+            MapMQTTSettings();
+        }
+
+        private void MapMQTTSettings()
+        {
+            MqttConnectionSettings mqttConnectionSettings = new MqttConnectionSettings();
+            Configuration.GetSection("Mqtt").Bind(mqttConnectionSettings);
+            AppSettingsProvider.MQTTSettings = mqttConnectionSettings;
+        }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -54,11 +68,14 @@ namespace iSpindel.App
                 .ReplaceService<IHistoryRepository, iSpindelHistoryRepository>()
            );
 
-           services.AddSignalR(opts => {
+           services.AddSignalR(options =>
+            {
 #if DEBUG
-               opts.EnableDetailedErrors = true;
+                options.EnableDetailedErrors = true;
 #endif
-           });
+            });
+
+            services.AddMqttClientHostedService();
 
             services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
@@ -107,6 +124,7 @@ namespace iSpindel.App
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapHub<NotifyHub>("/notify");
+                endpoints.MapHub<MqttBridgeHub>("/bridge");
 
                 endpoints.MapControllerRoute(
                     name: "default",

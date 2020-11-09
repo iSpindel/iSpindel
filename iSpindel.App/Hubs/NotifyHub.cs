@@ -5,12 +5,13 @@ using System.Threading.Tasks;
 using iSpindel.App.DTO;
 using Microsoft.AspNetCore.SignalR;
 
-namespace iSpindel.App.Realtime
+namespace iSpindel.App.Hubs
 {
-
     public interface IClientSpindelDataHub : IClientProxy
     {
-        Task Notify(DataPointDTO point);
+        Task RecordingStatusUpdate(string status);
+        Task RecordingChanged(int? dataSeriesId);
+        Task NewDataPoint(DataPointDTO point);
     }
 
     public class NotifyHub : Hub<IClientSpindelDataHub>

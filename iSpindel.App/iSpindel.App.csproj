@@ -33,4 +33,7 @@
     <ProjectReference Include="..\iSpindel.Database\iSpindel.Database.csproj" />
     <ProjectReference Include="..\iSpindel.Database.Job\iSpindel.Database.Job.csproj" />
   </ItemGroup>
+  <PropertyGroup>
+    <CodeAnalysisRuleSet>app.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
 </Project>

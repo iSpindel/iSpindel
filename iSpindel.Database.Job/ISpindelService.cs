@@ -7,5 +7,6 @@ namespace iSpindel.Database.Job
         Task<bool> StartAsync(int id);
         Task<bool> StopAsync();
         Task<StatusCode> GetStatusAsync();
+        Task<int?> GetRecordingIdAsync();
     }
 }

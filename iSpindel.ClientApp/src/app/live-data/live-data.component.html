@@ -2,9 +2,7 @@
     <mat-card>
         <mat-card-header>
             <mat-icon mat-card-avatar aria-hidden="false" svgIcon="server"></mat-icon>
-            Server Status
-            <br>
-            not implemented!
+            Status: {{currentRecordingStatus$ | async}}({{currentRecordingId$ | async}})<br>
         </mat-card-header>
     </mat-card>
 </div>

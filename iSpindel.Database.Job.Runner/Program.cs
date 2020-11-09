@@ -3,6 +3,7 @@ using System.Linq;
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
+using Npgsql;
 
 namespace iSpindel.Database.Job.Runner
 {
@@ -22,7 +23,6 @@ namespace iSpindel.Database.Job.Runner
 
             var runnerOptions = new RunnerOptions()
             {
-                ConnectionString = configurationRoot.GetConnectionString("DefaultConnection"),
                 MqttHost = configurationRoot.GetSanitizedValue<string>("Mqtt:Host"),
                 MqttPort = configurationRoot.GetSanitizedValue<int?>("Mqtt:Port", 1833).Value,
                 MqttUsername = configurationRoot.GetSanitizedValue<string>("Mqtt:Credentials:Username"),
@@ -36,6 +36,18 @@ namespace iSpindel.Database.Job.Runner
                 TopicISpindelBattery = configurationRoot.GetSanitizedValue<string>("Mqtt:Topics:iSpindelBattery"),
                 TopicISpindelGravity = configurationRoot.GetSanitizedValue<string>("Mqtt:Topics:iSpindelGravity"),
             };
+
+            var connectionStringBuilder = new NpgsqlConnectionStringBuilder(configurationRoot.GetConnectionString("DefaultConnection"))
+            {
+                ApplicationName = "iSpindel.Database.Job.Runner"
+            };
+            if (!string.IsNullOrWhiteSpace(configurationRoot["Database:Username"]) && !string.IsNullOrWhiteSpace(configurationRoot["Database:Password"]))
+            {
+                connectionStringBuilder.Username = configurationRoot["Database:Username"];
+                connectionStringBuilder.Password = configurationRoot["Database:Password"];
+                connectionStringBuilder.IntegratedSecurity = false;
+            }
+            runnerOptions.ConnectionString = connectionStringBuilder.ConnectionString;
 
             var runner = new Runner(runnerOptions);
 
