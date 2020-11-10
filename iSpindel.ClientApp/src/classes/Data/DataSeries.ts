@@ -2,6 +2,7 @@ import { first } from "rxjs/operators";
 import { BeerCharacteristics } from "./BeerCharacteristics";
 import { IDataPoint } from "./IDataPoint";
 import * as _ from 'lodash';
+import { mean } from "lodash";
 
 export class DataSeries {
     id: number;
@@ -22,11 +23,21 @@ export class DataSeries {
         return true;
     }
 
+    public getFirstPlato() : number {
+        return _.round(this.firstPlato,2);
+    }
+
     public getFirstGravity() : number {
-        if (!this.dataPointsExist()){
-            return null;
+        
+        if (this.firstPlato != null || this.firstPlato != undefined){
+            return _.round(this.firstPlato,2);
         }
-        return _.first(this.datapoints).gravity;
+        if ( (this.firstPlato == null || this.firstPlato == undefined ) && this.dataPointsExist()){
+           const gravity = _.first(this.datapoints).gravity;
+           return _.round(gravity,2);
+        }
+
+        return undefined;
     }
 
     public getMeanTemperature() : number {
@@ -35,18 +46,36 @@ export class DataSeries {
         }
 
         const sumTemp = _.sum(this.datapoints.map(x => x.temperature));
+        
+        let meanTemp = sumTemp/this.datapoints.length;
 
-        return sumTemp/this.datapoints.length;
+        return _.round(meanTemp,2);
+    }
+
+    private getFirstAndLastPlato() {
+        if (this.firstPlato != null && this.lastPlato != null &&
+            this.firstPlato != undefined && this.lastPlato != undefined) {
+                return {first: this.firstPlato, last: this.lastPlato};
+            }
+        
+        if (this.dataPointsExist() && this.datapoints.length > 1){
+            const firstPlato = _.first(this.datapoints).gravity;
+            const lastPlato = _.last(this.datapoints).gravity;
+                return {first: firstPlato, last: lastPlato};
+        }
+
+        return null;
     }
 
     public getAlcoholByVolume() : number {
-        if (this.firstPlato == null || this.firstPlato == undefined ||
-            this.lastPlato == null || this.lastPlato == undefined){
-            return null;
+        let platoValues = this.getFirstAndLastPlato();
+
+        if (platoValues == null){
+            return undefined;
         }
 
-        let lastPlato = this.convertPlatoToSG(this.lastPlato);
-        const alcoholByVolume = this.firstPlato * (lastPlato/0.794);
+        let lastPlato = this.convertPlatoToSG(platoValues.last);
+        const alcoholByVolume = platoValues.first * (lastPlato/0.794);
 
         return _.round(alcoholByVolume, 2);
 
@@ -61,10 +90,10 @@ export class DataSeries {
         const adjustedAlcohol = this.beerCharacteristics?.adjustedAlcoholLevel;
 
         if (alcoholByVolume != null){
-            return alcoholByVolume + adjustedAlcohol;
+            return adjustedAlcohol != null ? alcoholByVolume + adjustedAlcohol : alcoholByVolume;
         }
 
-        return null;
+        return undefined;
     }
 
     public getStart() : string {

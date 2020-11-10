@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using iSpindel.Database;
@@ -9,9 +10,10 @@ using iSpindel.Database;
 namespace iSpindel.Database.Migrations
 {
     [DbContext(typeof(iSpindelContext))]
-    partial class iSpindelContextModelSnapshot : ModelSnapshot
+    [Migration("20201109205856_FixBeerCharacteristics")]
+    partial class FixBeerCharacteristics
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

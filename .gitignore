@@ -437,3 +437,4 @@ appsettings.Production.json
 appsettings.Development.json
 README.production.md
 iSpindel.Database.Test/README.production.md
+iSpindel.Database.Job.Runner/config
