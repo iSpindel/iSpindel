@@ -1,3 +1,4 @@
+<!--<mat-card (ngSubmit)="onSubmit()" #beerForm="ngForm" *ngIf="dataSeries$ | async">-->
 <mat-card *ngIf="dataSeries$ | async">
     <mat-card-header>
         <mat-card-title>
@@ -7,7 +8,7 @@
         <button mat-icon-button class="example-icon" aria-label="Back to List" [routerLink]="['/viewMeasure']">
             <mat-icon matTooltip="Zurück zur Liste" svgIcon="arrow-up-bold"></mat-icon>
         </button>
-        <button mat-icon-button color="warn">
+        <button type="submit" mat-icon-button color="warn">
             <mat-icon matTooltip="Änderungen speichern" svgIcon="content-save-edit"></mat-icon>
         </button>
     </mat-card-header>
@@ -21,7 +22,9 @@
                     <mat-grid-tile colspan="1" rowspan="1">
                         <mat-form-field appearance="outline">
                             <mat-label>Angestrebter Bierstil</mat-label>
-                            <input matInput placeholder="Stil" value={{dataSeries.beerCharacteristics?.beerStyle}}>
+
+                            <input matInput placeholder="Stil" name="beerStyle" value={{dataSeries.beerCharacteristics?.beerStyle}}>
+                            <!--<input matInput placeholder="Stil" name="beerStyle" [(ngModel)]="dataSeries.beerCharacteristics.beerStyle" #beerStyle="ngModel" >-->
                         </mat-form-field>
                     </mat-grid-tile>
                     <mat-grid-tile colspan="1" rowspan="1">

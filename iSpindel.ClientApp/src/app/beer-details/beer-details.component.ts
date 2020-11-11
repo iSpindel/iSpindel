@@ -15,6 +15,7 @@ export class BeerDetailsComponent implements OnInit {
   public dataSeriesSubscription: Subscription;
   public dataSeries: DataSeries;
   public selectedDataSeriesId: number;
+  public isFormChanged : boolean = false;
 
   constructor(private _dataseriesService: DataseriesService,
     private route: ActivatedRoute,
@@ -23,6 +24,10 @@ export class BeerDetailsComponent implements OnInit {
   public goToItems(dataSeries: DataSeries) {
     const dataSeriesId = dataSeries ? dataSeries.id : null;
     this.router.navigate(['/beerDetails', { id: dataSeriesId }]);
+  }
+
+  public onSubmit() {
+    console.log(this.dataSeries$);
   }
 
   ngOnInit(): void {
