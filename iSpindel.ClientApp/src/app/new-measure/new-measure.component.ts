@@ -11,7 +11,7 @@ export class NewMeasureComponent implements OnInit {
 
   constructor(private _dataSeriesService: DataseriesService) { }
 
-  public newDataSeries: IDataSeries = { name: '', description: '', id: null, datapoints: null, start: null, end: null, beerCharacteristics: null };
+  public newDataSeries: IDataSeries = { name: '', description: '', id: null, datapoints: null, start: null, end: null, beerCharacteristics: null , firstPlato : null, lastPlato : null};
 
   public CreateNewDataSeries(): void {
 

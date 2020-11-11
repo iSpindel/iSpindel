@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { GraphService } from 'src/services/graph.service';
 import { Subject, Observable } from 'rxjs';
 import { IDataPoint } from 'src/classes/Data/IDataPoint';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 export class Range {
   public Name: string;

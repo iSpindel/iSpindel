@@ -8,6 +8,8 @@ import { AppComponent } from './app.component';
 import { ApiAuthorizationModule } from 'src/api-authorization/api-authorization.module';
 import { AuthorizeInterceptor } from 'src/api-authorization/authorize.interceptor';
 import { CustomMaterialModule } from './material.module';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+
 import { AppRoutingModule } from './app-routing.module';
 import { GraphComponent } from './graph/graph.component';
 import { LiveDataComponent } from './live-data/live-data.component';
@@ -40,6 +42,7 @@ import { BrewCalculatorsComponent } from './brew-calculators/brew-calculators.co
     //custom modules start here
     CustomMaterialModule,
     AppRoutingModule,
+    NgxChartsModule
     //RouterModule.forRoot(routes),
   ],
   providers: [

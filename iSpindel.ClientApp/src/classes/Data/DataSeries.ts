@@ -2,6 +2,8 @@ import { first } from "rxjs/operators";
 import { BeerCharacteristics } from "./BeerCharacteristics";
 import { IDataPoint } from "./IDataPoint";
 import * as _ from 'lodash';
+import { IChartSeries } from "./IChartSeries";
+import { ChartSeries } from "./ChartSeries";
 
 export class DataSeries {
     id: number;
@@ -9,76 +11,98 @@ export class DataSeries {
     description: string;
     datapoints: IDataPoint[];
     beerCharacteristics: BeerCharacteristics;
-    firstPlato : number;
+    firstPlato: number;
     lastPlato: number;
     start: Date;
     end: Date;
 
-    private dataPointsExist() : boolean {
-        if (this.datapoints === null || this.datapoints === undefined || this.datapoints.length == 0){
+    private dataPointsExist(): boolean {
+        if (this.datapoints === null || this.datapoints === undefined || this.datapoints.length == 0) {
             return false;
         }
 
         return true;
     }
 
-    public getFirstGravity() : number {
-        if (!this.dataPointsExist()){
+    public getFirstGravity(): number {
+        if (!this.dataPointsExist()) {
             return null;
         }
         return _.first(this.datapoints).gravity;
     }
 
-    public getMeanTemperature() : number {
-        if (!this.dataPointsExist()){
+    public getDatapointsChartFormat(): IChartSeries[] {
+        if (!this.dataPointsExist()) {
+            return null;
+        }
+
+        const transformedDatapoints = [
+            new ChartSeries("Stammwürze"),
+            new ChartSeries("Temperatur"),
+            new ChartSeries("Batterieladung")
+        ];
+
+        this.datapoints.map(datapoint => {
+            const ts = datapoint.recordTime;
+            transformedDatapoints[0].addDatapoint(ts, datapoint.gravity);
+            transformedDatapoints[1].addDatapoint(ts, datapoint.temperature);
+            transformedDatapoints[2].addDatapoint(ts, datapoint.battery);
+        });
+
+        return transformedDatapoints;
+
+    }
+
+    public getMeanTemperature(): number {
+        if (!this.dataPointsExist()) {
             return null;
         }
 
         const sumTemp = _.sum(this.datapoints.map(x => x.temperature));
 
-        return sumTemp/this.datapoints.length;
+        return sumTemp / this.datapoints.length;
     }
 
-    public getAlcoholByVolume() : number {
+    public getAlcoholByVolume(): number {
         if (this.firstPlato == null || this.firstPlato == undefined ||
-            this.lastPlato == null || this.lastPlato == undefined){
+            this.lastPlato == null || this.lastPlato == undefined) {
             return null;
         }
 
         let lastPlato = this.convertPlatoToSG(this.lastPlato);
-        const alcoholByVolume = this.firstPlato * (lastPlato/0.794);
+        const alcoholByVolume = this.firstPlato * (lastPlato / 0.794);
 
         return _.round(alcoholByVolume, 2);
 
     }
-    
-    public convertPlatoToSG(plato: number) : number {
-         return 1 + (0.082636 + 3.848 * plato + 0.014563 * plato * plato) / 1000;
+
+    public convertPlatoToSG(plato: number): number {
+        return 1 + (0.082636 + 3.848 * plato + 0.014563 * plato * plato) / 1000;
     }
 
-    public getAlcoholLevel() : number {
+    public getAlcoholLevel(): number {
         const alcoholByVolume = this.getAlcoholByVolume();
         const adjustedAlcohol = this.beerCharacteristics?.adjustedAlcoholLevel;
 
-        if (alcoholByVolume != null){
+        if (alcoholByVolume != null) {
             return alcoholByVolume + adjustedAlcohol;
         }
 
         return null;
     }
 
-    public getStart() : string {
+    public getStart(): string {
         if (this.start === null) {
             return "tbd";
         }
-        return this.start.getDate().toString().padStart(2,"0") + "." + this.start.getMonth().toString().padStart(2,"0") + "." + this.start.getFullYear();
+        return this.start.getDate().toString().padStart(2, "0") + "." + this.start.getMonth().toString().padStart(2, "0") + "." + this.start.getFullYear();
     }
 
-    public getEnd() : string {
-        if ( this.end === null) {
+    public getEnd(): string {
+        if (this.end === null) {
             return "tbd";
         }
-        return this.end.getDate().toString().padStart(2,"0") + "." + this.end.getMonth().toString().padStart(2,"0") + "." + this.end.getFullYear();
+        return this.end.getDate().toString().padStart(2, "0") + "." + this.end.getMonth().toString().padStart(2, "0") + "." + this.end.getFullYear();
     }
 
 

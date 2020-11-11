@@ -1671,6 +1671,35 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@swimlane/ngx-charts@npm:^16.0.0":
+  version: 16.0.0
+  resolution: "@swimlane/ngx-charts@npm:16.0.0"
+  dependencies:
+    d3-array: ^2.4.0
+    d3-brush: ^1.1.5
+    d3-color: ^1.4.0
+    d3-format: ^1.4.2
+    d3-hierarchy: ^1.1.9
+    d3-interpolate: ^1.4.0
+    d3-scale: ^3.2.1
+    d3-selection: ^1.4.1
+    d3-shape: ^1.3.7
+    d3-time-format: ^2.2.2
+    d3-transition: ^1.3.2
+    tslib: ^2.0.0
+  peerDependencies:
+    "@angular/animations": ">=10.0.0"
+    "@angular/cdk": ">=10.0.0"
+    "@angular/common": ">=10.0.0"
+    "@angular/core": ">=10.0.0"
+    "@angular/forms": ">=10.0.0"
+    "@angular/platform-browser": ">=10.0.0"
+    "@angular/platform-browser-dynamic": ">=10.0.0"
+    rxjs: 6.x
+  checksum: 8a5a0a264cf63f42bf7c79040ecb2f176ad32e9096afddf14ddf4ea7457a8387b3731613963e8b633b210f36a7518f84dcb36a5ad440adc57018cb2a5f12d7a5
+  languageName: node
+  linkType: hard
+
 "@types/color-name@npm:^1.1.1":
   version: 1.1.1
   resolution: "@types/color-name@npm:1.1.1"
@@ -4364,6 +4393,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"d3-array@npm:^2.3.0, d3-array@npm:^2.4.0":
+  version: 2.8.0
+  resolution: "d3-array@npm:2.8.0"
+  checksum: 2b57f05d0c666a282feb45e2bf9f948272942e45dfbe4318da582db5aff43ae387af86aba9f67f5f6ab08106f2b3e33252658c98aa317c946d54f2e365ef0261
+  languageName: node
+  linkType: hard
+
 "d3-axis@npm:1":
   version: 1.0.12
   resolution: "d3-axis@npm:1.0.12"
@@ -4371,7 +4407,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"d3-brush@npm:1":
+"d3-brush@npm:1, d3-brush@npm:^1.1.5":
   version: 1.1.6
   resolution: "d3-brush@npm:1.1.6"
   dependencies:
@@ -4401,7 +4437,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"d3-color@npm:1":
+"d3-color@npm:1, d3-color@npm:^1.4.0":
   version: 1.4.1
   resolution: "d3-color@npm:1.4.1"
   checksum: a579fdc2f4ec50980e32d0ac5212c3023ee9c6a7555ae698278f05c9f7d06322f83dde01253f672f9f9fd05d8860f0256d25aee999a0d32cf4111d731413f5da
@@ -4483,7 +4519,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"d3-format@npm:1":
+"d3-format@npm:1, d3-format@npm:1 - 2, d3-format@npm:^1.4.2":
   version: 1.4.5
   resolution: "d3-format@npm:1.4.5"
   checksum: ba111c97fc96c902c27e9fded2c9c75d3624d24d490965334ecfbd10783dca15b9a428a7baf303329abdb9516191304d4ae5e2b3bd03e9edccc1e1d75e35be16
@@ -4499,14 +4535,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"d3-hierarchy@npm:1":
+"d3-hierarchy@npm:1, d3-hierarchy@npm:^1.1.9":
   version: 1.1.9
   resolution: "d3-hierarchy@npm:1.1.9"
   checksum: 51b81657fff1a17eae4d03ad47f692669d4b7e14b27a2c432c119b32760679c07f55a19e35acacf0f78de0efdc3e55d053166f4d069f4cdcf5b6e88f00076a75
   languageName: node
   linkType: hard
 
-"d3-interpolate@npm:1":
+"d3-interpolate@npm:1, d3-interpolate@npm:1.2.0 - 2, d3-interpolate@npm:^1.4.0":
   version: 1.4.0
   resolution: "d3-interpolate@npm:1.4.0"
   dependencies:
@@ -4567,14 +4603,27 @@ __metadata:
   languageName: node
   linkType: hard
 
-"d3-selection@npm:1, d3-selection@npm:^1.1.0":
+"d3-scale@npm:^3.2.1":
+  version: 3.2.3
+  resolution: "d3-scale@npm:3.2.3"
+  dependencies:
+    d3-array: ^2.3.0
+    d3-format: 1 - 2
+    d3-interpolate: 1.2.0 - 2
+    d3-time: 1 - 2
+    d3-time-format: 2 - 3
+  checksum: 675a059241ce2db98eb61285f4e8745c854fcc66caf0aed31196dd45feb91d175d563b5b9cfe6670299690801b81d01623ace69276f5dc9f4eb0bc8d554caa3f
+  languageName: node
+  linkType: hard
+
+"d3-selection@npm:1, d3-selection@npm:^1.1.0, d3-selection@npm:^1.4.1":
   version: 1.4.2
   resolution: "d3-selection@npm:1.4.2"
   checksum: 5b0df1824a0aab04eb9a31ee48f64ce88a6fcf3052c103da4cd7da3171e6464573017c1c7ac20eaf2c2fe7caedf4ad280d61f32e5edcd6a22b6c5a241eeb5b77
   languageName: node
   linkType: hard
 
-"d3-shape@npm:1":
+"d3-shape@npm:1, d3-shape@npm:^1.3.7":
   version: 1.3.7
   resolution: "d3-shape@npm:1.3.7"
   dependencies:
@@ -4583,7 +4632,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"d3-time-format@npm:2":
+"d3-time-format@npm:2, d3-time-format@npm:2 - 3, d3-time-format@npm:^2.2.2":
   version: 2.3.0
   resolution: "d3-time-format@npm:2.3.0"
   dependencies:
@@ -4592,7 +4641,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"d3-time@npm:1":
+"d3-time@npm:1, d3-time@npm:1 - 2":
   version: 1.1.0
   resolution: "d3-time@npm:1.1.0"
   checksum: d083c2181bbd1207f5fc8a0bfc2a8c1a44a56b3781dd6ef73a70f1d82aa74f49d1b410d4afc8e1a10db459fd60fdc75191ac89b8cdf4ee2705d7f3a1f0034fac
@@ -4606,7 +4655,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"d3-transition@npm:1":
+"d3-transition@npm:1, d3-transition@npm:^1.3.2":
   version: 1.3.2
   resolution: "d3-transition@npm:1.3.2"
   dependencies:
@@ -7394,6 +7443,7 @@ fsevents@~2.1.2:
     "@angular/router": ^10.1.3
     "@mdi/angular-material": ^5.1.45
     "@microsoft/signalr": ^3.1.8
+    "@swimlane/ngx-charts": ^16.0.0
     "@types/d3": ^5.7.2
     "@types/jasmine": ~3.5.10
     "@types/jasminewd2": ~2.0.8
@@ -7412,6 +7462,7 @@ fsevents@~2.1.2:
     karma-jasmine: ~4.0.0
     karma-jasmine-html-reporter: ^1.5.0
     lodash: ^4.17.20
+    ngx-charts: ^3.0.2
     oidc-client: ^1.10.1
     protractor: ~7.0.0
     rxjs: ^6.5.5
@@ -8624,6 +8675,24 @@ fsevents@~2.1.2:
   version: 1.0.0
   resolution: "next-tick@npm:1.0.0"
   checksum: 18db63c447c6e65a23235b91da9ccdae53f74f9194cfbc71a1fd3170cdf81bd157d9676e47c2ea4ea5bd20e09fb019917b0a45d8e1a63e377175fc083f285234
+  languageName: node
+  linkType: hard
+
+"ngx-charts@npm:^3.0.2":
+  version: 3.0.2
+  resolution: "ngx-charts@npm:3.0.2"
+  peerDependencies:
+    "@angular/common": ~2.4.1
+    "@angular/compiler": ~2.4.1
+    "@angular/core": ~2.4.1
+    "@angular/platform-browser": ~2.4.1
+    "@angular/platform-browser-dynamic": ~2.4.1
+    core-js: 2.4.1
+    d3: 4.4.0
+    moment: 2.17.1
+    rxjs: 5.0.1
+    zone.js: ^0.7.4
+  checksum: 44311ca0eefb76bd1bf9b02dea43d39b80ef3670638fb90f4b4df60523ddbce0d90445b49f127da3af4084623141227a784b5a90ee66b0947599eac9d5c2948e
   languageName: node
   linkType: hard
 
