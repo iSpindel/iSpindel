@@ -11,6 +11,7 @@ using MQTTnet.Extensions.ManagedClient;
 using System.Threading;
 using Microsoft.AspNetCore.SignalR;
 using iSpindel.App.Hubs;
+using iSpindel.Database;
 
 namespace iSpindel.App.Controllers
 {
@@ -19,11 +20,13 @@ namespace iSpindel.App.Controllers
     [ApiController]
     public class RecordingController : ControllerBase
     {
+        private readonly iSpindelContext _context;
         private readonly iSpindelClientOptions iSpindelClientOptions;
         private readonly IHubContext<NotifyHub, IClientSpindelDataHub> notifyHub;
 
-        public RecordingController(IOptions<MqttConnectionSettings> settings, IHubContext<NotifyHub, IClientSpindelDataHub> notifyHub)
+        public RecordingController(IOptions<MqttConnectionSettings> settings, IHubContext<NotifyHub, IClientSpindelDataHub> notifyHub, iSpindelContext context)
         {
+            _context = context;
             this.iSpindelClientOptions = BuildISpindelClientOpts(settings.Value);
             this.notifyHub = notifyHub;
         }
@@ -86,6 +89,10 @@ namespace iSpindel.App.Controllers
         [HttpPost("{id}")]
         public async Task<bool> PostRecording(int id)
         {
+            var dbDataSeries = await _context.DataSeries.FindAsync(id);
+            if (dbDataSeries == null)
+                return false;
+
             using var iSpindelClient = new iSpindelClient(iSpindelClientOptions);
             var status = await iSpindelClient.StartAsync(id);
 
@@ -94,6 +101,9 @@ namespace iSpindel.App.Controllers
                 await this.notifyHub.Clients.All.RecordingChanged(id);
                 const StatusCode code = iSpindel.Database.Job.StatusCode.RECORDING;
                 await this.notifyHub.Clients.All.RecordingStatusUpdate(code.ToString());
+
+                dbDataSeries.Start = DateTime.Now;
+                _context.SaveChanges();
             }
 
             return status;
@@ -104,6 +114,18 @@ namespace iSpindel.App.Controllers
         public async Task<bool> StopRecording()
         {
             using var iSpindelClient = new iSpindelClient(iSpindelClientOptions);
+            var recordingStatus = await iSpindelClient.GetStatusAsync();
+            if (recordingStatus != iSpindel.Database.Job.StatusCode.RECORDING)
+                return false;
+
+            var recordingId = await iSpindelClient.GetRecordingIdAsync();
+            if (!recordingId.HasValue)
+                return false;
+
+            var dbDataSeries = await _context.DataSeries.FindAsync(recordingId);
+            if (dbDataSeries == null)
+                return false;
+
             var status = await iSpindelClient.StopAsync();
 
             if (status)
@@ -111,6 +133,9 @@ namespace iSpindel.App.Controllers
                 const StatusCode code = iSpindel.Database.Job.StatusCode.RECORDING;
                 await this.notifyHub.Clients.All.RecordingStatusUpdate(code.ToString());
                 await this.notifyHub.Clients.All.RecordingChanged(null);
+
+                dbDataSeries.End = DateTime.Now;
+                _context.SaveChanges();
             }
 
             return status;

@@ -11,9 +11,9 @@
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
-  align-content: start;
+  align-content: flex-start;
 }
 .item {
   flex: 0 0 auto;

@@ -30,6 +30,8 @@ export class ListMeasuresComponent implements OnInit {
     ).pipe(map(([id, isIdle]) => {
       if (dataSeries.end != null)
         return false;
+      if (!isIdle)
+        return false;
       if (id == dataSeries.id && !isIdle)
         return false;
       if (dataSeries.id == -1)
