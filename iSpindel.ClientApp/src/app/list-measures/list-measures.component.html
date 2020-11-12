@@ -31,7 +31,7 @@
             <input matInput placeholder="0" disabled value="{{dataSeries.beerCharacteristics?.bitterness}}">
             <span matSuffix>IBU</span>
           </mat-form-field>
-          <button class="item big-button" *ngIf="isRecordingStartPossible(dataSeries)" mat-icon-button color="warn">
+          <button class="item big-button" *ngIf="isRecordingStartPossible(dataSeries) | async" (click)="StartRecording(dataSeries.id)" mat-icon-button color="warn">
             <mat-icon svgIcon="record-rec"></mat-icon>
           </button>
         </div>

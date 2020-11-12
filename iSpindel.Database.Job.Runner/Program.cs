@@ -52,7 +52,9 @@ namespace iSpindel.Database.Job.Runner
             var runner = new Runner(runnerOptions);
 
             await runner.Run();
-            Console.WriteLine("Started cli runner");
+            Console.WriteLine("Started cli runner in version 0.2.0");
+            Console.WriteLine($"DB-Connection:{runnerOptions.ConnectionString}");
+            Console.WriteLine($"MQTT-Host:{runnerOptions.MqttHost}:{runnerOptions.MqttPort}");
             while (true)
             {
                 var input = Console.ReadLine();
@@ -79,6 +81,11 @@ namespace iSpindel.Database.Job.Runner
                 {
                     var status = await runner.Server.GetStatusAsync();
                     Console.WriteLine($"Server status is {status}");
+                }
+                else if (input.StartsWith("id"))
+                {
+                    var id = await runner.Server.GetRecordingIdAsync();
+                    Console.WriteLine($"Server recording id is {id}");
                 }
             }
         }

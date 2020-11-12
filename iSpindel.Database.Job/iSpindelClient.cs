@@ -106,6 +106,10 @@ namespace iSpindel.Database.Job
             var mqttRpcService = new MqttRpcService(topicServerRequest, topicServerResponse, mqttClient);
 
             var response = await mqttRpcService.ExecuteAsyncRpcRequest(payload);
+
+            if (response == null)
+                return String.Empty;
+
             var responsePayload = Encoding.UTF8.GetString(response);
             Console.WriteLine($"Payload {responsePayload}");
 
