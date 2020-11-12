@@ -1,6 +1,6 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { Observable, zip } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { map, share, switchMap } from 'rxjs/operators';
 import { DataseriesService } from 'src/services/dataseries.service';
 import { IDataPoint } from 'src/classes/Data/IDataPoint';
 import { IDataSeries } from 'src/classes/Data/IDataSeries';
@@ -23,21 +23,27 @@ export class ListMeasuresComponent implements OnInit {
     private _recordingService: RecordingService,
     private route: ActivatedRoute) { }
 
+  private status$: Observable<boolean>;
+  private obsCache: Map<number, Observable<boolean>> = new Map<number, Observable<boolean>>();
+
   public isRecordingStartPossible(dataSeries: IDataSeries): Observable<boolean> {
-    return zip(
-      this._recordingService.GetRecordingId(),
-      this._recordingService.GetRecordingStatus().pipe(map(status => status == RecordingStatus.IDLE))
-    ).pipe(map(([id, isIdle]) => {
-      if (dataSeries.end != null)
-        return false;
-      if (!isIdle)
-        return false;
-      if (id == dataSeries.id && !isIdle)
-        return false;
-      if (dataSeries.id == -1)
-        return false;
-      return true;
-    }));
+    if(!this.obsCache.has(dataSeries.id)) {
+      this.obsCache.set(dataSeries.id, zip(
+        this.status$,
+        //this._recordingService.GetRecordingId()
+      ).pipe(map(([isIdle]) => {
+        if (dataSeries.end != null)
+          return false;
+        if (!isIdle)
+          return false;
+        /*if (id == dataSeries.id && !isIdle)
+          return false;*/
+        if (dataSeries.id == -1)
+          return false;
+        return true;
+      })));
+    }
+    return this.obsCache.get(dataSeries.id);
   }
 
   public StartRecording(dataSeriesId: number): void {
@@ -52,6 +58,7 @@ export class ListMeasuresComponent implements OnInit {
 
   ngOnInit(): void {
     this.AllDataSeries$ = this._dataseriesService.loadAllDataSeries();
+    this.status$ = this._recordingService.GetRecordingStatus().pipe(map(status => status == RecordingStatus.IDLE), share());
   }
 
 }

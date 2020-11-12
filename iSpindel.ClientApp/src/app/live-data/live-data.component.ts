@@ -18,7 +18,7 @@ export class LiveDataComponent implements OnInit {
   public currentRecordingStatus$: Observable<RecordingStatus>;
 
   constructor(public recordingService: RecordingService) {
-    this.currentRecordingId$ = this.recordingService.GetRecordingId();
+    //this.currentRecordingId$ = this.recordingService.GetRecordingId();
     this.currentRecordingStatus$ = this.recordingService.GetRecordingStatus();
   }
 

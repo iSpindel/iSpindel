@@ -41,10 +41,8 @@ export class RecordingService {
 
   private _recordingIdInternal: Observable<number> = null;
   private _getRecordingIdInternal(): Observable<number> {
-    const recordingStatus = this.GetRecordingStatus().pipe(first());
-    
     return scheduled([
-      recordingStatus.pipe(switchMap(x => this._http.get<number>(this._baseUrl + 'RecordingId'))),
+      this._http.get<number>(this._baseUrl + 'RecordingId'),
       this._notifyService.RecordingId$]
       , asyncScheduler)
       .pipe(mergeAll());

@@ -41,9 +41,9 @@ export class GraphService {
       this._signalrPoints$.pipe(nullFilter),
       initialPoints);
 
-    this.BatteryStream$ = this.DataStream$.pipe(map(x => x.battery));
-    this.TemperatureStream$ = this.DataStream$.pipe(map(x => x.temperature));
-    this.GravityStream$ = this.DataStream$.pipe(map(x => x.gravity));
+    this.BatteryStream$ = this.DataStream$.pipe(nullFilter, map(x => x.battery));
+    this.TemperatureStream$ = this.DataStream$.pipe(nullFilter, map(x => x.temperature));
+    this.GravityStream$ = this.DataStream$.pipe(nullFilter, map(x => x.gravity));
 
     this.CurrentData$ = this.DataStream$.pipe(
       scan((acc, val, _) => {
