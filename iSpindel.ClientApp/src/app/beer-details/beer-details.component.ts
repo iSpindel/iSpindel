@@ -4,6 +4,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { DataSeries } from 'src/classes/Data/DataSeries';
 import { DataseriesService } from 'src/services/dataseries.service';
 import { switchMap } from 'rxjs/operators';
+import { BeerCharacteristics } from 'src/classes/Data/BeerCharacteristics';
 
 @Component({
   selector: 'app-beer-details',
@@ -12,8 +13,8 @@ import { switchMap } from 'rxjs/operators';
 })
 export class BeerDetailsComponent implements OnInit {
   public dataSeries$: Observable<DataSeries>;
-  public dataSeriesSubscription: Subscription;
   public dataSeries: DataSeries;
+  public dataSeriesSubscription: Subscription;
   public selectedDataSeriesId: number;
   public isFormChanged : boolean = false;
 
@@ -27,7 +28,8 @@ export class BeerDetailsComponent implements OnInit {
   }
 
   public onSubmit() {
-    console.log(this.dataSeries$);
+    console.log(this.dataSeries);
+    this._dataseriesService.UpdateDataseries(this.dataSeries);
   }
 
   ngOnInit(): void {
@@ -39,7 +41,11 @@ export class BeerDetailsComponent implements OnInit {
       })
     );
 
-    this.dataSeriesSubscription = this.dataSeries$.subscribe(x => this.dataSeries = x);
+    this.dataSeriesSubscription = this.dataSeries$.subscribe(x => {
+      this.dataSeries = x;
+      if (x.beerCharacteristics == null || x.beerCharacteristics == undefined){
+        this.dataSeries.beerCharacteristics = new BeerCharacteristics();
+      }});
   }
 
   ngOnDestroy(): void {

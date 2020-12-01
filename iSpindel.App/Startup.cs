@@ -45,6 +45,7 @@ namespace iSpindel.App
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
             var connectionStringBuilder = new NpgsqlConnectionStringBuilder(Configuration.GetConnectionString("DefaultConnection"))
             {
                 ApplicationName = "iSpindel.App"
@@ -57,6 +58,7 @@ namespace iSpindel.App
             }
 
             services.Configure<MqttConnectionSettings>(Configuration.GetSection("Mqtt"));
+
 
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseNpgsql(connectionStringBuilder.ConnectionString)

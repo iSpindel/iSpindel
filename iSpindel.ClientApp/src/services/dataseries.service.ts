@@ -23,6 +23,12 @@ export class DataseriesService {
     }, error => console.error(error));
   }
 
+  public UpdateDataseries(updatedDataSeries: DataSeries): void {
+    this._http.post<any>(this._baseUrl + "/" + updatedDataSeries.id, updatedDataSeries).subscribe(result => {
+      console.log('result of http post!', result);
+    }, error => console.error(error));
+  }
+
   public loadFullDataSeries(dataSeriesId: number): Observable<DataSeries> {
     let dataSeries = this._http.get<IDataSeries>(this._baseUrl + "/" + dataSeriesId).pipe(
       map(dataSeries => this.mapDataSeries(dataSeries))
@@ -41,17 +47,16 @@ export class DataseriesService {
   }
 
   private mapDataSeries(dataSeries: IDataSeries): DataSeries {
-          const ds = new DataSeries();
-          Object.assign(ds, dataSeries);
-          ds.start = dataSeries.start === null ? null : new Date(dataSeries.start);
-          ds.end = dataSeries.end === null ? null : new Date(dataSeries.end);
+    const ds = new DataSeries();
+    Object.assign(ds, dataSeries);
+    ds.start = dataSeries.start === null ? null : new Date(dataSeries.start);
+    ds.end = dataSeries.end === null ? null : new Date(dataSeries.end);
 
-          if (ds.beerCharacteristics != null) {
-            ds.beerCharacteristics = new BeerCharacteristics();
-            Object.assign(ds.beerCharacteristics, dataSeries.beerCharacteristics);
-          }
-          console.log(ds);
-          return ds;
+    if (ds.beerCharacteristics != null) {
+      ds.beerCharacteristics = new BeerCharacteristics();
+      Object.assign(ds.beerCharacteristics, dataSeries.beerCharacteristics);
+    }
+    return ds;
 
 
   }

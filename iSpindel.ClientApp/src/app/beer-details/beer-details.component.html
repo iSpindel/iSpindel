@@ -1,5 +1,6 @@
-<!--<mat-card (ngSubmit)="onSubmit()" #beerForm="ngForm" *ngIf="dataSeries$ | async">-->
 <mat-card *ngIf="dataSeries$ | async">
+    <!--<mat-card> *ngIf="dataSeries$ | async"> -->
+        <form (ngSubmit)="onSubmit()" #beerForm="ngForm">
     <mat-card-header>
         <mat-card-title>
             {{dataSeries.name}}</mat-card-title>
@@ -8,9 +9,9 @@
         <button mat-icon-button class="example-icon" aria-label="Back to List" [routerLink]="['/viewMeasure']">
             <mat-icon matTooltip="Zurück zur Liste" svgIcon="arrow-up-bold"></mat-icon>
         </button>
-        <button type="submit" mat-icon-button color="warn">
-            <mat-icon matTooltip="Änderungen speichern" svgIcon="content-save-edit"></mat-icon>
-        </button>
+            <button type="submit" mat-icon-button color="warn">
+                <mat-icon matTooltip="Änderungen speichern" svgIcon="content-save-edit"></mat-icon>
+            </button>
     </mat-card-header>
     <mat-card-content>
 
@@ -22,17 +23,15 @@
                     <mat-grid-tile colspan="1" rowspan="1">
                         <mat-form-field appearance="outline">
                             <mat-label>Angestrebter Bierstil</mat-label>
-
-                            <input matInput placeholder="Stil" name="beerStyle" value={{dataSeries.beerCharacteristics?.beerStyle}}>
-                            <!--
-                                <input matInput placeholder="Stil" name="beerStyle" [(ngModel)]="dataSeries.beerCharacteristics.beerStyle" #beerStyle="ngModel" >
-                            -->
+                            <input matInput placeholder="Stil" name="beerStyle"
+                                [(ngModel)]="dataSeries.beerCharacteristics.beerStyle" #beerStyle="ngModel">
                         </mat-form-field>
                     </mat-grid-tile>
                     <mat-grid-tile colspan="1" rowspan="1">
                         <mat-form-field appearance="outline">
                             <mat-label>Hefesorte</mat-label>
-                            <input matInput placeholder="Hefe" value={{dataSeries.beerCharacteristics?.yeastType}}>
+                            <input matInput placeholder="Hefe" name="yeastType"
+                                [(ngModel)]="dataSeries.beerCharacteristics.yeastType" #yeastType="ngModel">
                         </mat-form-field>
                     </mat-grid-tile>
                     <mat-grid-tile colspan="1" rowspan="1">
@@ -41,13 +40,21 @@
 
                 <mat-form-field class="fullwidth-textarea" appearance="outline">
                     <mat-label>Beschreibung</mat-label>
+                    <!--
                     <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="3"
                         cdkAutosizeMaxRows="10">{{dataSeries.description}}</textarea>
+                            -->
+                    <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="3" cdkAutosizeMaxRows="10"
+                        name="description" #description="ngModel" [(ngModel)]="dataSeries.description"></textarea>
                 </mat-form-field>
                 <mat-form-field class="fullwidth-textarea" appearance="outline">
                     <mat-label>Notizen</mat-label>
+                    <!--
                     <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="3"
                         cdkAutosizeMaxRows="10">{{dataSeries.beerCharacteristics?.notes}}</textarea>
+                            -->
+                    <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="3" cdkAutosizeMaxRows="10" name="notes"
+                        #notes="ngModel" [(ngModel)]="dataSeries.beerCharacteristics.notes"></textarea>
                 </mat-form-field>
                 <mat-divider></mat-divider>
                 <h3>Brau Ergebnis</h3>
@@ -55,15 +62,16 @@
                     <mat-grid-tile colspan="1" rowspan="1">
                         <mat-form-field appearance="outline">
                             <mat-label>Sudhaus-Ausbeute </mat-label>
-                            <input matInput placeholder="0"
-                                value="{{dataSeries.beerCharacteristics?.brewhouseEfficency}}">
+                            <input matInput type="number" placeholder="0" name="brewhouseEfficiency" #brewhouseEfficiency="ngModel"
+                                [(ngModel)]="dataSeries.beerCharacteristics.brewhouseEfficency">
                             <span matSuffix>%</span>
                         </mat-form-field>
                     </mat-grid-tile>
                     <mat-grid-tile colspan="1" rowspan="1">
                         <mat-form-field appearance="outline">
                             <mat-label>Biermenge (0-200l)</mat-label>
-                            <input matInput placeholder="0" value="{{dataSeries.beerCharacteristics?.amountOfWort}}">
+                            <input matInput type="number" placeholder="0" name="amountOfWort" #amountOfWorth="ngModel"
+                                [(ngModel)]="dataSeries.beerCharacteristics.amountOfWort">
                             <span matSuffix>l</span>
                         </mat-form-field>
                     </mat-grid-tile>
@@ -95,21 +103,24 @@
                     <mat-grid-tile colspan="1" rowspan="1">
                         <mat-form-field appearance="outline">
                             <mat-label>EVG (0-100%)</mat-label>
-                            <input matInput placeholder="0" value="{{dataSeries.beerCharacteristics?.evg}}">
+                            <input matInput type="number" placeholder="0" name="evg" #evg="ngModel"
+                                [(ngModel)]="dataSeries.beerCharacteristics.evg">
                             <span matSuffix>%</span>
                         </mat-form-field>
                     </mat-grid-tile>
                     <mat-grid-tile colspan="1" rowspan="1">
                         <mat-form-field appearance="outline">
                             <mat-label>Bittere (0-3000)</mat-label>
-                            <input matInput placeholder="0" value="{{dataSeries.beerCharacteristics?.bitterness}}">
+                            <input matInput type="number" placeholder="0" name="bitterness" #bitterness="ngModel"
+                                [(ngModel)]="dataSeries.beerCharacteristics.bitterness">
                             <span matSuffix>IBU</span>
                         </mat-form-field>
                     </mat-grid-tile>
                     <mat-grid-tile colspan="1" rowspan="1">
                         <mat-form-field appearance="outline">
                             <mat-label>Farbe (0-150)</mat-label>
-                            <input matInput placeholder="0" value="{{dataSeries.beerCharacteristics?.colorScale}}">
+                            <input matInput type="number" placeholder="0" name="colorScale" #colorScale="ngModel"
+                                [(ngModel)]="dataSeries.beerCharacteristics.colorScale">
                             <span matSuffix>EBC</span>
                         </mat-form-field>
                     </mat-grid-tile>
@@ -120,168 +131,35 @@
                     <mat-grid-tile colspan="1" rowspan="1">
                         <mat-form-field appearance="outline">
                             <mat-label>Zielwert CO2</mat-label>
-                            <input matInput placeholder="0"
-                                value="{{dataSeries.beerCharacteristics?.targetCarbonation}}">
+                            <input matInput type="number" placeholder="0" name="targetCarbonation" #targetCarbonation="ngModel"
+                                [(ngModel)]="dataSeries.beerCharacteristics.targetCarbonation">
                             <span matSuffix>g/l</span>
                         </mat-form-field>
                     </mat-grid-tile>
                     <mat-grid-tile colspan="1" rowspan="1">
                         <mat-form-field appearance="outline">
                             <mat-label>Zugegebener Zucker</mat-label>
-                            <input matInput placeholder="0" value="{{dataSeries.beerCharacteristics?.addedSugar}}">
+                            <input matInput type="number" placeholder="0" name="addedSugar" #addedSugar="ngModel"
+                                [(ngModel)]="dataSeries.beerCharacteristics.addedSugar">
                             <span matSuffix>g/l</span>
                         </mat-form-field>
                     </mat-grid-tile>
                     <mat-grid-tile colspan="1" rowspan="1">
                         <mat-form-field appearance="outline">
                             <mat-label>Erhöhung Alkoholgehalt</mat-label>
-                            <input matInput placeholder="0"
-                                value="{{dataSeries.beerCharacteristics?.adjustedAlcoholLevel}}">
+                            <input matInput type="number" placeholder="0" name="adjustedAlcoholLevel" #adjustedAlcoholLevel="ngModel"
+                                [(ngModel)]="dataSeries.beerCharacteristics.adjustedAlcoholLevel">
                             <span matSuffix>%vol.</span>
                         </mat-form-field>
                     </mat-grid-tile>
                 </mat-grid-list>
             </mat-tab>
-
-
+            
+            
             <mat-tab label="Verlaufs-Diagramm">
                 FANCY DIAGRAMM
             </mat-tab>
         </mat-tab-group>
     </mat-card-content>
+</form>
 </mat-card>
-
-<!--
-<mat-card>
-    <mat-card-header>
-        <mat-card-title>Quittenbier</mat-card-title>
-        <mat-card-subtitle>01.04.2020 - 02.04.2020</mat-card-subtitle>
-        <button mat-icon-button color="warn">
-                    <mat-icon svgIcon="content-save-edit"></mat-icon>
-        </button>
-    </mat-card-header>
-    <mat-card-content>
-
-        <h3>Braulogbuch</h3>
-        <mat-grid-list cols="3" rowHeight="80px">
-            <mat-grid-tile colspan="1" rowspan="1">
-                <mat-form-field appearance="outline">
-                    <mat-label>Angestrebter Bierstil</mat-label>
-                    <input matInput placeholder="Stil" value="Fruchtbier">
-                </mat-form-field>
-            </mat-grid-tile>
-            <mat-grid-tile colspan="1" rowspan="1">
-                <mat-form-field appearance="outline">
-                    <mat-label>Hefesorte</mat-label>
-                    <input matInput placeholder="Hefe" value="Safale K-97">
-                </mat-form-field>
-            </mat-grid-tile>
-            <mat-grid-tile colspan="1" rowspan="1">
-            </mat-grid-tile>
-        </mat-grid-list>
-
-        <mat-form-field class="fullwidth-textarea" appearance="outline">
-            <mat-label>Beschreibung</mat-label>
-            <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="3"
-                cdkAutosizeMaxRows="10">Testbier mit der iSpindel: ein Quittenbier</textarea>
-        </mat-form-field>
-        <mat-form-field class="fullwidth-textarea" appearance="outline">
-            <mat-label>Notizen</mat-label>
-            <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="3"
-                cdkAutosizeMaxRows="10">- halbe Packung Safale mit 400ml+1TL Zucker rehydriert</textarea>
-        </mat-form-field>
-        <mat-divider></mat-divider>
-        <h3>Brau Ergebnis</h3>
-        <mat-grid-list cols="3" rowHeight="80px">
-            <mat-grid-tile colspan="1" rowspan="1">
-                <mat-form-field appearance="outline">
-                    <mat-label>Sudhaus-Ausbeute </mat-label>
-                    <input matInput placeholder="0" value="55">
-                    <span matSuffix>%</span>
-                </mat-form-field>
-            </mat-grid-tile>
-            <mat-grid-tile colspan="1" rowspan="1">
-                <mat-form-field appearance="outline">
-                    <mat-label>Biermenge (0-200l)</mat-label>
-                    <input matInput placeholder="0" value="20">
-                    <span matSuffix>L</span>
-                </mat-form-field>
-            </mat-grid-tile>
-            <mat-grid-tile colspan="1" rowspan="1">
-            </mat-grid-tile>
-
-            <mat-grid-tile colspan="1" rowspan="1">
-                <mat-form-field appearance="outline">
-                    <mat-label>Mittlere Brautemperatur (aus Daten)</mat-label>
-                    <input matInput placeholder="0" value="20">
-                    <span matSuffix>°C</span>
-                </mat-form-field>
-            </mat-grid-tile>
-            <mat-grid-tile colspan="1" rowspan="1">
-                <mat-form-field appearance="outline">
-                    <mat-label>Plato Startwert (aus Daten)</mat-label>
-                    <input matInput placeholder="0" value="12">
-                    <span matSuffix>°P</span>
-                </mat-form-field>
-            </mat-grid-tile>
-            <mat-grid-tile colspan="1" rowspan="1">
-                <mat-form-field appearance="outline">
-                    <mat-label>Alkoholgehalt (aus Daten + Zuschlag vom Karbonisieren)</mat-label>
-                    <input matInput placeholder="0" value="5,6">
-                    <span matSuffix>%</span>
-                </mat-form-field>
-            </mat-grid-tile>
-
-            <mat-grid-tile colspan="1" rowspan="1">
-                <mat-form-field appearance="outline">
-                    <mat-label>EVG (0-100%)</mat-label>
-                    <input matInput placeholder="0" value="60">
-                    <span matSuffix>%</span>
-                </mat-form-field>
-            </mat-grid-tile>
-            <mat-grid-tile colspan="1" rowspan="1">
-                <mat-form-field appearance="outline">
-                    <mat-label>Bittere (0-3000)</mat-label>
-                    <input matInput placeholder="0" value="30">
-                    <span matSuffix>IBU</span>
-                </mat-form-field>
-            </mat-grid-tile>
-            <mat-grid-tile colspan="1" rowspan="1">
-                <mat-form-field appearance="outline">
-                    <mat-label>Farbe (0-150)</mat-label>
-                    <input matInput placeholder="0" value="5,4">
-                    <span matSuffix>EBC</span>
-                </mat-form-field>
-            </mat-grid-tile>
-        </mat-grid-list>
-        <mat-divider></mat-divider>
-        <h3>Karbonisierung</h3>
-        <mat-grid-list cols="3" rowHeight="80px">
-            <mat-grid-tile colspan="1" rowspan="1">
-                <mat-form-field appearance="outline">
-                    <mat-label>Zielwert CO2</mat-label>
-                    <input matInput placeholder="0" value="5,5">
-                    <span matSuffix>g/l</span>
-                </mat-form-field>
-            </mat-grid-tile>
-            <mat-grid-tile colspan="1" rowspan="1">
-                <mat-form-field appearance="outline">
-                    <mat-label>Zugegebener Zucker</mat-label>
-                    <input matInput placeholder="0" value="10">
-                    <span matSuffix>g/l</span>
-                </mat-form-field>
-            </mat-grid-tile>
-            <mat-grid-tile colspan="1" rowspan="1">
-                <mat-form-field appearance="outline">
-                    <mat-label>Erhöhung des Alkoholgehaltes</mat-label>
-                    <input matInput placeholder="0" value="2">
-                    <span matSuffix>%vol.</span>
-                </mat-form-field>
-            </mat-grid-tile>
-        </mat-grid-list>
-        <br>
-
-        FANCY DIAGRAMM
-    </mat-card-content>
-</mat-card>
--->

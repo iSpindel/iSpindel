@@ -2,13 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using iSpindel.Database;
 using iSpindel.App.DTO;
 using System.Linq.Expressions;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
 using iSpindel.App.Hubs;
 
@@ -73,12 +71,13 @@ namespace iSpindel.App.Controllers
 
             dbDataSeries.Description = dataSeries.Description;
 
-            if ( dataSeries.BeerCharacteristics != null ){
-                var beerData = dbDataSeries.BeerCharacteristics ?? new BeerCharacteristics() {DataSeriesId = dbDataSeries.Id};
+            if (dataSeries.BeerCharacteristics != null)
+            {
+                var beerData = dbDataSeries.BeerCharacteristics ?? new BeerCharacteristics() { DataSeriesId = dbDataSeries.Id };
                 beerData.AddedSugar = dataSeries.BeerCharacteristics.AddedSugar;
                 beerData.AdjustedAlcoholLevel = dataSeries.BeerCharacteristics.AdjustedAlcoholLevel;
                 beerData.AmountOfWort = dataSeries.BeerCharacteristics.AmountOfWort;
-                beerData.BeerStyle  = dataSeries.BeerCharacteristics.BeerStyle;
+                beerData.BeerStyle = dataSeries.BeerCharacteristics.BeerStyle;
                 beerData.Bitterness = dataSeries.BeerCharacteristics.Bitterness;
                 beerData.BrewhouseEfficency = dataSeries.BeerCharacteristics.BrewhouseEfficency;
                 beerData.ColorScale = dataSeries.BeerCharacteristics.ColorScale;
@@ -148,8 +147,8 @@ namespace iSpindel.App.Controllers
         }
 
         // PUT: api/DataSeries/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutDataSeries(int id, DataSeriesDTO dataSeries)
+        [HttpPost("{id}")]
+        public async Task<IActionResult> UpdateDataSeries(int id, DataSeriesWithFullInformationDTO dataSeries)
         {
             if (id != dataSeries.Id)
             {
@@ -163,8 +162,73 @@ namespace iSpindel.App.Controllers
                 return NotFound();
             }
 
-            dbDataSeries.Name = dataSeries.Name;
-            dbDataSeries.Description = dataSeries.Description;
+
+            if (dbDataSeries.Description != dataSeries.Description)
+            {
+                dbDataSeries.Description = dataSeries.Description;
+            }
+
+                var beerData = dbDataSeries.BeerCharacteristics ?? new BeerCharacteristics(){DataSeriesId = dataSeries.Id};
+                var updatedBeerData = dataSeries.BeerCharacteristics;
+
+                if (updatedBeerData.AddedSugar != null && beerData.AddedSugar != updatedBeerData.AddedSugar)
+                {
+                    beerData.AddedSugar = updatedBeerData.AddedSugar;
+                }
+
+                if (updatedBeerData.AdjustedAlcoholLevel != null && beerData.AdjustedAlcoholLevel != updatedBeerData.AdjustedAlcoholLevel)
+                {
+                    beerData.AdjustedAlcoholLevel = updatedBeerData.AdjustedAlcoholLevel;
+                }
+                if (updatedBeerData.AmountOfWort != null && beerData.AmountOfWort != updatedBeerData.AmountOfWort)
+                {
+                    beerData.AmountOfWort = updatedBeerData.AmountOfWort;
+                }
+
+                if (updatedBeerData.BeerStyle != null && beerData.BeerStyle != updatedBeerData.BeerStyle)
+                {
+                    beerData.BeerStyle = updatedBeerData.BeerStyle;
+                }
+
+                if (updatedBeerData.Bitterness != null && beerData.Bitterness != updatedBeerData.Bitterness)
+                {
+                    beerData.Bitterness = updatedBeerData.Bitterness;
+                }
+
+                if (updatedBeerData.BrewhouseEfficency != null && beerData.BrewhouseEfficency != updatedBeerData.BrewhouseEfficency)
+                {
+                    beerData.BrewhouseEfficency = updatedBeerData.BrewhouseEfficency;
+                }
+
+                if (updatedBeerData.ColorScale != null && beerData.ColorScale != updatedBeerData.ColorScale)
+                {
+                    beerData.ColorScale = updatedBeerData.ColorScale;
+                }
+
+                if (updatedBeerData.EVG != null && beerData.EVG != updatedBeerData.EVG)
+                {
+                    beerData.EVG = updatedBeerData.EVG;
+                }
+
+                if (updatedBeerData.Notes != null && beerData.Notes != updatedBeerData.Notes)
+                {
+                    beerData.Notes = updatedBeerData.Notes;
+                }
+
+                if (updatedBeerData.TargetCarbonation != null && beerData.TargetCarbonation != updatedBeerData.TargetCarbonation)
+                {
+                    beerData.TargetCarbonation = updatedBeerData.TargetCarbonation;
+                }
+
+                if (updatedBeerData.YeastType != null && beerData.YeastType != updatedBeerData.YeastType)
+                {
+                    beerData.YeastType = updatedBeerData.YeastType;
+                }
+
+                if ( dbDataSeries.BeerCharacteristics == null && beerData != null) {
+                    dbDataSeries.BeerCharacteristics = beerData;
+                }
+
 
             try
             {
@@ -227,6 +291,7 @@ namespace iSpindel.App.Controllers
                 Start = dataSeries.Start,
                 End = dataSeries.End
             };
+
         private static readonly Expression<Func<DataSeries, DataSeriesWithBeerCharacteristicsDTO>> SeriesToDTOWithBeer =
             (DataSeries dataSeries) => new DataSeriesWithBeerCharacteristicsDTO()
             {

@@ -1,35 +1,50 @@
-<mat-card>
-    <mat-card-header>
-        <mat-card-title>Aktuelle Messwerte</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-        <ul>
-            <li>Batterie: {{ BatteryStream | async }}</li>
-            <li>Temperatur: {{ TemperatureStream | async }}</li>
-            <li>Stammwürze: {{ GravityStream | async }}</li>
-        </ul>
-    </mat-card-content>
-</mat-card>
-<mat-card>
-    <mat-card-content>
-        <svg id="graph">
-            <g *ngFor="let range of Ranges; index as i" transform="translate(0 50)">
-                <text>{{range.Name}}</text>
-            </g>
-            <g transform="translate(0 0) scale(1 1)" *ngIf="CurrentData?.length > 0" id="chartArea">
-                <rect fill="transparent" stroke-width="2" stroke="orange" [attr.width]="SvgWidth"
-                    [attr.height]="SvgHeight">
-                </rect>
-                <g *ngFor="let range of Ranges" [ngClass]="range.Class" transform="translate(0 300) scale(0.99 -0.99)">
-                    <g *ngFor="let point of CurrentData; index as i; last as isLast">
-                        <line class="line" *ngIf="!isLast" [attr.x1]="calculateX(i)"
-                            [attr.y1]="calculateY(range, point)" [attr.x2]="calculateX(i + 1)"
-                            [attr.y2]="calculateY(range, CurrentData[i + 1])"></line>
-                        <!--<circle class="dot" r="4" [attr.cx]="calculateX(i)" [attr.cy]="calculateY(range, point)">
-                        </circle> -->
+<div *ngIf="currentRecordingStatus$ | async">
+    <ng-container *ngIf="isRecordingActive(); else notRecording">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Aktuelle Messwerte</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <ul>
+                <li>Batterie: {{ BatteryStream | async }}</li>
+                <li>Temperatur: {{ TemperatureStream | async }}</li>
+                <li>Stammwürze: {{ GravityStream | async }}</li>
+            </ul>
+    <button mat-raised-button *ngIf="isRecordingStopPossible()"
+                (click)="StopRecording($event); $event.stopPropagation()"  color="warn">Aufzeichnung stoppen
+        <mat-icon svgIcon="stop-circle"></mat-icon>
+    </button>
+        </mat-card-content>
+    </mat-card>
+    <mat-card>
+        <mat-card-content>
+            <!--
+            <svg id="graph">
+                <g *ngFor="let range of Ranges; index as i" transform="translate(0 50)">
+                    <text>{{range.Name}}</text>
+                </g>
+                <g transform="translate(0 0) scale(1 1)" *ngIf="CurrentData?.length > 0" id="chartArea">
+                    <rect fill="transparent" stroke-width="2" stroke="orange" [attr.width]="SvgWidth"
+                        [attr.height]="SvgHeight">
+                    </rect>
+                    <g *ngFor="let range of Ranges" [ngClass]="range.Class"
+                        transform="translate(0 300) scale(0.99 -0.99)">
+                        <g *ngFor="let point of CurrentData; index as i; last as isLast">
+                            <line class="line" *ngIf="!isLast" [attr.x1]="calculateX(i)"
+                                [attr.y1]="calculateY(range, point)" [attr.x2]="calculateX(i + 1)"
+                                [attr.y2]="calculateY(range, CurrentData[i + 1])"></line>
+                        </g>
                     </g>
                 </g>
-            </g>
-        </svg>
-    </mat-card-content>
-</mat-card>
+            </svg>
+            -->
+            <div id="valueGraph"></div>
+        </mat-card-content>
+    </mat-card>
+    </ng-container>
+
+    <ng-template #notRecording>
+        Currently no recording taking place!
+    </ng-template>
+
+</div>
