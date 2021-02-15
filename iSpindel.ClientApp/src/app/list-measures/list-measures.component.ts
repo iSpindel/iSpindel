@@ -74,12 +74,15 @@ export class ListMeasuresComponent implements OnInit {
     this.AllDataSeries$ = this._dataseriesService.loadAllDataSeries()
       .pipe(
         map<Array<DataSeries>, Array<IRecordingDataSeries>>(ds => {
+          console.log(ds.length);
           return ds.map(d => {
-            return <IRecordingDataSeries>{
+            const rDs = <IRecordingDataSeries>{
               dataseries: d,
               isStartable$: this.isRecordingStartPossible(d),
               isStoppable$: this.isRecordingStopPossible(d)
-            }
+            };
+            console.log(rDs.dataseries.id);
+            return rDs;
           })
         }
         )

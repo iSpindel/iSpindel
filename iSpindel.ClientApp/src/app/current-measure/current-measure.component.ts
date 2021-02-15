@@ -89,8 +89,8 @@ export class CurrentMeasureComponent implements OnInit {
     const width = window.innerWidth - 25;
     const height = window.innerHeight - 25;
 
-    const graph = new MultilineChart(this.CurrentData,'#valueGraph', height, width);
-    graph.initialize();
+    //const graph = new MultilineChart(this.CurrentData,'#valueGraph', height, width);
+    //graph.initialize();
   }
   ngAfterViewInit() {
     //TODO replace with angular way
