@@ -37,4 +37,22 @@
   <PropertyGroup>
     <CodeAnalysisRuleSet>app.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
+
+
+  <Target Name="BuildAngularAppOnPublish" AfterTargets="Publish">
+    <Exec WorkingDirectory="..\iSpindel.ClientApp" Command="yarn run build:prod"/>
+  </Target>  
+
+
+  <Target Name="CopyAngularAppOnPublish" AfterTargets="BuildAngularAppOnPublish">
+    <ItemGroup>
+        <MySourceFiles Include="..\iSpindel.ClientApp\dist\**\*.*"/>
+    </ItemGroup>
+    <Error
+              Text=" The source folder does not exist"
+              Condition="@(MySourceFiles) == ''" />
+    <Copy SourceFiles="@(MySourceFiles)"
+          DestinationFiles="@(MySourceFiles->'$(PublishDir)\dist\%(RecursiveDir)%(Filename)%(Extension)')"
+          />
+  </Target>
 </Project>

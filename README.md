@@ -155,3 +155,44 @@ dotnet ef migrations add <name> -c ApplicationDbContext -o Data/Migrations
     ```
 
 4. modify appsettings
+
+
+### Starting the iSpindel Program
+
+1. Start the Database Runner. Make sure appsettings.json is correct
+
+    ```bash
+    cd iSpindel.Database.Job.Runner
+    ./publishForPi.sh
+    # copy to pi
+    ./iSpindel.Database.Job.Runner
+    ```
+
+2. Start the Angular App
+
+    ```bash
+    cd iSpindel.ClientApp
+    yarn run start
+    ```
+
+3. Start the WebApi. Make sure appsettings.json is correct
+
+    ```bash
+    cd iSpindel.App
+    dotnet run
+    ```
+
+## Publishing iSpindel
+
+### iSpindel.App
+The build for the WebApp also triggers a yarn run build:prod
+
+1. cd iSpindel.App
+2. dotnet publish -r linux-arm64 -c Release --no-self-contained -p:PublishSingleFile=True
+3. scp -r bin\Release\netcoreapp3.1\linux-arm64\publish\* pi@raspi:~/iSpindel/WebApp
+
+### iSpindel.Database.Job.Runner
+1. cd iSpindel.Database.Job.Runner
+2. dotnet publish -r linux-arm64 -c Release --no-self-contained -p:PublishSingleFile=True
+3. scp -r bin\Release\netcoreapp3.1\linux-arm64\publish\iSpindel.Database.Job.Runner pi@raspi:~/iSpindel/DatabaseRunner
+3. scp -r appsettings.json pi@raspi:~/iSpindel/DatabaseRunner
