@@ -12,7 +12,7 @@ import { IDataPoint } from 'src/classes/Data/IDataPoint';
 export class GraphService {
   protected _seriesId: Subject<number> = new Subject<number>();
   public readonly SeriesId$: Observable<number> = this._seriesId.asObservable();
-  public readonly CurrentSeries$: Observable<IDataSeries>;
+  public CurrentSeries$: Observable<IDataSeries>;
 
   protected _signalrPoints$: Subject<IDataPoint> = new Subject<IDataPoint>();
   protected _resetChannel$: Subject<IDataPoint> = new Subject<IDataPoint>();
@@ -24,6 +24,7 @@ export class GraphService {
   public readonly GravityStream$: Observable<number>;
 
   constructor(protected httpClient: HttpClient) {
+    /*
     this.CurrentSeries$ = this._seriesId.pipe(
       mergeMap(x =>
         this.httpClient.get(`/api/DataSeries/${x}`) as Observable<IDataSeries>),
@@ -44,7 +45,6 @@ export class GraphService {
     this.BatteryStream$ = this.DataStream$.pipe(nullFilter, map(x => x.battery));
     this.TemperatureStream$ = this.DataStream$.pipe(nullFilter, map(x => x.temperature));
     this.GravityStream$ = this.DataStream$.pipe(nullFilter, map(x => x.gravity));
-
     this.CurrentData$ = this.DataStream$.pipe(
       scan((acc, val, _) => {
         if (val == null) //reset signal
@@ -55,10 +55,12 @@ export class GraphService {
         }
         return acc;
       }, new Array<IDataPoint>()));
+*/
   }
 
   public loadData(seriesId: number): void {
-    this._seriesId.next(seriesId);
+    this.CurrentSeries$ = this.httpClient.get(`/api/DataSeries/${seriesId}`) as Observable<IDataSeries>;
+    //this._seriesId.next(seriesId);
     //this.httpClient.get('/api/DataSeries/' + seriesId).pipe();
   }
 

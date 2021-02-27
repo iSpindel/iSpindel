@@ -12,6 +12,10 @@
 </mat-card>
 <mat-card>
     <mat-card-content>
+        <script>
+            </script>
+        <div id="graph"></div>
+        <!--
         <svg id="graph">
             <g *ngFor="let range of Ranges; index as i" transform="translate(0 50)">
                 <text>{{range.Name}}</text>
@@ -25,11 +29,10 @@
                         <line class="line" *ngIf="!isLast" [attr.x1]="calculateX(i)"
                             [attr.y1]="calculateY(range, point)" [attr.x2]="calculateX(i + 1)"
                             [attr.y2]="calculateY(range, CurrentData[i + 1])"></line>
-                        <!--<circle class="dot" r="4" [attr.cx]="calculateX(i)" [attr.cy]="calculateY(range, point)">
-                        </circle> -->
                     </g>
                 </g>
             </g>
         </svg>
+        -->
     </mat-card-content>
 </mat-card>

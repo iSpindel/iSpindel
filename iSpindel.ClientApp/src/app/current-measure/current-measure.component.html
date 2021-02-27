@@ -1,9 +1,10 @@
 <div *ngIf="currentRecordingStatus$ | async">
-    <ng-container *ngIf="isRecordingActive(); else notRecording">
+    <!-- <ng-container *ngIf="isRecordingActive(); else notRecording"> -->
     <mat-card>
         <mat-card-header>
             <mat-card-title>Aktuelle Messwerte</mat-card-title>
         </mat-card-header>
+        <!--
         <mat-card-content>
             <ul>
                 <li>Batterie: {{ BatteryStream | async }}</li>
@@ -14,10 +15,12 @@
                 (click)="StopRecording($event); $event.stopPropagation()"  color="warn">Aufzeichnung stoppen
         <mat-icon svgIcon="stop-circle"></mat-icon>
     </button>
-        </mat-card-content>
+</mat-card-content>
+-->
     </mat-card>
     <mat-card>
         <mat-card-content>
+            Test
             <!--
             <svg id="graph">
                 <g *ngFor="let range of Ranges; index as i" transform="translate(0 50)">
@@ -41,7 +44,7 @@
             <div id="valueGraph"></div>
         </mat-card-content>
     </mat-card>
-    </ng-container>
+    <!-- </ng-container> -->
 
     <ng-template #notRecording>
         Currently no recording taking place!
