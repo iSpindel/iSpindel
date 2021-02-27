@@ -77,11 +77,11 @@ export class ListMeasuresComponent implements OnInit {
           console.log(ds.length);
           return ds.map(d => {
             const rDs = <IRecordingDataSeries>{
-              dataseries: d,
+              dataSeries: d,
               isStartable$: this.isRecordingStartPossible(d),
               isStoppable$: this.isRecordingStopPossible(d)
             };
-            console.log(rDs.dataseries.id);
+            console.log(rDs.dataSeries.id);
             return rDs;
           })
         }

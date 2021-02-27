@@ -5,6 +5,13 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Launch Chrome",
+            "request": "launch",
+            "type": "pwa-chrome",
+            "url": "https://localhost:5001",
+            "webRoot": "${workspaceFolder}/iSpindel.ClientApp"
+        },
+        {
             "name": "iSpindel CLI Runner",
             "type": "coreclr",
             "request": "launch",
