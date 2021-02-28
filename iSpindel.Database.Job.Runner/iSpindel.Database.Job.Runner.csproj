@@ -15,4 +15,10 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UserSecretsId>a574c2f9-4a0e-4ed9-98cc-b5f4b1ee112d</UserSecretsId>
   </PropertyGroup>
+  <Target Name="CopyCustomContentOnPublish" AfterTargets="Publish">
+    <Copy SourceFiles="Dockerfile.Runner" DestinationFolder="$(PublishDir)" />
+    <Copy SourceFiles="build.sh" DestinationFolder="$(PublishDir)" />
+    <Copy SourceFiles="docker-compose.yml" DestinationFolder="$(PublishDir)" />
+  </Target>
+
 </Project>

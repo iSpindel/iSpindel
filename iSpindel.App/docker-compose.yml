@@ -1,0 +1,21 @@
+services:
+  ispindel.app:
+    container_name: ispindel.app
+    hostname: ispindel.app
+    image: ispindel.app:latest
+    restart: always
+    ports:
+      - "5200:80"
+    networks:
+      - ispindel.app
+      - mosquitto
+      - postgres
+networks:
+  ispindel.app:
+    name: ispindel.app
+  mosquitto:
+    name: mosquitto
+    external: true
+  postgres:
+    name: postgres
+    external: true

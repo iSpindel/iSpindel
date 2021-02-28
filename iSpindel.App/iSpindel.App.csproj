@@ -38,11 +38,15 @@
     <CodeAnalysisRuleSet>app.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
+  <Target Name="CopyCustomContentOnPublish" AfterTargets="Publish">
+    <Copy SourceFiles="Dockerfile.App" DestinationFolder="$(PublishDir)" />
+    <Copy SourceFiles="build.sh" DestinationFolder="$(PublishDir)" />
+    <Copy SourceFiles="docker-compose.yml" DestinationFolder="$(PublishDir)" />
+  </Target>
 
   <Target Name="BuildAngularAppOnPublish" AfterTargets="Publish">
     <Exec WorkingDirectory="..\iSpindel.ClientApp" Command="yarn run build:prod"/>
-  </Target>  
-
+  </Target>
 
   <Target Name="CopyAngularAppOnPublish" AfterTargets="BuildAngularAppOnPublish">
     <ItemGroup>

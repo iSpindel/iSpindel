@@ -1,1 +1,1 @@
-dotnet publish -r linux-arm -c Release --no-self-contained -p:PublishSingleFile=True
+dotnet publish -r linux-arm64 -c Release --no-self-contained -p:PublishSingleFile=True

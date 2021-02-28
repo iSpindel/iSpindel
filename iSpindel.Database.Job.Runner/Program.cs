@@ -7,13 +7,10 @@ using Npgsql;
 
 namespace iSpindel.Database.Job.Runner
 {
-
     internal class Program
     {
-
         static async Task Main(string[] args)
         {
-
             var configurationRoot = new ConfigurationBuilder()
                     .SetBasePath(Path.Combine(Directory.GetCurrentDirectory()))
                     .AddJsonFile("appsettings.json", false, false)
@@ -55,6 +52,19 @@ namespace iSpindel.Database.Job.Runner
             Console.WriteLine("Started cli runner in version 0.2.0");
             Console.WriteLine($"DB-Connection:{runnerOptions.ConnectionString}");
             Console.WriteLine($"MQTT-Host:{runnerOptions.MqttHost}:{runnerOptions.MqttPort}");
+            if (args.Any(x => string.Equals(x, "i", StringComparison.OrdinalIgnoreCase)))
+            {
+                await InteractiveRun(runner);
+            }
+            else
+            {
+                //never finish
+                await Task.Delay(-1);
+            }
+        }
+
+        private static async Task InteractiveRun(Runner runner)
+        {
             while (true)
             {
                 var input = Console.ReadLine();

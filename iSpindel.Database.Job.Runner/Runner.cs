@@ -35,8 +35,6 @@ namespace iSpindel.Database.Job.Runner
             var BridgeManagedFactory = BuildManagedClientFactory(managedMqttClientOptsBridge);
             var ServerManagedFactory = BuildManagedClientFactory(managedMqttClientOptsServer);
 
-
-
             var serverOpts = new iSpindelServerOptions()
             {
                 MqttClientFactory = ServerManagedFactory,
@@ -65,7 +63,6 @@ namespace iSpindel.Database.Job.Runner
 
             this.ControlBridge = new ControlBridge(bridgeOpts);
             await this.ControlBridge.Init();
-
         }
 
         public IMqttClientOptions BuildClientOpts(string ClientId)
@@ -94,7 +91,6 @@ namespace iSpindel.Database.Job.Runner
                                 await client.ConnectAsync(ClientOpts, CancellationToken.None);
                                 return client;
                             };
-
         }
 
         public Func<Task<IManagedMqttClient>> BuildManagedClientFactory(ManagedMqttClientOptions ClientOpts)

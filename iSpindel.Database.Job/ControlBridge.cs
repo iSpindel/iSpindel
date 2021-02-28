@@ -33,7 +33,7 @@ namespace iSpindel.Database.Job
             this.mqttClient = await options.MqttClientFactory();
             Console.WriteLine("Verifying Connection");
             mqttClient.UseConnectedHandler(this.VerifyConnection);
-            await subscribeToControlTopics();
+            await SubscribeToControlTopics();
         }
 
         private void VerifyConnection(MqttClientConnectedEventArgs connectArgs)
@@ -47,7 +47,7 @@ namespace iSpindel.Database.Job
             return;
         }
 
-        private async Task subscribeToControlTopics()
+        private async Task SubscribeToControlTopics()
         {
             await mqttClient.SubscribeAsync(this.topicServerRequest);
             mqttClient.UseApplicationMessageReceivedHandler(async e =>
@@ -55,20 +55,20 @@ namespace iSpindel.Database.Job
                 Console.WriteLine($"Received Message on Topic {e.ApplicationMessage.Topic} with Payload {Encoding.UTF8.GetString(e.ApplicationMessage.Payload)}");
                 if (e.ApplicationMessage.Topic == this.topicServerRequest)
                 {
-                    await handleMessage(Encoding.UTF8.GetString(e.ApplicationMessage.Payload));
+                    await HandleMessage(Encoding.UTF8.GetString(e.ApplicationMessage.Payload));
                 }
             });
             Console.WriteLine($"Subscribed to Topic {this.topicServerRequest}");
         }
 
-        private async Task handleMessage(string payload)
+        private async Task HandleMessage(string payload)
         {
             if (payload.Equals("Stop"))
             {
                 Console.WriteLine("Stop signal received");
                 var rc = await server.StopAsync();
                 Console.WriteLine($"Stop returned {rc.ToString()}");
-                await sendRpcReply(rc ? "Stop Successful" : "Stop Failed");
+                await SendRpcReply(rc ? "Stop Successful" : "Stop Failed");
             }
             else if (payload.Contains("Start"))
             {
@@ -87,28 +87,26 @@ namespace iSpindel.Database.Job
 
                 Console.WriteLine($"Start returned {rc}");
 
-                await sendRpcReply(rc ? "Start Successful" : "Start Failed");
+                await SendRpcReply(rc ? "Start Successful" : "Start Failed");
             }
             else if (payload.Equals("Status"))
             {
                 Console.WriteLine("Status signal received");
                 var currentStatus = await server.GetStatusAsync();
                 Console.WriteLine($"Status: {currentStatus}");
-                await sendRpcReply(currentStatus.ToString());
+                await SendRpcReply(currentStatus.ToString());
             }
             else if (payload.Equals("Id"))
             {
                 Console.WriteLine("Id signal received");
                 var currentId = await server.GetRecordingIdAsync();
                 Console.WriteLine($"Id: {currentId}");
-                await sendRpcReply(currentId.ToString());
+                await SendRpcReply(currentId.ToString());
             }
-
         }
 
-        private async Task sendRpcReply(string payload)
+        private async Task SendRpcReply(string payload)
         {
-
             var message = new MqttApplicationMessageBuilder()
             .WithTopic(this.topicServerResponse)
             .WithPayload(payload)
@@ -116,7 +114,6 @@ namespace iSpindel.Database.Job
 
             Console.WriteLine($"Publishing Message {payload} to topic {this.topicServerResponse}");
             await mqttClient.PublishAsync(message, CancellationToken.None);
-
         }
 
         /*

@@ -39,8 +39,7 @@ namespace iSpindel.Database.Job
             }
         }
 
-
-        private async Task subscribeToSensorTopics()
+        private async Task SubscribeToSensorTopics()
         {
             foreach (var topic in sensorTopics)
             {
@@ -53,22 +52,20 @@ namespace iSpindel.Database.Job
                 Console.WriteLine($"Got message on topic {e.ApplicationMessage.Topic}");
                 var payload = Encoding.UTF8.GetString(e.ApplicationMessage.Payload);
                 Console.WriteLine($"Payload {payload}");
-                await handleSensorData(e.ApplicationMessage.Topic, payload);
+                await HandleSensorData(e.ApplicationMessage.Topic, payload);
             });
         }
 
-        private async Task unsubscribeFromSensorTopics()
+        private async Task UnsubscribeFromSensorTopics()
         {
-
             foreach (var topic in sensorTopics)
             {
                 await mqttClient.UnsubscribeAsync(topic);
             }
         }
-        private async Task handleSensorData(string topic, string payload)
+        private async Task HandleSensorData(string topic, string payload)
         {
-
-            dataBuffer = dataBuffer ?? new RawDataPoint();
+            dataBuffer ??= new RawDataPoint();
 
             if (topic.Equals(batteryTopic) && Double.TryParse(payload, NumberStyles.Any, CultureInfo.InvariantCulture, out var batValue))
             {
@@ -93,12 +90,12 @@ namespace iSpindel.Database.Job
             if (dataBuffer.Battery.HasValue && dataBuffer.Gravity.HasValue && dataBuffer.Temperature.HasValue)
             {
                 Console.WriteLine("Persisting");
-                await this.persistDataPoint();
+                await this.PersistDataPoint();
                 Console.WriteLine("Persisted");
             }
         }
 
-        private async Task persistDataPoint()
+        private async Task PersistDataPoint()
         {
             try
             {
@@ -133,7 +130,7 @@ namespace iSpindel.Database.Job
             // TODO - check if connection is successful, otherwise return false
             this.mqttClient = await options.MqttClientFactory();
             // TODO - check if subscribe is successful, otherwise return false
-            await subscribeToSensorTopics();
+            await SubscribeToSensorTopics();
             // TODO - check if Database is alive
             // TODO - check if id already exists in Database
             CurrentId = id;
@@ -159,7 +156,7 @@ namespace iSpindel.Database.Job
         public async Task<bool> StopAsync()
         {
             // TODO - check if all this was successful before returning
-            await unsubscribeFromSensorTopics();
+            await UnsubscribeFromSensorTopics();
             //await mqttClient.StopAsync();
 
             using var dbContext = options.DbContextFactory();

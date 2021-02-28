@@ -1,0 +1,19 @@
+services:
+  ispindel.runner:
+    container_name: ispindel.runner
+    hostname: ispindel.runner
+    image: ispindel.runner:latest
+    restart: always
+    networks:
+      - ispindel.app
+      - mosquitto
+      - postgres
+networks:
+  ispindel.app:
+    external: true
+  mosquitto:
+    name: mosquitto
+    external: true
+  postgres:
+    name: postgres
+    external: true
