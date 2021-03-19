@@ -17,6 +17,7 @@ import { CurrentMeasureComponent } from './current-measure/current-measure.compo
 import { Routes } from '@angular/router';
 import { BeerDetailsComponent } from './beer-details/beer-details.component';
 import { BrewCalculatorsComponent } from './brew-calculators/brew-calculators.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 //import { AuthorizeGuard } from 'src/api-authorization/authorize.guard';
 
 @NgModule({
@@ -40,6 +41,7 @@ import { BrewCalculatorsComponent } from './brew-calculators/brew-calculators.co
     //custom modules start here
     CustomMaterialModule,
     AppRoutingModule,
+    NgxChartsModule
     //RouterModule.forRoot(routes),
   ],
   providers: [

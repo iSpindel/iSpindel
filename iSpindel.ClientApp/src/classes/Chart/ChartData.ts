@@ -3,25 +3,31 @@ import { IDataPoint } from 'src/classes/Data/IDataPoint';
 
 export class ChartData {
     series: DataRange[];
-    dates: Date[];
 
-    public static fromDataPoints(datapoints: IDataPoint[]): ChartData {
+    public static fromDataPoints(datapoints: IDataPoint[], withBattery: boolean = false): DataRange[] {
 
-        const batteryData = new DataRange("Battery");
         const temperatureData = new DataRange("Temperature");
         const gravityData = new DataRange("Gravity");
         const chartData = new ChartData();
-        chartData.series = [batteryData, temperatureData, gravityData];
+        chartData.series = [temperatureData, gravityData];
+
+        if ( withBattery == true ){
+            const batteryData = new DataRange("Battery");
+            chartData.series.push(batteryData);
+
+        }
 
         datapoints.map(datapoint => {
-            chartData.dates.push(new Date(datapoint.recordTime));
+            var timestamp = new Date(datapoint.recordTime);
 
-            batteryData.values.push(datapoint.battery);
-            temperatureData.values.push(datapoint.temperature);
-            gravityData.values.push(datapoint.gravity);
+            if (withBattery) {
+                chartData.series[2].series.push({ name : timestamp, value : datapoint.battery});
+            }
+            temperatureData.series.push({ name : timestamp, value : datapoint.temperature });
+            gravityData.series.push({ name : timestamp, value : datapoint.gravity });
         })
 
-        return chartData;
+        return chartData.series;
 
 
     }
