@@ -1,0 +1,53 @@
+syntax = "proto3";
+import "google/protobuf/wrappers.proto";
+
+option csharp_namespace = "iSpindel.Server.gRPC";
+
+package ispindel;
+
+// The recording service definition.
+service RecordingService {
+  rpc StartRecording (StartRequest) returns (StartReply);
+  rpc StopRecording (StopRequest) returns (StopReply);
+  rpc GetRecordingStatus (StatusRequest) returns (StatusReply);
+  rpc GetCurrentRecordingId (CurrentRecordingIdRequest) returns (CurrentRecordingIdReply);
+}
+
+// The start request message containing the id of the dataseries to record to
+message StartRequest {
+  int32 id = 1;
+};
+
+// The reply contains whether the start of the recording was successfull (true)
+message StartReply {
+  bool rc = 1;
+};
+
+// The stop request message containing the id of the dataseries to stop recording 
+message StopRequest {
+  int32 id = 1;
+};
+
+// The reply contains whether the stop of the recording was successfull (true)
+message StopReply {
+  bool rc = 1;
+};
+
+message StatusRequest{};
+
+// Returns the Status of the iSpindel Recording Server
+message StatusReply{
+  ServerStatusCode server_status_code = 1;
+};
+
+enum ServerStatusCode {
+  SERVER_STATUS_CODE_UNKNOWN=0;
+  SERVER_STATUS_CODE_RECORDING=1;
+  SERVER_STATUS_CODE_IDLE=2;
+};
+message CurrentRecordingIdRequest {};
+
+// Returns the Id of the current recording
+message CurrentRecordingIdReply {
+  google.protobuf.Int32Value id = 1;
+};
