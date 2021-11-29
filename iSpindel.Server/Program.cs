@@ -15,24 +15,26 @@ namespace iSpindel.Server
 
             // Add services to the container.
             builder.Services.AddGrpc();
-            var configurationRoot = builder.Configuration;
+            builder.Services.Configure<RunnerOptions>(
+                builder.configuration.GetSection(RunnerOptions.RunnerOpts));
+            builder.Services.AddSingleton<AbstractValidator<RunnerOptions>, RunnerOptionsValidator>();
+/*
+                        var runnerOptions = new RunnerOptions()
+                        {
+                            MqttHost = configurationRoot.GetSanitizedValue<string>("Mqtt:Host"),
+                            MqttPort = configurationRoot.GetSanitizedValue<int?>("Mqtt:Port", 1833).Value,
+                            MqttUsername = configurationRoot.GetSanitizedValue<string>("Mqtt:Credentials:Username"),
+                            MqttPassword = configurationRoot.GetSanitizedValue<string>("Mqtt:Credentials:Password"),
 
-            var runnerOptions = new RunnerOptions()
-            {
-                MqttHost = configurationRoot.GetSanitizedValue<string>("Mqtt:Host"),
-                MqttPort = configurationRoot.GetSanitizedValue<int?>("Mqtt:Port", 1833).Value,
-                MqttUsername = configurationRoot.GetSanitizedValue<string>("Mqtt:Credentials:Username"),
-                MqttPassword = configurationRoot.GetSanitizedValue<string>("Mqtt:Credentials:Password"),
-
-                TopicControlBridgeBasePath = configurationRoot.GetSanitizedValue<string>("Mqtt:Topics:ControlBridgeTopicBasePath", "spindelControl/").AppendTerminatorChar(),
-                TopicISpindelBasePath = configurationRoot.GetSanitizedValue<string>("Mqtt:Topics:iSpindelTopicBasePath").AppendTerminatorChar(),
-                TopicServerRequest = configurationRoot.GetSanitizedValue<string>("Mqtt:Topics:ServerRequest", "Request"),
-                TopicServerResponse = configurationRoot.GetSanitizedValue<string>("Mqtt:Topics:ServerResponse", "Response"),
-                TopicISpindelTemperature = configurationRoot.GetSanitizedValue<string>("Mqtt:Topics:iSpindelTemperature"),
-                TopicISpindelBattery = configurationRoot.GetSanitizedValue<string>("Mqtt:Topics:iSpindelBattery"),
-                TopicISpindelGravity = configurationRoot.GetSanitizedValue<string>("Mqtt:Topics:iSpindelGravity"),
-            };
-
+                            TopicControlBridgeBasePath = configurationRoot.GetSanitizedValue<string>("Mqtt:Topics:ControlBridgeTopicBasePath", "spindelControl/").AppendTerminatorChar(),
+                            TopicISpindelBasePath = configurationRoot.GetSanitizedValue<string>("Mqtt:Topics:iSpindelTopicBasePath").AppendTerminatorChar(),
+                            TopicServerRequest = configurationRoot.GetSanitizedValue<string>("Mqtt:Topics:ServerRequest", "Request"),
+                            TopicServerResponse = configurationRoot.GetSanitizedValue<string>("Mqtt:Topics:ServerResponse", "Response"),
+                            TopicISpindelTemperature = configurationRoot.GetSanitizedValue<string>("Mqtt:Topics:iSpindelTemperature"),
+                            TopicISpindelBattery = configurationRoot.GetSanitizedValue<string>("Mqtt:Topics:iSpindelBattery"),
+                            TopicISpindelGravity = configurationRoot.GetSanitizedValue<string>("Mqtt:Topics:iSpindelGravity"),
+                        };
+                    */
             var connectionStringBuilder = new NpgsqlConnectionStringBuilder(configurationRoot.GetConnectionString("DefaultConnection"))
             {
                 ApplicationName = "iSpindel.Database.Job.Runner"
