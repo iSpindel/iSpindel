@@ -1,3 +1,4 @@
+using iSpindel.Shared;
 using System.Threading.Tasks;
 
 namespace iSpindel.Database.Job

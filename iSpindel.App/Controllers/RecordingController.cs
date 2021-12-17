@@ -1,17 +1,11 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using iSpindel.Database.Job;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.Extensions.Options;
 using System;
-using MQTTnet;
-using MQTTnet.Client;
-using MQTTnet.Client.Options;
-using MQTTnet.Extensions.ManagedClient;
-using System.Threading;
 using Microsoft.AspNetCore.SignalR;
 using iSpindel.App.Hubs;
 using iSpindel.Database;
+using iSpindel.Shared;
+using iSpindel.App.Services;
 
 namespace iSpindel.App.Controllers
 {
@@ -21,68 +15,39 @@ namespace iSpindel.App.Controllers
     public class RecordingController : ControllerBase
     {
         private readonly iSpindelContext _context;
-        private readonly iSpindelClientOptions iSpindelClientOptions;
-        private readonly IHubContext<NotifyHub, IClientSpindelDataHub> notifyHub;
+        private readonly ISpindelClient _spindelClient;
+        private readonly IHubContext<NotifyHub, IClientSpindelDataHub> _notifyHub;
 
-        public RecordingController(IOptions<MqttConnectionSettings> settings, IHubContext<NotifyHub, IClientSpindelDataHub> notifyHub, iSpindelContext context)
+        public RecordingController(
+            ISpindelClient spindelClient,
+            IHubContext<NotifyHub, IClientSpindelDataHub> notifyHub,
+            iSpindelContext context)
         {
             _context = context;
-            this.iSpindelClientOptions = BuildISpindelClientOpts(settings.Value);
-            this.notifyHub = notifyHub;
-        }
-
-        private iSpindelClientOptions BuildISpindelClientOpts(MqttConnectionSettings options)
-        {
-            var mqttClientOpts = new MqttClientOptionsBuilder()
-            .WithTcpServer(options.Host, options.Port)
-            .WithCredentials(options.Username, options.Password)
-            .Build();
-
-            var managedMqttClientOpts = new ManagedMqttClientOptionsBuilder()
-            .WithAutoReconnectDelay(TimeSpan.FromSeconds(5))
-            .WithClientOptions(mqttClientOpts)
-            .Build();
-
-            async Task<IMqttClient> mqttClientFactory()
-            {
-                var factory = new MqttFactory();
-                var client = factory.CreateMqttClient();
-                Console.WriteLine($"Starting mqtt client");
-                var authResult = await client.ConnectAsync(mqttClientOpts, CancellationToken.None);
-                return client;
-            }
-
-            return new iSpindelClientOptions()
-            {
-                MqttClientFactory = mqttClientFactory,
-                TopicBasePath = options.TopicControlBridgeBasePath,
-                TopicServerRequest = options.TopicServerRequest,
-                TopicServerResponse = options.TopicServerResponse
-            };
+            this._spindelClient = spindelClient;
+            this._notifyHub = notifyHub;
         }
 
         // GET: api/Recording
         [HttpGet("RecordingStatus")]
         public async Task<string> RecordingStatus()
         {
-            using var iSpindelClient = new iSpindelClient(iSpindelClientOptions);
-            var status = (await iSpindelClient.GetStatusAsync()).ToString();
 
-            await this.notifyHub.Clients.All.RecordingStatusUpdate(status);
+            var rc = await _spindelClient.GetStatusAsync();
+            await this._notifyHub.Clients.All.RecordingStatusUpdate(rc.ToString());
 
-            return status;
+            return rc.ToString();
         }
 
         // GET: api/Recording
         [HttpGet("RecordingId")]
         public async Task<int?> RecordingId()
         {
-            using var iSpindelClient = new iSpindelClient(iSpindelClientOptions);
-            var id = await iSpindelClient.GetRecordingIdAsync();
 
-            await this.notifyHub.Clients.All.RecordingChanged(id);
+            var rc = await _spindelClient.GetRecordingIdAsync();
+            await this._notifyHub.Clients.All.RecordingChanged(rc.Value);
 
-            return id;
+            return rc;
         }
 
         // POST: api/Recording
@@ -93,67 +58,50 @@ namespace iSpindel.App.Controllers
             if (dbDataSeries == null)
                 return false;
 
-            using var iSpindelClient = new iSpindelClient(iSpindelClientOptions);
-            var status = await iSpindelClient.StartAsync(id);
+            var rc = await _spindelClient.StartAsync(id);
 
-            if (status)
+            if (rc)
             {
-                await this.notifyHub.Clients.All.RecordingChanged(id);
-                const StatusCode code = iSpindel.Database.Job.StatusCode.RECORDING;
-                await this.notifyHub.Clients.All.RecordingStatusUpdate(code.ToString());
+                await this._notifyHub.Clients.All.RecordingChanged(id);
+                await this._notifyHub.Clients.All.RecordingStatusUpdate(Shared.StatusCode.RECORDING.ToString());
 
                 dbDataSeries.Start = DateTime.Now;
                 _context.SaveChanges();
             }
 
-            return status;
+            return rc;
         }
 
         // PUT: api/Recording
         [HttpGet("StopRecording")]
         public async Task<bool> StopRecording()
         {
-            using var iSpindelClient = new iSpindelClient(iSpindelClientOptions);
-            var recordingStatus = await iSpindelClient.GetStatusAsync();
-            if (recordingStatus != iSpindel.Database.Job.StatusCode.RECORDING)
+            var recStatus = await _spindelClient.GetStatusAsync();
+
+            if (recStatus != Shared.StatusCode.RECORDING)
                 return false;
 
-            var recordingId = await iSpindelClient.GetRecordingIdAsync();
-            if (!recordingId.HasValue)
+            var recId = await _spindelClient.GetRecordingIdAsync();
+            if (!recId.HasValue)
                 return false;
 
-            var dbDataSeries = await _context.DataSeries.FindAsync(recordingId);
+            var dbDataSeries = await _context.DataSeries.FindAsync(recId);
             if (dbDataSeries == null)
                 return false;
 
-            var status = await iSpindelClient.StopAsync();
+            var rc = await _spindelClient.StopAsync();
 
-            if (status)
+            if (rc)
             {
-                const StatusCode code = iSpindel.Database.Job.StatusCode.RECORDING;
-                await this.notifyHub.Clients.All.RecordingStatusUpdate(code.ToString());
-                await this.notifyHub.Clients.All.RecordingChanged(null);
+
+                await this._notifyHub.Clients.All.RecordingStatusUpdate(Shared.StatusCode.RECORDING.ToString());
+                await this._notifyHub.Clients.All.RecordingChanged(null);
 
                 dbDataSeries.End = DateTime.Now;
                 _context.SaveChanges();
             }
 
-            return status;
+            return rc;
         }
-        /*
-        // DELETE: api/DataSeries/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<DataSeries>> DeleteDataSeries(int id) {
-            var dataSeries = await _context.DataSeries.FindAsync(id);
-            if (dataSeries == null) {
-                return NotFound();
-            }
-
-            _context.DataSeries.Remove(dataSeries);
-            await _context.SaveChangesAsync();
-
-            return dataSeries;
-        }
-       */
     }
 }

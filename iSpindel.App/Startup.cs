@@ -17,6 +17,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using iSpindel.App.Settings;
 using iSpindel.App.Extensions;
 using iSpindel.App.Hubs;
+using iSpindel.Server.gRPC;
+using Grpc.Net.Client;
+using Microsoft.Extensions.Options;
+using System;
+using iSpindel.App.Services;
 
 namespace iSpindel.App
 {
@@ -58,6 +63,7 @@ namespace iSpindel.App
             }
 
             services.Configure<MqttConnectionSettings>(Configuration.GetSection("Mqtt"));
+            services.Configure<GrpcOptions>(Configuration.GetSection(GrpcOptions.Position));
 
 
             services.AddDbContext<ApplicationDbContext>(options =>
@@ -70,17 +76,34 @@ namespace iSpindel.App
                 .ReplaceService<IHistoryRepository, iSpindelHistoryRepository>()
            );
 
-           services.AddSignalR(options =>
-            {
+            services.AddSignalR(options =>
+             {
 #if DEBUG
-                options.EnableDetailedErrors = true;
+                 options.EnableDetailedErrors = true;
 #endif
-            });
+             });
 
             services.AddMqttClientHostedService();
 
+            /*
+            services.AddGrpcClient<RecordingService.RecordingServiceClient>(client =>
+            {
+                client.Address = new Uri("https://localhost:5001");
+            });
+            */
+            services.AddSingleton(serviceProvider =>
+            {
+                var _grpcOptions = serviceProvider.GetRequiredService<IOptions<GrpcOptions>>();
+                return new RecordingService.RecordingServiceClient(
+                    GrpcChannel.ForAddress($"{_grpcOptions.Value.Protocol}://{_grpcOptions.Value.Hostname}:{_grpcOptions.Value.Port}")
+                        );
+
+            });
+
+            services.AddSingleton<ISpindelClient, SpindelClient>();
+
             services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+                    .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddIdentityServer()
                 .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
@@ -136,15 +159,15 @@ namespace iSpindel.App
 
             app.UseSpa(spa =>
             {
-                // To learn more about options for serving an Angular SPA from ASP.NET Core,
-                // see https://go.microsoft.com/fwlink/?linkid=864501
+        // To learn more about options for serving an Angular SPA from ASP.NET Core,
+        // see https://go.microsoft.com/fwlink/?linkid=864501
 
-                spa.Options.SourcePath = "../iSpindel.ClientApp";
+        spa.Options.SourcePath = "../iSpindel.ClientApp";
 
                 if (env.IsDevelopment())
                 {
-                    //spa.UseAngularCliServer(npmScript: "start");
-                    spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
+            //spa.UseAngularCliServer(npmScript: "start");
+            spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
                 }
             });
         }

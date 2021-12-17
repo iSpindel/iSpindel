@@ -1,5 +1,5 @@
 
-namespace iSpindel.Database.Job
+namespace iSpindel.Shared
 {
     public enum StatusCode
     {

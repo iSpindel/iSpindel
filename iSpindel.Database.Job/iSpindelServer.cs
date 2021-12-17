@@ -10,6 +10,7 @@ using Microsoft.Extensions.Options;
 
 using iSpindel.Shared.Options;
 using iSpindel.Shared.Factories;
+using iSpindel.Shared;
 
 namespace iSpindel.Database.Job
 {

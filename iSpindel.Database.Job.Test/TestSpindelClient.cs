@@ -45,7 +45,7 @@ namespace iSpindel.Database.Job.Test
         public void TestCreateClient()
         {
             var _iSpindelClient = BuildSpindelClient(runner);
-            Assert.IsType<iSpindelClient>(_iSpindelClient);
+            Assert.IsType<iSpindelClientGrpc>(_iSpindelClient);
         }
 
 
@@ -108,7 +108,7 @@ namespace iSpindel.Database.Job.Test
 
             return new Runner.Runner(runnerOptions);
         }
-        private iSpindelClient BuildSpindelClient(Runner.Runner runner)
+        private iSpindelClientGrpc BuildSpindelClient(Runner.Runner runner)
         {
             var mqttClientOpts = runner.BuildClientOpts("XUnit-Client");
 

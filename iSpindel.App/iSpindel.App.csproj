@@ -13,6 +13,13 @@
     <UserSecretsId>335aea1f-96d3-4da3-92bd-995a5bb55191</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="Google.Protobuf" Version="3.19.1" />
+    <PackageReference Include="Grpc.Net.Client" Version="2.41.0" />
+    <PackageReference Include="Grpc.Net.ClientFactory" Version="2.41.0" />
+    <PackageReference Include="Grpc.Tools" Version="2.42.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.1.3" />
     <PackageReference Include="Microsoft.AspNetCore.ApiAuthorization.IdentityServer" Version="3.1.3" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.3" />
@@ -33,10 +40,15 @@
   <ItemGroup>
     <ProjectReference Include="..\iSpindel.Database\iSpindel.Database.csproj" />
     <ProjectReference Include="..\iSpindel.Database.Job\iSpindel.Database.Job.csproj" />
+    <ProjectReference Include="..\iSpindel.Shared\iSpindel.Shared.csproj" />
   </ItemGroup>
   <PropertyGroup>
     <CodeAnalysisRuleSet>app.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
+
+	<ItemGroup>
+		<Protobuf Include="..\iSpindel.Server\Protos\recording.proto" GrpcServices="Both" />
+	</ItemGroup>
 
   <Target Name="CopyCustomContentOnPublish" AfterTargets="Publish">
     <Copy SourceFiles="Dockerfile.WebApp" DestinationFolder="$(PublishDir)" />
@@ -45,18 +57,14 @@
   </Target>
 
   <Target Name="BuildAngularAppOnPublish" AfterTargets="Publish">
-    <Exec WorkingDirectory="..\iSpindel.ClientApp" Command="yarn run build:prod"/>
+    <Exec WorkingDirectory="..\iSpindel.ClientApp" Command="yarn run build:prod" />
   </Target>
 
   <Target Name="CopyAngularAppOnPublish" AfterTargets="BuildAngularAppOnPublish">
     <ItemGroup>
-        <MySourceFiles Include="..\iSpindel.ClientApp\dist\**\*.*"/>
+        <MySourceFiles Include="..\iSpindel.ClientApp\dist\**\*.*" />
     </ItemGroup>
-    <Error
-              Text=" The source folder does not exist"
-              Condition="@(MySourceFiles) == ''" />
-    <Copy SourceFiles="@(MySourceFiles)"
-          DestinationFiles="@(MySourceFiles->'$(PublishDir)\dist\%(RecursiveDir)%(Filename)%(Extension)')"
-          />
+    <Error Text=" The source folder does not exist" Condition="@(MySourceFiles) == ''" />
+    <Copy SourceFiles="@(MySourceFiles)" DestinationFiles="@(MySourceFiles->'$(PublishDir)\dist\%(RecursiveDir)%(Filename)%(Extension)')" />
   </Target>
 </Project>
