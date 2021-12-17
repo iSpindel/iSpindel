@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29806.167
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31919.166
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "iSpindel.App", "iSpindel.App\iSpindel.App.csproj", "{94963950-1046-480E-A0DB-499EBDA6CA55}"
 EndProject
@@ -19,9 +19,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "iSpindel.Database.Job", "iS
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "iSpindel.Database.Job.Test", "iSpindel.Database.Job.Test\iSpindel.Database.Job.Test.csproj", "{235723A2-484E-4C30-B92A-65353A9BDDBB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iSpindel.Database.Job.Runner", "iSpindel.Database.Job.Runner\iSpindel.Database.Job.Runner.csproj", "{1F2427E9-0AC3-4303-9D0E-C588BAA2667C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "iSpindel.Database.Job.Runner", "iSpindel.Database.Job.Runner\iSpindel.Database.Job.Runner.csproj", "{1F2427E9-0AC3-4303-9D0E-C588BAA2667C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iSpindel.Server", "iSpindel.Server\iSpindel.Server.csproj", "{9923E5F5-56F8-4C20-8768-8EA1C2C63F43}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "iSpindel.Server", "iSpindel.Server\iSpindel.Server.csproj", "{9923E5F5-56F8-4C20-8768-8EA1C2C63F43}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iSpindel.Shared", "iSpindel.Shared\iSpindel.Shared.csproj", "{48B9344E-3632-470F-A1DA-B9F9A02634E5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -129,6 +131,18 @@ Global
 		{9923E5F5-56F8-4C20-8768-8EA1C2C63F43}.Release|x64.Build.0 = Release|Any CPU
 		{9923E5F5-56F8-4C20-8768-8EA1C2C63F43}.Release|x86.ActiveCfg = Release|Any CPU
 		{9923E5F5-56F8-4C20-8768-8EA1C2C63F43}.Release|x86.Build.0 = Release|Any CPU
+		{48B9344E-3632-470F-A1DA-B9F9A02634E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48B9344E-3632-470F-A1DA-B9F9A02634E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48B9344E-3632-470F-A1DA-B9F9A02634E5}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{48B9344E-3632-470F-A1DA-B9F9A02634E5}.Debug|x64.Build.0 = Debug|Any CPU
+		{48B9344E-3632-470F-A1DA-B9F9A02634E5}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{48B9344E-3632-470F-A1DA-B9F9A02634E5}.Debug|x86.Build.0 = Debug|Any CPU
+		{48B9344E-3632-470F-A1DA-B9F9A02634E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48B9344E-3632-470F-A1DA-B9F9A02634E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48B9344E-3632-470F-A1DA-B9F9A02634E5}.Release|x64.ActiveCfg = Release|Any CPU
+		{48B9344E-3632-470F-A1DA-B9F9A02634E5}.Release|x64.Build.0 = Release|Any CPU
+		{48B9344E-3632-470F-A1DA-B9F9A02634E5}.Release|x86.ActiveCfg = Release|Any CPU
+		{48B9344E-3632-470F-A1DA-B9F9A02634E5}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -140,6 +154,9 @@ Global
 		{E8B6C9D0-79C4-41B2-921E-FEF8DF728392} = {FBF6A89A-F53F-4145-88E3-21976DAB3D42}
 		{47294800-B7FE-4D15-A6D1-487FD3313572} = {900E0D71-B11B-4FF8-B6A3-2AAD90B9C8A3}
 		{235723A2-484E-4C30-B92A-65353A9BDDBB} = {FBF6A89A-F53F-4145-88E3-21976DAB3D42}
+		{1F2427E9-0AC3-4303-9D0E-C588BAA2667C} = {900E0D71-B11B-4FF8-B6A3-2AAD90B9C8A3}
+		{9923E5F5-56F8-4C20-8768-8EA1C2C63F43} = {900E0D71-B11B-4FF8-B6A3-2AAD90B9C8A3}
+		{48B9344E-3632-470F-A1DA-B9F9A02634E5} = {900E0D71-B11B-4FF8-B6A3-2AAD90B9C8A3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {47170B90-4DB1-4F0C-AE8E-55999A2F6546}

@@ -12,7 +12,18 @@
 
   <ItemGroup>
     <PackageReference Include="Grpc.AspNetCore" Version="2.40.0" />
+    <PackageReference Include="MQTTnet" Version="3.1.1" />
+    <PackageReference Include="MQTTnet.Extensions.ManagedClient" Version="3.1.1" />
     <PackageReference Include="Npgsql" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\iSpindel.Database.Job\iSpindel.Database.Job.csproj" />
+    <ProjectReference Include="..\iSpindel.Shared\iSpindel.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Factories\" />
   </ItemGroup>
 
 </Project>

@@ -6,48 +6,54 @@ using System.Text;
 using System.Threading.Tasks;
 using MQTTnet.Client;
 using MQTTnet.Extensions.ManagedClient;
+using Microsoft.Extensions.Options;
+
+using iSpindel.Shared.Options;
+using iSpindel.Shared.Factories;
 
 namespace iSpindel.Database.Job
 {
     public class iSpindelServer : ISpindelService
     {
-        private iSpindelServerOptions options;
-
-        private IManagedMqttClient mqttClient = null;
+        private IManagedMqttClient _mqttClient = null;
+        private IDbContextFactory _dbContextFactory = null;
+        private Shared.Factories.IMqttClientFactory _mqttClientFactory = null;
         public int? CurrentId { get; set; }
-        private RawDataPoint dataBuffer = null;
-        private readonly string batteryTopic;
-        private readonly string temperatureTopic;
-        private readonly string gravityTopic;
-        private readonly List<string> sensorTopics = new List<string>();
+        private RawDataPoint _dataBuffer = null;
+        private readonly string _batteryTopic;
+        private readonly string _temperatureTopic;
+        private readonly string _gravityTopic;
+        private readonly List<string> _sensorTopics = new List<string>();
 
-        public iSpindelServer(iSpindelServerOptions options)
+        public iSpindelServer(IOptions<SpindelServerOptions> options, Shared.Factories.IMqttClientFactory mqttClientFactory, IDbContextFactory dbContextFactory)
         {
-            this.options = options;
-            this.batteryTopic = options.TopicBasePath + options.TopicBattery;
-            this.temperatureTopic = options.TopicBasePath + options.TopicTemperature;
-            this.gravityTopic = options.TopicBasePath + options.TopicGravity;
+            this._batteryTopic = options.Value.TopicBasePath + options.Value.TopicBattery;
+            this._temperatureTopic = options.Value.TopicBasePath + options.Value.TopicTemperature;
+            this._gravityTopic = options.Value.TopicBasePath + options.Value.TopicGravity;
 
-            this.sensorTopics.Add(batteryTopic);
-            this.sensorTopics.Add(temperatureTopic);
-            this.sensorTopics.Add(gravityTopic);
+            this._sensorTopics.Add(_batteryTopic);
+            this._sensorTopics.Add(_temperatureTopic);
+            this._sensorTopics.Add(_gravityTopic);
 
-            using var dbContext = this.options.DbContextFactory();
+            using var dbContext = dbContextFactory.CreateContext();
             if (!dbContext.Database.CanConnect())
             {
                 throw new ArgumentException("Could not validate database connection");
             }
+
+            this._mqttClientFactory = mqttClientFactory;
+            this._dbContextFactory = dbContextFactory;
         }
 
         private async Task SubscribeToSensorTopics()
         {
-            foreach (var topic in sensorTopics)
+            foreach (var topic in _sensorTopics)
             {
                 Console.WriteLine($"subscribe to topic {topic}");
-                await mqttClient.SubscribeAsync(topic);
+                await _mqttClient.SubscribeAsync(topic);
             }
 
-            mqttClient.UseApplicationMessageReceivedHandler(async (e) =>
+            _mqttClient.UseApplicationMessageReceivedHandler(async (e) =>
             {
                 Console.WriteLine($"Got message on topic {e.ApplicationMessage.Topic}");
                 var payload = Encoding.UTF8.GetString(e.ApplicationMessage.Payload);
@@ -58,36 +64,36 @@ namespace iSpindel.Database.Job
 
         private async Task UnsubscribeFromSensorTopics()
         {
-            foreach (var topic in sensorTopics)
+            foreach (var topic in _sensorTopics)
             {
-                await mqttClient.UnsubscribeAsync(topic);
+                await _mqttClient.UnsubscribeAsync(topic);
             }
         }
         private async Task HandleSensorData(string topic, string payload)
         {
-            dataBuffer ??= new RawDataPoint();
+            _dataBuffer ??= new RawDataPoint();
 
-            if (topic.Equals(batteryTopic) && Double.TryParse(payload, NumberStyles.Any, CultureInfo.InvariantCulture, out var batValue))
+            if (topic.Equals(_batteryTopic) && Double.TryParse(payload, NumberStyles.Any, CultureInfo.InvariantCulture, out var batValue))
             {
-                dataBuffer.Battery = batValue;
-                dataBuffer.LastRecordTime = DateTime.Now;
-                Console.WriteLine($"Got battery {batValue} on {dataBuffer.LastRecordTime}");
+                _dataBuffer.Battery = batValue;
+                _dataBuffer.LastRecordTime = DateTime.Now;
+                Console.WriteLine($"Got battery {batValue} on {_dataBuffer.LastRecordTime}");
             }
-            else if (topic.Equals(temperatureTopic) && Double.TryParse(payload, NumberStyles.Any, CultureInfo.InvariantCulture, out var tempValue))
+            else if (topic.Equals(_temperatureTopic) && Double.TryParse(payload, NumberStyles.Any, CultureInfo.InvariantCulture, out var tempValue))
             {
-                dataBuffer.Temperature = tempValue;
-                dataBuffer.LastRecordTime = DateTime.Now;
-                Console.WriteLine($"Got temp {tempValue} on {dataBuffer.LastRecordTime}");
+                _dataBuffer.Temperature = tempValue;
+                _dataBuffer.LastRecordTime = DateTime.Now;
+                Console.WriteLine($"Got temp {tempValue} on {_dataBuffer.LastRecordTime}");
             }
-            else if (topic.Equals(gravityTopic) && Double.TryParse(payload, NumberStyles.Any, CultureInfo.InvariantCulture, out var gravValue))
+            else if (topic.Equals(_gravityTopic) && Double.TryParse(payload, NumberStyles.Any, CultureInfo.InvariantCulture, out var gravValue))
             {
-                dataBuffer.Gravity = gravValue;
-                dataBuffer.LastRecordTime = DateTime.Now;
-                Console.WriteLine($"Got grav {gravValue} on {dataBuffer.LastRecordTime}");
+                _dataBuffer.Gravity = gravValue;
+                _dataBuffer.LastRecordTime = DateTime.Now;
+                Console.WriteLine($"Got grav {gravValue} on {_dataBuffer.LastRecordTime}");
             }
             //TODO check timeframe from lastrecordtime here
 
-            if (dataBuffer.Battery.HasValue && dataBuffer.Gravity.HasValue && dataBuffer.Temperature.HasValue)
+            if (_dataBuffer.Battery.HasValue && _dataBuffer.Gravity.HasValue && _dataBuffer.Temperature.HasValue)
             {
                 Console.WriteLine("Persisting");
                 await this.PersistDataPoint();
@@ -99,22 +105,22 @@ namespace iSpindel.Database.Job
         {
             try
             {
-                using var dbContext = options.DbContextFactory();
+                using var dbContext = _dbContextFactory.CreateContext();
 
                 var dataPoint = new DataPoint()
                 {
                     DataSeriesId = CurrentId ?? -1,
-                    Temperature = dataBuffer.Temperature.Value,
-                    Battery = dataBuffer.Battery.Value,
-                    Gravity = dataBuffer.Gravity.Value,
-                    RecordTime = dataBuffer.LastRecordTime
+                    Temperature = _dataBuffer.Temperature.Value,
+                    Battery = _dataBuffer.Battery.Value,
+                    Gravity = _dataBuffer.Gravity.Value,
+                    RecordTime = _dataBuffer.LastRecordTime
                 };
                 Console.WriteLine($"DataPoint T:{dataPoint.Temperature} B:{dataPoint.Battery} G:{dataPoint.Gravity}");
                 dbContext.DataPoints.Add(dataPoint);
                 await dbContext.SaveChangesAsync();
 
                 //clear existing data
-                dataBuffer = null;
+                _dataBuffer = null;
             }
             catch (Exception ex)
             {
@@ -128,14 +134,14 @@ namespace iSpindel.Database.Job
         public async Task<bool> StartAsync(int id)
         {
             // TODO - check if connection is successful, otherwise return false
-            this.mqttClient = await options.MqttClientFactory();
+            this._mqttClient = await _mqttClientFactory.CreateManagedClient();
             // TODO - check if subscribe is successful, otherwise return false
             await SubscribeToSensorTopics();
             // TODO - check if Database is alive
             // TODO - check if id already exists in Database
             CurrentId = id;
 
-            using var dbContext = options.DbContextFactory();
+            using var dbContext = _dbContextFactory.CreateContext();
             var currentSeries = dbContext.DataSeries.Single(x => x.Id == id);
             currentSeries.Start = DateTime.Now;
 
@@ -159,11 +165,11 @@ namespace iSpindel.Database.Job
             await UnsubscribeFromSensorTopics();
             //await mqttClient.StopAsync();
 
-            using var dbContext = options.DbContextFactory();
+            using var dbContext = _dbContextFactory.CreateContext();
             var currentSeries = dbContext.DataSeries.Single(x => x.Id == CurrentId);
             currentSeries.End = DateTime.Now;
 
-            mqttClient = null;
+            _mqttClient = null;
             CurrentId = null;
             return true;
         }
