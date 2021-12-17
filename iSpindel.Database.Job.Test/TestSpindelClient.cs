@@ -11,6 +11,7 @@ namespace iSpindel.Database.Job.Test
 {
     public class TestSpindelClient
     {
+        /*
         private readonly IConfigurationSection mqttOpts;
         private RunnerOptions runnerOptions;
         private Runner.Runner runner;
@@ -133,5 +134,6 @@ namespace iSpindel.Database.Job.Test
 
 
         }
+        */
     }
 }

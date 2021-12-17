@@ -1,10 +1,11 @@
 using Microsoft.Extensions.Configuration;
 using System;
 
-namespace iSpindel.Database.Job.Runner
+namespace iSpindel.Shared
 {
     public static class ConfigurationExtensions
     {
+        /*
         public static T GetSanitizedValue<T>(this IConfigurationRoot configurationRoot, string configKey, T defaultValue = default(T))
         {
             var configEntry = configurationRoot.GetValue<T>(configKey);
@@ -19,5 +20,6 @@ namespace iSpindel.Database.Job.Runner
 
             return configEntry ?? defaultValue;
         }
+        */
     }
 }
