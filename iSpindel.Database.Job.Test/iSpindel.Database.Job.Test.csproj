@@ -18,7 +18,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\iSpindel.Database.Job\iSpindel.Database.Job.csproj" />
-  <ProjectReference Include="..\iSpindel.Database.Job.Runner\iSpindel.Database.Job.Runner.csproj" />
   </ItemGroup>
 
   <ItemGroup>

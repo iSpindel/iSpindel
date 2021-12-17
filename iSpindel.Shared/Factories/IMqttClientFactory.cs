@@ -8,7 +8,8 @@ namespace iSpindel.Shared.Factories
 {
     public interface IMqttClientFactory
     {
-        Func<Task<IMqttClient>> CreateClient(string ClientId);
-        Func<Task<IManagedMqttClient>> CreateManagedClient(IMqttClientOptions ClientOpts);
+        Func<Task<IMqttClient>> CreateClient(string clientId);
+        Func<Task<IManagedMqttClient>> CreateManagedClient(IMqttClientOptions clientOpts);
+        (IManagedMqttClient client, ManagedMqttClientOptions options) CreateManagedClient(string clientId);
     }
 }

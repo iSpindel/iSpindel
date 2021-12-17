@@ -3,6 +3,7 @@
     public class SpindelServerOptions
     {
         public const string SpindelServerPosition = "SpindelServer";
+        public string ClientId { get; set; } = "iSpindel-Server";
         public string TopicBasePath { get; set; }
         public string TopicTemperature { get; set; }
         public string TopicBattery { get; set; }

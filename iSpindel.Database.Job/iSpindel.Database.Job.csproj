@@ -2,12 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\iSpindel.Database\iSpindel.Database.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="MQTTnet" Version="3.0.9" />
-    <PackageReference Include="MQTTnet.Extensions.ManagedClient" Version="3.0.9" />
-    <PackageReference Include="MQTTnet.Extensions.Rpc" Version="3.0.9" />
+    <ProjectReference Include="..\iSpindel.Shared\iSpindel.Shared.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

@@ -18,15 +18,26 @@ namespace iSpindel.Shared.Factories
         {
             this._mqttOptions = mqttOptions;
         }
-
-        public Func<Task<IMqttClient>> CreateClient(string ClientId)
+        private IMqttClientOptions BuildClientOpts(string clientId)
         {
-            var mqttOpts = new MqttClientOptionsBuilder()
-                        .WithClientId(ClientId)
+            return new MqttClientOptionsBuilder()
+                        .WithClientId(clientId)
                         .WithTcpServer(_mqttOptions.Value.Host, _mqttOptions.Value.Port)
                         .WithCredentials(_mqttOptions.Value.Username, _mqttOptions.Value.Passwort)
                         .Build();
+        }
 
+        private ManagedMqttClientOptions BuildManagedClientOpts(IMqttClientOptions clientOpts)
+        {
+            return new ManagedMqttClientOptionsBuilder()
+            .WithAutoReconnectDelay(TimeSpan.FromSeconds(10))
+            .WithClientOptions(clientOpts)
+            .Build();
+        }
+
+        public Func<Task<IMqttClient>> CreateClient(string clientId)
+        {
+            var mqttOpts = BuildClientOpts(clientId);
             return async () =>
             {
                 var factory = new MqttFactory();
@@ -36,12 +47,16 @@ namespace iSpindel.Shared.Factories
             };
         }
 
-        public Func<Task<IManagedMqttClient>> CreateManagedClient(IMqttClientOptions ClientOpts)
+        public (IManagedMqttClient client, ManagedMqttClientOptions options) CreateManagedClient(string clientId)
         {
-            var mqttOpts = new ManagedMqttClientOptionsBuilder()
-            .WithAutoReconnectDelay(TimeSpan.FromSeconds(10))
-            .WithClientOptions(ClientOpts)
-            .Build();
+            var mqttClientOpts = BuildClientOpts(clientId);
+            var mqttOpts = BuildManagedClientOpts(mqttClientOpts);
+            var factory = new MqttFactory();
+            return (factory.CreateManagedMqttClient(), mqttOpts);
+        }
+        public Func<Task<IManagedMqttClient>> CreateManagedClient(IMqttClientOptions clientOpts)
+        {
+            var mqttOpts = BuildManagedClientOpts(clientOpts);
 
             return async () =>
                             {

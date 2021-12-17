@@ -134,7 +134,9 @@ namespace iSpindel.Database.Job
         public async Task<bool> StartAsync(int id)
         {
             // TODO - check if connection is successful, otherwise return false
-            this._mqttClient = await _mqttClientFactory.CreateManagedClient();
+            var mqtt = _mqttClientFactory.CreateManagedClient("iSpindel-Server");
+            _mqttClient = mqtt.client;
+            await _mqttClient.StartAsync(mqtt.options);
             // TODO - check if subscribe is successful, otherwise return false
             await SubscribeToSensorTopics();
             // TODO - check if Database is alive

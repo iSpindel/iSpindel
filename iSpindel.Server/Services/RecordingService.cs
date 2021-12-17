@@ -1,4 +1,5 @@
 using Grpc.Core;
+using iSpindel.Database.Job;
 using iSpindel.Server.gRPC;
 
 namespace iSpindel.Server.Services;
@@ -6,28 +7,33 @@ namespace iSpindel.Server.Services;
 public class RecordingService : gRPC.RecordingService.RecordingServiceBase
 {
     private readonly ILogger<RecordingService> _logger;
-    public RecordingService(ILogger<RecordingService> logger)
+    private readonly ISpindelService _spindelService;
+
+    public RecordingService(ILogger<RecordingService> logger, ISpindelService spindelService)
     {
         _logger = logger;
+        this._spindelService = spindelService;
     }
 
-    public override Task<CurrentRecordingIdReply> GetCurrentRecordingId(CurrentRecordingIdRequest request, ServerCallContext context)
+    public override async Task<CurrentRecordingIdReply> GetCurrentRecordingId(CurrentRecordingIdRequest request, ServerCallContext context)
     {
-        return Task.FromResult(new CurrentRecordingIdReply() {Id = 2});
+        return new CurrentRecordingIdReply() { Id = await _spindelService.GetRecordingIdAsync() };
     }
 
-    public override Task<StatusReply> GetRecordingStatus(StatusRequest request, ServerCallContext context)
+    public override async Task<StatusReply> GetRecordingStatus(StatusRequest request, ServerCallContext context)
     {
-        return Task.FromResult(new StatusReply(){ServerStatusCode = ServerStatusCode.Idle});
+        return new StatusReply() { ServerStatusCode = (ServerStatusCode) await _spindelService.GetStatusAsync() };
     }
 
     public override Task<StartReply> StartRecording(StartRequest request, ServerCallContext context)
     {
-        return Task.FromResult(new StartReply(){ Rc = true });
+        _spindelService.StartAsync(request.Id);    
+        return Task.FromResult(new StartReply() { Rc = true });
     }
 
     public override Task<StopReply> StopRecording(StopRequest request, ServerCallContext context)
     {
-        return Task.FromResult(new StopReply(){ Rc = true });
+        _spindelService.StopAsync();    
+        return Task.FromResult(new StopReply() { Rc = true });
     }
 }
