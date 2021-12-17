@@ -1,4 +1,0 @@
-FROM mcr.microsoft.com/dotnet/runtime:3.1-focal-arm64v8 AS run
-WORKDIR /App
-COPY ./ ./
-ENTRYPOINT ["./iSpindel.Database.Job.Runner"]
