@@ -1,14 +1,14 @@
-﻿using System;
+﻿using iSpindel.App.DTO;
+using iSpindel.App.Hubs;
+using iSpindel.Database;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using iSpindel.Database;
-using iSpindel.App.DTO;
 using System.Linq.Expressions;
-using Microsoft.AspNetCore.SignalR;
-using iSpindel.App.Hubs;
+using System.Threading.Tasks;
 
 namespace iSpindel.App.Controllers
 {
@@ -168,66 +168,67 @@ namespace iSpindel.App.Controllers
                 dbDataSeries.Description = dataSeries.Description;
             }
 
-                var beerData = dbDataSeries.BeerCharacteristics ?? new BeerCharacteristics(){DataSeriesId = dataSeries.Id};
-                var updatedBeerData = dataSeries.BeerCharacteristics;
+            var beerData = dbDataSeries.BeerCharacteristics ?? new BeerCharacteristics() { DataSeriesId = dataSeries.Id };
+            var updatedBeerData = dataSeries.BeerCharacteristics;
 
-                if (updatedBeerData.AddedSugar != null && beerData.AddedSugar != updatedBeerData.AddedSugar)
-                {
-                    beerData.AddedSugar = updatedBeerData.AddedSugar;
-                }
+            if (updatedBeerData.AddedSugar != null && beerData.AddedSugar != updatedBeerData.AddedSugar)
+            {
+                beerData.AddedSugar = updatedBeerData.AddedSugar;
+            }
 
-                if (updatedBeerData.AdjustedAlcoholLevel != null && beerData.AdjustedAlcoholLevel != updatedBeerData.AdjustedAlcoholLevel)
-                {
-                    beerData.AdjustedAlcoholLevel = updatedBeerData.AdjustedAlcoholLevel;
-                }
-                if (updatedBeerData.AmountOfWort != null && beerData.AmountOfWort != updatedBeerData.AmountOfWort)
-                {
-                    beerData.AmountOfWort = updatedBeerData.AmountOfWort;
-                }
+            if (updatedBeerData.AdjustedAlcoholLevel != null && beerData.AdjustedAlcoholLevel != updatedBeerData.AdjustedAlcoholLevel)
+            {
+                beerData.AdjustedAlcoholLevel = updatedBeerData.AdjustedAlcoholLevel;
+            }
+            if (updatedBeerData.AmountOfWort != null && beerData.AmountOfWort != updatedBeerData.AmountOfWort)
+            {
+                beerData.AmountOfWort = updatedBeerData.AmountOfWort;
+            }
 
-                if (updatedBeerData.BeerStyle != null && beerData.BeerStyle != updatedBeerData.BeerStyle)
-                {
-                    beerData.BeerStyle = updatedBeerData.BeerStyle;
-                }
+            if (updatedBeerData.BeerStyle != null && beerData.BeerStyle != updatedBeerData.BeerStyle)
+            {
+                beerData.BeerStyle = updatedBeerData.BeerStyle;
+            }
 
-                if (updatedBeerData.Bitterness != null && beerData.Bitterness != updatedBeerData.Bitterness)
-                {
-                    beerData.Bitterness = updatedBeerData.Bitterness;
-                }
+            if (updatedBeerData.Bitterness != null && beerData.Bitterness != updatedBeerData.Bitterness)
+            {
+                beerData.Bitterness = updatedBeerData.Bitterness;
+            }
 
-                if (updatedBeerData.BrewhouseEfficency != null && beerData.BrewhouseEfficency != updatedBeerData.BrewhouseEfficency)
-                {
-                    beerData.BrewhouseEfficency = updatedBeerData.BrewhouseEfficency;
-                }
+            if (updatedBeerData.BrewhouseEfficency != null && beerData.BrewhouseEfficency != updatedBeerData.BrewhouseEfficency)
+            {
+                beerData.BrewhouseEfficency = updatedBeerData.BrewhouseEfficency;
+            }
 
-                if (updatedBeerData.ColorScale != null && beerData.ColorScale != updatedBeerData.ColorScale)
-                {
-                    beerData.ColorScale = updatedBeerData.ColorScale;
-                }
+            if (updatedBeerData.ColorScale != null && beerData.ColorScale != updatedBeerData.ColorScale)
+            {
+                beerData.ColorScale = updatedBeerData.ColorScale;
+            }
 
-                if (updatedBeerData.EVG != null && beerData.EVG != updatedBeerData.EVG)
-                {
-                    beerData.EVG = updatedBeerData.EVG;
-                }
+            if (updatedBeerData.EVG != null && beerData.EVG != updatedBeerData.EVG)
+            {
+                beerData.EVG = updatedBeerData.EVG;
+            }
 
-                if (updatedBeerData.Notes != null && beerData.Notes != updatedBeerData.Notes)
-                {
-                    beerData.Notes = updatedBeerData.Notes;
-                }
+            if (updatedBeerData.Notes != null && beerData.Notes != updatedBeerData.Notes)
+            {
+                beerData.Notes = updatedBeerData.Notes;
+            }
 
-                if (updatedBeerData.TargetCarbonation != null && beerData.TargetCarbonation != updatedBeerData.TargetCarbonation)
-                {
-                    beerData.TargetCarbonation = updatedBeerData.TargetCarbonation;
-                }
+            if (updatedBeerData.TargetCarbonation != null && beerData.TargetCarbonation != updatedBeerData.TargetCarbonation)
+            {
+                beerData.TargetCarbonation = updatedBeerData.TargetCarbonation;
+            }
 
-                if (updatedBeerData.YeastType != null && beerData.YeastType != updatedBeerData.YeastType)
-                {
-                    beerData.YeastType = updatedBeerData.YeastType;
-                }
+            if (updatedBeerData.YeastType != null && beerData.YeastType != updatedBeerData.YeastType)
+            {
+                beerData.YeastType = updatedBeerData.YeastType;
+            }
 
-                if ( dbDataSeries.BeerCharacteristics == null && beerData != null) {
-                    dbDataSeries.BeerCharacteristics = beerData;
-                }
+            if (dbDataSeries.BeerCharacteristics == null && beerData != null)
+            {
+                dbDataSeries.BeerCharacteristics = beerData;
+            }
 
 
             try

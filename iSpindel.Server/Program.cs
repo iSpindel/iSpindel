@@ -3,8 +3,6 @@ using iSpindel.Server.Options;
 using iSpindel.Server.Services;
 using iSpindel.Shared.Factories;
 using iSpindel.Shared.Options;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace iSpindel.Server
 {
@@ -24,7 +22,7 @@ namespace iSpindel.Server
             builder.Services.Configure<SpindelServerOptions>(builder.Configuration.GetSection(SpindelServerOptions.SpindelServerPosition));
             builder.Services.Configure<DbOptions>(builder.Configuration.GetSection(DbOptions.DbPosition));
             builder.Services.Configure<GrpcServerOptions>(builder.Configuration.GetSection(GrpcServerOptions.GrpcServerPosition));
-            builder.Services.AddSingleton<Shared.Factories.IMqttClientFactory, Shared.Factories.MqttClientFactory>();
+            builder.Services.AddSingleton<IMqttClientFactory, MqttClientFactory>();
             builder.Services.AddSingleton<IDbContextFactory, DbContextFactory>();
             builder.Services.AddSingleton<ISpindelService, iSpindelServer>();
             var app = builder.Build();

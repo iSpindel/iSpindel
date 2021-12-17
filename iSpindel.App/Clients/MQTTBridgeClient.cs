@@ -1,5 +1,4 @@
 using System.Threading.Tasks;
-using iSpindel.App.Messages.MQTTBridge;
 
 namespace iSpindel.App.Clients
 {

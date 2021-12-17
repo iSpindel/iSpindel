@@ -1,13 +1,11 @@
-using System;
-using System.IO;
-using System.Threading.Tasks;
+using iSpindel.Database.Job.Runner;
 using Microsoft.Extensions.Configuration;
 using MQTTnet;
-using MQTTnet.Client.Options;
-using MQTTnet.Extensions.ManagedClient;
-using iSpindel.Database.Job.Runner;
-using Xunit;
+using System;
+using System.IO;
 using System.Threading;
+using System.Threading.Tasks;
+using Xunit;
 
 namespace iSpindel.Database.Job.Test
 {

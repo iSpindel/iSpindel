@@ -1,7 +1,5 @@
-using System;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+using iSpindel.App.Clients;
+using iSpindel.App.Hubs;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Logging;
 using MQTTnet;
@@ -9,8 +7,10 @@ using MQTTnet.Client;
 using MQTTnet.Client.Connecting;
 using MQTTnet.Client.Disconnecting;
 using MQTTnet.Client.Options;
-using iSpindel.App.Clients;
-using iSpindel.App.Hubs;
+using System;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace iSpindel.App.Services
 {
@@ -87,7 +87,7 @@ namespace iSpindel.App.Services
 
         public async Task StopAsync(CancellationToken cancellationToken)
         {
-            if(cancellationToken.IsCancellationRequested)
+            if (cancellationToken.IsCancellationRequested)
             {
                 var disconnectOption = new MqttClientDisconnectOptions
                 {

@@ -1,7 +1,7 @@
 ﻿using iSpindel.Database;
 using iSpindel.Shared.Options;
-using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Npgsql;
 
 namespace iSpindel.Shared.Factories

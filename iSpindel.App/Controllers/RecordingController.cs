@@ -1,11 +1,10 @@
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using Microsoft.AspNetCore.SignalR;
 using iSpindel.App.Hubs;
-using iSpindel.Database;
-using iSpindel.Shared;
 using iSpindel.App.Services;
+using iSpindel.Database;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
+using System;
+using System.Threading.Tasks;
 
 namespace iSpindel.App.Controllers
 {

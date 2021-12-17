@@ -1,6 +1,3 @@
-using System;
-using Microsoft.Extensions.Configuration;
-
 namespace iSpindel.Server
 {
     public static class ConfigurationExtensions

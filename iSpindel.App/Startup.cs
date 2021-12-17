@@ -1,27 +1,22 @@
+using Grpc.Net.Client;
+using iSpindel.App.Data;
+using iSpindel.App.Extensions;
+using iSpindel.App.Hubs;
+using iSpindel.App.Models;
+using iSpindel.App.Services;
+using iSpindel.App.Settings;
+using iSpindel.Database;
+using iSpindel.Server.gRPC;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
-using iSpindel.App.Data;
-using iSpindel.App.Models;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using iSpindel.Database;
-using Npgsql;
-using Microsoft.EntityFrameworkCore.Migrations;
-using iSpindel.App.Settings;
-using iSpindel.App.Extensions;
-using iSpindel.App.Hubs;
-using iSpindel.Server.gRPC;
-using Grpc.Net.Client;
 using Microsoft.Extensions.Options;
-using System;
-using iSpindel.App.Services;
+using Npgsql;
 
 namespace iSpindel.App
 {
@@ -84,8 +79,8 @@ namespace iSpindel.App
              });
 
             services.AddMqttClientHostedService();
-
             /*
+
             services.AddGrpcClient<RecordingService.RecordingServiceClient>(client =>
             {
                 client.Address = new Uri("https://localhost:5001");
@@ -159,15 +154,15 @@ namespace iSpindel.App
 
             app.UseSpa(spa =>
             {
-        // To learn more about options for serving an Angular SPA from ASP.NET Core,
-        // see https://go.microsoft.com/fwlink/?linkid=864501
+                // To learn more about options for serving an Angular SPA from ASP.NET Core,
+                // see https://go.microsoft.com/fwlink/?linkid=864501
 
-        spa.Options.SourcePath = "../iSpindel.ClientApp";
+                spa.Options.SourcePath = "../iSpindel.ClientApp";
 
                 if (env.IsDevelopment())
                 {
-            //spa.UseAngularCliServer(npmScript: "start");
-            spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
+                    //spa.UseAngularCliServer(npmScript: "start");
+                    spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
                 }
             });
         }

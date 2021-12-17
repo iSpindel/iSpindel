@@ -1,16 +1,15 @@
-﻿using System;
-using System.Linq;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Text;
-using System.Threading.Tasks;
+﻿using iSpindel.Shared;
+using iSpindel.Shared.Factories;
+using iSpindel.Shared.Options;
+using Microsoft.Extensions.Options;
 using MQTTnet.Client;
 using MQTTnet.Extensions.ManagedClient;
-using Microsoft.Extensions.Options;
-
-using iSpindel.Shared.Options;
-using iSpindel.Shared.Factories;
-using iSpindel.Shared;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace iSpindel.Database.Job
 {

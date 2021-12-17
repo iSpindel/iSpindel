@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace iSpindel.App.DTO
+﻿namespace iSpindel.App.DTO
 {
     public class CreateDataSeriesDTO
     {

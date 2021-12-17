@@ -1,16 +1,13 @@
-﻿using iSpindel.App.Models;
-using IdentityServer4.EntityFramework.Options;
+﻿using IdentityServer4.EntityFramework.Options;
+using iSpindel.App.Models;
 using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Migrations.Internal;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage;
+using Microsoft.Extensions.Options;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Migrations.Internal;
+using System;
 using System.Text;
 
 namespace iSpindel.App.Data
@@ -23,13 +20,15 @@ namespace iSpindel.App.Data
         {
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
             base.OnConfiguring(optionsBuilder);
         }
 
-        protected override void OnModelCreating(ModelBuilder builder) {
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
             base.OnModelCreating(builder);
-            
+
         }
     }
 
@@ -37,16 +36,19 @@ namespace iSpindel.App.Data
     public class ApplicationHistoryRepository : NpgsqlHistoryRepository
     {
         public ApplicationHistoryRepository(HistoryRepositoryDependencies dependencies)
-        : base(dependencies) {
+        : base(dependencies)
+        {
         }
 
-        protected override void ConfigureTable(EntityTypeBuilder<HistoryRow> history) {
+        protected override void ConfigureTable(EntityTypeBuilder<HistoryRow> history)
+        {
             base.ConfigureTable(history);
             history.Property<string>("ContextKey").HasMaxLength(50);
             history.Property<DateTime>("Applied");
         }
 
-        public override string GetInsertScript(HistoryRow row) {
+        public override string GetInsertScript(HistoryRow row)
+        {
             var stringTypeMapping = Dependencies.TypeMappingSource.GetMapping(typeof(string));
             var datetimeTypeMapping = Dependencies.TypeMappingSource.GetMapping(typeof(DateTime));
 

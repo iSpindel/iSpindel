@@ -1,9 +1,9 @@
+using iSpindel.App.DTO;
+using Microsoft.AspNetCore.SignalR;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using iSpindel.App.DTO;
-using Microsoft.AspNetCore.SignalR;
 
 namespace iSpindel.App.Hubs
 {

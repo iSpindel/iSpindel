@@ -1,12 +1,12 @@
-﻿using Microsoft.Extensions.Options;
+﻿using iSpindel.Shared.Options;
+using Microsoft.Extensions.Options;
+using MQTTnet;
 using MQTTnet.Client;
 using MQTTnet.Client.Options;
-using System;
-using System.Threading.Tasks;
-using MQTTnet;
 using MQTTnet.Extensions.ManagedClient;
-using iSpindel.Shared.Options;
+using System;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace iSpindel.Shared.Factories
 {

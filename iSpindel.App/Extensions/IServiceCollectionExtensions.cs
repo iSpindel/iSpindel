@@ -1,10 +1,10 @@
-using System;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using MQTTnet.Client.Options;
 using iSpindel.App.Options;
 using iSpindel.App.Services;
 using iSpindel.App.Settings;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using MQTTnet.Client.Options;
+using System;
 
 namespace iSpindel.App.Extensions
 {

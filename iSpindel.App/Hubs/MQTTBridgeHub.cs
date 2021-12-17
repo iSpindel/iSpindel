@@ -1,9 +1,9 @@
-using System;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.SignalR;
-using Microsoft.Extensions.Logging;
 using iSpindel.App.Clients;
 using iSpindel.App.Messages.MQTTBridge;
+using Microsoft.AspNetCore.SignalR;
+using Microsoft.Extensions.Logging;
+using System;
+using System.Threading.Tasks;
 
 namespace iSpindel.App.Hubs
 {

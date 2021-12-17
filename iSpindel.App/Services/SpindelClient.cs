@@ -1,15 +1,8 @@
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using MQTTnet.Client;
-using MQTTnet.Exceptions;
-using Grpc.Net.Client;
 using iSpindel.Server.gRPC;
 using iSpindel.Shared;
+using System;
+using System.Threading.Tasks;
 
 namespace iSpindel.App.Services
 {

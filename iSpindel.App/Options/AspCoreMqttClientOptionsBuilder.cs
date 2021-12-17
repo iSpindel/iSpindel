@@ -1,6 +1,6 @@
 
-using System;
 using MQTTnet.Client.Options;
+using System;
 
 namespace iSpindel.App.Options
 {

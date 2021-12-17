@@ -1,11 +1,11 @@
-using System;
-using System.Linq;
-using System.Text;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Migrations.Internal;
+using System;
+using System.Linq;
+using System.Text;
 
 namespace iSpindel.Database
 {
@@ -43,17 +43,18 @@ namespace iSpindel.Database
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<DataSeries>(e =>
             {
-                var currentTime = new DateTime(2020,05,01,23,50,00);
+                var currentTime = new DateTime(2020, 05, 01, 23, 50, 00);
 
-                e.HasData(new DataSeries() { Id = -1, Name = "Default Data Series", Description = "This is the default Data Series for iSpindel Projects.", Start = new DateTime(2020, 5, 1, 23, 0, 0, 0)});
-                e.HasData(new DataSeries() { Id = 1, Name = "Test Series 1", Description = "This is the first test dataset", Start = new DateTime(2020,05,01,23,00,00), End = new DateTime(2020,05,01,23,45,00), BeerCharacteristicsId = -1});
-                e.HasData(new DataSeries() { Id = 2, Name = "Test Series 2", Description = "This is the second test dataset", Start = currentTime, End = currentTime.AddMinutes( 20 * 20.0)  });
+                e.HasData(new DataSeries() { Id = -1, Name = "Default Data Series", Description = "This is the default Data Series for iSpindel Projects.", Start = new DateTime(2020, 5, 1, 23, 0, 0, 0) });
+                e.HasData(new DataSeries() { Id = 1, Name = "Test Series 1", Description = "This is the first test dataset", Start = new DateTime(2020, 05, 01, 23, 00, 00), End = new DateTime(2020, 05, 01, 23, 45, 00), BeerCharacteristicsId = -1 });
+                e.HasData(new DataSeries() { Id = 2, Name = "Test Series 2", Description = "This is the second test dataset", Start = currentTime, End = currentTime.AddMinutes(20 * 20.0) });
                 e.HasData(new DataSeries() { Id = 3, Name = "Test Series 3", Description = "This is the third test dataset", Start = currentTime });
             });
 
-            modelBuilder.Entity<BeerCharacteristics>(e => 
+            modelBuilder.Entity<BeerCharacteristics>(e =>
             {
-                e.HasData(new BeerCharacteristics() {
+                e.HasData(new BeerCharacteristics()
+                {
                     Id = -1,
                     DataSeriesId = 1,
                     BeerStyle = "Lambic",
@@ -85,14 +86,14 @@ namespace iSpindel.Database
                     new DataPoint(){Id = dataPointIndex++, DataSeriesId = 1, Temperature = 21, Battery =  85, Gravity = 25, RecordTime = new DateTime(2020,05,01,23,40,00)},
                     new DataPoint(){Id = dataPointIndex++, DataSeriesId = 1, Temperature = 24, Battery =  80, Gravity = 25, RecordTime = new DateTime(2020,05,01,23,45,00)},
                 });
-                e.HasData(Enumerable.Range(0,  20).Select(i => generator(ref dataPointIndex, i,  20, 2)));
+                e.HasData(Enumerable.Range(0, 20).Select(i => generator(ref dataPointIndex, i, 20, 2)));
                 e.HasData(Enumerable.Range(0, 800).Select(i => generator(ref dataPointIndex, i, 800, 3)));
             });
         }
 
         private DataPoint generator(ref int dataPointIndex, int index, int max, int seriesId)
         {
-            var currentTime = new DateTime(2020,05,01,23,50,00);
+            var currentTime = new DateTime(2020, 05, 01, 23, 50, 00);
             var tRatio = (double)index / (double)max;
             return new DataPoint()
             {

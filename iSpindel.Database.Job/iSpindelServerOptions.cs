@@ -1,7 +1,6 @@
+using MQTTnet.Extensions.ManagedClient;
 using System;
 using System.Threading.Tasks;
-using MQTTnet.Client;
-using MQTTnet.Extensions.ManagedClient;
 
 namespace iSpindel.Database.Job
 {

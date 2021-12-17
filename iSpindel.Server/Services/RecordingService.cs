@@ -22,18 +22,18 @@ public class RecordingService : gRPC.RecordingService.RecordingServiceBase
 
     public override async Task<StatusReply> GetRecordingStatus(StatusRequest request, ServerCallContext context)
     {
-        return new StatusReply() { ServerStatusCode = (ServerStatusCode) await _spindelService.GetStatusAsync() };
+        return new StatusReply() { ServerStatusCode = (ServerStatusCode)await _spindelService.GetStatusAsync() };
     }
 
     public override Task<StartReply> StartRecording(StartRequest request, ServerCallContext context)
     {
-        _spindelService.StartAsync(request.Id);    
+        _spindelService.StartAsync(request.Id);
         return Task.FromResult(new StartReply() { Rc = true });
     }
 
     public override Task<StopReply> StopRecording(StopRequest request, ServerCallContext context)
     {
-        _spindelService.StopAsync();    
+        _spindelService.StopAsync();
         return Task.FromResult(new StopReply() { Rc = true });
     }
 }
