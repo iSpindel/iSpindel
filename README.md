@@ -150,7 +150,7 @@ dotnet ef migrations add <name> -c ApplicationDbContext -o Data/Migrations
 
     ```bash
     scp appsettings.json pi@<ZIELPI>:/home/pi
-    cd bin/Release/netcoreapp3.1/linux-arm/publish
+    cd bin/Release/net6.0/linux-arm/publish
     scp iSpindel.Database.Job.Runner pi@<ZIELPI>:/home/pi/iSpindel
     ```
 
@@ -189,10 +189,10 @@ The build for the WebApp also triggers a yarn run build:prod
 
 1. cd iSpindel.App
 2. dotnet publish -r linux-arm64 -c Release --no-self-contained -p:PublishSingleFile=True
-3. scp -r bin\Release\netcoreapp3.1\linux-arm64\publish\* pi@raspi:~/iSpindel/WebApp
+3. scp -r bin\Release\net6.0\linux-arm64\publish\* pi@raspi:~/iSpindel/WebApp
 
 ### iSpindel.Database.Job.Runner
 1. cd iSpindel.Database.Job.Runner
 2. dotnet publish -r linux-arm64 -c Release --no-self-contained -p:PublishSingleFile=True
-3. scp -r bin\Release\netcoreapp3.1\linux-arm64\publish\iSpindel.Database.Job.Runner pi@raspi:~/iSpindel/DatabaseRunner
+3. scp -r bin\Release\net6.0\linux-arm64\publish\iSpindel.Database.Job.Runner pi@raspi:~/iSpindel/DatabaseRunner
 3. scp -r appsettings.json pi@raspi:~/iSpindel/DatabaseRunner

@@ -1,6 +1,7 @@
 
 using iSpindel.Server.gRPC;
 using iSpindel.Shared;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
 
@@ -8,10 +9,12 @@ namespace iSpindel.App.Services
 {
     public class SpindelClient : ISpindelClient
     {
+        private readonly ILogger<SpindelClient> _logger;
         private readonly RecordingService.RecordingServiceClient _grpcClient;
 
-        public SpindelClient(RecordingService.RecordingServiceClient grpcClient)
+        public SpindelClient(ILogger<SpindelClient> logger, RecordingService.RecordingServiceClient grpcClient)
         {
+            _logger = logger;
             _grpcClient = grpcClient;
         }
 
@@ -35,7 +38,10 @@ namespace iSpindel.App.Services
                 return TranslateStatusCode(rc.ServerStatusCode);
 
             }
-            catch (Exception) { }
+            catch (Exception e)
+            {
+                _logger.LogError("Error when sending Status request" + e.Message);
+            }
             return StatusCode.UNKNOWN;
         }
 

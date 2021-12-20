@@ -3,8 +3,8 @@
     public class GrpcOptions
     {
         public const string Position = "Grpc";
-        public string Hostname { get; internal set; }
-        public int Port { get; internal set; }
-        public string Protocol { get; internal set; }
+        public string Host { get; set; }
+        public int Port { get; set; }
+        public string Protocol { get; set; }
     }
 }

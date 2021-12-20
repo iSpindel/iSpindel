@@ -33,6 +33,7 @@ namespace iSpindel.App
         private void MapConfiguration()
         {
             MapMQTTSettings();
+            MapGrpcSettings();
         }
 
         private void MapMQTTSettings()
@@ -40,6 +41,13 @@ namespace iSpindel.App
             MqttConnectionSettings mqttConnectionSettings = new MqttConnectionSettings();
             Configuration.GetSection("Mqtt").Bind(mqttConnectionSettings);
             AppSettingsProvider.MQTTSettings = mqttConnectionSettings;
+        }
+
+        private void MapGrpcSettings()
+        {
+            GrpcOptions grpcOptions = new GrpcOptions();
+            Configuration.GetSection("Grpc").Bind(grpcOptions);
+            AppSettingsProvider.GrpcSettings = grpcOptions;
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -88,9 +96,9 @@ namespace iSpindel.App
             */
             services.AddSingleton(serviceProvider =>
             {
-                var _grpcOptions = serviceProvider.GetRequiredService<IOptions<GrpcOptions>>();
+                var _grpcOptions = AppSettingsProvider.GrpcSettings;
                 return new RecordingService.RecordingServiceClient(
-                    GrpcChannel.ForAddress($"{_grpcOptions.Value.Protocol}://{_grpcOptions.Value.Hostname}:{_grpcOptions.Value.Port}")
+                    GrpcChannel.ForAddress($"{_grpcOptions.Protocol}://{_grpcOptions.Host}:{_grpcOptions.Port}")
                         );
 
             });
@@ -100,8 +108,8 @@ namespace iSpindel.App
             services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
                     .AddEntityFrameworkStores<ApplicationDbContext>();
 
-            services.AddIdentityServer()
-                .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
+            IIdentityServerBuilder identityServerBuilder = services.AddIdentityServer()
+                                                                   .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
 
             services.AddAuthentication()
                 .AddIdentityServerJwt();
@@ -138,9 +146,9 @@ namespace iSpindel.App
 
             app.UseRouting();
 
-            app.UseAuthentication();
-            app.UseIdentityServer();
-            app.UseAuthorization();
+            //app.UseAuthentication();
+            //app.UseIdentityServer();
+            //app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapHub<NotifyHub>("/notify");

@@ -2,6 +2,6 @@
 {
     public class GrpcServerOptions
     {
-        public const string GrpcServerPosition = "GrpcServer";
+        public const string GrpcServerPosition = "Grpc";
     }
 }

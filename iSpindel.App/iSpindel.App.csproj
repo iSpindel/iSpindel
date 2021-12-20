@@ -13,6 +13,8 @@
     <UserSecretsId>335aea1f-96d3-4da3-92bd-995a5bb55191</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="Duende.IdentityServer" Version="5.2.3" />
+    <PackageReference Include="Duende.IdentityServer.EntityFramework" Version="5.2.3" />
     <PackageReference Include="Google.Protobuf" Version="3.19.1" />
     <PackageReference Include="Grpc.Net.Client" Version="2.41.0" />
     <PackageReference Include="Grpc.Net.ClientFactory" Version="2.41.0" />

@@ -33,7 +33,7 @@ namespace iSpindel.App.Controllers
         {
 
             var rc = await _spindelClient.GetStatusAsync();
-            await this._notifyHub.Clients.All.RecordingStatusUpdate(rc.ToString());
+            //await this._notifyHub.Clients.All.RecordingStatusUpdate(rc.ToString());
 
             return rc.ToString();
         }
