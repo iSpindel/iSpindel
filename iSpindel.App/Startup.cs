@@ -98,7 +98,7 @@ namespace iSpindel.App
             {
                 var _grpcOptions = AppSettingsProvider.GrpcSettings;
                 return new RecordingService.RecordingServiceClient(
-                    GrpcChannel.ForAddress($"{_grpcOptions.Protocol}://{_grpcOptions.Host}:{_grpcOptions.Port}")
+                    GrpcChannel.ForAddress($"{_grpcOptions.Protocol}://{_grpcOptions.Host}:{_grpcOptions.Port}", new GrpcChannelOptions(){ Credentials = Grpc.Core.ChannelCredentials.Insecure })
                         );
 
             });

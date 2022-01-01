@@ -44,7 +44,10 @@ namespace iSpindel.App.Controllers
         {
 
             var rc = await _spindelClient.GetRecordingIdAsync();
-            await this._notifyHub.Clients.All.RecordingChanged(rc.Value);
+            if (rc.HasValue)
+            {
+                await this._notifyHub.Clients.All.RecordingChanged(rc.Value);
+            }
 
             return rc;
         }

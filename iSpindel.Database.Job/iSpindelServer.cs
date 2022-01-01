@@ -1,6 +1,7 @@
 ﻿using iSpindel.Shared;
 using iSpindel.Shared.Factories;
 using iSpindel.Shared.Options;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using MQTTnet.Client;
 using MQTTnet.Extensions.ManagedClient;
@@ -16,7 +17,7 @@ namespace iSpindel.Database.Job
     public class iSpindelServer : ISpindelService
     {
         private IManagedMqttClient _mqttClient = null;
-        private IDbContextFactory _dbContextFactory = null;
+        private IDbContextFactory<iSpindelContext> _dbContextFactory = null;
         private Shared.Factories.IMqttClientFactory _mqttClientFactory = null;
         public int? CurrentId { get; set; }
         private RawDataPoint _dataBuffer = null;
@@ -25,7 +26,7 @@ namespace iSpindel.Database.Job
         private readonly string _gravityTopic;
         private readonly List<string> _sensorTopics = new List<string>();
 
-        public iSpindelServer(IOptions<SpindelServerOptions> options, Shared.Factories.IMqttClientFactory mqttClientFactory, IDbContextFactory dbContextFactory)
+        public iSpindelServer(IOptions<SpindelServerOptions> options, Shared.Factories.IMqttClientFactory mqttClientFactory, IDbContextFactory<iSpindelContext> dbContextFactory)
         {
             this._batteryTopic = options.Value.TopicBasePath + options.Value.TopicBattery;
             this._temperatureTopic = options.Value.TopicBasePath + options.Value.TopicTemperature;
@@ -35,7 +36,7 @@ namespace iSpindel.Database.Job
             this._sensorTopics.Add(_temperatureTopic);
             this._sensorTopics.Add(_gravityTopic);
 
-            using var dbContext = dbContextFactory.CreateContext();
+            using var dbContext = dbContextFactory.CreateDbContext();
             if (!dbContext.Database.CanConnect())
             {
                 throw new ArgumentException("Could not validate database connection");
@@ -76,19 +77,19 @@ namespace iSpindel.Database.Job
             if (topic.Equals(_batteryTopic) && Double.TryParse(payload, NumberStyles.Any, CultureInfo.InvariantCulture, out var batValue))
             {
                 _dataBuffer.Battery = batValue;
-                _dataBuffer.LastRecordTime = DateTime.Now;
+                _dataBuffer.LastRecordTime = DateTime.UtcNow;
                 Console.WriteLine($"Got battery {batValue} on {_dataBuffer.LastRecordTime}");
             }
             else if (topic.Equals(_temperatureTopic) && Double.TryParse(payload, NumberStyles.Any, CultureInfo.InvariantCulture, out var tempValue))
             {
                 _dataBuffer.Temperature = tempValue;
-                _dataBuffer.LastRecordTime = DateTime.Now;
+                _dataBuffer.LastRecordTime = DateTime.UtcNow;
                 Console.WriteLine($"Got temp {tempValue} on {_dataBuffer.LastRecordTime}");
             }
             else if (topic.Equals(_gravityTopic) && Double.TryParse(payload, NumberStyles.Any, CultureInfo.InvariantCulture, out var gravValue))
             {
                 _dataBuffer.Gravity = gravValue;
-                _dataBuffer.LastRecordTime = DateTime.Now;
+                _dataBuffer.LastRecordTime = DateTime.UtcNow;
                 Console.WriteLine($"Got grav {gravValue} on {_dataBuffer.LastRecordTime}");
             }
             //TODO check timeframe from lastrecordtime here
@@ -105,7 +106,7 @@ namespace iSpindel.Database.Job
         {
             try
             {
-                using var dbContext = _dbContextFactory.CreateContext();
+                using var dbContext = _dbContextFactory.CreateDbContext();
 
                 var dataPoint = new DataPoint()
                 {
@@ -143,7 +144,7 @@ namespace iSpindel.Database.Job
             // TODO - check if id already exists in Database
             CurrentId = id;
 
-            using var dbContext = _dbContextFactory.CreateContext();
+            using var dbContext = _dbContextFactory.CreateDbContext();
             var currentSeries = dbContext.DataSeries.Single(x => x.Id == id);
             currentSeries.Start = DateTime.Now;
 
@@ -153,12 +154,12 @@ namespace iSpindel.Database.Job
 
         public Task<StatusCode> GetStatusAsync()
         {
-            return Task.Run(() => CurrentId.HasValue ? StatusCode.RECORDING : StatusCode.IDLE);
+            return Task.FromResult(CurrentId.HasValue ? StatusCode.RECORDING : StatusCode.IDLE);
         }
 
         public Task<int?> GetRecordingIdAsync()
         {
-            return Task.Run(() => CurrentId);
+            return Task.FromResult(CurrentId);
         }
 
         public async Task<bool> StopAsync()
@@ -167,7 +168,7 @@ namespace iSpindel.Database.Job
             await UnsubscribeFromSensorTopics();
             //await mqttClient.StopAsync();
 
-            using var dbContext = _dbContextFactory.CreateContext();
+            using var dbContext = _dbContextFactory.CreateDbContext();
             var currentSeries = dbContext.DataSeries.Single(x => x.Id == CurrentId);
             currentSeries.End = DateTime.Now;
 
