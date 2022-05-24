@@ -46,6 +46,7 @@
   </ItemGroup>
   <PropertyGroup>
     <CodeAnalysisRuleSet>app.ruleset</CodeAnalysisRuleSet>
+    <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
   </PropertyGroup>
 
 	<ItemGroup>

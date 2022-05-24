@@ -10,6 +10,7 @@
     <RootNamespace>iSpindel.Database.Job</RootNamespace>
     <LangVersion>8</LangVersion>
     <Deterministic>true</Deterministic>
+    <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
   </PropertyGroup>
 
 </Project>
