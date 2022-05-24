@@ -1,0 +1,6 @@
+@startuml
+:iSpindel Hardware;
+-> PUB <SensorData>;
+:MQTT Broker;
+
+@enduml

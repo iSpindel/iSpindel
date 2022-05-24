@@ -1,0 +1,9 @@
+@startuml
+SpindelClient -> MQTTBroker: Status
+MQTTBroker -> ControlBridge: Status
+ControlBridge -> SpindelServer : GetStatusAsync()
+
+ControlBridge <-- SpindelServer : IDLE/RECORDING
+MQTTBroker <-- ControlBridge : IDLE/RECORDING
+SpindelClient <-- MQTTBroker : IDLE/RECORDING
+@enduml

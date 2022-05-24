@@ -1,0 +1,9 @@
+@startuml
+SpindelClient -> MQTTBroker: Start|1
+MQTTBroker -> ControlBridge: Start|1
+ControlBridge -> SpindelServer : StartAsync(1)
+
+ControlBridge <-- SpindelServer : Success/Failure
+MQTTBroker <-- ControlBridge : Success/Failure
+SpindelClient <-- MQTTBroker : Success/Failure
+@enduml
