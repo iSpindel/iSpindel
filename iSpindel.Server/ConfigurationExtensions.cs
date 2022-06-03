@@ -11,7 +11,7 @@ namespace iSpindel.Server
 
             if (string.IsNullOrEmpty(configKey))
             {
-                throw new ArgumentException($"\"{nameof(configKey)}\" kann nicht NULL oder leer sein.", nameof(configKey));
+                throw new ArgumentException($"\"{nameof(configKey)}\" cannot be null or empty.", nameof(configKey));
             }
 
             var configEntry = configurationRoot.GetValue<T>(configKey);

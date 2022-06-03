@@ -18,7 +18,7 @@ namespace iSpindel.App.Services
             _grpcClient = grpcClient;
         }
 
-        private StatusCode TranslateStatusCode(iSpindel.Server.gRPC.ServerStatusCode grpcStatus)
+        private static StatusCode TranslateStatusCode(ServerStatusCode grpcStatus)
         {
             if (grpcStatus == ServerStatusCode.Idle)
                 return StatusCode.IDLE;
@@ -40,7 +40,7 @@ namespace iSpindel.App.Services
             }
             catch (Exception e)
             {
-                _logger.LogError("Error when sending Status request" + e.Message);
+                _logger.LogError("Error when sending Status request: {msg}", e.Message);
             }
             return StatusCode.UNKNOWN;
         }

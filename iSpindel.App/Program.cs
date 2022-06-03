@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 
 namespace iSpindel.App
@@ -7,14 +8,25 @@ namespace iSpindel.App
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            var builder = CreateHostBuilder(args);
+            builder.Build().Run();
+        }
+
+        public static IConfiguration CreateConfiguration()
+        {
+            return new ConfigurationBuilder()
+             .SetBasePath("/etc/ispindel/webapp")
+             .AddJsonFile("appsettings.json", optional: false)
+             .AddJsonFile($"appsettings.Production.json", optional: false)
+             .Build();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseStartup<Startup>();
+                    webBuilder.UseConfiguration(CreateConfiguration())
+                              .UseStartup<Startup>();
                 });
     }
 }

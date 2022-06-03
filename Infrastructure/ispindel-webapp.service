@@ -1,0 +1,20 @@
+[Unit]
+Description=iSpindel WebApp
+Requires=network-online.target
+After=network-online.target ispindel-jobrunner.service ispindel-db.service ispindel-mqtt.service
+Requires=ispindel-jobrunner.service ispindel-db.service ispindel-mqtt.service
+
+[Service]
+ExecStart=/home/pi/iSpindelV3Grpc/WebApp/iSpindel.App
+ExecStop=/bin/kill -TERM $MAINPID
+Environment="ASPNETCORE_URLS=http://192.168.1.120:5000;https://192.168.1.120:5001"
+User=pi
+Group=pi
+#PIDFile=/var/run/ha-service.pid
+Type=exec
+
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

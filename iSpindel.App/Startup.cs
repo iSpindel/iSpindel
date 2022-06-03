@@ -1,3 +1,5 @@
+using System.Diagnostics;
+using System.IO;
 using Grpc.Net.Client;
 using iSpindel.App.Data;
 using iSpindel.App.Extensions;
@@ -38,14 +40,14 @@ namespace iSpindel.App
 
         private void MapMQTTSettings()
         {
-            MqttConnectionSettings mqttConnectionSettings = new MqttConnectionSettings();
+            var mqttConnectionSettings = new MqttConnectionSettings();
             Configuration.GetSection("Mqtt").Bind(mqttConnectionSettings);
             AppSettingsProvider.MQTTSettings = mqttConnectionSettings;
         }
 
         private void MapGrpcSettings()
         {
-            GrpcOptions grpcOptions = new GrpcOptions();
+            var grpcOptions = new GrpcOptions();
             Configuration.GetSection("Grpc").Bind(grpcOptions);
             AppSettingsProvider.GrpcSettings = grpcOptions;
         }
@@ -87,18 +89,11 @@ namespace iSpindel.App
              });
 
             services.AddMqttClientHostedService();
-            /*
-
-            services.AddGrpcClient<RecordingService.RecordingServiceClient>(client =>
-            {
-                client.Address = new Uri("https://localhost:5001");
-            });
-            */
             services.AddSingleton(serviceProvider =>
             {
                 var _grpcOptions = AppSettingsProvider.GrpcSettings;
                 return new RecordingService.RecordingServiceClient(
-                    GrpcChannel.ForAddress($"{_grpcOptions.Protocol}://{_grpcOptions.Host}:{_grpcOptions.Port}", new GrpcChannelOptions(){ Credentials = Grpc.Core.ChannelCredentials.Insecure })
+                    GrpcChannel.ForAddress($"{_grpcOptions.Protocol}://{_grpcOptions.Host}:{_grpcOptions.Port}", new GrpcChannelOptions() { Credentials = Grpc.Core.ChannelCredentials.Insecure })
                         );
 
             });
@@ -118,17 +113,22 @@ namespace iSpindel.App
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
-                configuration.RootPath = "./dist";
+                var pathToExe = Process.GetCurrentProcess().MainModule.FileName;
+                var pathToContentRoot = Path.GetDirectoryName(pathToExe);
+                configuration.RootPath = Path.Combine(pathToContentRoot, "dist");
             });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            var pathToExe = Process.GetCurrentProcess().MainModule.FileName;
+            var pathToContentRoot = Path.GetDirectoryName(pathToExe);
+            env.ContentRootPath = pathToContentRoot;
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseDatabaseErrorPage();
             }
             else
             {

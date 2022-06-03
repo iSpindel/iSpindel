@@ -1,0 +1,15 @@
+[Unit]
+Description=Mosquitto Container for capture of iSpindel data
+After=docker.service
+
+[Service]
+TimeoutStartSec=0
+Restart=on-failure
+User=pi
+Group=pi
+RestartSec=5
+ExecStart=/usr/bin/docker start -a mqtt
+ExecStop=/usr/bin/docker stop mqtt
+
+[Install]
+WantedBy=multi-user.target

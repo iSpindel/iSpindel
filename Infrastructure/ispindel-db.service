@@ -1,0 +1,15 @@
+[Unit]
+Description=Postgres Container with iSpindel db
+After=docker.service
+
+[Service]
+TimeoutStartSec=0
+Restart=on-failure
+RestartSec=5
+ExecStart=/usr/bin/docker start -a postgres
+ExecStop=/usr/bin/docker stop postgres
+User=pi
+Group=pi
+
+[Install]
+WantedBy=multi-user.target

@@ -6,12 +6,10 @@ namespace iSpindel.Server.Services;
 
 public class RecordingService : gRPC.RecordingService.RecordingServiceBase
 {
-    private readonly ILogger<RecordingService> _logger;
     private readonly ISpindelService _spindelService;
 
-    public RecordingService(ILogger<RecordingService> logger, ISpindelService spindelService)
+    public RecordingService(ISpindelService spindelService)
     {
-        _logger = logger;
         this._spindelService = spindelService;
     }
 
