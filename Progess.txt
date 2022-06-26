@@ -1,0 +1,10 @@
+- BrewBatch Aggregate definiert
+- DataSeries, DataPoint übernommen
+- BeerCharacteristics in Einzelschritte aufgeteilt
+
+Next Steps:
+- Persistenz wiederherstellen
+    - DbContext anlegen
+- Entities mit iSpindel.Server teilen
+- iSpindel.Server rüberretten
+- Userinterface umbenennen in iSpindel.UserInterface
