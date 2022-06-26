@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
+using System.IO;
 
 namespace iSpindel.App
 {
@@ -15,9 +16,10 @@ namespace iSpindel.App
         public static IConfiguration CreateConfiguration()
         {
             return new ConfigurationBuilder()
-             .SetBasePath("/etc/ispindel/webapp")
+             .SetBasePath(Directory.GetCurrentDirectory())
              .AddJsonFile("appsettings.json", optional: false)
-             .AddJsonFile($"appsettings.Production.json", optional: false)
+             .AddJsonFile($"appsettings.Development.json", optional: true)
+             .AddJsonFile($"appsettings.Production.json", optional: true)
              .Build();
         }
 
