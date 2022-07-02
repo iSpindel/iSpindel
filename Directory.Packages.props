@@ -15,19 +15,27 @@
     <PackageVersion Include="Autofac" Version="6.3.0" />
     <PackageVersion Include="Autofac.Extensions.DependencyInjection" Version="7.2.0" />
     <PackageVersion Include="coverlet.collector" Version="3.1.2" />
+    <PackageVersion Include="Grpc.AspNetCore" Version="2.41.0" />
+    <PackageVersion Include="Grpc.AspNetCore.Server.Reflection" Version="2.41.0" />
+    <PackageVersion Include="Grpc.Reflection" Version="2.42.0" />
     <PackageVersion Include="MediatR" Version="10.0.1" />
     <PackageVersion Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.5" />
     <PackageVersion Include="Microsoft.AspNetCore.Mvc.Testing" Version="6.0.5" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.InMemory" Version="6.0.5" />
-    <PackageVersion Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.5" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.5" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.5" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.5" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Relational" Version="6.0.5" />
+    <PackageVersion Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.5" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.2.0" />
-    <PackageVersion Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.5" />
     <PackageVersion Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.16.1" />
+    <PackageVersion Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.5" />
     <PackageVersion Include="Moq" Version="4.18.1" />
+    <PackageVersion Include="MQTTnet" Version="3.1.1" />
+    <PackageVersion Include="MQTTnet.Extensions.ManagedClient" Version="3.1.1" />
     <PackageVersion Include="NETStandard.Library" Version="2.0.3" />
     <PackageVersion Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageVersion Include="Npgsql" Version="6.0.5" />
     <PackageVersion Include="ReportGenerator" Version="5.1.9" />
     <PackageVersion Include="Serilog.AspNetCore" Version="5.0.0" />
     <PackageVersion Include="Serilog.Sinks.ApplicationInsights" Version="3.1.0" />
