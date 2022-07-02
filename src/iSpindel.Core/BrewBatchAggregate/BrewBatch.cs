@@ -14,8 +14,9 @@ public class BrewBatch : EntityBase<BrewBatchId>, IAggregateRoot
   public string Name { get; set; }
   public string? Description { get; set; }
   public string? Notes { get; set; }
-  public Gaerungsschritt? Gaerungsschritt { get; set; }
-  public Abfuellschritt? AbfuellSchritt { get; set; }
-  public ReifeSchritt? ReifeSchritt { get; set; }
+  public RezeptSchritt RezeptSchritt { get; set; }
+  public NachBrauenSchritt? NachBrauenSchritt { get; set; }
+  public NachGaerungSchritt? NachGaerungSchritt { get; set; }
+  public NachAbfuellungSchritt? NachAbfuellSchritt { get; set; }
   public DataSeries? DataSeries { get; set; }
 }

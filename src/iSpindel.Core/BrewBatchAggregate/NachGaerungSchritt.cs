@@ -1,6 +1,7 @@
-﻿namespace iSpindel.Core.BrewBatchAggregate;
+﻿using iSpindel.SharedKernel;
+namespace iSpindel.Core.BrewBatchAggregate;
 
-public class Gaerungsschritt
+public class NachGaerungSchritt : ValueObject
 {
 
   public string? BeerStyle { get; set; }

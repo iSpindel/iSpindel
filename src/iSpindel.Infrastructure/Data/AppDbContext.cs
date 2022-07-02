@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using iSpindel.Core.BrewBatchAggregate;
 using iSpindel.Core.ProjectAggregate;
 using iSpindel.SharedKernel;
 using iSpindel.SharedKernel.Interfaces;
@@ -19,6 +20,11 @@ public class AppDbContext : DbContext
 
   public DbSet<ToDoItem> ToDoItems => Set<ToDoItem>();
   public DbSet<Project> Projects => Set<Project>();
+
+  public DbSet<DataSeries> DataSeries => Set<DataSeries>();
+  public DbSet<DataPoint> DataPoints => Set<DataPoint>();
+  public DbSet<BrewBatch> BrewBatches => Set<BrewBatch>();
+  public DbSet<SpindelDevice> SpindelDevices => Set<SpindelDevice>();
 
   protected override void OnModelCreating(ModelBuilder modelBuilder)
   {

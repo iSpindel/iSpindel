@@ -1,8 +1,9 @@
 ﻿using iSpindel.SharedKernel;
+using iSpindel.SharedKernel.Interfaces;
 
 namespace iSpindel.Core.BrewBatchAggregate;
 
-public class SpindelDevice : EntityBase<Guid>
+public class SpindelDevice : EntityBase<Guid>, IAggregateRoot
 {
   public SpindelDevice(Guid id) : base(id)
   {
