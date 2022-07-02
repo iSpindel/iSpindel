@@ -4,12 +4,12 @@ using System.Text.Json.Serialization;
 namespace iSpindel.SharedKernel;
 
 // This can be modified to EntityBase<TId> to support multiple key types (e.g. Guid)
-public abstract class EntityBase<TId>
+public abstract class EntityBase
 {
   [JsonPropertyName("id")]
-  public TId Id { get; set; }
+  public Guid Id { get; set; }
 
-  protected EntityBase(TId id)
+  protected EntityBase(Guid id)
   {
     Id = id;
   }

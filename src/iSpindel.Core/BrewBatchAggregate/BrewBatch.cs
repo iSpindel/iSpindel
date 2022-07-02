@@ -3,9 +3,9 @@ using iSpindel.SharedKernel.Interfaces;
 
 namespace iSpindel.Core.BrewBatchAggregate;
 
-public class BrewBatch : EntityBase<BrewBatchId>, IAggregateRoot
+public class BrewBatch : EntityBase, IAggregateRoot
 {
-  public BrewBatch(BrewBatchId brewBatchId, string name, string? description) : base(brewBatchId)
+  public BrewBatch(Guid brewBatchId, string name, string? description) : base(brewBatchId)
   {
     Name = name;
     Description = description;
@@ -14,7 +14,7 @@ public class BrewBatch : EntityBase<BrewBatchId>, IAggregateRoot
   public string Name { get; set; }
   public string? Description { get; set; }
   public string? Notes { get; set; }
-  public RezeptSchritt RezeptSchritt { get; set; }
+  public RezeptSchritt? RezeptSchritt { get; set; }
   public NachBrauenSchritt? NachBrauenSchritt { get; set; }
   public NachGaerungSchritt? NachGaerungSchritt { get; set; }
   public NachAbfuellungSchritt? NachAbfuellSchritt { get; set; }
