@@ -4,17 +4,18 @@ using System.Text.Json.Serialization;
 namespace iSpindel.SharedKernel;
 
 // This can be modified to EntityBase<TId> to support multiple key types (e.g. Guid)
-public abstract class EntityBase
+public abstract class EntityBase<TId>
 {
   [JsonPropertyName("id")]
-  public Guid Id { get; set; }
+  public TId Id { get; set; }
 
-  protected EntityBase(Guid id)
+  private List<DomainEventBase> _domainEvents = new();
+
+  protected EntityBase(TId id)
   {
     Id = id;
   }
 
-  private List<DomainEventBase> _domainEvents = new();
   [NotMapped]
   public IEnumerable<DomainEventBase> DomainEvents => _domainEvents.AsReadOnly();
 

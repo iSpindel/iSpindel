@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using Autofac;
-using iSpindel.Core.Interfaces;
-using iSpindel.Core.ProjectAggregate;
+using iSpindel.Core.BrewBatchAggregate;
+//using iSpindel.Core.Interfaces;
 using iSpindel.Infrastructure.Data;
 using iSpindel.SharedKernel;
 using iSpindel.SharedKernel.Interfaces;
@@ -19,7 +19,7 @@ public class DefaultInfrastructureModule : Module
   public DefaultInfrastructureModule(bool isDevelopment, Assembly? callingAssembly = null)
   {
     _isDevelopment = isDevelopment;
-    var coreAssembly = Assembly.GetAssembly(typeof(Project)); // TODO: Replace "Project" with any type from your Core project
+    var coreAssembly = Assembly.GetAssembly(typeof(BrewBatch)); // TODO: Replace "Project" with any type from your Core project
     var infrastructureAssembly = Assembly.GetAssembly(typeof(StartupSetup));
     if (coreAssembly != null)
     {
@@ -87,8 +87,7 @@ public class DefaultInfrastructureModule : Module
       .AsImplementedInterfaces();
     }
 
-    builder.RegisterType<EmailSender>().As<IEmailSender>()
-        .InstancePerLifetimeScope();
+    //builder.RegisterType<EmailSender>().As<IEmailSender>().InstancePerLifetimeScope();
   }
 
   private void RegisterDevelopmentOnlyDependencies(ContainerBuilder builder)

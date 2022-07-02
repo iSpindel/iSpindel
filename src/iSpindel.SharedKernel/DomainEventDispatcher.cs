@@ -12,7 +12,7 @@ public class DomainEventDispatcher : IDomainEventDispatcher
     _mediator = mediator;
   }
 
-  public async Task DispatchAndClearEvents(IEnumerable<EntityBase> entitiesWithEvents)
+  public async Task DispatchAndClearEvents(IEnumerable<EntityBase<Guid>> entitiesWithEvents)
   {
     foreach (var entity in entitiesWithEvents)
     {

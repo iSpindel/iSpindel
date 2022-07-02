@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 using iSpindel.Core.BrewBatchAggregate;
-using iSpindel.Core.ProjectAggregate;
+//using iSpindel.Core.ProjectAggregate;
 using iSpindel.SharedKernel;
 using iSpindel.SharedKernel.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -18,8 +18,8 @@ public class AppDbContext : DbContext
     _dispatcher = dispatcher;
   }
 
-  public DbSet<ToDoItem> ToDoItems => Set<ToDoItem>();
-  public DbSet<Project> Projects => Set<Project>();
+  //public DbSet<ToDoItem> ToDoItems => Set<ToDoItem>();
+  //public DbSet<Project> Projects => Set<Project>();
 
   public DbSet<DataSeries> DataSeries => Set<DataSeries>();
   public DbSet<DataPoint> DataPoints => Set<DataPoint>();
@@ -41,8 +41,8 @@ public class AppDbContext : DbContext
 
     // dispatch events only if save was successful
     var entitiesWithEvents = ChangeTracker
-        .Entries<EntityBase>()
-        .Select(e => e.Entity)
+        .Entries()
+        .Select(e => e.Entity as EntityBase<Guid>)
         .Where(e => e?.DomainEvents?.Any() ?? false)
         .ToArray();
 

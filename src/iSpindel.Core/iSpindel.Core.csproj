@@ -8,6 +8,38 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Interfaces\IEmailSender.cs" />
+    <Compile Remove="Interfaces\IToDoItemSearchService.cs" />
+    <Compile Remove="ProjectAggregate\Events\NewItemAddedEvent.cs" />
+    <Compile Remove="ProjectAggregate\Events\ToDoItemCompletedEvent.cs" />
+    <Compile Remove="ProjectAggregate\Handlers\ItemCompletedEmailNotificationHandler.cs" />
+    <Compile Remove="ProjectAggregate\PriorityStatus.cs" />
+    <Compile Remove="ProjectAggregate\Project.cs" />
+    <Compile Remove="ProjectAggregate\ProjectStatus.cs" />
+    <Compile Remove="ProjectAggregate\Specifications\IncompleteItemsSearchSpec.cs" />
+    <Compile Remove="ProjectAggregate\Specifications\IncompleteItemsSpec.cs" />
+    <Compile Remove="ProjectAggregate\Specifications\ProjectByIdWithItemsSpec.cs" />
+    <Compile Remove="ProjectAggregate\ToDoItem.cs" />
+    <Compile Remove="Services\ToDoItemSearchService.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Interfaces\IEmailSender.cs" />
+    <None Include="Interfaces\IToDoItemSearchService.cs" />
+    <None Include="ProjectAggregate\Events\NewItemAddedEvent.cs" />
+    <None Include="ProjectAggregate\Events\ToDoItemCompletedEvent.cs" />
+    <None Include="ProjectAggregate\Handlers\ItemCompletedEmailNotificationHandler.cs" />
+    <None Include="ProjectAggregate\PriorityStatus.cs" />
+    <None Include="ProjectAggregate\Project.cs" />
+    <None Include="ProjectAggregate\ProjectStatus.cs" />
+    <None Include="ProjectAggregate\Specifications\IncompleteItemsSearchSpec.cs" />
+    <None Include="ProjectAggregate\Specifications\IncompleteItemsSpec.cs" />
+    <None Include="ProjectAggregate\Specifications\ProjectByIdWithItemsSpec.cs" />
+    <None Include="ProjectAggregate\ToDoItem.cs" />
+    <None Include="Services\ToDoItemSearchService.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Ardalis.GuardClauses" />
     <PackageReference Include="Ardalis.Result" />
     <PackageReference Include="Ardalis.SmartEnum" />

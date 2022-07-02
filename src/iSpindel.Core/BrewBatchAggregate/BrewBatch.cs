@@ -3,7 +3,7 @@ using iSpindel.SharedKernel.Interfaces;
 
 namespace iSpindel.Core.BrewBatchAggregate;
 
-public class BrewBatch : EntityBase, IAggregateRoot
+public class BrewBatch : EntityBase<Guid>, IAggregateRoot
 {
   public BrewBatch(Guid brewBatchId, string name, string? description) : base(brewBatchId)
   {
