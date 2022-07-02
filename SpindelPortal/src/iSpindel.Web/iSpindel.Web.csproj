@@ -27,7 +27,7 @@
   </ItemGroup>
   
   <ItemGroup>
-    <ProjectReference Include="..\iSpindel.Infrastructure\iSpindel.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\..\iSpindel.SharedKernel\iSpindel.SharedKernel.csproj" />
   </ItemGroup>
   
 </Project>

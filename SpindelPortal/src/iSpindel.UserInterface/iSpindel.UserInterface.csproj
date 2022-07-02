@@ -13,4 +13,8 @@
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\iSpindel.SharedKernel\iSpindel.SharedKernel.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -31,7 +31,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "iSpindel.IntegrationTests",
 		{220361D6-9C76-4E3F-BD34-3C7B50E2CA4D} = {220361D6-9C76-4E3F-BD34-3C7B50E2CA4D}
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "iSpindel.SharedKernel", "SpindelPortal\src\iSpindel.SharedKernel\iSpindel.SharedKernel.csproj", "{744AD1DC-E83E-4ACE-BE57-395395D6E357}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "iSpindel.SharedKernel", "iSpindel.SharedKernel\iSpindel.SharedKernel.csproj", "{744AD1DC-E83E-4ACE-BE57-395395D6E357}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "iSpindel.UnitTests", "SpindelPortal\tests\iSpindel.UnitTests\iSpindel.UnitTests.csproj", "{1DC7F5A0-DDF7-4975-84EB-05F4FC1B6AB5}"
 EndProject

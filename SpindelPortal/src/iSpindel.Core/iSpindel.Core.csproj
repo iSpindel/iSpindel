@@ -49,7 +49,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\iSpindel.SharedKernel\iSpindel.SharedKernel.csproj" />
+    <ProjectReference Include="..\..\..\iSpindel.SharedKernel\iSpindel.SharedKernel.csproj" />
   </ItemGroup>
 
 </Project>

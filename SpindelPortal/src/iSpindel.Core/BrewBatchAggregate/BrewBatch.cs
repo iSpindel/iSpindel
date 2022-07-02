@@ -18,5 +18,5 @@ public class BrewBatch : EntityBase<Guid>, IAggregateRoot
   public NachBrauenSchritt? NachBrauenSchritt { get; set; }
   public NachGaerungSchritt? NachGaerungSchritt { get; set; }
   public NachAbfuellungSchritt? NachAbfuellSchritt { get; set; }
-  public DataSeries? DataSeries { get; set; }
+  public DataSeries DataSeries { get; set; }
 }

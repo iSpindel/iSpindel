@@ -32,6 +32,6 @@
   
   <ItemGroup>
     <ProjectReference Include="..\iSpindel.Core\iSpindel.Core.csproj" />
-    <ProjectReference Include="..\iSpindel.SharedKernel\iSpindel.SharedKernel.csproj" />
+    <ProjectReference Include="..\..\..\iSpindel.SharedKernel\iSpindel.SharedKernel.csproj" />
   </ItemGroup>
 </Project>

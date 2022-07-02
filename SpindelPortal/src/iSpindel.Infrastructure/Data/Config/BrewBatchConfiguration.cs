@@ -15,6 +15,7 @@ public class BrewBatchConfiguration : IEntityTypeConfiguration<BrewBatch>
     builder.OwnsOne(p => p.NachAbfuellSchritt);
     builder.OwnsOne(p => p.NachGaerungSchritt);
 
+    builder.Property(p => p.DataSeries).IsRequired();
     builder.HasOne(p => p.DataSeries);
   }
 }
