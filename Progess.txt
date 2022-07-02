@@ -2,9 +2,15 @@
 - DataSeries, DataPoint übernommen
 - BeerCharacteristics in Einzelschritte aufgeteilt
 - Userinterface umbenannt in iSpindel.UserInterface
-
-Next Steps:
+- iSpindel.Server rüberretten => SpindelCollector
+- Entities mit iSpindel.Server teilen
 - Persistenz wiederherstellen
     - DbContext anlegen
-- Entities mit iSpindel.Server teilen
-- iSpindel.Server rüberretten
+
+
+Next Steps:
+- Seeding Service für Portal
+- Npgsql verknüpfen
+- SpindelCollector: mehrere Spindeln unterstützen
+- DomainEvents definieren (BrewBatchCreated, RecordingStarted, RecordingStopped)
+- SignalR in den SpindelCollector integrieren um Live-Daten an SpindelPortal zu streamen
