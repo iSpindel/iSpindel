@@ -2,8 +2,8 @@
 
 namespace iSpindel.Shared.Factories
 {
-    /*public interface IDbContextFactory
+    public interface IDbContextFactory
     {
         iSpindelContext CreateContext();
-    }*/
+    }
 }

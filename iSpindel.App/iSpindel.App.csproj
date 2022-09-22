@@ -53,7 +53,7 @@
 		<Protobuf Include="..\iSpindel.Server\Protos\recording.proto" GrpcServices="Client" />
 	</ItemGroup>
 
-  <Target Name="CopyAngularAppOnPublish" AfterTargets="BuildAngularAppOnPublish">
+  <Target Name="CopyAngularAppOnPublish">
     <ItemGroup>
         <MySourceFiles Include="..\iSpindel.ClientApp\dist\**\*.*" />
     </ItemGroup>

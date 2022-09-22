@@ -6,7 +6,7 @@ using Npgsql;
 
 namespace iSpindel.Shared.Factories
 {
-    /*public class DbContextFactory : IDbContextFactory
+    public class DbContextFactory : IDbContextFactory
     {
         private readonly IOptions<DbOptions> _dbOptions;
 
@@ -27,5 +27,5 @@ namespace iSpindel.Shared.Factories
             .UseNpgsql(connString);
             return new iSpindelContext(optionsBuilder.Options);
         }
-    }*/
+    }
 }
