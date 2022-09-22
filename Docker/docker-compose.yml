@@ -1,0 +1,64 @@
+services:
+  mqtt:
+    container_name: mqtt
+    image: eclipse-mosquitto:latest
+    restart: always
+    volumes: 
+    - /opt/ispindel/mosquitto/config:/mosquitto/config
+    - /opt/ispindel/mosquitto/logs:/mosquitto/log
+    - /opt/ispindel/mosquitto/data:/mosquitto/data
+    networks:
+      - ispindel
+    ports:
+      - 1883:1883
+      - 9001:9001
+
+  database:
+    container_name: database
+    image: postgres
+    restart: always
+    shm_size: 256MB
+    networks:
+      - ispindel
+    ports:
+      - 5432:5432
+    volumes:
+      - /opt/ispindel/postgres:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=${PG_SUPERUSER_PW} # Password for the database user using postgres.
+      - POSTGRES_DB=${PG_DB}                 # Name of the database using postgres.
+      - POSTGRES_USER=${PG_USER}             # Username for the database using postgres.
+
+  data-ingestor:
+    container_name: data-ingestor
+    networks:
+      - ispindel
+    image: localhost:5000/ispindel-server:v1.0
+    restart: always
+    environment: 
+      - POSTGRES_HOST=database
+
+  webapp:
+    container_name: webapp
+    image: localhost:5000/ispindel-webapp:v1.0
+    restart: always
+    networks:
+      - ispindel
+    environment: 
+      - POSTGRES_HOST=database
+    ports:
+      - 5001:80
+
+  mqtt-producer:
+    container_name: mqtt-producer
+    image: localhost:5000/mqtt-producer:v1.0
+    ports:
+      - 8080:80
+    networks:
+      - ispindel
+
+networks: 
+  ispindel:
+    name: ispindel
+
+# TODO: nginx for ssl

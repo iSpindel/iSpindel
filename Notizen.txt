@@ -1,0 +1,4 @@
+docker rm -f webapp; ./build-containers.sh; cd Docker && docker compose up; cd - ; docker start webapp; docker logs webapp
+
+log in to database
+docker run -it --rm --network ispindel postgres psql -h database -U ispindel -d iSpindel

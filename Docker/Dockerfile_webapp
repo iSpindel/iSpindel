@@ -1,0 +1,34 @@
+# Dockerfile has to be executed in main iSpindel folder!
+# https://hub.docker.com/_/microsoft-dotnet
+FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
+WORKDIR /ispindel
+EXPOSE 80
+EXPOSE 7000
+
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+
+# copy csproj and restore as distinct layers
+WORKDIR /app
+COPY iSpindel.Shared iSpindel.Shared
+COPY iSpindel.Database iSpindel.Database
+COPY iSpindel.Database.Job iSpindel.Database.Job
+COPY iSpindel.Server/Protos iSpindel.Server/Protos
+
+COPY iSpindel.App/iSpindel.App.csproj iSpindel.App/iSpindel.App.csproj
+RUN dotnet restore "iSpindel.App/iSpindel.App.csproj"
+
+# copy and publish app and libraries
+COPY iSpindel.App iSpindel.App
+WORKDIR "/app/iSpindel.App"
+RUN dotnet build "iSpindel.App.csproj" -c Release --no-restore
+
+FROM build AS publish
+RUN  dotnet publish "iSpindel.App.csproj" --no-build --no-cache -c Release -o /app/publish
+
+# final stage/image
+FROM base AS final
+WORKDIR /ispindel
+COPY --from=publish /app/publish .
+ENTRYPOINT ["dotnet", "iSpindel.App.dll"]
+
+# TODO: build the client app

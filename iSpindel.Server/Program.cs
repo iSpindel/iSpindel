@@ -23,7 +23,8 @@ namespace iSpindel.Server
             // Add services to the container.
             builder.Services.AddGrpc();
             builder.Services.AddGrpcReflection();
-            builder.Configuration.SetBasePath("/etc/ispindel/jobrunner")
+            builder.Configuration
+                                    .SetBasePath(Directory.GetCurrentDirectory())
                                     .AddJsonFile("appsettings.json", optional: false)
                                     .AddJsonFile($"appsettings.Production.json", optional: false);
             builder.Services.Configure<MqttOptions>(builder.Configuration.GetSection(MqttOptions.MqttPosition));
@@ -36,7 +37,6 @@ namespace iSpindel.Server
                 options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
             
-            //builder.Services.AddSingleton<IDbContextFactory, DbContextFactory>();
             builder.Services.AddSingleton<ISpindelService, iSpindelServer>();
             var app = builder.Build();
 

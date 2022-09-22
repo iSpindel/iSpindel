@@ -53,16 +53,6 @@
 		<Protobuf Include="..\iSpindel.Server\Protos\recording.proto" GrpcServices="Client" />
 	</ItemGroup>
 
-  <Target Name="CopyCustomContentOnPublish" AfterTargets="Publish">
-    <Copy SourceFiles="Dockerfile.WebApp" DestinationFolder="$(PublishDir)" />
-    <Copy SourceFiles="build.sh" DestinationFolder="$(PublishDir)" />
-    <Copy SourceFiles="docker-compose.yml" DestinationFolder="$(PublishDir)" />
-  </Target>
-<!--
-  <Target Name="BuildAngularAppOnPublish" AfterTargets="Publish">
-    <Exec WorkingDirectory="..\iSpindel.ClientApp" Command="yarn run build:prod" />
-  </Target>
--->
   <Target Name="CopyAngularAppOnPublish" AfterTargets="BuildAngularAppOnPublish">
     <ItemGroup>
         <MySourceFiles Include="..\iSpindel.ClientApp\dist\**\*.*" />
