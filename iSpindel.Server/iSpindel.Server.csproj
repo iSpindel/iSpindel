@@ -8,6 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Factories\**" />
+    <Content Remove="Factories\**" />
+    <EmbeddedResource Remove="Factories\**" />
+    <None Remove="Factories\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Protobuf Include="Protos\recording.proto" GrpcServices="Server" />
   </ItemGroup>
 
@@ -15,6 +22,7 @@
     <PackageReference Include="Grpc.AspNetCore" Version="2.41.0" />
     <PackageReference Include="Grpc.AspNetCore.Server.Reflection" Version="2.41.0" />
     <PackageReference Include="Grpc.Reflection" Version="2.42.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.9" />
     <PackageReference Include="MQTTnet" Version="3.1.1" />
     <PackageReference Include="MQTTnet.Extensions.ManagedClient" Version="3.1.1" />
     <PackageReference Include="Npgsql" Version="6.0.1" />
@@ -23,10 +31,6 @@
   <ItemGroup>
     <ProjectReference Include="..\iSpindel.Database.Job\iSpindel.Database.Job.csproj" />
     <ProjectReference Include="..\iSpindel.Shared\iSpindel.Shared.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Factories\" />
   </ItemGroup>
 
 </Project>

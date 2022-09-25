@@ -31,8 +31,11 @@ namespace iSpindel.App
             return new ConfigurationBuilder()
              .SetBasePath(Directory.GetCurrentDirectory())
              .AddJsonFile("appsettings.json", optional: false)
+#if DEBUG
              .AddJsonFile($"appsettings.Development.json", optional: true)
+#else
              .AddJsonFile($"appsettings.Production.json", optional: true)
+#endif
              .AddEnvironmentVariables()
              .Build();
         }

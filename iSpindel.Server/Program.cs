@@ -7,6 +7,8 @@ using iSpindel.Server.Services;
 using iSpindel.Shared.Factories;
 using iSpindel.Shared.Options;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Migrations;
+using Npgsql;
 
 namespace iSpindel.Server
 {
@@ -26,26 +28,27 @@ namespace iSpindel.Server
             builder.Configuration
                                     .SetBasePath(Directory.GetCurrentDirectory())
                                     .AddJsonFile("appsettings.json", optional: false)
-                                    .AddJsonFile($"appsettings.Development.json", optional: true)
-                                    .AddJsonFile($"appsettings.Production.json", optional: true)
+#if DEBUG
+                                    .AddJsonFile("appsettings.Development.json", optional: true)
+#else
+                                    .AddJsonFile("appsettings.Production.json", optional: true)
+#endif
                                     .AddEnvironmentVariables();
             builder.Services.Configure<MqttOptions>(builder.Configuration.GetSection(MqttOptions.MqttPosition));
             builder.Services.Configure<SpindelServerOptions>(builder.Configuration.GetSection(SpindelServerOptions.SpindelServerPosition));
             builder.Services.Configure<DbOptions>(builder.Configuration.GetSection(DbOptions.DbPosition));
             builder.Services.Configure<GrpcServerOptions>(builder.Configuration.GetSection(GrpcServerOptions.GrpcServerPosition));
             builder.Services.AddSingleton<IMqttClientFactory, MqttClientFactory>();
-            builder.Services.AddDbContext<iSpindelContext>(options =>
-            {
-                options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
-            });
-            
+
+            ConfigureDB(builder);
+
             builder.Services.AddSingleton<ISpindelService, iSpindelServer>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
             app.MapGrpcService<Services.RecordingService>();
 
-            if(builder.Environment.IsDevelopment())
+            if (builder.Environment.IsDevelopment())
             {
                 app.MapGrpcReflectionService();
             }
@@ -54,6 +57,28 @@ namespace iSpindel.Server
 
             app.Run();
 
+        }
+
+        public static void ConfigureDB(WebApplicationBuilder builder)
+        {
+            var connectionStringBuilder = new NpgsqlConnectionStringBuilder(builder.Configuration.GetConnectionString("DefaultConnection"))
+            {
+                ApplicationName = "iSpindel.DataIngestor"
+            };
+            if (!string.IsNullOrWhiteSpace(builder.Configuration["Database:Username"]) && !string.IsNullOrWhiteSpace(builder.Configuration["Database:Password"]))
+            {
+                connectionStringBuilder.Username = builder.Configuration["Database:Username"];
+                connectionStringBuilder.Password = builder.Configuration["Database:Password"];
+                connectionStringBuilder.IntegratedSecurity = false;
+            }
+
+            builder.Services.AddDbContext<iSpindelContext>(options =>
+                options.UseNpgsql(connectionStringBuilder.ConnectionString)
+                .ReplaceService<IHistoryRepository, iSpindelHistoryRepository>(),
+                optionsLifetime: ServiceLifetime.Singleton
+           );
+
+            builder.Services.AddDbContextFactory<iSpindelContext>(options => { }, ServiceLifetime.Singleton);
         }
     }
 }
