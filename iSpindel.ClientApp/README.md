@@ -1,5 +1,30 @@
 # iSpindel.App
 
+## Local build with yarn
+
+Make sure `yarn` is installed and ready.
+According the yarn wiki enable corepack wrapper:
+
+`corepack enable`
+
+As we haven't made _clean_ install of the new yarn maybe you have to run:
+
+`npm install -g yarn`
+
+install all dependencies with:
+
+`yarn install`
+
+trigger the build with:
+
+`yarn build`
+
+-> Profit
+
+
+## General Anuglar information
+
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.0.
 
 ## Development server
