@@ -26,8 +26,9 @@ namespace iSpindel.Server
             builder.Configuration
                                     .SetBasePath(Directory.GetCurrentDirectory())
                                     .AddJsonFile("appsettings.json", optional: false)
-                                    .AddJsonFile($"appsettings.Development.json", optional: false);
-                                    //.AddJsonFile($"appsettings.Production.json", optional: false);
+                                    .AddJsonFile($"appsettings.Development.json", optional: true)
+                                    .AddJsonFile($"appsettings.Production.json", optional: true)
+                                    .AddEnvironmentVariables();
             builder.Services.Configure<MqttOptions>(builder.Configuration.GetSection(MqttOptions.MqttPosition));
             builder.Services.Configure<SpindelServerOptions>(builder.Configuration.GetSection(SpindelServerOptions.SpindelServerPosition));
             builder.Services.Configure<DbOptions>(builder.Configuration.GetSection(DbOptions.DbPosition));

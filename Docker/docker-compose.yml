@@ -36,7 +36,10 @@ services:
     image: localhost:5000/ispindel-server:v1.0
     restart: always
     environment: 
-      - POSTGRES_HOST=database
+      - Mqtt:Host=mqtt
+      - Mqtt:Username=${MQTT_USER}
+      - Mqtt:Password=${MQTT_PW}
+      - ConnectionStrings:DefaultConnection=${DB_CONNECTION}
 
   webapp:
     container_name: webapp
@@ -45,7 +48,11 @@ services:
     networks:
       - ispindel
     environment: 
-      - POSTGRES_HOST=database
+      - Mqtt:Host=mqtt
+      - Grpc:Host=data-ingestor
+      - Mqtt:Username=${MQTT_USER}
+      - Mqtt:Password=${MQTT_PW}
+      - ConnectionStrings:DefaultConnection=${DB_CONNECTION}
     ports:
       - 5001:80
 
