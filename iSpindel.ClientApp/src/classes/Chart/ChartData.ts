@@ -28,7 +28,5 @@ export class ChartData {
         })
 
         return chartData.series;
-
-
     }
 }

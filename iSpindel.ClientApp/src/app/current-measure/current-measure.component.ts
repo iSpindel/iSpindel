@@ -1,11 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { GraphService } from 'src/services/graph.service';
-import { Subject, Observable } from 'rxjs';
+import { Subject, Observable, Subscription } from 'rxjs';
 import { IDataPoint } from 'src/classes/Data/IDataPoint';
 import { RecordingService } from 'src/services/recording.service';
 import { RecordingStatus } from 'src/services/notify.service';
 //import { MultilineChart } from 'src/classes/Chart/Chart';
 import * as d3 from 'd3';
+import { DataRange } from 'src/classes/Chart/DataRange';
+import { DataSeries } from 'src/classes/Data/DataSeries';
+import { switchMap } from 'rxjs/operators';
+import { DataseriesService } from 'src/services/dataseries.service';
+import { ChartData } from 'src/classes/Chart/ChartData';
 
 export class Range {
   public Name: string;
@@ -41,6 +46,10 @@ export class CurrentMeasureComponent implements OnInit {
   public CurrentData$: Observable<IDataPoint[]> = this._graphService.CurrentData$;
   public CurrentData: IDataPoint[];
 
+  public dataSeries$: Observable<DataSeries>;
+  public dataSeries: DataSeries;
+  public dataSeriesSubscription: Subscription;
+
   public currentRecordingStatus: RecordingStatus;
   public currentRecordingStatus$: Observable<RecordingStatus>;
 
@@ -48,8 +57,29 @@ export class CurrentMeasureComponent implements OnInit {
   public SvgHeight: number = 300;
   public Ranges: Array<Range> = new Array<Range>();
 
+  public selectedDataSeriesId: number;
+  // Chart options
+  legend: boolean = true;
+  showLabels: boolean = true;
+  animations: boolean = true;
+  xAxis: boolean = true;
+  yAxis: boolean = true;
+  showYAxisLabel: boolean = true;
+  showXAxisLabel: boolean = true;
+  //xAxisLabel: string = 'Time';
+  //yAxisLabel: string = 'Value';
+  timeline: boolean = false;
+  autoscale: boolean = true;
+  //view: any = [700, 700];
+
+  chartData: DataRange[];
+  colorScheme = {
+    domain: ['#121CD1', '#D1121C', '#CFC0BB', '#7aa3e5', '#a8385d', '#aae3f5']
+  };
+
+
   // eslint-disable-next-line no-unused-vars
-  constructor(private _graphService: GraphService, public _recordingService: RecordingService) {
+  constructor(private _graphService: GraphService, private _dataseriesService: DataseriesService, public _recordingService: RecordingService) {
   }
 
   private createScale(name: string, classes: string, min: number, max: number, acc: (x: IDataPoint) => number): Range {
@@ -66,12 +96,25 @@ export class CurrentMeasureComponent implements OnInit {
   ngOnInit() {
     this.CurrentData$.subscribe(x => {
       this.CurrentData = x;
-      console.log(this.CurrentData);
     });
 
-    this.Ranges.push(this.createScale('Battery', 'battery', 3.2, 4.4, x => x.battery));
-    this.Ranges.push(this.createScale('Temperature', 'temperature', 0, 45, x => x.temperature));
-    this.Ranges.push(this.createScale('Gravity', 'gravity', 0, 10, x => x.gravity));
+    this._recordingService.GetRecordingId().subscribe(id => {
+
+      console.log("Current Dataseries Id: " + id);
+      if (id == null || this.selectedDataSeriesId != null) {
+        return;
+      }
+
+      this.selectedDataSeriesId = id;
+      this.dataSeries$ = this._dataseriesService.loadFullDataSeries(this.selectedDataSeriesId);
+      this.dataSeriesSubscription = this.dataSeries$.subscribe(x => {
+        this.dataSeries = x;
+        console.log("Generating Chart datapoints from DB");
+        this.chartData = ChartData.fromDataPoints(this.dataSeries.datapoints, true);
+        console.log("Chart data ", this.chartData);
+      });
+    });
+
     this.currentRecordingStatus$ = this._recordingService.GetRecordingStatus();
     this.currentRecordingStatus$.subscribe(x => this.currentRecordingStatus = x);
 
@@ -80,7 +123,6 @@ export class CurrentMeasureComponent implements OnInit {
       dataseriesId => {
         if (dataseriesId != null && dataseriesId != undefined) {
           this.recordingId = dataseriesId;
-          console.log('loading graph data');
           this._graphService.loadData(dataseriesId);
         }
       }
@@ -89,16 +131,28 @@ export class CurrentMeasureComponent implements OnInit {
     const width = window.innerWidth - 25;
     const height = window.innerHeight - 25;
 
-    //const graph = new MultilineChart(this.CurrentData,'#valueGraph', height, width);
-    //graph.initialize();
   }
   ngAfterViewInit() {
-    //TODO replace with angular way
-    //const chartArea = document.getElementById('chartArea');
-    //console.log(chartArea);
-    //fromEvent(chartArea, 'mouseover').pipe(debounce(() => interval(100))).subscribe(x => {
-    //  console.log(x);
-    //});
+ 
+  }
+  getDate(date: Date) {
+    return date.getHours().toString().padStart(2, "0") + ":"
+      + date.getMinutes().toString().padStart(2, "0") + " "
+      + date.getDay().toString().padStart(2, "0") + "."
+      + date.getMonth().toString().padStart(2, "0") + "."
+      + date.getFullYear();
+  }
+
+  onSelect(data): void {
+    //console.log('Item clicked', JSON.parse(JSON.stringify(data)));
+  }
+
+  onActivate(data): void {
+   // console.log('Activate', JSON.parse(JSON.stringify(data)));
+  }
+
+  onDeactivate(data): void {
+    //console.log('Deactivate', JSON.parse(JSON.stringify(data)));
   }
 
   public calculateX(index: number): number {
@@ -113,12 +167,9 @@ export class CurrentMeasureComponent implements OnInit {
   }
 
   public isRecordingStopPossible(): boolean {
-    console.log('check if recording Id ' + this.recordingId + ' can be stopped');
     if (this.recordingId == null || this.recordingId == undefined) {
       return false;
     }
-
-    console.log('it can be stopped');
     return true;
   }
 

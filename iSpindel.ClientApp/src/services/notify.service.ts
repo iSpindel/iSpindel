@@ -67,6 +67,7 @@ export class NotifyService extends SignalRService<NotifyClient, NotifyServer> im
     }
 
     protected onConnected(): void {
+        console.log("Notify Service connected");
         /*this.Invoke('Register', 1);
         this.Invoke('Register', 10);
         this.Invoke('Ping', 'asdf').then(x => console.log(x));*/
