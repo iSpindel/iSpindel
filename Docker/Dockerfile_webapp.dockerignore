@@ -6,8 +6,10 @@ Dockerfile*
 docker-compose*
 README.md
 LICENSE
-.vscode
-.vs
+.vscode/
+.vs/
+.yarn/
+dist/
 
 # directories
 **/bin/
