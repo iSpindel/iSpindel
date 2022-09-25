@@ -40,6 +40,8 @@ services:
       - Mqtt:Username=${MQTT_USER}
       - Mqtt:Password=${MQTT_PW}
       - ConnectionStrings:DefaultConnection=${DB_CONNECTION}
+    ports:
+      - 7000:7000
 
   webapp:
     container_name: webapp
