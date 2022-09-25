@@ -1,4 +1,12 @@
 # Dockerfile has to be executed in main iSpindel folder!
+
+FROM node:latest AS client_build
+WORKDIR /client-app
+COPY iSpindel.ClientApp/package.json .
+RUN yarn install
+COPY iSpindel.ClientApp .
+RUN yarn build
+
 # https://hub.docker.com/_/microsoft-dotnet
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
 WORKDIR /ispindel
@@ -30,6 +38,7 @@ RUN  dotnet publish "iSpindel.App.csproj" --no-build --no-cache -c Release -o /a
 FROM base AS final
 WORKDIR /ispindel
 COPY --from=publish /app/publish .
+COPY --from=client_build /client-app/dist /dist
 ENTRYPOINT ["dotnet", "iSpindel.App.dll"]
 
 # TODO: build the client app
