@@ -1,7 +1,11 @@
+using iSpindel.App.Data;
+using iSpindel.Database;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.DependencyInjection;
 using System.IO;
+using Microsoft.EntityFrameworkCore;
 
 namespace iSpindel.App
 {
@@ -9,8 +13,17 @@ namespace iSpindel.App
     {
         public static void Main(string[] args)
         {
-            var builder = CreateHostBuilder(args);
-            builder.Build().Run();
+            var host = CreateHostBuilder(args).Build();
+
+            using (var scope = host.Services.CreateScope())
+            {
+                var dbAppContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+                dbAppContext.Database.Migrate();
+                var db = scope.ServiceProvider.GetRequiredService<iSpindelContext>();
+                db.Database.Migrate();
+            }
+
+            host.Run();
         }
 
         public static IConfiguration CreateConfiguration()

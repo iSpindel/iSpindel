@@ -34,7 +34,7 @@ namespace iSpindel.Server
             builder.Services.Configure<DbOptions>(builder.Configuration.GetSection(DbOptions.DbPosition));
             builder.Services.Configure<GrpcServerOptions>(builder.Configuration.GetSection(GrpcServerOptions.GrpcServerPosition));
             builder.Services.AddSingleton<IMqttClientFactory, MqttClientFactory>();
-            builder.Services.AddDbContextFactory<iSpindelContext>(options =>
+            builder.Services.AddDbContext<iSpindelContext>(options =>
             {
                 options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
             });

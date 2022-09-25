@@ -145,7 +145,7 @@ namespace iSpindel.Database
                 .Append(", ")
                 .Append(stringTypeMapping.GenerateSqlLiteral("iSpindelContext"))
                 .Append(", ")
-                .Append(datetimeTypeMapping.GenerateSqlLiteral(DateTime.Now))
+                .Append(datetimeTypeMapping.GenerateSqlLiteral(DateTime.UtcNow))
                 .Append(")")
                 .AppendLine(SqlGenerationHelper.StatementTerminator)
                 .ToString();
