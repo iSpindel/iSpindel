@@ -12,6 +12,7 @@ services:
     ports:
       - 1883:1883
       - 9001:9001
+    profiles: ["services", "testing"]
 
   database:
     container_name: database
@@ -28,6 +29,7 @@ services:
       - POSTGRES_PASSWORD=${PG_SUPERUSER_PW} # Password for the database user using postgres.
       - POSTGRES_DB=${PG_DB}                 # Name of the database using postgres.
       - POSTGRES_USER=${PG_USER}             # Username for the database using postgres.
+    profiles: ["services", "testing"]
 
   data-ingestor:
     container_name: data-ingestor
@@ -42,6 +44,9 @@ services:
       - ConnectionStrings:DefaultConnection=${DB_CONNECTION}
     ports:
       - 7000:7000
+    depends_on:
+      - database
+      - mqtt
 
   webapp:
     container_name: webapp
@@ -57,6 +62,10 @@ services:
       - ConnectionStrings:DefaultConnection=${DB_CONNECTION}
     ports:
       - 5001:80
+    depends_on:
+      - database
+      - mqtt
+      - data-ingestor
 
   mqtt-producer:
     container_name: mqtt-producer
@@ -65,6 +74,9 @@ services:
       - 8080:80
     networks:
       - ispindel
+    profiles: ["testing"]
+    depends_on:
+      - mqtt
 
 networks: 
   ispindel:

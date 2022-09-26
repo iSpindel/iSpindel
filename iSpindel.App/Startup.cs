@@ -113,9 +113,7 @@ namespace iSpindel.App
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
-                var pathToExe = Process.GetCurrentProcess().MainModule.FileName;
-                var pathToContentRoot = Path.GetDirectoryName(pathToExe);
-                configuration.RootPath = Path.Combine(pathToContentRoot, "dist");
+                configuration.RootPath = "dist";
             });
         }
 
@@ -165,11 +163,8 @@ namespace iSpindel.App
                 // To learn more about options for serving an Angular SPA from ASP.NET Core,
                 // see https://go.microsoft.com/fwlink/?linkid=864501
 
-                spa.Options.SourcePath = "../iSpindel.ClientApp";
-
                 if (env.IsDevelopment())
                 {
-                    //spa.UseAngularCliServer(npmScript: "start");
                     spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
                 }
             });
