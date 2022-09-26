@@ -170,6 +170,7 @@ DocProject/Help/html
 
 # Click-Once directory
 publish/
+config/
 
 # Publish Web Output
 *.[Pp]ublish.xml
