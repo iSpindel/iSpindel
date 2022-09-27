@@ -1,5 +1,4 @@
 # Dockerfile has to be executed in main iSpindel folder!
-
 FROM node:14.20.0-alpine3.15 AS client_build
 WORKDIR /client-app
 COPY iSpindel.ClientApp .
@@ -7,12 +6,15 @@ RUN yarn install
 RUN yarn build
 
 # https://hub.docker.com/_/microsoft-dotnet
-FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
+ARG BASE_IMAGE_ARCH=""
+FROM mcr.microsoft.com/dotnet/aspnet:6.0$BASE_IMAGE_ARCH AS base
 WORKDIR /ispindel
 EXPOSE 80
 EXPOSE 7000
 
-FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+ARG BASE_IMAGE_ARCH=""
+FROM mcr.microsoft.com/dotnet/sdk:6.0$BASE_IMAGE_ARCH AS build
+ARG DOTNET_ARCH=x64
 
 # copy csproj and restore as distinct layers
 WORKDIR /app
@@ -26,12 +28,12 @@ RUN dotnet restore "iSpindel.App/iSpindel.App.csproj"
 
 # copy and publish app and libraries
 COPY iSpindel.App iSpindel.App
-COPY iSpindel.ClientApp/dist iSpindel.ClientApp/dist
 WORKDIR "/app/iSpindel.App"
-RUN dotnet build "iSpindel.App.csproj" -c Release --no-restore
+RUN dotnet build "iSpindel.App.csproj" -c Release -r linux-$DOTNET_ARCH --no-restore
 
 FROM build AS publish
-RUN  dotnet publish "iSpindel.App.csproj" --no-build --no-cache -c Release -o /app/publish
+ARG DOTNET_ARCH=x64
+RUN  dotnet publish "iSpindel.App.csproj" --no-build --no-cache -c Release -r linux-$DOTNET_ARCH --no-self-contained -o /app/publish
 
 # final stage/image
 FROM base AS final

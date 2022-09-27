@@ -11,6 +11,8 @@
     <LangVersion>8</LangVersion>
     <Deterministic>true</Deterministic>
     <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
+	<RuntimeIdentifiers>linux-x64;linux-arm</RuntimeIdentifiers>
+	<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
 
 </Project>

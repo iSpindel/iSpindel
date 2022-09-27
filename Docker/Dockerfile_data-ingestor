@@ -1,10 +1,13 @@
 # Dockerfile has to be executed in main iSpindel folder!
 # https://hub.docker.com/_/microsoft-dotnet
-FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
+ARG BASE_IMAGE_ARCH=""
+ARG DOTNET_ARCH=x64
+
+FROM mcr.microsoft.com/dotnet/aspnet:6.0$BASE_IMAGE_ARCH AS base
 WORKDIR /ispindel
 EXPOSE 7000
 
-FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:6.0$BASE_IMAGE_ARCH AS build
 
 # copy csproj and restore as distinct layers
 WORKDIR /app
@@ -19,10 +22,10 @@ RUN dotnet restore "iSpindel.Server/iSpindel.Server.csproj"
 # copy and publish app and libraries
 COPY iSpindel.Server iSpindel.Server
 WORKDIR "/app/iSpindel.Server"
-RUN dotnet build "iSpindel.Server.csproj" -c Release --no-restore
+RUN dotnet build "iSpindel.Server.csproj" -c Release -r linux-$DOTNET_ARCH --no-restore
 
 FROM build AS publish
-RUN  dotnet publish "iSpindel.Server.csproj" --no-build --no-cache -c Release -o /app/publish
+RUN  dotnet publish "iSpindel.Server.csproj" --no-build --no-cache -c Release -r linux-$DOTNET_ARCH --no-self-contained -o /app/publish
 
 # final stage/image
 FROM base AS final

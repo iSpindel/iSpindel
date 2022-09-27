@@ -4,6 +4,8 @@
     <TargetFramework>net6.0</TargetFramework>
     <RootNamespace>iSpindel.Database</RootNamespace>
     <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
+	<RuntimeIdentifiers>linux-x64;linux-arm</RuntimeIdentifiers>
+	<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
 
   <ItemGroup>
