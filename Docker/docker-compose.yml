@@ -35,7 +35,7 @@ services:
     container_name: data-ingestor
     networks:
       - ispindel
-    image: localhost:5000/ispindel-server:v1.0
+    image: ${REGISTRY}/ispindel-server:${ARCH}v1.0
     restart: always
     environment: 
       - Mqtt:Host=mqtt
@@ -50,7 +50,7 @@ services:
 
   webapp:
     container_name: webapp
-    image: localhost:5000/ispindel-webapp:v1.0
+    image: ${REGISTRY}/ispindel-webapp:${ARCH}v1.0
     restart: always
     networks:
       - ispindel
@@ -69,7 +69,7 @@ services:
 
   mqtt-producer:
     container_name: mqtt-producer
-    image: localhost:5000/mqtt-producer:v1.0
+    image: ${REGISTRY}/mqtt-producer:${ARCH}v1.0
     ports:
       - 8080:80
     networks:

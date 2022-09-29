@@ -1,28 +1,29 @@
 # Dockerfile has to be executed in main iSpindel folder!
 # https://hub.docker.com/_/microsoft-dotnet
-ARG BASE_IMAGE_ARCH=""
-ARG DOTNET_ARCH=x64
 
-FROM mcr.microsoft.com/dotnet/aspnet:6.0$BASE_IMAGE_ARCH AS base
+ARG BASE_IMAGE_ARCH=""
+FROM mcr.microsoft.com/dotnet/aspnet:6.0-bullseye-slim$BASE_IMAGE_ARCH AS base
 WORKDIR /ispindel
 EXPOSE 7000
 
-FROM mcr.microsoft.com/dotnet/sdk:6.0$BASE_IMAGE_ARCH AS build
+# Dotnet is platform agnostic anyway so only the dotnet RUNTIME needs to be arm
+FROM mcr.microsoft.com/dotnet/sdk:6.0.401-bullseye-slim-amd64 AS build
+WORKDIR /app
 
 # copy csproj and restore as distinct layers
-WORKDIR /app
 COPY iSpindel.Shared iSpindel.Shared
 COPY iSpindel.Database iSpindel.Database
 COPY iSpindel.Database.Job iSpindel.Database.Job
-RUN ls /app
 
 COPY iSpindel.Server/iSpindel.Server.csproj iSpindel.Server/iSpindel.Server.csproj
-RUN dotnet restore "iSpindel.Server/iSpindel.Server.csproj"
+ARG DOTNET_ARCH=x64
+RUN dotnet restore "iSpindel.Server/iSpindel.Server.csproj" -r linux-$DOTNET_ARCH
 
 # copy and publish app and libraries
 COPY iSpindel.Server iSpindel.Server
 WORKDIR "/app/iSpindel.Server"
-RUN dotnet build "iSpindel.Server.csproj" -c Release -r linux-$DOTNET_ARCH --no-restore
+ARG DOTNET_ARCH=x64
+RUN dotnet build "iSpindel.Server.csproj" -c Release -r linux-$DOTNET_ARCH --no-restore --no-self-contained
 
 FROM build AS publish
 RUN  dotnet publish "iSpindel.Server.csproj" --no-build --no-cache -c Release -r linux-$DOTNET_ARCH --no-self-contained -o /app/publish
