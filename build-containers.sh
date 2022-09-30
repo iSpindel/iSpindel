@@ -11,7 +11,7 @@ docker buildx build -q --platform=linux/arm/v7 --build-arg DOTNET_ARCH="arm" --b
 
 echo ">> Building iSpindel.App, the Webservice"
 echo "> Step 1/2 - x86_64 Build"
-docker buildx build -q --build-arg DOTNET_ARCH=x64 --build-arg BASE_IMAGE_ARCH="" -f Docker/Dockerfile_webapp -t $REGISTRY/ispindel-webapp:v1.0 --push .
+docker buildx build --build-arg DOTNET_ARCH=x64 --build-arg BASE_IMAGE_ARCH="" -f Docker/Dockerfile_webapp -t $REGISTRY/ispindel-webapp:v1.0 --push .
 
 echo "> Step 2/2 - arm Build"
 docker buildx build -q --platform=linux/arm/v7 --build-arg DOTNET_ARCH="arm" --build-arg BASE_IMAGE_ARCH="-arm32v7" -f Docker/Dockerfile_webapp -t $REGISTRY/ispindel-webapp:v1.0 --push .
