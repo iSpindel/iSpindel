@@ -16,7 +16,7 @@ img/
 **/bin/
 **/obj/
 **/out/
-**/node_modules/
+#**/node_modules/
 **/.vscode/
 **/dist/
 **/e2e/
