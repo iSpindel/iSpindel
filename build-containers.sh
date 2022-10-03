@@ -1,5 +1,5 @@
 #!/bin/bash
-REGISTRY=localhost:5000
+#REGISTRY=localhost:5000
 #REGISTRY=hauspi:6000
 REGISTRY=raspberrypi:5000
 

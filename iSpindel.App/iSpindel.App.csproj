@@ -7,7 +7,7 @@
     <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
     <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
     <IsPackable>false</IsPackable>
-	<RuntimeIdentifiers>linux-x64;linux-arm</RuntimeIdentifiers>
+	<RuntimeIdentifiers>linux-x64;linux-arm;linux-arm64</RuntimeIdentifiers>
 	<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
 
     <DefaultItemExcludes>$(DefaultItemExcludes);$(SpaRoot)node_modules\**</DefaultItemExcludes>
