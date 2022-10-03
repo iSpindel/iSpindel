@@ -16,7 +16,7 @@ services:
 
   database:
     container_name: database
-    image: postgres
+    image: postgres:12
     restart: always
     shm_size: 256MB
     networks:
