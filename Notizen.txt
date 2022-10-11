@@ -2,3 +2,8 @@ docker rm -f webapp; ./build-containers.sh; cd Docker && docker compose up; cd -
 
 log in to database
 docker run -it --rm --network ispindel postgres psql -h database -U ispindel -d iSpindel
+
+# Webapp macht einen Heartbeat zum Server
+# Webapp streikt wenn Server unerreichbar
+# Webapp streamt aktuelle Werte über grpc vom Server wenn ein Recording läuft
+# pushed diese Werte in den SignalR stream
