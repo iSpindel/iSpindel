@@ -56,8 +56,9 @@
                         <ng-template #seriesTooltipTemplate let-model="model">
                             <div class="area-tooltip-container">
                                 {{getDate(model[0].name)}} <br />
-                                {{model[0].series}} - {{model[0].value}}°C<br />
-                                {{model[1].series}} - {{model[1].value}}°P<br />
+                                {{model[0].series}} - {{model[0].value}} °C<br />
+                                {{model[1].series}} - {{model[1].value}} °P<br />
+                                {{model[2].series}} - {{model[2].value}} vol %<br />
                             </div>
                         </ng-template>
                     </ngx-charts-line-chart>

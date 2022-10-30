@@ -1,0 +1,9 @@
+@origin = http://localhost:5000
+
+GET {{origin}}/demo/hello
+# Rest client extension
+
+POST {{origin}}/demo/write
+content-type: application/json
+
+"Hello Docker folks!"

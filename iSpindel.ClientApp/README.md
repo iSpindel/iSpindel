@@ -12,8 +12,13 @@ As we haven't made _clean_ install of the new yarn maybe you have to run:
 `npm install -g yarn`
 
 install all dependencies with:
+```
+cd src/
+yarn install
+```
 
-`yarn install`
+if strange error messages come up, the path length might be to long. copy ClientApp to ~/ in WSL and try again
+
 
 trigger the build with:
 

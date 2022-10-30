@@ -5,6 +5,9 @@
 		},
 		{
 			"path": "iSpindel.ClientApp"
+		},
+		{
+			"path": "../MQTT-Generator/MQTT-Producer"
 		}
 	],
 	"settings": {}

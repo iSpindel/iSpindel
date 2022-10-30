@@ -4,11 +4,8 @@ import { Subject, Observable, Subscription } from 'rxjs';
 import { IDataPoint } from 'src/classes/Data/IDataPoint';
 import { RecordingService } from 'src/services/recording.service';
 import { RecordingStatus } from 'src/services/notify.service';
-//import { MultilineChart } from 'src/classes/Chart/Chart';
-import * as d3 from 'd3';
 import { DataRange } from 'src/classes/Chart/DataRange';
 import { DataSeries } from 'src/classes/Data/DataSeries';
-import { switchMap } from 'rxjs/operators';
 import { DataseriesService } from 'src/services/dataseries.service';
 import { ChartData } from 'src/classes/Chart/ChartData';
 

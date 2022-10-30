@@ -19,7 +19,17 @@ COPY iSpindel.ClientApp/dist ./dist
 # https://hub.docker.com/_/microsoft-dotnet
 ARG BASE_IMAGE_ARCH=""
 FROM mcr.microsoft.com/dotnet/aspnet:6.0-bullseye-slim$BASE_IMAGE_ARCH AS base
-WORKDIR /ispindel
+ARG DEBUG=0
+WORKDIR /remote_debugger
+RUN if [ "${DEBUG}" = "1" ];\
+    then\
+        echo "Installing Remote Debugger into Container"; \
+        apt-get update; \
+        apt-get install -y --no-install-recommends unzip curl;\
+        rm -rf /var/lib/apt/lists;\
+        curl -sSL https://aka.ms/getvsdbgsh --output install_vs_dbg.sh;\
+        chmod +x install_vs_dbg.sh && ./install_vs_dbg.sh -v latest -l /remote_debugger;\
+    fi 
 EXPOSE 80
 EXPOSE 7000
 
