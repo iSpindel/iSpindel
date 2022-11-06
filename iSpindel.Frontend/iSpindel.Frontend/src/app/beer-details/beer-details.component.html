@@ -1,0 +1,189 @@
+<mat-card *ngIf="dataSeries$ | async">
+    <!--<mat-card> *ngIf="dataSeries$ | async"> -->
+    <form (ngSubmit)="onSubmit()" #beerForm="ngForm">
+        <mat-card-header>
+            <mat-card-title>
+                {{dataSeries.name}}</mat-card-title>
+            <mat-card-subtitle>{{dataSeries.getStart()}} - {{dataSeries.getEnd()}}</mat-card-subtitle>
+            <span class="menu-spacer"></span>
+            <button mat-icon-button class="example-icon" aria-label="Back to List" [routerLink]="['/viewMeasure']">
+                <mat-icon matTooltip="Zurück zur Liste" svgIcon="arrow-up-bold"></mat-icon>
+            </button>
+            <button type="submit" mat-icon-button color="warn">
+                <mat-icon matTooltip="Änderungen speichern" svgIcon="content-save-edit"></mat-icon>
+            </button>
+        </mat-card-header>
+        <mat-card-content>
+
+            <mat-tab-group>
+                <mat-tab label="Werte Übersicht">
+
+                    <h3>Braulogbuch</h3>
+                    <mat-grid-list cols="3" rowHeight="80px">
+                        <mat-grid-tile colspan="1" rowspan="1">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Angestrebter Bierstil</mat-label>
+                                <input matInput placeholder="Stil" name="beerStyle"
+                                    [(ngModel)]="dataSeries.beerCharacteristics.beerStyle" #beerStyle="ngModel">
+                            </mat-form-field>
+                        </mat-grid-tile>
+                        <mat-grid-tile colspan="1" rowspan="1">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Hefesorte</mat-label>
+                                <input matInput placeholder="Hefe" name="yeastType"
+                                    [(ngModel)]="dataSeries.beerCharacteristics.yeastType" #yeastType="ngModel">
+                            </mat-form-field>
+                        </mat-grid-tile>
+                        <mat-grid-tile colspan="1" rowspan="1">
+                        </mat-grid-tile>
+                    </mat-grid-list>
+
+                    <mat-form-field class="fullwidth-textarea" appearance="outline">
+                        <mat-label>Beschreibung</mat-label>
+                        <!--
+                    <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="3"
+                        cdkAutosizeMaxRows="10">{{dataSeries.description}}</textarea>
+                            -->
+                        <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="3" cdkAutosizeMaxRows="10"
+                            name="description" #description="ngModel" [(ngModel)]="dataSeries.description"></textarea>
+                    </mat-form-field>
+                    <mat-form-field class="fullwidth-textarea" appearance="outline">
+                        <mat-label>Notizen</mat-label>
+                        <!--
+                    <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="3"
+                        cdkAutosizeMaxRows="10">{{dataSeries.beerCharacteristics?.notes}}</textarea>
+                            -->
+                        <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="3" cdkAutosizeMaxRows="10"
+                            name="notes" #notes="ngModel" [(ngModel)]="dataSeries.beerCharacteristics.notes"></textarea>
+                    </mat-form-field>
+                    <mat-divider></mat-divider>
+                    <h3>Brau Ergebnis</h3>
+                    <mat-grid-list cols="3" rowHeight="80px">
+                        <mat-grid-tile colspan="1" rowspan="1">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Sudhaus-Ausbeute </mat-label>
+                                <input matInput type="number" placeholder="0" name="brewhouseEfficiency"
+                                    #brewhouseEfficiency="ngModel"
+                                    [(ngModel)]="dataSeries.beerCharacteristics.brewhouseEfficency">
+                                <span matSuffix>%</span>
+                            </mat-form-field>
+                        </mat-grid-tile>
+                        <mat-grid-tile colspan="1" rowspan="1">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Biermenge (0-200l)</mat-label>
+                                <input matInput type="number" placeholder="0" name="amountOfWort"
+                                    #amountOfWorth="ngModel" [(ngModel)]="dataSeries.beerCharacteristics.amountOfWort">
+                                <span matSuffix>l</span>
+                            </mat-form-field>
+                        </mat-grid-tile>
+                        <mat-grid-tile colspan="1" rowspan="1">
+                        </mat-grid-tile>
+
+                        <mat-grid-tile colspan="1" rowspan="1">
+                            <mat-form-field class="undiscernable-disabled-field" appearance="outline">
+                                <mat-label>Mittlere Brautemperatur</mat-label>
+                                <input matInput placeholder="0" disabled value="{{dataSeries.getMeanTemperature()}}">
+                                <span matSuffix>°C </span>
+                            </mat-form-field>
+                        </mat-grid-tile>
+                        <mat-grid-tile colspan="1" rowspan="1">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Plato Startwert</mat-label>
+                                <input matInput placeholder="0" disabled value="{{dataSeries.getFirstGravity()}}">
+                                <span matSuffix>°P </span>
+                            </mat-form-field>
+                        </mat-grid-tile>
+                        <mat-grid-tile colspan="1" rowspan="1">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Alkoholgehalt</mat-label>
+                                <input matInput placeholder="0" disabled value="{{dataSeries.getAlcoholLevel()}}">
+                                <span matSuffix>% </span>
+                            </mat-form-field>
+                        </mat-grid-tile>
+
+                        <mat-grid-tile colspan="1" rowspan="1">
+                            <mat-form-field appearance="outline">
+                                <mat-label>EVG (0-100%)</mat-label>
+                                <input matInput type="number" placeholder="0" name="evg" #evg="ngModel"
+                                    [(ngModel)]="dataSeries.beerCharacteristics.evg">
+                                <span matSuffix>%</span>
+                            </mat-form-field>
+                        </mat-grid-tile>
+                        <mat-grid-tile colspan="1" rowspan="1">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Bittere (0-3000)</mat-label>
+                                <input matInput type="number" placeholder="0" name="bitterness" #bitterness="ngModel"
+                                    [(ngModel)]="dataSeries.beerCharacteristics.bitterness">
+                                <span matSuffix>IBU</span>
+                            </mat-form-field>
+                        </mat-grid-tile>
+                        <mat-grid-tile colspan="1" rowspan="1">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Farbe (0-150)</mat-label>
+                                <input matInput type="number" placeholder="0" name="colorScale" #colorScale="ngModel"
+                                    [(ngModel)]="dataSeries.beerCharacteristics.colorScale">
+                                <span matSuffix>EBC</span>
+                            </mat-form-field>
+                        </mat-grid-tile>
+                    </mat-grid-list>
+                    <mat-divider></mat-divider>
+                    <h3>Karbonisierung</h3>
+                    <mat-grid-list cols="3" rowHeight="80px">
+                        <mat-grid-tile colspan="1" rowspan="1">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Zielwert CO2</mat-label>
+                                <input matInput type="number" placeholder="0" name="targetCarbonation"
+                                    #targetCarbonation="ngModel"
+                                    [(ngModel)]="dataSeries.beerCharacteristics.targetCarbonation">
+                                <span matSuffix>g/l</span>
+                            </mat-form-field>
+                        </mat-grid-tile>
+                        <mat-grid-tile colspan="1" rowspan="1">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Zugegebener Zucker</mat-label>
+                                <input matInput type="number" placeholder="0" name="addedSugar" #addedSugar="ngModel"
+                                    [(ngModel)]="dataSeries.beerCharacteristics.addedSugar">
+                                <span matSuffix>g/l</span>
+                            </mat-form-field>
+                        </mat-grid-tile>
+                        <mat-grid-tile colspan="1" rowspan="1">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Erhöhung Alkoholgehalt</mat-label>
+                                <input matInput type="number" placeholder="0" name="adjustedAlcoholLevel"
+                                    #adjustedAlcoholLevel="ngModel"
+                                    [(ngModel)]="dataSeries.beerCharacteristics.adjustedAlcoholLevel">
+                                <span matSuffix>%vol.</span>
+                            </mat-form-field>
+                        </mat-grid-tile>
+                    </mat-grid-list>
+                </mat-tab>
+
+
+                <mat-tab label="Verlaufs-Diagramm">
+                    <div id="diagram-container">
+                        <ngx-charts-line-chart [view]="view" [scheme]="colorScheme" [legend]="legend"
+                            [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel" [xAxis]="xAxis"
+                            [yAxis]="yAxis" [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel" [timeline]="timeline"
+                            [results]="chartData" (select)="onSelect($event)" (activate)="onActivate($event)"
+                            (deactivate)="onDeactivate($event)">
+                            <ng-template #tooltipTemplate let-model="model">
+                                <div class="area-tooltip-container">
+                                    {{model.series}} - {{getDate(model.name)}} <br />
+                                    <b>{{model.value}}</b>
+                                </div>
+                            </ng-template>
+
+                            <ng-template #seriesTooltipTemplate let-model="model">
+                                <div class="area-tooltip-container">
+                                    {{getDate(model[0].name)}} <br />
+                                    {{model[0].series}} - {{model[0].value}}°C<br />
+                                    {{model[1].series}} - {{model[1].value}}°P<br />
+                                </div>
+                            </ng-template>
+                        </ngx-charts-line-chart>
+                    </div>
+                </mat-tab>
+            </mat-tab-group>
+        </mat-card-content>
+    </form>
+</mat-card>

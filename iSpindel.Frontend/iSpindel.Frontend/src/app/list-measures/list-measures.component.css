@@ -1,0 +1,25 @@
+.list-heading {
+    font-size: 20px;
+    display: inline;
+}
+
+.list-subtitle {
+    margin: 5 px;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  align-content: flex-start;
+}
+.item {
+  flex: 0 0 auto;
+  margin: 5px;
+}
+
+button svg {
+    scale: 1.5 !important;
+}

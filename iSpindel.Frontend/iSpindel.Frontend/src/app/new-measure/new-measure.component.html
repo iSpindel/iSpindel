@@ -1,0 +1,21 @@
+<div class="input-container">
+    <h3>Neue Messreihe anlegen</h3>
+    <mat-form-field appearance="fill">
+        <mat-label>Name der Messung</mat-label>
+        <input name="DataSeriesName" [(ngModel)]="newDataSeries.name" matInput required>
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill">
+
+        <mat-label>Beschreibung/Notizen</mat-label>
+        <textarea name="DataSeriesDescription" [(ngModel)]="newDataSeries.description" matInput></textarea>
+    </mat-form-field>
+    <br>
+    <button mat-raised-button color="secondary" (click)="CreateNewDataSeries()">Messreihe anlegen
+        <mat-icon svgIcon="glass-mug-variant"></mat-icon>
+    </button>
+
+    <br><br>
+    Obacht: Die Messung muss nach anlegen der Messreihe noch gestartet werden !
+
+</div>

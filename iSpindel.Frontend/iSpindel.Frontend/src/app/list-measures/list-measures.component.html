@@ -1,0 +1,57 @@
+<a *ngFor="let wrapper of (AllDataSeries$ | async)" [routerLink]="['/beerDetails', wrapper.dataSeries.id]">
+  <mat-card>
+    <mat-card-content>
+      <form>
+        <div class="container">
+          <mat-form-field class="item" appearance="standard">
+            <mat-label>Name</mat-label>
+            <input matInput placeholder="0" disabled value="{{ wrapper.dataSeries.name }}">
+          </mat-form-field>
+          <mat-form-field class="item" appearance="standard">
+            <mat-label>Zeitraum</mat-label>
+            <input matInput placeholder="0" disabled
+              value="{{ wrapper.dataSeries.getStart() }} - {{ wrapper.dataSeries.getEnd() }}">
+          </mat-form-field>
+          <mat-form-field class="item small-form-field" appearance="standard">
+            <mat-label>Plato Startwert</mat-label>
+            <input matInput placeholder="0" disabled value="{{wrapper.dataSeries.getFirstGravity()}}">
+            <span matSuffix>°P </span>
+          </mat-form-field>
+          <mat-form-field class="item small-form-field" appearance="standard">
+            <mat-label>Alkoholgehalt</mat-label>
+            <input matInput placeholder="0" disabled value="{{wrapper.dataSeries.getAlcoholLevel()}}">
+            <span matSuffix>% </span>
+          </mat-form-field>
+          <mat-form-field class="item small-form-field" appearance="standard">
+            <mat-label>EVG (0-100%)</mat-label>
+            <input matInput placeholder="0" disabled value="{{wrapper.dataSeries.beerCharacteristics?.evg}}">
+            <span matSuffix>%</span>
+          </mat-form-field>
+          <mat-form-field class="item small-form-field" appearance="standard">
+            <mat-label>Bittere (0-3000)</mat-label>
+            <input matInput placeholder="0" disabled value="{{wrapper.dataSeries.beerCharacteristics?.bitterness}}">
+            <span matSuffix>IBU</span>
+          </mat-form-field>
+          <button class="item big-button" *ngIf="(wrapper.isStartable$ | async)"
+            (click)="StartRecording(wrapper.dataSeries.id, $event)" mat-icon-button
+            color="warn">
+            <mat-icon svgIcon="record-rec"></mat-icon>
+          </button>
+          <button class="item big-button-2" *ngIf="(wrapper.isStoppable$ | async)"
+            (click)="StopRecording($event)" mat-icon-button
+            color="warn">
+          <mat-icon svgIcon="stop-circle"></mat-icon>
+          </button>
+        </div>
+
+        <div class="list-subtitle">
+          <mat-form-field class="fullwidth-textarea" appearance="standard">
+            <mat-label>Beschreibung</mat-label>
+            <textarea disabled matInput cdkTextareaAutosize cdkAutosizeMinRows="1"
+              cdkAutosizeMaxRows="5">{{wrapper.dataSeries.description}}</textarea>
+          </mat-form-field>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</a>

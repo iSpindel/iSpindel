@@ -1,0 +1,41 @@
+/* You can add global styles to this file, and also import other style files */
+.chart {
+    height: 80%;
+    width: 80%;
+    margin-left: auto;
+    margin-top: 5em;
+    margin-right: auto;
+}
+
+#graph {
+    width: 600px;
+    height: 300px;
+    border: red 2px dashed;
+}
+
+.battery {
+    .dot {
+        fill: gray;
+    }
+    .line {
+        stroke: gray;
+    }
+}
+.gravity {
+    .dot {
+        fill: orange;
+        stroke: white;
+        stroke-width: 2;
+    }
+    .line {
+        stroke: orange;
+    }
+}
+.temperature {
+    .dot {
+        fill: green;
+    }
+    .line {
+        stroke: green;
+    }
+}

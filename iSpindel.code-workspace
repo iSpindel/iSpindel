@@ -7,7 +7,7 @@
 			"path": "iSpindel.ClientApp"
 		},
 		{
-			"path": "../MQTT-Generator/MQTT-Producer"
+			"path": "iSpindel.Frontend/iSpindel.Frontend"
 		}
 	],
 	"settings": {}
