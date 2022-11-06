@@ -5,8 +5,6 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
-import { ApiAuthorizationModule } from 'src/api-authorization/api-authorization.module';
-import { AuthorizeInterceptor } from 'src/api-authorization/authorize.interceptor';
 import { CustomMaterialModule } from './material.module';
 import { AppRoutingModule } from './app-routing.module';
 import { GraphComponent } from './graph/graph.component';
@@ -37,7 +35,6 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
-    ApiAuthorizationModule,
     //custom modules start here
     CustomMaterialModule,
     AppRoutingModule,
@@ -45,7 +42,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     //RouterModule.forRoot(routes),
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }
+    //{ provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })
