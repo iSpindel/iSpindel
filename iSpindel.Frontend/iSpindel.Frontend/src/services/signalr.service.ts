@@ -46,16 +46,29 @@ export abstract class SignalRService<TClient, TServer> {
     - The same goes for the methods return type (TReturn)
 
     */
+   /*
     public Invoke<
         TMethod extends FunctionPropertyNames<TServer>,
         TCall extends TServer[TMethod],
         TParameters extends Parameters<TCall>,
         TReturn extends ReturnType<TCall>
     >(method: TMethod, ...params: TParameters): Promise<TReturn> | undefined
+
+      public testInvoke<
+        K extends FunctionPropertyNames<S>,
+    >(method: K, ...args: S[K] extends (...args: infer A) => any ? A : never):
+        Promise<S[K] extends (...args: any) => infer R ? R : never> {
+        return new Promise<S[K] extends (...args: any) => infer R ? R : never>(() => console.log("test"));
+    }
+    */
+    public Invoke<TMethod extends FunctionPropertyNames<TServer>>
+        (method: TMethod, ...params: TServer[TMethod] extends (...params: infer TCall) => any ? TCall : never):
+        Promise<TServer[TMethod] extends (...params: any) => infer TReturn ? TReturn : never> | undefined
     {
-        return this._connection?.invoke(method as string, params as any[]) as Promise<TReturn> | undefined;
+        return this._connection?.invoke(method as string, params as any[]) 
     }
 
+    /*
     public On<
         TMethod extends FunctionPropertyNames<TClient>,
         TCall extends TClient[TMethod],
@@ -63,6 +76,13 @@ export abstract class SignalRService<TClient, TServer> {
     >(method: TMethod, handler: ((...params: TParameters) => void) ): void {
         this._connection?.on(method as string, handler as (...args: any[]) => void);
     }
+    */
+
+    public On<TMethod extends FunctionPropertyNames<TServer>>
+        (method: TMethod, ...handler: TServer[TMethod] extends (...handler: infer TCall) => void ? TCall : void): void {
+        this._connection?.on(method as string, handler as (...handler: any[]) => void);
+    }
+
 
     public OnSelf(this: TClient & SignalRService<TClient, TServer>, method: FunctionPropertyNames<TClient>) {
         this._connection?.on(method as string, (this as any)[method].bind(this));
@@ -70,7 +90,6 @@ export abstract class SignalRService<TClient, TServer> {
 
     protected createConnection(): HubConnection {
         return new signalR.HubConnectionBuilder()
-            //.withUrl('https://localhost:5001/notify')
             .withUrl('/' + this._hub)
             .configureLogging('debug')
             .withAutomaticReconnect()
