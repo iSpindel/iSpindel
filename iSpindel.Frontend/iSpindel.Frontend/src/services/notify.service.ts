@@ -22,26 +22,6 @@ export interface NotifyClient {
     RecordingChanged(dataSeriesId: number): void;
     NewDataPoint(point: IDataPoint): void;
 }
-/*type FunctionPropertyNames<T> = {
-    [K in keyof T]: T[K] extends Function ? K : never;
-}[keyof T];
-declare function testFunc1<
-    TMethod extends FunctionPropertyNames<NotifyServer>,
-    TCall extends NotifyServer[TMethod],
-    TParameters extends Parameters<TCall>,
-    TReturn extends ReturnType<TCall>
->(method: TMethod, ...args: TParameters): TReturn;
-declare function testFunc2<
-    TInterface,
-    TMethod extends FunctionPropertyNames<TInterface>,
-    TCall extends TInterface[TMethod],
-    TParameters extends Parameters<TCall>,
-    TReturn extends ReturnType<TCall>
-    >(method: TMethod, ...args: TParameters): TReturn;
-let result = testFunc1('Register', 2);
-// Register(2: number) => boolean;
-// result: boolean;
-*/
 
 @Injectable({
     providedIn: 'root'
@@ -90,9 +70,5 @@ export class NotifyService extends SignalRService<NotifyClient, NotifyServer> im
 
     protected override onConnected(): void {
         console.log("Notify Service connected");
-        this.Invoke('Register', 1);
-        /*this.Invoke('Register', 1);
-        this.Invoke('Register', 10);
-        this.Invoke('Ping', 'asdf').then(x => console.log(x));*/
     }
 }
